@@ -7,7 +7,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.1,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -39,7 +38,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 102,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.095,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -69,7 +67,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 105,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.085,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.26,
       "VorpX Config Pixel 1:1 Zoom": 1.175,
@@ -101,7 +98,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 113,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -132,7 +128,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -163,7 +158,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.09,
       "VorpX Config Pixel 1:1 Zoom": 1.045,
@@ -197,7 +191,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 110,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.295,
       "VorpX Config Pixel 1:1 Zoom": 1.2,
@@ -231,7 +224,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.05,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.19,
       "VorpX Config Pixel 1:1 Zoom": 1.12,
@@ -266,7 +258,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.095,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -296,7 +287,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 104,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.09,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
       "VorpX Config Pixel 1:1 Zoom": 1.185,
@@ -327,7 +317,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 108,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.07,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.23,
       "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -359,7 +348,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 109,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.03,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.15,
       "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -390,7 +378,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 108,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.185,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -422,7 +409,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 109,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.065,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.215,
       "VorpX Config Pixel 1:1 Zoom": 1.14,
@@ -454,7 +440,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 94,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.07,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.23,
       "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -483,7 +468,6 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 97,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.055,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.21,
       "VorpX Config Pixel 1:1 Zoom": 1.135,
@@ -513,7 +497,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 113,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.1,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -545,7 +528,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 103,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.1,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -579,7 +561,6 @@
       ],
       "Hz": 72,
       "SC Attributes FOV": 110,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.1,
       "VorpX Config Pixel 1:1 Zoom": 1.05,
@@ -626,13 +607,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 145,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.015,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.12,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -653,6 +629,10 @@
           "3174 X 2380 ( High Quality ) ~113%",
           "3412 X 2560 ( Very High Quality ) ~122%",
           "4094 X 3072 ( Supreme Quality ) ~146%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Large+PP+R90": {
@@ -678,13 +658,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 144,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.07,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.225,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -705,6 +680,10 @@
           "4670 X 3502 ( Ultimate Quality ) ~133%",
           "5170 X 3878 ( Hyperion Quality ) ~147%",
           "5560 X 4170 ( Ludicrous ) ~158%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Normal+Native+R144": {
@@ -730,13 +709,8 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 128,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.17,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -756,6 +730,10 @@
           "2276 X 1708 ( Performance ) ~81%",
           "2448 X 1836 ( Quality ) ~87%",
           "2938 X 2204 ( High Quality ) ~105%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Normal+Native+R90": {
@@ -781,13 +759,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 129,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -807,6 +780,10 @@
           "2380 X 1786 ( Performance ) ~85%",
           "2560 X 1920 ( Quality ) ~91%",
           "3072 X 2304 ( High Quality ) ~110%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Normal+PP+R144": {
@@ -832,13 +809,8 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 130,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -859,6 +831,10 @@
           "2752 X 2064 ( Quality ) ~78%",
           "2960 X 2220 ( High Quality ) ~84%",
           "3552 X 2664 ( Very High Quality ) ~101%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Normal+PP+R90": {
@@ -884,13 +860,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 130,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -911,6 +882,10 @@
           "2864 X 2148 ( High Quality ) ~82%",
           "3080 X 2310 ( High Quality ) ~88%",
           "3696 X 2772 ( Extremely High Quality ) ~105%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 5K Plus | Small+Native+R120": {
@@ -936,7 +911,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -983,7 +957,6 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -1030,7 +1003,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -1077,7 +1049,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 120,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1125,7 +1096,6 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 119,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
       "VorpX Config Pixel 1:1 Zoom": 1.185,
@@ -1173,7 +1143,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 120,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1221,7 +1190,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -1267,7 +1235,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -1313,7 +1280,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1360,7 +1326,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1397,13 +1362,8 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 145,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.015,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.12,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "844 X 634 ( Safe Mode ) 33%",
           "1050 X 788 ( Safe Mode ) 41%",
@@ -1423,6 +1383,10 @@
           "2812 X 2110 ( High Quality ) ~110%",
           "3024 X 2268 ( High Quality ) ~118%",
           "3628 X 2722 ( Extremely High Quality ) ~142%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 8K | Large+PP+R80": {
@@ -1436,15 +1400,10 @@
           "Small+Native+R80",
           "Small+PP+R80"
       ],
-      "Hz": "80Hz",
+      "Hz": 80,
       "SC Attributes FOV": 150,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.01,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.1,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "906 X 678 ( Safe Mode ) 41%",
           "1104 X 828 ( Safe Mode ) 50%",
@@ -1464,6 +1423,10 @@
           "3154 X 2366 ( High Quality ) ~143%",
           "3392 X 2544 ( Very High Quality ) ~154%",
           "4070 X 3052 ( Supreme Quality ) ~184%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 8K | Normal+Native+R80": {
@@ -1479,13 +1442,8 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 129,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "988 X 740 ( Safe Mode ) 33%",
           "1226 X 920 ( Extremely High Performance ) 41%",
@@ -1505,6 +1463,10 @@
           "2470 X 1852 ( Quality ) ~83%",
           "2656 X 1992 ( Quality ) ~89%",
           "3188 X 2390 ( High Quality ) ~107%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 8K | Normal+PP+R80": {
@@ -1520,13 +1482,8 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 134,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.17,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1002 X 752 ( Safe Mode ) 33%",
           "1244 X 934 ( Extremely High Performance ) 41%",
@@ -1546,6 +1503,10 @@
           "2404 X 1802 ( Quality ) ~79%",
           "2584 X 1938 ( Quality ) ~85%",
           "3100 X 2326 ( High Quality ) ~102%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax 8K | Small+Native+R80": {
@@ -1561,7 +1522,6 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 117,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -1600,13 +1560,8 @@
       ],
       "Hz": 80,
       "SC Attributes FOV": 122,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "902 X 676 ( Safe Mode ) 25%",
           "1190 X 892 ( Safe Mode ) 33%",
@@ -1626,6 +1581,10 @@
           "2064 X 1550 ( Performance ) ~57%",
           "2220 X 1666 ( Performance ) ~62%",
           "2664 X 2000 ( Quality ) ~74%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Artisan | Small+Native+R90+I60": {
@@ -1643,13 +1602,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 123,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -1668,6 +1622,10 @@
           "2172 X 1630 ( Performance ) ~77%",
           "2336 X 1752 ( Performance ) ~83%",
           "2804 X 2102 ( High Quality ) ~100%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Artisan | Small+Native+R90+I70": {
@@ -1685,7 +1643,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 115,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -1724,13 +1681,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 125,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -1751,6 +1703,10 @@
           "2444 X 1834 ( Quality ) ~70%",
           "2628 X 1972 ( Quality ) ~75%",
           "3154 X 2366 ( High Quality ) ~90%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Artisan | Small+PP+R90+I70": {
@@ -1768,7 +1724,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 118,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1808,7 +1763,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 112,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -1847,7 +1801,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 104,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -1885,7 +1838,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1925,7 +1877,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 110,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -1957,7 +1908,6 @@
       ],
       "Hz": 120,
       "SC Attributes FOV": 110,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.015,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.125,
       "VorpX Config Pixel 1:1 Zoom": 1.07,
@@ -2004,13 +1954,8 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 142,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.17,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -2031,6 +1976,10 @@
           "3114 X 2336 ( High Quality ) ~111%",
           "3348 X 2512 ( Very High Quality ) ~119%",
           "4018 X 3014 ( Supreme Quality ) ~143%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Large+Native+R90": {
@@ -2056,13 +2005,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 145,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.015,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.12,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -2083,6 +2027,10 @@
           "3174 X 2380 ( High Quality ) ~113%",
           "3412 X 2560 ( Very High Quality ) ~122%",
           "4094 X 3072 ( Supreme Quality ) ~146%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Large+PP+R110": {
@@ -2108,13 +2056,8 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 143,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -2135,6 +2078,10 @@
           "4456 X 3342 ( Ultimate Quality ) ~127%",
           "4932 X 3700 ( Hyperion Quality ) ~141%",
           "5304 X 3978 ( Ludicrous ) ~151%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Large+PP+R90": {
@@ -2160,13 +2107,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 144,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.07,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.225,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -2187,6 +2129,10 @@
           "4670 X 3502 ( Ultimate Quality ) ~133%",
           "5170 X 3878 ( Hyperion Quality ) ~147%",
           "5560 X 4170 ( Ludicrous ) ~158%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Normal+Native+R110": {
@@ -2212,13 +2158,8 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 128,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -2238,6 +2179,10 @@
           "2352 X 1764 ( Performance ) ~84%",
           "2528 X 1896 ( Quality ) ~90%",
           "3034 X 2276 ( High Quality ) ~108%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Normal+Native+R90": {
@@ -2263,13 +2208,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 129,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
-      "VorpX Config Pixel 1:1 Zoom": "w Aw aw aw",
       "Custom Resolution List": [
           "926 X 694 ( Safe Mode ) 33%",
           "1150 X 862 ( Safe Mode ) 41%",
@@ -2289,6 +2229,10 @@
           "2380 X 1786 ( Performance ) ~85%",
           "2560 X 1920 ( Quality ) ~91%",
           "3072 X 2304 ( High Quality ) ~110%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Normal+PP+R110": {
@@ -2314,13 +2258,8 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 130,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -2341,6 +2280,10 @@
           "2804 X 2104 ( High Quality ) ~80%",
           "3016 X 2262 ( High Quality ) ~86%",
           "3620 X 2714 ( Extremely High Quality ) ~103%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Normal+PP+R90": {
@@ -2366,13 +2309,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 130,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "878 X 658 ( Safe Mode ) 25%",
           "1158 X 868 ( Safe Mode ) 33%",
@@ -2393,6 +2331,10 @@
           "2864 X 2148 ( High Quality ) ~82%",
           "3080 X 2310 ( High Quality ) ~88%",
           "3696 X 2772 ( Extremely High Quality ) ~105%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K Plus | Small+Native+R110": {
@@ -2418,7 +2360,6 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -2465,7 +2406,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 116,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -2512,7 +2452,6 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 119,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -2560,7 +2499,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 120,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -2608,7 +2546,6 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 105,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -2654,7 +2591,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -2700,7 +2636,6 @@
       ],
       "Hz": 110,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -2747,7 +2682,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -2786,13 +2720,8 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 143,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.17,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1054 X 790 ( Safe Mode ) 25%",
           "1390 X 1042 ( Extremely High Performance ) 33%",
@@ -2813,6 +2742,10 @@
           "4206 X 3156 ( Supreme Quality ) ~100%",
           "4658 X 3494 ( Ultimate Quality ) ~111%",
           "5008 X 3756 ( Hyperion Quality ) ~119%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K X | Large+PP+R75": {
@@ -2830,13 +2763,8 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 144,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1316 X 988 ( Extremely High Performance ) 25%",
           "1738 X 1302 ( High Performance ) 33%",
@@ -2852,6 +2780,10 @@
           "3386 X 2540 ( Very High Quality ) ~64%",
           "4130 X 3098 ( Supreme Quality ) ~78%",
           "5452 X 4090 ( Ludicrous ) ~104%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K X | Normal+Native+R75": {
@@ -2869,13 +2801,8 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 129,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.17,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1054 X 790 ( Safe Mode ) 25%",
           "1390 X 1042 ( Extremely High Performance ) 33%",
@@ -2897,6 +2824,10 @@
           "3468 X 2600 ( Very High Quality ) ~82%",
           "3728 X 2796 ( Extremely High Quality ) ~88%",
           "4474 X 3356 ( Ultimate Quality ) ~106%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K X | Normal+PP+R75": {
@@ -2914,13 +2845,8 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 130,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.275,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1316 X 988 ( Extremely High Performance ) 25%",
           "1738 X 1302 ( High Performance ) 33%",
@@ -2941,6 +2867,10 @@
           "4226 X 3170 ( Supreme Quality ) ~80%",
           "4544 X 3408 ( Ultimate Quality ) ~86%",
           "5452 X 4090 ( Ludicrous ) ~104%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Pimax Vision 8K X | Small+Native+R75": {
@@ -2958,7 +2888,6 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 117,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.175,
       "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -2999,7 +2928,6 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 120,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -3040,7 +2968,6 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 106,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.045,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.18,
       "VorpX Config Pixel 1:1 Zoom": 1.115,
@@ -3081,7 +3008,6 @@
       ],
       "Hz": 75,
       "SC Attributes FOV": 111,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.095,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.28,
       "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -3115,7 +3041,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 109,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.15,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.395,
       "VorpX Config Pixel 1:1 Zoom": 1.275,
@@ -3144,13 +3069,8 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 164,
-      "Error Report (SC FOV Cap 120)": [
-          "SC can't natively run your headset's FOV",
-          "Use VorpX Zoom Function"
-      ],
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.14,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.36,
-      "VorpX Config Pixel 1:1 Zoom": "You will need to find this setting",
       "Custom Resolution List": [
           "1434 X 1076 ( Extremely High Performance ) 25%",
           "1894 X 1420 ( High Performance ) 33%",
@@ -3170,6 +3090,10 @@
           "4804 X 3604 ( Hyperion Quality ) ~84%",
           "5320 X 3990 ( Ludicrous ) ~93%",
           "5720 X 4290 ( Crash Mode ) ~100%"
+      ],
+      "Notes": [
+          "SC can't natively run your headset's FOV",
+          "Use VorpX Zoom Function"
       ]
   },
   "Valve Index | Native+R144": {
@@ -3181,7 +3105,6 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 113,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.125,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.335,
       "VorpX Config Pixel 1:1 Zoom": 1.23,
@@ -3216,7 +3139,6 @@
       ],
       "Hz": 144,
       "SC Attributes FOV": 113,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.125,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.335,
       "VorpX Config Pixel 1:1 Zoom": 1.23,
@@ -3250,7 +3172,6 @@
       ],
       "Hz": 90,
       "SC Attributes FOV": 110,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.03,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.145,
       "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -3285,7 +3206,6 @@
       ],
       "Hz": 60,
       "SC Attributes FOV": 92,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.09,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.265,
       "VorpX Config Pixel 1:1 Zoom": 1.18,
@@ -3317,7 +3237,6 @@
       ],
       "Hz": 60,
       "SC Attributes FOV": 92,
-      "Error Report (SC FOV Cap 120)": false,
       "Suggested Minimum VorpX Pixel 1:1 Zoom": 1.09,
       "Suggested Maximum VorpX Pixel 1:1 Zoom": 1.27,
       "VorpX Config Pixel 1:1 Zoom": 1.18,

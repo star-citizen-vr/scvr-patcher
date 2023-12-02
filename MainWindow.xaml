@@ -5,21 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCVRPatcher"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Star Citizen VR Patcher" Height="450" Width="893">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="13*"/>
-            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="52*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="815*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="pack://application:,,,/banner.png" Margin="0,9,321,247" HorizontalAlignment="Right" Width="417" Grid.Column="1" />
-        <ListView x:Name="HMDSelector" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="556,0,0,0">
-            <ListView.View>
+        <Image Source="pack://application:,,,/banner.png" Margin="0,10,398,246" HorizontalAlignment="Right" Width="417" Grid.Column="3" />
+        <ListView x:Name="HMDSelector" Grid.Column="3" d:ItemsSource="{d:Binding availableConfigs}" Margin="422,0,0,0" ItemStringFormat="">
+            <!--<ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
-            </ListView.View>
+            </ListView.View>-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Key}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="VREnableButton" Grid.Column="1" Content="Enable VR" HorizontalAlignment="Left" Margin="20,240,0,0" VerticalAlignment="Top" Height="70" Width="169"/>
-        <Button x:Name="VRDisableButton" Grid.Column="1" Content="Disable VR" HorizontalAlignment="Left" Margin="219,240,0,0" VerticalAlignment="Top" Height="70" Width="169"/>
+        <Button x:Name="VREnableButton" Grid.Column="3" Content="Enable VR" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Height="70" Width="169" RenderTransformOrigin="0.497,0.572" Click="VREnableButton_Click"/>
+        <Button x:Name="VRDisableButton" Grid.Column="3" Content="Disable VR" HorizontalAlignment="Left" Margin="200,275,0,0" VerticalAlignment="Top" Height="70" Width="168" IsEnabled="False"/>
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>scvr_patcher</RootNamespace>
     <Nullable>enable</Nullable>
@@ -14,7 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove=".gitignore" />
     <None Remove="banner.png" />
+    <None Remove="configs-converted.json" />
+    <None Remove="README.md" />
+    <None Remove="requirements.txt" />
+    <None Remove="scvr-json-convert.py" />
+    <None Remove="scvr-patcher.py" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Resources.xaml" />
   </ItemGroup>
 
   <ItemGroup>
