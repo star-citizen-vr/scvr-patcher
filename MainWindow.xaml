@@ -1,0 +1,25 @@
+﻿<Window x:Class="SCVRPatcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SCVRPatcher"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="187*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="pack://application:,,,/banner.png" Margin="0,9,321,247" HorizontalAlignment="Right" Width="417" Grid.Column="1" />
+        <ListView x:Name="HMDSelector" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="556,0,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="VREnableButton" Grid.Column="1" Content="Enable VR" HorizontalAlignment="Left" Margin="20,240,0,0" VerticalAlignment="Top" Height="70" Width="169"/>
+        <Button x:Name="VRDisableButton" Grid.Column="1" Content="Disable VR" HorizontalAlignment="Left" Margin="219,240,0,0" VerticalAlignment="Top" Height="70" Width="169"/>
+    </Grid>
+</Window>
