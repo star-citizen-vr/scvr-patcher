@@ -1,7 +1,9 @@
-# SCVR-Settings-v2_1
-This is a fix for the Interface and better handles a number of combinations of VR Headsets (Lenses if interchangeable) and a cleanup of the resolutions. 
+# SCVR-Settings-V2_2
 
-This is the 2nd iteration of a program to update Star Citizen for use with VorpX for VR as a stop-gap until SC has native VR support
+
+This is a fix for the Interface and better handles a number of combinations of VR Headsets (Lenses if interchangeable) and a cleanup of the resolutions.
+
+This is the 2nd iteration of a program to update Star Citizen for use with VorpX for VR as a stop-gap until SC has native VR support. Code updated to include directory structures outside of english language installs. 
 
 First of all, this exe might get flagged by your antivirus as a trojan. I assure you, it is not. I have sent a copy of this to Microsoft as Defender is the worst/best on flagging it as a trojan. Best guess is because it adds a couple lines to the 'hosts' file is the main reason for the false flag.
 
