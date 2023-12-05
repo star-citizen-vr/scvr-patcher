@@ -2,6 +2,7 @@ import os
 import json
 import tkinter as tk
 from tkinter import *
+import tkinter.filedialog
 from PIL import Image, ImageTk
 from io import BytesIO
 import base64
@@ -90,12 +91,28 @@ def update_attributes(directory, width, height, fov):
 
 
 def update_data():
-    drive_letter = drive_var.get()
-    selected_headset = headset_var.get()
+    # Search for Star Citizen installation directory on all available drives
+    star_citizen_dir = None
+    for drive in string.ascii_uppercase:
+        potential_dir = os.path.join(drive + ":", 'Program Files', 'Roberts Space Industries', 'StarCitizen')
+        if os.path.exists(potential_dir):
+            star_citizen_dir = potential_dir
+            break
+
+    if star_citizen_dir is None:
+        messagebox.showerror("Error", "Star Citizen installation directory not found at default location.\nPlease select directory manually!")
+        star_citizen_dir = tkinter.filedialog.askdirectory(
+            initialdir="C:\Program Files",
+            title="Select Star Citizen installation directory (Containing LIVE, PTU, EPTU, TECH-PREVIEW, HOTFIX, ...)"
+        )
+
+    if not os.path.exists(star_citizen_dir):
+        messagebox.showerror("Error", "Star Citizen installation directory not found!")
+        return
+
+    # Extract width and height from the selected resolution
     selected_resolution = resolution_var.get()
     width, height = map(int, re.findall(r'(\d+) X (\d+)', selected_resolution)[0])
-
-    base_directory = os.path.join(drive_letter, 'Program Files', 'Roberts Space Industries', 'StarCitizen')
 
     # Update settings in specified directories
     directories = ['PTU', 'LIVE', 'EPTU', 'TECH-PREVIEW', 'HOTFIX']
@@ -109,8 +126,11 @@ def update_data():
 
     result_settings = []
     for directory in directories:
-        full_directory = os.path.join(base_directory, directory, 'EasyAntiCheat')
-        result_settings.append(update_settings(full_directory, new_values))
+        full_directory = os.path.join(star_citizen_dir, directory, 'EasyAntiCheat')
+        if os.path.exists(full_directory):
+            result_settings.append(update_settings(full_directory, new_values))
+        else:
+            result_settings.append(f"Directory not found: {full_directory}")
 
     result_settings_message = '\n'.join(result for result in result_settings if not result.startswith("Directory not found"))
 
@@ -119,33 +139,43 @@ def update_data():
     result_attributes = []
 
     for subdirectory in attributes_subdirectories:
-        full_attributes_directory = os.path.join(base_directory, subdirectory, 'USER', 'Client', '0', 'Profiles', 'default')
-        result_attributes.append(update_attributes(full_attributes_directory, width, height, fov_var.get()))
+        full_attributes_directory = os.path.join(star_citizen_dir, subdirectory, 'USER', 'Client', '0', 'Profiles', 'default')
+        if os.path.exists(full_attributes_directory):
+            result_attributes.append(update_attributes(full_attributes_directory, width, height, fov_var.get()))
+        else:
+            result_attributes.append(f"Directory not found: {full_attributes_directory}")
 
     result_attributes_message = '\n'.join(result for result in result_attributes if not result.startswith("Directory not found"))
 
     # Check and update hosts file
     hosts_updated = is_hosts_updated()
 
-    # Display result in a single message box
-    result_message = f"{result_settings_message}\n\n{result_attributes_message}"
+    result_message = "Settings updated successfully in the following directories:\n\n"
+    updated = False
+
+    for directory, result in zip(directories, result_settings):
+        if result and not result.startswith("Directory not found"):
+            result_message += f"{os.path.join(star_citizen_dir, directory)}\n"
+            updated = True
 
     if hosts_updated:
         result_message += "\nHosts file updated successfully."
+        updated = True
     elif hosts_updated is False:
         result_message += "\nHosts file is already up to date."
 
-    if result_message:
+    if updated:
         result_message += "\nClose the program now."
     else:
         result_message = "Failed to update settings. Check the paths and try again."
 
     messagebox.showinfo("Update Result", result_message)
 
-    # Create a Close Program button
-    close_button = tk.Button(root, text="Close Program", command=root.destroy, font=("Arial", 12))
-    close_button.pack(pady=10)
-
+    if updated:
+        # Create a Close Program button
+        close_button = tk.Button(root, text="Close Program", command=root.destroy, font=("Arial", 12))
+        close_button.pack(pady=10)
+        
 # GUI setup
 root = tk.Tk()
 root.title("VRCitizen Settings Updater")
@@ -169,21 +199,27 @@ label_text.pack(padx=10, pady=10, anchor="n")
 import string
 drives = [f"{letter}:" for letter in string.ascii_uppercase if os.path.exists(f"{letter}:\\")]
 
-# Label for drive selection
-drive_label = tk.Label(root, text="Select the drive in dropdown below, where Star Citizen is installed.", anchor="c", font=("Arial", 12))
-drive_label.pack(padx=10, pady=10, anchor="c")
-
-# Dropdown for drive selection
-drive_var = tk.StringVar()
-drive_dropdown = tk.OptionMenu(root, drive_var, *drives)
-drive_dropdown.pack(padx=10, pady=10, anchor="c")
-
 # Load headset data from the JSON file
 with open('configs.json', 'r') as json_file:
-    headset_data = json.load(json_file)
+    data = json.load(json_file)
+
+brands = data["hmds"]
 
 # Set default headset
-default_headset = "HP Reverb G2"
+default_brand = "Select Manufacturer"
+default_headset = "Select VR Headset"
+default_config = "Select Configuration"
+
+# Label for brand selection
+headset_label = tk.Label(root, text="Select VR Headset brand in the dropdown below:", anchor="c", font=("Arial", 12))
+headset_label.pack(padx=10, pady=10, anchor="c")
+
+# Dropdown for brand selection
+brands_var = tk.StringVar()
+brands_keys = list(brands.keys())  # Updated to get the list of headsets dynamically
+brands_var.set(default_brand)
+headset_dropdown = tk.OptionMenu(root, brands_var, *brands_keys)
+headset_dropdown.pack(padx=10, pady=10, anchor="c")
 
 # Label for headset selection
 headset_label = tk.Label(root, text="Select VR Headset in the dropdown below \n(for PIMAX also choose lenses installed):", anchor="c", font=("Arial", 12))
@@ -191,10 +227,19 @@ headset_label.pack(padx=10, pady=10, anchor="c")
 
 # Dropdown for headset selection
 headset_var = tk.StringVar()
-headsets = list(headset_data.keys())  # Updated to get the list of headsets dynamically
 headset_var.set(default_headset)
-headset_dropdown = tk.OptionMenu(root, headset_var, *headsets)
+headset_dropdown = tk.OptionMenu(root, headset_var, "No headsets")
 headset_dropdown.pack(padx=10, pady=10, anchor="c")
+
+# Label for lens selection
+lense_label = tk.Label(root, text="Select Lense configuration in the dropdown below:", anchor="c", font=("Arial", 12))
+lense_label.pack(padx=10, pady=10, anchor="c")
+
+# Dropdown for lens selection
+lense_var = tk.StringVar()
+lense_var.set(default_config)
+lense_dropdown = tk.OptionMenu(root, lense_var, "No configurations")
+lense_dropdown.pack(padx=10, pady=10, anchor="c")
 
 # Label for resolution selection
 resolution_label = tk.Label(root, text="Select Resolution in dropdown below and then hit UPDATE:", anchor="c", font=("Arial", 12))
@@ -206,16 +251,47 @@ resolution_menu = tk.OptionMenu(root, resolution_var, "No Resolutions")
 resolution_menu.config(font=("Arial", 12))
 resolution_menu.pack(padx=10, pady=10, anchor="c")
 
+def update_brand_data(*args):
+    selected_brand = brands_var.get()
+    if not selected_brand: return
+    headset_dropdown['menu'].delete(0, 'end')  # Clear the existing menu
+    for hmd in brands[selected_brand].keys():
+        headset_dropdown['menu'].add_command(label=hmd, command=tk._setit(headset_var, hmd))
+    headset_var.set(list(brands[selected_brand].keys())[0])
+
+# Bind the update function to the brand dropdown
+brands_var.trace_add("write", lambda *args: update_brand_data(*args))
+
+def update_lens_data(*args):
+    selected_brand = brands_var.get()
+    if not selected_brand: return
+    selected_headset = headset_var.get()
+    if not selected_headset: return
+    lense_dropdown['menu'].delete(0, 'end')  # Clear the existing menu
+    keys = brands[selected_brand][selected_headset].keys()
+    for config in keys:
+        lense_dropdown['menu'].add_command(label=config, command=tk._setit(lense_var, config))
+    lense_var.set(list(brands[selected_brand][selected_headset].keys())[0])
+
+# Bind the update function to the brand dropdown
+headset_var.trace_add("write", lambda *args: update_lens_data(*args))
+
+def get_selections():
+    return brands_var.get(), headset_var.get(), lense_var.get(), resolution_var.get()
+
+def get_selected_data():
+    return brands[brands_var.get()][headset_var.get()][lense_var.get()]
+
 # Update FOV and resolutions based on the selected headset
 def update_headset_data(fov_var, *args):
-    selected_headset = headset_var.get()
+    selected_headset = get_selected_data()
     if selected_headset:
         # Fetch FOV and clamp it to a maximum of 120
-        fov_value = min(headset_data[selected_headset].get("SC Attributes FOV", 0), 120)
+        fov_value = min(selected_headset.get("SC Attributes FOV", 0), 120)
         fov_var.set(fov_value)
 
         # Fetch resolutions and update the dropdown
-        custom_resolutions = headset_data[selected_headset].get("Custom Resolution List", [])
+        custom_resolutions = selected_headset.get("Custom Resolution List", [])
         resolution_menu['menu'].delete(0, 'end')  # Clear the existing menu
 
         for resolution in custom_resolutions:
@@ -227,7 +303,7 @@ def update_headset_data(fov_var, *args):
             resolution_var.set("No Resolutions")
 
 # Bind the update function to the headset dropdown
-headset_var.trace_add("write", lambda *args: update_headset_data(fov_var, *args))
+lense_var.trace_add("write", lambda *args: update_headset_data(fov_var, *args))
 fov_var = tk.DoubleVar()
 
 # Button to update settings

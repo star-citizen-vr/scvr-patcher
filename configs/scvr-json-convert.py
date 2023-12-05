@@ -1,6 +1,6 @@
 from json import load, dump
 
-new_data = {}
+new_data = []
 
 with open('configs.json', 'r') as f:
     data = load(f)
@@ -8,6 +8,8 @@ with open('configs.json', 'r') as f:
 for key, value in data.items():
     print("Processing",key)
     new_value = value
+    # new_key = [k.strip() for k in key.split("|")]
+    value["Name"] = key
 
     # if isinstance(value["All Possible Lens Configurations"], str):
     #     value["All Possible Lens Configurations"] = [value["All Possible Lens Configurations"]]
@@ -18,9 +20,11 @@ for key, value in data.items():
     #     val = new_value["Error Report (SC FOV Cap 120)"]
     #     del new_value["Error Report (SC FOV Cap 120)"]
     #     new_value["Notes"] = val
-    if new_value["VorpX Config Pixel 1:1 Zoom"] == -1:
-        del new_value["VorpX Config Pixel 1:1 Zoom"]
-    new_data[key] = new_value
+    # if new_value["VorpX Config Pixel 1:1 Zoom"] == -1:
+    #     del new_value["VorpX Config Pixel 1:1 Zoom"]
+
+    new_data.append(new_value)
+    # new_data[key] = new_value
 
 
 with open('configs-converted.json', 'w') as f:

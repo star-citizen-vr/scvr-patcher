@@ -72,7 +72,7 @@ namespace SCVRPatcher {
         public static Dictionary<string, HmdConfig> GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
             if (availableConfigsFile.Exists) {
                 Logger.Info($"Loading available configs from {availableConfigsFile.FullName}...");
-                return HmdConfigs.FromJson(File.ReadAllText(availableConfigsFile.FullName));
+                return ConfigDataBase.FromJson(File.ReadAllText(availableConfigsFile.FullName));
             } else {
                 Logger.Warn($"Configs file not found at {availableConfigsFile.FullName}!");
                 return new();
@@ -86,7 +86,7 @@ namespace SCVRPatcher {
                     if (response.IsSuccessStatusCode) {
                         var json = response.Content.ReadAsStringAsync().Result;
                         File.WriteAllText(availableConfigsFile.FullName, json);
-                        return HmdConfigs.FromJson(json);
+                        return ConfigDataBase.FromJson(json);
                     } else {
                         throw new Exception($"Failed to download available configs! (Error {response.StatusCode})");
                     }
@@ -94,7 +94,7 @@ namespace SCVRPatcher {
             } catch (Exception e) {
                 Logger.Error(e);
                 if (availableConfigsFile.Exists) {
-                    return HmdConfigs.FromJson(File.ReadAllText(availableConfigsFile.FullName));
+                    return ConfigDataBase.FromJson(File.ReadAllText(availableConfigsFile.FullName));
                 }
             }
             return new();

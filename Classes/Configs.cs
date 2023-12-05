@@ -19,59 +19,101 @@ namespace SCVRPatcher {
     using System.Globalization;
     using System.Runtime.InteropServices;
 
+    public partial class ConfigDataBase {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("common")]
+        public virtual Common Common { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("hmds")]
+        public virtual Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>> Brands { get; set; }
+
+        public static ConfigDataBase FromJson(string json) => JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
+    }
+    public static class Serialize {
+        public static string ToJson(this ConfigDataBase self) => JsonSerializer.Serialize(self, Converter.Settings);
+    }
+
+    public partial class Common {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("Alternative Interger Resolutions (small list)")]
+        public virtual List<string> AlternativeIntergerResolutionsSmallList { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("Alternative Interger Resolutions (big list)")]
+        public virtual List<string> AlternativeIntergerResolutionsBigList { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("Give me all the resolutions")]
+        public virtual List<string> GiveMeAllTheResolutions { get; set; }
+    }
+
     public partial class HmdConfig {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("Headset Name")]
-        public virtual string HeadsetName { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("DB-UID")]
-        public virtual long? DbUid { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("All Possible Lens Configurations")]
-        public virtual List<string> AllPossibleLensConfigurations { get; set; } = new();
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Hz")]
-        public virtual int? Hz { get; set; }
+        public virtual long? Hz { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("SC Attributes FOV")]
-        public virtual long? ScAttributesFov { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("Notes")]
-        public virtual List<string>? Notes { get; set; } = new();
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
-        public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
-        public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
+        public virtual double? Fov { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
-        public virtual double? VorpXConfigPixel11Zoom { get; set; }
+        public virtual double? Zoom { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("All Possible Lens Configurations")]
+        public virtual List<string> LensConfigurations { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Custom Resolution List")]
-        public virtual List<string> CustomResolutionList { get; set; } = new();
+        public virtual List<string> CustomResolutions { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Headset Name")]
+        //public virtual string HeadsetName { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("DB-UID")]
+        //public virtual long? DbUid { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("All Possible Lens Configurations")]
+        //public virtual List<string> AllPossibleLensConfigurations { get; set; } = new();
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Hz")]
+        //public virtual int? Hz { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("SC Attributes FOV")]
+        //public virtual long? ScAttributesFov { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Notes")]
+        //public virtual List<string>? Notes { get; set; } = new();
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
+        //public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
+        //public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
+        //public virtual double? VorpXConfigPixel11Zoom { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Custom Resolution List")]
+        //public virtual List<string> CustomResolutionList { get; set; } = new();
+        //public virtual List<string> CustomResolutionList { get; set; } = new();
     }
 
     //public enum ErrorReportScFovCap120 { ScCanTNativelyRunYourHeadsetSFov, UseVorpXZoomFunction };
 
     //public enum VorpXConfigPixel11Zoom { WAwAwAw, YouWillNeedToFindThisSetting };
-
-    public partial class HmdConfigs {
-        public static Dictionary<string, HmdConfig> FromJson(string json) => JsonSerializer.Deserialize<Dictionary<string, HmdConfig>>(json, Converter.Settings);
-    }
-
-    public static class Serialize {
-        public static string ToJson(this Dictionary<string, HmdConfig> self) => JsonSerializer.Serialize(self, Converter.Settings);
-    }
 
     internal static class Converter {
         public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.General) {
