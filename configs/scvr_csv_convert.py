@@ -66,8 +66,9 @@ def csv_to_json(csvFilePath, jsonFilePath):
    # Create a dictionary to store the data
    data = {}
    data["common"] = {}
+   data["brands"] = {}
+   brands = data["brands"]
 
-   hmds = {}
 
    # Open the CSV file and read it using csv.DictReader
    with open(csvFilePath, encoding='utf-8') as csvf:
@@ -79,14 +80,14 @@ def csv_to_json(csvFilePath, jsonFilePath):
             # Create a dictionary for each row
             row_dict = {}
 
-            if row['Headset Brand'] not in hmds:
-                hmds[row['Headset Brand']] = {}
+            if row['Headset Brand'] not in brands:
+                brands[row['Headset Brand']] = { "hmds": {} }
 
-            if row['Headset Model'] not in hmds[row['Headset Brand']]:
-                hmds[row['Headset Brand']][row['Headset Model']] = {}
+            if row['Headset Model'] not in brands[row['Headset Brand']]:
+                brands[row['Headset Brand']]["hmds"][row['Headset Model']] = { "configs": {} }
 
-            if row['Lens Configuration'] not in hmds[row['Headset Brand']][row['Headset Model']]:
-                hmds[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = {}
+            if row['Lens Configuration'] not in brands[row['Headset Brand']]["hmds"][row['Headset Model']]:
+                brands[row['Headset Brand']]["hmds"][row['Headset Model']]["configs"][row['Lens Configuration']] = {}
 
             for key, value in row.items():
                 # Skip the keys that we don't want to include in the JSON file
@@ -115,6 +116,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     elif value.startswith('H '): value = value[2:]
                     if value.endswith('Hz'): value = value[:-2]
                     if value.endswith('px'): value = value[:-2]
+                    if 'aw ' in value: exit(1) # pls fix in csv
                     value = value.replace('\u00b0','')
                 if not isinstance(value, list):
                     if value.isdigit(): value = int(value)
@@ -126,9 +128,9 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 row_dict[key] = value
 
             # Add the row dictionary to the data dictionary
-            hmds[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = row_dict
+            brands[row['Headset Brand']]["hmds"][row['Headset Model']]["configs"][row['Lens Configuration']] = row_dict
 
-   data["hmds"] = hmds
+   data["brands"] = brands
 
    # Open the output JSON file and write the data to it
    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:

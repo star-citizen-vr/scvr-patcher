@@ -18,8 +18,12 @@ namespace SCVRPatcher {
     using System.Text.Json.Serialization;
     using System.Globalization;
     using System.Runtime.InteropServices;
+    using NLog;
 
     public partial class ConfigDataBase {
+
+        Logger Logger = LogManager.GetCurrentClassLogger();
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("common")]
         public virtual Common Common { get; set; }
@@ -30,6 +34,31 @@ namespace SCVRPatcher {
 
         [JsonIgnore]
         public bool IsEmptyOrMissing => Brands is null || Brands.Count == 0;
+
+        public HmdConfig GetConfig(string brand, string hmd, string config) {
+            Logger.Debug($"Trying to get config for {brand}/{hmd}/{config}");
+            var b = Brands.First(b => b.Key == brand);
+            var h = b.Value.First(h => h.Key == hmd);
+            var c = h.Value.First(c => c.Key == config);
+            return c.Value;
+        }
+
+        public List<string> GetPath(HmdConfig config) {
+            var path = new List<string>();
+            foreach (var brand in Brands) {
+                foreach (var hmd in brand.Value) {
+                    foreach (var c in hmd.Value) {
+                        if (c.Value == config) {
+                            path.Add(brand.Key);
+                            path.Add(hmd.Key);
+                            path.Add(c.Key);
+                            return path;
+                        }
+                    }
+                }
+            }
+            return path;
+        }
 
         public static ConfigDataBase FromJson(string json) => JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
     }
@@ -52,6 +81,14 @@ namespace SCVRPatcher {
     }
 
     public partial class HmdConfig {
+
+        //[JsonIgnore]
+        //public string Brand;
+        //[JsonIgnore]
+        //public string Model;
+        //[JsonIgnore]
+        //public string Name;
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Hz")]
         public virtual double? Hz { get; set; }

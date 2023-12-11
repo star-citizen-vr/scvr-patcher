@@ -43,8 +43,24 @@ namespace SCVRPatcher {
             }
             InitializeComponent();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
-            //HMDSelector.DisplayMemberPath = "Name";
-            //HMDSelector.ItemsSource = availableConfigs;
+            FillConfigs(configDatabase);
+            stackpanel_config.Children.Clear();
+        }
+
+        public void FillConfigs(ConfigDataBase db) {
+            tree_configs.Items.Clear();
+            foreach (var brand in db.Brands) {
+                var brandItem = new TreeViewItem() { Header = brand.Key };
+                foreach (var model in brand.Value) {
+                    var modelItem = new TreeViewItem() { Header = model.Key };
+                    foreach (var config in model.Value) {
+                        var configItem = new TreeViewItem() { Header = config.Key };
+                        modelItem.Items.Add(configItem);
+                    }
+                    brandItem.Items.Add(modelItem);
+                }
+                tree_configs.Items.Add(brandItem);
+            }
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -65,21 +81,16 @@ namespace SCVRPatcher {
                 // Application.Current.Shutdown();
                 return;
             }
-
-            ClearBoxes(true);
-        }
-        public void ClearBoxes(bool refill = false) {
-            box_manufacturer.Items.Clear();
-            box_hmd.Items.Clear();
-            box_config.Items.Clear();
-            if (refill) {
-                foreach (var brand in configDatabase.Brands) {
-                    var item = new ComboBoxItem();
-                    item.Content = brand.Key;
-                    item.Tag = brand.Value;
-                    box_manufacturer.Items.Add(item);
-                }
-            }
+            Logger.Info($"Loaded {configDatabase.Brands.Count} brands.");
+            //foreach (var brand in configDatabase.Brands) {
+            //    foreach (var model in brand.Value) {
+            //        foreach (var config in model.Value) {
+            //            config.Value.Brand = brand.Key;
+            //            config.Value.Model = model.Key;
+            //            config.Value.Name = config.Key;
+            //        }
+            //    }
+            //}
         }
         public static ConfigDataBase GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
             if (availableConfigsFile.Exists) {
@@ -112,51 +123,17 @@ namespace SCVRPatcher {
             return new();
         }
 
-        private void VREnableButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private void box_manufacturer_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selected = (ComboBoxItem)box_manufacturer.SelectedItem;
-            var name = (string)selected.Content;
-            var brand = (Dictionary<string, Dictionary<string, HmdConfig>>)selected.Tag;
-            box_hmd.Items.Clear();
-            box_config.Items.Clear();
-            foreach (var hmd in brand) {
-                var item = new ComboBoxItem();
-                item.Content = hmd.Key;
-                item.Tag = hmd.Value;
-                box_hmd.Items.Add(item);
-            }
-
-        }
-
-        private void box_hmd_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selected = (ComboBoxItem)box_hmd.SelectedItem;
-            var hmd = (Dictionary<string, HmdConfig>)selected.Tag;
-            box_config.Items.Clear();
-            foreach (var config in hmd) {
-                var item = new ComboBoxItem();
-                item.Content = config.Key;
-                item.Tag = config.Value;
-                box_config.Items.Add(item);
-            }
-        }
-
-        private void box_config_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selected = (ComboBoxItem)box_config.SelectedItem;
-            var cfg = (HmdConfig)selected.Tag;
-            FillConfig(cfg);
-        }
-
         private void FillConfig(HmdConfig config) {
             if (config is null) return;
+            stackpanel_config.Children.Clear();
             Logger.Debug($"Filling config: {config}");
+            stackpanel_config.Children.Add(new Label() { Content = string.Join(" ", configDatabase.GetPath(config)) });
             Type t = config.GetType();
             Dictionary<string, object> Items = new();
             foreach (var item in t.GetProperties()) {
                 var value = item.GetValue(config);
                 if (value is null) continue;
+                //if (new string[] { "Brand", "Model", "Name" }.Contains(item.Name)) continue;
                 Items.Add(item.Name, value);
             }
             foreach (var item in t.GetFields()) {
@@ -178,19 +155,26 @@ namespace SCVRPatcher {
                 textbox.VerticalAlignment = VerticalAlignment.Center;
                 textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
                 textbox.Margin = new Thickness(0, 0, 5, 0);
-                //textbox.TextChanged += Textbox_TextChanged;
-                grd_config.RowDefinitions.Add(new RowDefinition());
-                Grid.SetRow(label, grd_config.RowDefinitions.Count - 1);
-                Grid.SetColumn(label, 1);
-                Grid.SetRow(textbox, grd_config.RowDefinitions.Count - 1);
-                Grid.SetColumn(textbox, 2);
-                grd_config.Children.Add(label);
-                grd_config.Children.Add(textbox);
+                // add label and textbox to stackpanel_config
+                stackpanel_config.Children.Add(label);
+                stackpanel_config.Children.Add(textbox);
             }
         }
 
-        private void Textbox_TextChanged(object sender, TextChangedEventArgs e) {
-            throw new NotImplementedException();
+        private void VREnableButton_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void tree_configs_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            var selectedItem = (TreeViewItem)tree_configs.SelectedItem;
+            var hasParent = selectedItem.Parent is not null;
+            var hasChildren = selectedItem.Items.Count > 0;
+            if (!hasParent || hasChildren) return;
+            var configName = selectedItem.Header.ToString();
+            var hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
+            var brandItem = (TreeViewItem)selectedItem.Parent;
+            var brandName = (((TreeViewItem)brandItem.Parent).Header).ToString();
+            FillConfig(configDatabase.GetConfig(brandName, hmdName, configName));
         }
     }
 }

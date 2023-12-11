@@ -5,28 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCVRPatcher"
         mc:Ignorable="d"
-        Title="Star Citizen VR Patcher" Height="450" Width="793">
-    <Grid>
-        <Image Grid.Column="1" Source="pack://application:,,,/banner.png" Margin="0,10,397,246" HorizontalAlignment="Right" Width="386" />
-        <Grid Grid.Column = "1">
-            <Button x:Name="VREnableButton" Content="Enable VR" HorizontalAlignment="Left" Margin="237,354,0,0" VerticalAlignment="Top" Height="70" Width="169" RenderTransformOrigin="0.497,0.572" Click="VREnableButton_Click"/>
-            <Button x:Name="VRDisableButton" Content="Disable VR" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top" Height="70" Width="168" IsEnabled="False"/>
-        </Grid>
-        <ComboBox x:Name="box_manufacturer" Grid.Column="2" HorizontalAlignment="Left" Margin="505,10,0,0" VerticalAlignment="Top" Width="208" SelectionChanged="box_manufacturer_SelectionChanged"/>
-        <Label Grid.Column="2" Content="Manufacturer:" HorizontalAlignment="Left" Margin="417,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.003,-0.019" Width="83"/>
-        <ComboBox x:Name="box_hmd" Grid.Column="2" HorizontalAlignment="Left" Margin="505,41,0,0" VerticalAlignment="Top" Width="208" SelectionChanged="box_hmd_SelectionChanged"/>
-        <Label Grid.Column="2" Content="Headset:" HorizontalAlignment="Left" Margin="417,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.003,-0.019" Width="83"/>
-        <ComboBox x:Name="box_config" Grid.Column="3" HorizontalAlignment="Left" Margin="505,75,0,0" VerticalAlignment="Top" Width="208" SelectionChanged="box_config_SelectionChanged"/>
-        <Label Grid.Column="2" Content="Config" HorizontalAlignment="Left" Margin="417,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.003,-0.019" Width="83"/>
-        <GroupBox x:Name="grp_selectedConfig" Grid.Column="3" Header="Selected Config" Margin="417,104,0,0">
-            <Grid x:Name="grd_config">
-                <!--<Label Content="Penis" Grid.Row="0" Grid.Column="0" Width="50"/>
-                <TextBox x:Name="txt_text1" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1"/>
-                <Label Content="Penis" Grid.Row="1" Grid.Column="0" />
-                <TextBox TextWrapping="Wrap" Grid.Row="1" Grid.Column="2"/>
-                <Label Content="Penis" Grid.Row="2" Grid.Column="1" />
-                <TextBox TextWrapping="Wrap" Grid.Row="2" Grid.Column="2"/>-->
-            </Grid>
-        </GroupBox>
-    </Grid>
+        Title="Star Citizen VR Patcher" Height="450" Width="850">
+    <StackPanel Orientation="Horizontal">
+        <TreeView x:Name="tree_configs" SelectedItemChanged="tree_configs_SelectedItemChanged" MinWidth="200">
+            <ListViewItem Content="ListViewItem1"/>
+            <ListViewItem Content="ListViewItem2"/>
+        </TreeView>
+        <StackPanel Orientation="Vertical">
+            <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
+            <Button x:Name="VREnableButton" Content="Enable VR" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
+            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom"/>
+        </StackPanel>
+        <StackPanel x:Name="stackpanel_config">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Label: "/>
+                <TextBox Text="Textbox"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </Window>
