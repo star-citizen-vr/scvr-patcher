@@ -36,7 +36,7 @@ namespace SCVRPatcher {
         public bool IsEmptyOrMissing => Brands is null || Brands.Count == 0;
 
         public HmdConfig GetConfig(string brand, string hmd, string config) {
-            Logger.Debug($"Trying to get config for {brand}/{hmd}/{config}");
+            Logger.Info($"Trying to get config for {brand}/{hmd}/{config}");
             var b = Brands.First(b => b.Key == brand);
             var h = b.Value.First(h => h.Key == hmd);
             var c = h.Value.First(c => c.Key == config);

@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog" Version="5.2.7" />
+    <PackageReference Include="Sprache" Version="3.0.0-develop-00049" />
   </ItemGroup>
 
   <ItemGroup>

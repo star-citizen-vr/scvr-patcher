@@ -1,9 +1,12 @@
 ﻿using NLog;
+using SCVRPatcher;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.Xml;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -27,9 +30,9 @@ namespace SCVRPatcher {
         public static ConfigDataBase configDatabase = new();
 
         public MainWindow() {
-            Logger.Debug($"Started {Application.Current.MainWindow.Title}");
+            Logger.Info($"Started {Application.Current.MainWindow.Title}");
             var args = Environment.GetCommandLineArgs();
-            Logger.Debug($"Command line arguments: {string.Join(" ", args)}");
+            Logger.Info($"Command line arguments: {string.Join(" ", args)}");
             var parser = new Utils.CommandLineParser(args);
             var configsArg = parser.GetStringArgument("config");
             if (configsArg != null) {
@@ -45,6 +48,14 @@ namespace SCVRPatcher {
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             FillConfigs(configDatabase);
             stackpanel_config.Children.Clear();
+            var hf = new HostsFile();
+            //foreach (var entry in hf.Entries) {
+            //    try {
+            //        Logger.Info(entry.ToJson());
+            //    } catch (System.Exception e) { Logger.Warn($"Error: {entry}"); Logger.Error(e); }
+            //}
+            hf.AddOrEnableByDomain(HostsFile.EACHostName, HostsFile.Localhost);
+            hf.Save(new FileInfo("hosts.txt"), true);
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -126,7 +137,7 @@ namespace SCVRPatcher {
         private void FillConfig(HmdConfig config) {
             if (config is null) return;
             stackpanel_config.Children.Clear();
-            Logger.Debug($"Filling config: {config}");
+            Logger.Info($"Filling config: {config}");
             stackpanel_config.Children.Add(new Label() { Content = string.Join(" ", configDatabase.GetPath(config)) });
             Type t = config.GetType();
             Dictionary<string, object> Items = new();
