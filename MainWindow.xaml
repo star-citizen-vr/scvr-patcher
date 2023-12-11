@@ -8,18 +8,18 @@
         Title="Star Citizen VR Patcher" Height="450" Width="850">
     <StackPanel Orientation="Horizontal">
         <TreeView x:Name="tree_configs" SelectedItemChanged="tree_configs_SelectedItemChanged" MinWidth="200">
-            <!--<ListViewItem Content="ListViewItem1"/>
-            <ListViewItem Content="ListViewItem2"/>-->
+            <!--<ListViewItem Content="ListViewItem1" />
+            <ListViewItem Content="ListViewItem2" />-->
         </TreeView>
         <StackPanel Orientation="Vertical">
             <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
             <Button x:Name="VREnableButton" Content="Enable VR" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
-            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom"/>
+            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
         </StackPanel>
         <StackPanel x:Name="stackpanel_config">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Label: "/>
-                <TextBox Text="Textbox"/>
+                <Label Content="Label: " />
+                <TextBox Text="Textbox" />
             </StackPanel>
         </StackPanel>
     </StackPanel>

@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 
 namespace SCVRPatcher {
+
     internal class HostsFile {
         internal const string EACHostName = "modules-cdn.eac-prod.on.epicgames.com";
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -19,7 +20,9 @@ namespace SCVRPatcher {
         }
 
         public IEnumerable<HostsEntry> GetEntriesByDomain(string domain) => Entries.Where(e => e.Hostnames.Contains(domain));
+
         public IEnumerable<HostsEntry> GetEntryByIp(IPAddress ip) => Entries.Where(e => e.Ip.Equals(ip));
+
         public bool AddOrEnableByDomain(string domain, IPAddress ip, string comment = null) {
             var entries = GetEntriesByDomain(domain);
             if (entries.Count() > 1) {
@@ -42,6 +45,7 @@ namespace SCVRPatcher {
         public override string ToString() {
             return string.Join(Environment.NewLine, ToLines());
         }
+
         public List<string> ToLines() {
             var lines = new List<string>();
             foreach (var entry in Entries) {

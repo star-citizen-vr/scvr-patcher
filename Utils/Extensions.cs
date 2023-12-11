@@ -3,16 +3,21 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace SCVRPatcher {
-    static class Extensions {
+
+    internal static class Extensions {
+
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() {
             WriteIndented = true,
             Converters = { new IPAddressConverter() }
         };
+
         public static string ToJson(this object obj) { // , bool indented = false
             return JsonSerializer.Serialize(obj, JsonSerializerOptions);
         }
     }
+
     public class IPAddressConverter : JsonConverter<IPAddress> {
+
         public override IPAddress Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
             return IPAddress.Parse(reader.GetString() ?? string.Empty);
         }
@@ -21,5 +26,4 @@ namespace SCVRPatcher {
             writer.WriteStringValue(value.ToString());
         }
     }
-
 }

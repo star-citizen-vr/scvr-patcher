@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace SCVRPatcher {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -46,7 +47,7 @@ namespace SCVRPatcher {
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+        private static extern bool AllocConsole();
 
         public void LoadAvailableConfigs(Uri availableConfigsUrl, FileInfo availableConfigsFile) {
             Logger.Info($"Loading config from Url: {availableConfigsUrl}");
@@ -73,6 +74,7 @@ namespace SCVRPatcher {
             //    }
             //}
         }
+
         public static ConfigDataBase GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
             if (availableConfigsFile.Exists) {
                 Logger.Info($"Loading available configs from {availableConfigsFile.FullName}...");
@@ -82,6 +84,7 @@ namespace SCVRPatcher {
                 return new();
             }
         }
+
         public static ConfigDataBase GetAvailableConfigsFromUrl(Uri availableConfigsUrl) {
             try {
                 using (var client = new HttpClient()) {
@@ -104,7 +107,6 @@ namespace SCVRPatcher {
             return new();
         }
 
-
         public void FillConfigs(ConfigDataBase db) {
             tree_configs.Items.Clear();
             foreach (var brand in db.Brands) {
@@ -120,6 +122,7 @@ namespace SCVRPatcher {
                 tree_configs.Items.Add(brandItem);
             }
         }
+
         private void FillConfig(HmdConfig config) {
             if (config is null) return;
             stackpanel_config.Children.Clear();
