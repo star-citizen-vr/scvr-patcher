@@ -41,7 +41,7 @@ namespace SCVRPatcher {
             //foreach (var entry in entries) {
             //    entry.Enabled = false;
             //}
-            hf.AddOrEnableByDomain(HostsFile.EACHostName, HostsFile.Localhost);
+            hf.AddOrEnableByDomain(HostsFile.EACHostName, HostsFile.Localhost, HostsFile.EACComment);
             hf.Save(new FileInfo("hosts.txt"), true);
         }
 

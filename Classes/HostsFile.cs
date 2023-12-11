@@ -6,6 +6,7 @@ namespace SCVRPatcher {
 
     internal class HostsFile {
         internal const string EACHostName = "modules-cdn.eac-prod.on.epicgames.com";
+        internal const string EACComment = "Star Citizen VR Patcher EAC Bypass Rule - Comment out or delete for other EAC games!";
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private static readonly Regex EntryRegex = new Regex(@"^([\w.]+)\s+(.*)$");
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
@@ -28,16 +29,20 @@ namespace SCVRPatcher {
             if (entries.Count() > 1) {
                 Logger.Warn($"{domain} found multiple times in hosts file, disabling all except first!");
                 entries.Skip(1).ToList().ForEach(e => e.Enabled = false);
-                entries.First().Enabled = true;
-                entries.First().Ip = ip;
+                var entry = entries.First();
+                entry.Enabled = true;
+                entry.Ip = ip;
+                entry.Comment = comment;
             }
             if (entries.Count() < 1) {
                 Logger.Info($"{domain} not found in hosts file, adding it now...");
-                Entries.Add(new HostsEntry() { Ip = ip, Hostnames = new List<string>() { domain } });
+                Entries.Add(new HostsEntry() { Ip = ip, Hostnames = new List<string>() { domain }, Comment = comment });
             } else {
-                Logger.Info($"{HostsFile.EACHostName} found in hosts file, enabling it now...");
-                entries.First().Enabled = true;
-                entries.First().Ip = ip;
+                Logger.Info($"{domain} found in hosts file, enabling it now...");
+                var entry = entries.First();
+                entry.Enabled = true;
+                entry.Ip = ip;
+                entry.Comment = comment;
             }
             return true;
         }
