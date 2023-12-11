@@ -47,22 +47,6 @@ namespace SCVRPatcher {
             stackpanel_config.Children.Clear();
         }
 
-        public void FillConfigs(ConfigDataBase db) {
-            tree_configs.Items.Clear();
-            foreach (var brand in db.Brands) {
-                var brandItem = new TreeViewItem() { Header = brand.Key };
-                foreach (var model in brand.Value) {
-                    var modelItem = new TreeViewItem() { Header = model.Key };
-                    foreach (var config in model.Value) {
-                        var configItem = new TreeViewItem() { Header = config.Key };
-                        modelItem.Items.Add(configItem);
-                    }
-                    brandItem.Items.Add(modelItem);
-                }
-                tree_configs.Items.Add(brandItem);
-            }
-        }
-
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
@@ -123,6 +107,22 @@ namespace SCVRPatcher {
             return new();
         }
 
+
+        public void FillConfigs(ConfigDataBase db) {
+            tree_configs.Items.Clear();
+            foreach (var brand in db.Brands) {
+                var brandItem = new TreeViewItem() { Header = brand.Key };
+                foreach (var model in brand.Value) {
+                    var modelItem = new TreeViewItem() { Header = model.Key };
+                    foreach (var config in model.Value) {
+                        var configItem = new TreeViewItem() { Header = config.Key };
+                        modelItem.Items.Add(configItem);
+                    }
+                    brandItem.Items.Add(modelItem);
+                }
+                tree_configs.Items.Add(brandItem);
+            }
+        }
         private void FillConfig(HmdConfig config) {
             if (config is null) return;
             stackpanel_config.Children.Clear();
