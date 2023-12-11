@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,7 +24,7 @@ namespace SCVRPatcher {
 
         public static Uri availableConfigsUrl = new Uri("https://raw.githubusercontent.com/Bluscream/scvr-patcher/main/configs.json");
         public static FileInfo availableConfigsFile = new FileInfo("configs.json");
-        public static Dictionary<string, HmdConfig> availableConfigs = new();
+        public static ConfigDataBase configDatabase = new();
 
         public MainWindow() {
             Logger.Debug($"Started {Application.Current.MainWindow.Title}");
@@ -32,9 +33,8 @@ namespace SCVRPatcher {
             var parser = new Utils.CommandLineParser(args);
             var configsArg = parser.GetStringArgument("config");
             if (configsArg != null) {
-                var isUrl = Uri.TryCreate(configsArg, UriKind.Absolute, out var uriResult);
-                if (isUrl) availableConfigsUrl = uriResult;
-                else if (File.Exists(configsArg)) availableConfigsFile = new FileInfo(configsArg);
+                if (File.Exists(configsArg)) availableConfigsFile = new FileInfo(configsArg);
+                else if (Uri.TryCreate(configsArg, UriKind.Absolute, out var uriResult)) availableConfigsUrl = uriResult;
                 else Logger.Error($"Invalid --config argument: \"{configsArg}\"");
             }
             if (parser.GetSwitchArgument("console", 'c')) {
@@ -52,24 +52,36 @@ namespace SCVRPatcher {
         static extern bool AllocConsole();
 
         public void LoadAvailableConfigs(Uri availableConfigsUrl, FileInfo availableConfigsFile) {
-            availableConfigs = GetAvailableConfigsFromUrl(availableConfigsUrl);
-            if (availableConfigs.Count == 0) {
-                availableConfigs = GetAvailableConfigsFromFile(availableConfigsFile);
+            Logger.Info($"Loading config from Url: {availableConfigsUrl}");
+            configDatabase = GetAvailableConfigsFromUrl(availableConfigsUrl);
+            if (configDatabase.IsEmptyOrMissing) {
+                Logger.Error($"Failed to load config from Url!");
+                Logger.Info($"Loading config from File: {availableConfigsFile.FullName}");
+                configDatabase = GetAvailableConfigsFromFile(availableConfigsFile);
             }
-            if (availableConfigs.Count == 0) {
+            if (configDatabase.IsEmptyOrMissing) {
                 Logger.Error("No configs available!");
                 MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
+                // Application.Current.Shutdown();
+                return;
             }
-            HMDSelector.Items.Clear();
-            foreach (var config in availableConfigs) {
-                var item = new ListViewItem();
-                item.Content = config.Key;
-                item.Tag = config;
-                HMDSelector.Items.Add(item);
+
+            ClearBoxes(true);
+        }
+        public void ClearBoxes(bool refill = false) {
+            box_manufacturer.Items.Clear();
+            box_hmd.Items.Clear();
+            box_config.Items.Clear();
+            if (refill) {
+                foreach (var brand in configDatabase.Brands) {
+                    var item = new ComboBoxItem();
+                    item.Content = brand.Key;
+                    item.Tag = brand.Value;
+                    box_manufacturer.Items.Add(item);
+                }
             }
         }
-        public static Dictionary<string, HmdConfig> GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
+        public static ConfigDataBase GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
             if (availableConfigsFile.Exists) {
                 Logger.Info($"Loading available configs from {availableConfigsFile.FullName}...");
                 return ConfigDataBase.FromJson(File.ReadAllText(availableConfigsFile.FullName));
@@ -78,7 +90,7 @@ namespace SCVRPatcher {
                 return new();
             }
         }
-        public static Dictionary<string, HmdConfig> GetAvailableConfigsFromUrl(Uri availableConfigsUrl) {
+        public static ConfigDataBase GetAvailableConfigsFromUrl(Uri availableConfigsUrl) {
             try {
                 using (var client = new HttpClient()) {
                     Logger.Info($"Downloading available configs from {availableConfigsUrl}...");
@@ -102,6 +114,83 @@ namespace SCVRPatcher {
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void box_manufacturer_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selected = (ComboBoxItem)box_manufacturer.SelectedItem;
+            var name = (string)selected.Content;
+            var brand = (Dictionary<string, Dictionary<string, HmdConfig>>)selected.Tag;
+            box_hmd.Items.Clear();
+            box_config.Items.Clear();
+            foreach (var hmd in brand) {
+                var item = new ComboBoxItem();
+                item.Content = hmd.Key;
+                item.Tag = hmd.Value;
+                box_hmd.Items.Add(item);
+            }
+
+        }
+
+        private void box_hmd_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selected = (ComboBoxItem)box_hmd.SelectedItem;
+            var hmd = (Dictionary<string, HmdConfig>)selected.Tag;
+            box_config.Items.Clear();
+            foreach (var config in hmd) {
+                var item = new ComboBoxItem();
+                item.Content = config.Key;
+                item.Tag = config.Value;
+                box_config.Items.Add(item);
+            }
+        }
+
+        private void box_config_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selected = (ComboBoxItem)box_config.SelectedItem;
+            var cfg = (HmdConfig)selected.Tag;
+            FillConfig(cfg);
+        }
+
+        private void FillConfig(HmdConfig config) {
+            if (config is null) return;
+            Logger.Debug($"Filling config: {config}");
+            Type t = config.GetType();
+            Dictionary<string, object> Items = new();
+            foreach (var item in t.GetProperties()) {
+                var value = item.GetValue(config);
+                if (value is null) continue;
+                Items.Add(item.Name, value);
+            }
+            foreach (var item in t.GetFields()) {
+                var value = item.GetValue(config);
+                if (value is null) continue;
+                Items.Add(item.Name, value);
+            }
+            foreach (var item in Items) {
+                var value = item.Value;
+                if (value is null) continue;
+                if (value is System.Collections.IList) continue;
+                var label = new Label();
+                label.Content = item.Key + ":";
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.HorizontalAlignment = HorizontalAlignment.Right;
+                label.Margin = new Thickness(0, 0, 5, 0);
+                var textbox = new TextBox();
+                textbox.Text = value.ToString();
+                textbox.VerticalAlignment = VerticalAlignment.Center;
+                textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
+                textbox.Margin = new Thickness(0, 0, 5, 0);
+                //textbox.TextChanged += Textbox_TextChanged;
+                grd_config.RowDefinitions.Add(new RowDefinition());
+                Grid.SetRow(label, grd_config.RowDefinitions.Count - 1);
+                Grid.SetColumn(label, 1);
+                Grid.SetRow(textbox, grd_config.RowDefinitions.Count - 1);
+                Grid.SetColumn(textbox, 2);
+                grd_config.Children.Add(label);
+                grd_config.Children.Add(textbox);
+            }
+        }
+
+        private void Textbox_TextChanged(object sender, TextChangedEventArgs e) {
+            throw new NotImplementedException();
         }
     }
 }

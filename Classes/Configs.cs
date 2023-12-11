@@ -26,7 +26,10 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("hmds")]
-        public virtual Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>> Brands { get; set; }
+        public Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>> Brands { get; set; }
+
+        [JsonIgnore]
+        public bool IsEmptyOrMissing => Brands is null || Brands.Count == 0;
 
         public static ConfigDataBase FromJson(string json) => JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
     }
@@ -51,7 +54,7 @@ namespace SCVRPatcher {
     public partial class HmdConfig {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Hz")]
-        public virtual long? Hz { get; set; }
+        public virtual double? Hz { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("SC Attributes FOV")]

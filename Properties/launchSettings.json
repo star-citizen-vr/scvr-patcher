@@ -2,7 +2,7 @@
   "profiles": {
     "scvr-patcher": {
       "commandName": "Project",
-      "commandLineArgs": "--console --config \"C:\\Users\\blusc\\Desktop\\scvr\\scvr-patcher\\configs.json\""
+      "commandLineArgs": "--console --config \"D:\\Desktop\\scvr\\scvr-patcher\\configs\\configs-converted.json\""
     }
   }
 }
