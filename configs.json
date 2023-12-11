@@ -2171,7 +2171,6 @@
                 "Normal+Native+R90": {
                     "Hz": 90.0,
                     "SC Attributes FOV": 128.4658,
-                    "VorpX Config Pixel 1:1 Zoom": "w Aw aw aw",
                     "All Possible Lens Configurations": [
                         "Large+Native+R110",
                         "Large+Native+R90",
