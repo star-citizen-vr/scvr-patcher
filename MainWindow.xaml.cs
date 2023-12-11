@@ -49,10 +49,9 @@ namespace SCVRPatcher {
             FillConfigs(configDatabase);
             stackpanel_config.Children.Clear();
             var hf = new HostsFile();
-            //foreach (var entry in hf.Entries) {
-            //    try {
-            //        Logger.Info(entry.ToJson());
-            //    } catch (System.Exception e) { Logger.Warn($"Error: {entry}"); Logger.Error(e); }
+            //var entries = hf.GetEntriesByDomain(HostsFile.EACHostName);
+            //foreach (var entry in entries) {
+            //    entry.Enabled = false;
             //}
             hf.AddOrEnableByDomain(HostsFile.EACHostName, HostsFile.Localhost);
             hf.Save(new FileInfo("hosts.txt"), true);
