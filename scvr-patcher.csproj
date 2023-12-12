@@ -3,10 +3,23 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>scvr_patcher</RootNamespace>
+    <RootNamespace>SCVRPatcher</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <Description>Tool used to patch Star Citzen for VR</Description>
+    <PackageProjectUrl>https://github.com/Kaglaaz/scvr-update</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Kaglaaz/scvr-update</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>vr,vorpx,star citizen,eac,patcher</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +30,6 @@
     <None Remove=".gitignore" />
     <None Remove="banner.png" />
     <None Remove="configs-converted.json" />
-    <None Remove="README.md" />
     <None Remove="requirements.txt" />
     <None Remove="scvr-json-convert.py" />
     <None Remove="scvr-patcher.py" />
@@ -25,6 +37,10 @@
 
   <ItemGroup>
     <Page Remove="Resources.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,8 +53,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="main.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>main.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="main.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>main.Designer.cs</LastGenOutput>
+    </None>
     <None Update="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

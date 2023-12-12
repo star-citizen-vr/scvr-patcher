@@ -4,6 +4,10 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using Application = System.Windows.Application;
+using Label = System.Windows.Controls.Label;
+using MessageBox = System.Windows.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace SCVRPatcher {
 
@@ -13,9 +17,11 @@ namespace SCVRPatcher {
     public partial class MainWindow : Window {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public static Uri availableConfigsUrl = new Uri("https://raw.githubusercontent.com/Bluscream/scvr-patcher/main/configs.json");
-        public static FileInfo availableConfigsFile = new FileInfo("configs.json");
-        public static ConfigDataBase configDatabase = new();
+        internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
+        internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
+        internal static ConfigDataBase configDatabase = new();
+
+        internal static Game game { get; private set; }
 
         public MainWindow() {
             Logger.Info($"Started {Application.Current.MainWindow.Title}");
@@ -32,6 +38,7 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
+            game = new();
             InitializeComponent();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             FillConfigs(configDatabase);
@@ -41,7 +48,7 @@ namespace SCVRPatcher {
             //foreach (var entry in entries) {
             //    entry.Enabled = false;
             //}
-            hf.AddOrEnableByDomain(HostsFile.EACHostName, HostsFile.Localhost, HostsFile.EACComment);
+            hf.AddOrEnableByDomain(AppSettings.Default.EACHostName, HostsFile.Localhost, AppSettings.Default.EACComment);
             hf.Save(new FileInfo("hosts.txt"), true);
         }
 
@@ -59,7 +66,7 @@ namespace SCVRPatcher {
             }
             if (configDatabase.IsEmptyOrMissing) {
                 Logger.Error("No configs available!");
-                MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 // Application.Current.Shutdown();
                 return;
             }
@@ -148,12 +155,12 @@ namespace SCVRPatcher {
                 var label = new Label();
                 label.Content = item.Key + ":";
                 label.VerticalAlignment = VerticalAlignment.Center;
-                label.HorizontalAlignment = HorizontalAlignment.Right;
+                //label.HorizontalAlignment = HorizontalAlignment.Right;
                 label.Margin = new Thickness(0, 0, 5, 0);
                 var textbox = new TextBox();
                 textbox.Text = value.ToString();
                 textbox.VerticalAlignment = VerticalAlignment.Center;
-                textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
+                //textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
                 textbox.Margin = new Thickness(0, 0, 5, 0);
                 // add label and textbox to stackpanel_config
                 stackpanel_config.Children.Add(label);

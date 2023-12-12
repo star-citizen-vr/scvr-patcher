@@ -5,8 +5,6 @@ using System.Text.RegularExpressions;
 namespace SCVRPatcher {
 
     internal class HostsFile {
-        internal const string EACHostName = "modules-cdn.eac-prod.on.epicgames.com";
-        internal const string EACComment = "Star Citizen VR Patcher EAC Bypass Rule - Comment out or delete for other EAC games!";
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private static readonly Regex EntryRegex = new Regex(@"^([\w.]+)\s+(.*)$");
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
