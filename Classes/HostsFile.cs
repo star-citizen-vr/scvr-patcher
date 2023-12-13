@@ -6,7 +6,7 @@ namespace SCVRPatcher {
 
     internal class HostsFile {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private static readonly Regex EntryRegex = new Regex(@"^([\w.]+)\s+(.*)$");
+        //private static readonly Regex EntryRegex = new Regex(@"^([\w.]+)\s+(.*)$");
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
         internal static readonly IPAddress Null = new IPAddress(new byte[] { 0, 0, 0, 0 });
         internal static readonly IPAddress Localhost = new IPAddress(new byte[] { 127, 0, 0, 1 });
@@ -22,7 +22,26 @@ namespace SCVRPatcher {
 
         public IEnumerable<HostsEntry> GetEntryByIp(IPAddress ip) => Entries.Where(e => e.Ip.Equals(ip));
 
-        public bool AddOrEnableByDomain(string domain, IPAddress ip, string comment = null) {
+        public void DisableDomain(string domain, bool remove = false) {
+            var entries = GetEntriesByDomain(domain);
+            var removestring = remove ? "removing" : "disabling";
+            if (entries.Count() < 1) {
+                Logger.Debug($"{domain} not found in hosts file, skipping...");
+                return;
+            }
+            if (entries.Count() > 1) {
+                Logger.Warn($"{domain} found multiple times in hosts file, {removestring} all!");
+                if (remove) entries.ToList().ForEach(e => Entries.Remove(e));
+                else entries.ToList().ForEach(e => e.Enabled = false);
+            } else {
+                Logger.Info($"{domain} found in hosts file, {removestring} it now...");
+                var entry = entries.First();
+                entry.Enabled = false;
+                if (remove) Entries.Remove(entry);
+            }
+        }
+
+        public bool AddOrEnableDomain(string domain, IPAddress ip, string comment = null) {
             var entries = GetEntriesByDomain(domain);
             if (entries.Count() > 1) {
                 Logger.Warn($"{domain} found multiple times in hosts file, disabling all except first!");
@@ -35,6 +54,9 @@ namespace SCVRPatcher {
             if (entries.Count() < 1) {
                 Logger.Info($"{domain} not found in hosts file, adding it now...");
                 Entries.Add(new HostsEntry() { Ip = ip, Hostnames = new List<string>() { domain }, Comment = comment });
+            } else if (entries.First().Enabled) {
+                Logger.Debug($"{domain} already enabled in hosts file, skipping...");
+                return true;
             } else {
                 Logger.Info($"{domain} found in hosts file, enabling it now...");
                 var entry = entries.First();
@@ -94,19 +116,13 @@ namespace SCVRPatcher {
                     entry.Enabled = false;
                     line = line.Substring(1).Trim();
                 }
-                var parts = WhiteSpaceRegex.Split(line); // line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var parts = WhiteSpaceRegex.Split(line);
                 if (parts.Length < 2) {
                     Logger.Trace($"Line is too short: {line}");
                     entry.Comment = line.Replace("#", string.Empty).Trim();
                     Entries.Add(entry);
                     continue;
                 }
-                //if (!EntryRegex.IsMatch(line)) {
-                //    Logger.Trace($"Line does not match valid EntryRegex: {line}");
-                //    entry.Comment = line;
-                //    Entries.Add(entry);
-                //    continue;
-                //}
                 var success = IPAddress.TryParse(parts[0], out var ip);
                 if (!success) {
                     Logger.Trace($"Not a valid IP: {parts[0]}");

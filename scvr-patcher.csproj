@@ -28,8 +28,12 @@
 
   <ItemGroup>
     <None Remove=".gitignore" />
+    <None Remove="App.config" />
     <None Remove="banner.png" />
     <None Remove="configs-converted.json" />
+    <None Remove="FodyWeavers.xml" />
+    <None Remove="FodyWeavers.xsd" />
+    <None Remove="NLog.config" />
     <None Remove="requirements.txt" />
     <None Remove="scvr-json-convert.py" />
     <None Remove="scvr-patcher.py" />
@@ -46,9 +50,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="FodyWeavers.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FodyWeavers.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NLog.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="NLog" Version="5.2.7" />
     <PackageReference Include="Sprache" Version="3.0.0-develop-00049" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="App.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -80,21 +102,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="App.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Update="AppSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="configs.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="FodyWeavers.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="FodyWeavers.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="logo.png">
@@ -111,9 +124,6 @@
     <None Update="main.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>main.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="NLog.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>

@@ -1,5 +1,8 @@
 import csv
 import json
+from re import compile
+
+resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
 
 """
 = row["Headset Name"]
@@ -61,6 +64,17 @@ import json
 = row["All Integer Resolutions up to 19840 x 14880"]
 """
 
+def split_resolution(resolution: str):
+    match = resolution_regex.match(resolution)
+    if not match: return None
+    grps = len(match.groups())
+    if grps < 1: return None
+    dic = {}
+    if match.group(1): dic["w"] = int(match.group(1))
+    if match.group(2): dic["h"] = int(match.group(2))
+    if match.group(3): dic["d"] = match.group(3).strip()
+    if match.group(4): dic["p"] = match.group(4).replace('%','').strip()
+    return dic
 
 def csv_to_json(csvFilePath, jsonFilePath):
    # Create a dictionary to store the data
@@ -95,7 +109,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 # Add the key-value pair to the row dictionary
                 if not value or value.strip() == '': continue
                 if key in ["Give me all the resolutions","Alternative Interger Resolutions (big list)","Alternative Interger Resolutions (small list)"]:
-                    data['common'][key] = value.split(', ')
+                    data['common'][key] = [split_resolution(v) for v in value.split(', ') if v]
                     continue
                 if key in [
                     "Monitor (Ignore me)",
@@ -109,7 +123,9 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     key = "Notes"
                     if value.replace(' ','').replace('|','') == '' : value = list()
                     else: value = value.split(' | ')
-                elif key in ["Custom Resolution List","All Possible Lens Configurations","Custom Resolutions V-Translated","Custom Resolutions H-Translated (Preferred)","Combined Custom Resolutions","Every 6th up to 5440 x 4080","Every 8th up to 5440 x 4080","Every 10th up to 5440 x 4080","Every 6th+8th up to 5440 x 4080","Every 6th+8th+10th up to 5440 x 4080","All Integer Resolutions up to 5440 x 4080","Every 6th up to 19840 x 14880","Every 8th up to 19840 x 14880","Every 10th up to 19840 x 14880","Every 6th+8th up to 19840 x 14880","Every 6th+8th+10th up to 19840 x 14880","All Integer Resolutions up to 19840 x 14880"]:
+                elif key in ["Custom Resolution List","Custom Resolutions V-Translated","Custom Resolutions H-Translated (Preferred)","Combined Custom Resolutions","Every 6th up to 5440 x 4080","Every 8th up to 5440 x 4080","Every 10th up to 5440 x 4080","Every 6th+8th up to 5440 x 4080","Every 6th+8th+10th up to 5440 x 4080","All Integer Resolutions up to 5440 x 4080","Every 6th up to 19840 x 14880","Every 8th up to 19840 x 14880","Every 10th up to 19840 x 14880","Every 6th+8th up to 19840 x 14880","Every 6th+8th+10th up to 19840 x 14880","All Integer Resolutions up to 19840 x 14880"]:
+                    value = [split_resolution(v) for v in value.split(', ') if v]
+                elif key == "All Possible Lens Configurations":
                     value = value.split(', ')
                 else:
                     if value.startswith('W '): value = value[2:]

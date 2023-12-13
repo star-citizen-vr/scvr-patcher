@@ -16,6 +16,10 @@ namespace SCVRPatcher {
 
         public Game() {
             BuildRootDirectory = GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
+            Logger.Debug($"Got game root directory: {BuildRootDirectory.FullName}");
+            foreach (var buildDir in BuildDirectories) {
+                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.FullName})");
+            }
         }
 
         public DirectoryInfo? GetGameRootDirFromRegistry() {
@@ -32,16 +36,17 @@ namespace SCVRPatcher {
                 if (matchedExeFullPath == null) continue;
                 var matchedExe = new FileInfo(matchedExeFullPath);
                 if (matchedExe.Name == "StarCitizen.exe") {
-                    Logger.Info($"Found Star Citizen as {subKey.Name}: {matchedExe.FullName}");
+                    Logger.Debug($"Found Star Citizen as {subKey.Name}: {matchedExe.FullName}");
                     var dir = matchedExe.Directory?.Parent?.Parent;
                     if (dir is null || !dir.Exists) {
                         Logger.Error($"Star Citizen's root directory does not exist or is invalid: {dir?.FullName}");
                         continue;
                     }
+                    Logger.Debug($"Found Star Citizen's root directory: {dir.FullName}");
                     return dir;
                 }
             }
-            Logger.Warn("Could not find Star Citizen's root directory in the registry, please select it manually!");
+            Logger.Error("Could not find Star Citizen's root directory in the registry, please select it manually!");
             return null;
         }
 

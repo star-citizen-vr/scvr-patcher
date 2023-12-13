@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NLog.Config;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.InteropServices;
@@ -23,7 +24,18 @@ namespace SCVRPatcher {
 
         internal static Game game { get; private set; }
 
+        public static void SetupLogging() {
+            var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
+            string xml;
+            using (var reader = new StreamReader(stream)) {
+                xml = reader.ReadToEnd();
+            }
+            LogManager.Configuration = XmlLoggingConfiguration.CreateFromXmlString(xml);
+            //Logger = LogManager.GetCurrentClassLogger();
+        }
+
         public MainWindow() {
+            SetupLogging();
             Logger.Info($"Started {Application.Current.MainWindow.Title}");
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
@@ -44,11 +56,8 @@ namespace SCVRPatcher {
             FillConfigs(configDatabase);
             stackpanel_config.Children.Clear();
             var hf = new HostsFile();
-            //var entries = hf.GetEntriesByDomain(HostsFile.EACHostName);
-            //foreach (var entry in entries) {
-            //    entry.Enabled = false;
-            //}
-            hf.AddOrEnableByDomain(AppSettings.Default.EACHostName, HostsFile.Localhost, AppSettings.Default.EACComment);
+            hf.AddOrEnableDomain(AppSettings.Default.EACHostName, HostsFile.Localhost, AppSettings.Default.EACComment); // hf.DisableDomain(AppSettings.Default.EACHostName);
+
             hf.Save(new FileInfo("hosts.txt"), true);
         }
 
