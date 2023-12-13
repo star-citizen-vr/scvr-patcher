@@ -1,4 +1,4 @@
-﻿namespace SCVRPatcher.Utils {
+﻿namespace SCVRPatcher {
 
     public class CommandLineParser {
         private readonly List<string> _args;

@@ -1,10 +1,12 @@
 ﻿using NLog;
 using NLog.Config;
+using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
 using MessageBox = System.Windows.MessageBox;
@@ -21,6 +23,7 @@ namespace SCVRPatcher {
         internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
         internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
         internal static ConfigDataBase configDatabase = new();
+        internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
 
         internal static Game game { get; private set; }
 
@@ -39,7 +42,7 @@ namespace SCVRPatcher {
             Logger.Info($"Started {Application.Current.MainWindow.Title}");
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
-            var parser = new Utils.CommandLineParser(args);
+            var parser = new CommandLineParser(args);
             var configsArg = parser.GetStringArgument("config");
             if (configsArg != null) {
                 Logger.Info($"--config argument: {configsArg}");
@@ -55,10 +58,10 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
-            game = new();
+            //game = new();
             InitializeComponent();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
-            FillConfigs(configDatabase);
+            FillHmds(configDatabase);
             stackpanel_config.Children.Clear();
             var hf = new HostsFile();
             hf.AddOrEnableDomain(AppSettings.Default.EACHostName, HostsFile.Localhost, AppSettings.Default.EACComment); // hf.DisableDomain(AppSettings.Default.EACHostName);
@@ -106,8 +109,8 @@ namespace SCVRPatcher {
             //}
         }
 
-        public void FillConfigs(ConfigDataBase db) {
-            tree_configs.Items.Clear();
+        public void FillHmds(ConfigDataBase db) {
+            tree_hmds.Items.Clear();
             foreach (var brand in db.Brands) {
                 var brandItem = new TreeViewItem() { Header = brand.Key };
                 foreach (var model in brand.Value) {
@@ -118,8 +121,23 @@ namespace SCVRPatcher {
                     }
                     brandItem.Items.Add(modelItem);
                 }
-                tree_configs.Items.Add(brandItem);
+                tree_hmds.Items.Add(brandItem);
             }
+        }
+
+        public void FillConfigList(ConfigDataBase db, HmdConfig config) {
+            list_configs.Items.Clear();
+            var redBrush = new SolidColorBrush(Colors.Red);
+            foreach (var res in config.CustomResolutions) {
+                var item = new ListViewItem() { Content = res.ToString(), Tag = res };
+                if (res > mainScreenResolution) {
+                    item.Foreground = redBrush;
+                    item.ToolTip = $"Resolution is higher than your main screen's resolution! ({mainScreenResolution.Width} x {mainScreenResolution.Height})";
+                }
+                list_configs.Items.Add(item);
+            }
+            // sort list_configs
+            list_configs.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Tag.Width", System.ComponentModel.ListSortDirection.Ascending));
         }
 
         private void FillConfig(HmdConfig config) {
@@ -164,8 +182,20 @@ namespace SCVRPatcher {
             MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void tree_configs_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
-            var selectedItem = (TreeViewItem)tree_configs.SelectedItem;
+        private void tree_hmds_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
+            var hasParent = selectedItem.Parent is not null;
+            var hasChildren = selectedItem.Items.Count > 0;
+            if (!hasParent || hasChildren) return;
+            var configName = selectedItem.Header.ToString();
+            var hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
+            var brandItem = (TreeViewItem)selectedItem.Parent;
+            var brandName = (((TreeViewItem)brandItem.Parent).Header).ToString();
+            FillConfigList(configDatabase, configDatabase.GetConfig(brandName, hmdName, configName));
+        }
+
+        private void list_configs_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
             var hasParent = selectedItem.Parent is not null;
             var hasChildren = selectedItem.Items.Count > 0;
             if (!hasParent || hasChildren) return;

@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCVRPatcher"
         mc:Ignorable="d"
-        Title="Star Citizen VR Patcher" Height="450" Width="850">
+        Title="Star Citizen VR Patcher" Height="500" Width="1150">
     <StackPanel Orientation="Horizontal">
-        <TreeView x:Name="tree_configs" SelectedItemChanged="tree_configs_SelectedItemChanged" MinWidth="200">
-            <!--<ListViewItem Content="ListViewItem1" />
-            <ListViewItem Content="ListViewItem2" />-->
-        </TreeView>
+        <TreeView x:Name="tree_hmds" SelectedItemChanged="tree_hmds_SelectedItemChanged" MinWidth="200"/>
+        <GridSplitter/>
+        <ListView x:Name="list_configs" MinWidth="250" SelectionChanged="list_configs_SelectionChanged" SelectionMode="Single"/>
+        <GridSplitter/>
         <StackPanel Orientation="Vertical">
             <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
             <Button x:Name="VREnableButton" Content="Enable VR" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
             <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
         </StackPanel>
+        <GridSplitter/>
         <StackPanel x:Name="stackpanel_config">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Label: " />

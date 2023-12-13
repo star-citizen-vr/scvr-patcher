@@ -22,6 +22,8 @@ namespace SCVRPatcher {
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Net.Http;
+    using System.Text;
+    using System.CodeDom;
 
     public partial class ConfigDataBase {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -136,6 +138,20 @@ namespace SCVRPatcher {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("p")]
         public virtual string? Percentage { get; set; }
+
+        public override string ToString() {
+            var sb = new StringBuilder($"{Width} x {Height}");
+            if (!string.IsNullOrEmpty(Description)) sb.Append($" ({Description})");
+            if (!string.IsNullOrEmpty(Percentage)) sb.Append($" {Percentage}%");
+            return sb.ToString();
+        }
+
+        public static bool operator >(Resolution a, Resolution b) {
+            return a.Width > b.Width && a.Height > b.Height;
+        }
+        public static bool operator <(Resolution a, Resolution b) {
+            return a.Width < b.Width && a.Height < b.Height;
+        }
     }
 
     public partial class HmdConfig {
