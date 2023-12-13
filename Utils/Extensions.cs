@@ -1,10 +1,14 @@
 ﻿using System.Net;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace SCVRPatcher {
 
     internal static class Extensions {
+
+        public static string ReadAllText(this FileInfo file) => File.ReadAllText(file.FullName);
+        public static IEnumerable<string> ReadAllLines(this FileInfo file) => File.ReadAllLines(file.FullName);
 
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() {
             WriteIndented = true,

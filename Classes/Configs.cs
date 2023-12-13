@@ -19,17 +19,19 @@ namespace SCVRPatcher {
     using System.Globalization;
     using System.Runtime.InteropServices;
     using NLog;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Net.Http;
 
     public partial class ConfigDataBase {
-
-        Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("common")]
         public virtual Common Common { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("hmds")]
+        [JsonPropertyName("brands")]
         public Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>> Brands { get; set; }
 
         [JsonIgnore]
@@ -60,7 +62,48 @@ namespace SCVRPatcher {
             return path;
         }
 
-        public static ConfigDataBase FromJson(string json) => JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
+        public void ToFile(FileInfo file) {
+            File.WriteAllText(file.FullName, this.ToJson());
+        }
+
+        public static ConfigDataBase? FromUrl(Uri uri) {
+            try {
+                using (var client = new HttpClient()) {
+                    Logger.Info($"Downloading available configs from {uri}...");
+                    var response = client.GetAsync(uri).Result;
+                    if (response.IsSuccessStatusCode) {
+                        var json = response.Content.ReadAsStringAsync().Result;
+                        return ConfigDataBase.FromJson(json);
+                    } else {
+                        throw new Exception($"Failed to download available configs! (Error {response.StatusCode})");
+                    }
+                }
+            } catch (Exception e) {
+                Logger.Error(e);
+            }
+            return null;
+        }
+        public static ConfigDataBase? FromFile(FileInfo file) {
+            if (!file.Exists) {
+                Logger.Error($"Config file not found: {file.FullName}");
+                return null;
+            }
+            try { File.ReadAllText(file.FullName); } catch (Exception e) {
+                Logger.Error($"Error reading file {file.FullName}!", e);
+            }
+            var text = File.ReadAllText(file.FullName);
+            Logger.Debug($"Read {text.Length} chars from {file.FullName}");
+            return FromJson(text);
+        }
+        public static ConfigDataBase? FromJson(string json) {
+            try {
+                var db = JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
+                return db;
+            } catch (Exception e) {
+                Logger.Error($"Error parsing json: {e} (Length: {json.Length})");
+            }
+            return null;
+        }
     }
     public static class Serialize {
         public static string ToJson(this ConfigDataBase self) => JsonSerializer.Serialize(self, Converter.Settings);
@@ -69,15 +112,30 @@ namespace SCVRPatcher {
     public partial class Common {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Alternative Interger Resolutions (small list)")]
-        public virtual List<string> AlternativeIntergerResolutionsSmallList { get; set; }
+        public virtual List<Resolution> AlternativeIntergerResolutionsSmallList { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Alternative Interger Resolutions (big list)")]
-        public virtual List<string> AlternativeIntergerResolutionsBigList { get; set; }
+        public virtual List<Resolution> AlternativeIntergerResolutionsBigList { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Give me all the resolutions")]
-        public virtual List<string> GiveMeAllTheResolutions { get; set; }
+        public virtual List<Resolution> GiveMeAllTheResolutions { get; set; }
+    }
+
+    public partial class Resolution {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("w")]
+        public virtual double? Width { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("h")]
+        public virtual double? Height { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("d")]
+        public virtual string? Description { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("p")]
+        public virtual string? Percentage { get; set; }
     }
 
     public partial class HmdConfig {
@@ -101,13 +159,13 @@ namespace SCVRPatcher {
         [JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
         public virtual double? Zoom { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("All Possible Lens Configurations")]
-        public virtual List<string> LensConfigurations { get; set; }
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] // Todo: Do we need this?
+        //[JsonPropertyName("All Possible Lens Configurations")]
+        //public virtual List<string> LensConfigurations { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Custom Resolution List")]
-        public virtual List<string> CustomResolutions { get; set; }
+        public virtual List<Resolution> CustomResolutions { get; set; }
 
         //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         //[JsonPropertyName("Headset Name")]

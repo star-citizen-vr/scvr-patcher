@@ -42,9 +42,14 @@ namespace SCVRPatcher {
             var parser = new Utils.CommandLineParser(args);
             var configsArg = parser.GetStringArgument("config");
             if (configsArg != null) {
-                if (File.Exists(configsArg)) availableConfigsFile = new FileInfo(configsArg);
-                else if (Uri.TryCreate(configsArg, UriKind.Absolute, out var uriResult)) availableConfigsUrl = uriResult;
-                else Logger.Error($"Invalid --config argument: \"{configsArg}\"");
+                Logger.Info($"--config argument: {configsArg}");
+                if (File.Exists(configsArg)) {
+                    Logger.Info($"--config argument is a file: {configsArg}");
+                    availableConfigsFile = new FileInfo(configsArg);
+                } else if (Uri.TryCreate(configsArg, UriKind.Absolute, out var uriResult)) {
+                    Logger.Info($"--config argument is a url: {configsArg}");
+                    availableConfigsUrl = uriResult;
+                } else Logger.Error($"Invalid --config argument: \"{configsArg}\"");
             }
             if (parser.GetSwitchArgument("console", 'c')) {
                 AllocConsole();
@@ -66,17 +71,27 @@ namespace SCVRPatcher {
         private static extern bool AllocConsole();
 
         public void LoadAvailableConfigs(Uri availableConfigsUrl, FileInfo availableConfigsFile) {
-            Logger.Info($"Loading config from Url: {availableConfigsUrl}");
-            configDatabase = GetAvailableConfigsFromUrl(availableConfigsUrl);
-            if (configDatabase.IsEmptyOrMissing) {
-                Logger.Error($"Failed to load config from Url!");
-                Logger.Info($"Loading config from File: {availableConfigsFile.FullName}");
-                configDatabase = GetAvailableConfigsFromFile(availableConfigsFile);
+            //Logger.Info($"Loading config from Url: {availableConfigsUrl}");
+            var onlineConfigs = ConfigDataBase.FromUrl(availableConfigsUrl);
+            var offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
+            if (onlineConfigs != null && onlineConfigs != offlineConfigs && MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                onlineConfigs.ToFile(availableConfigsFile);
+                Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.FullName}");
+                configDatabase = onlineConfigs;
+            } else if (offlineConfigs != null) {
+                Logger.Info($"Loaded config from {availableConfigsFile.FullName}");
+                configDatabase = offlineConfigs;
             }
+
+            //if (configDatabase.IsEmptyOrMissing) {
+            //    Logger.Error($"Failed to load config from Url!");
+            //    Logger.Info($"Loading config from File: {availableConfigsFile.FullName}");
+            //    configDatabase = GetAvailableConfigsFromFile(availableConfigsFile);
+            //}
             if (configDatabase.IsEmptyOrMissing) {
                 Logger.Error("No configs available!");
-                System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                // Application.Current.Shutdown();
+                var result = System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
                 return;
             }
             Logger.Info($"Loaded {configDatabase.Brands.Count} brands.");
@@ -89,38 +104,6 @@ namespace SCVRPatcher {
             //        }
             //    }
             //}
-        }
-
-        public static ConfigDataBase GetAvailableConfigsFromFile(FileInfo availableConfigsFile) {
-            if (availableConfigsFile.Exists) {
-                Logger.Info($"Loading available configs from {availableConfigsFile.FullName}...");
-                return ConfigDataBase.FromJson(File.ReadAllText(availableConfigsFile.FullName));
-            } else {
-                Logger.Warn($"Configs file not found at {availableConfigsFile.FullName}!");
-                return new();
-            }
-        }
-
-        public static ConfigDataBase GetAvailableConfigsFromUrl(Uri availableConfigsUrl) {
-            try {
-                using (var client = new HttpClient()) {
-                    Logger.Info($"Downloading available configs from {availableConfigsUrl}...");
-                    var response = client.GetAsync(availableConfigsUrl).Result;
-                    if (response.IsSuccessStatusCode) {
-                        var json = response.Content.ReadAsStringAsync().Result;
-                        File.WriteAllText(availableConfigsFile.FullName, json);
-                        return ConfigDataBase.FromJson(json);
-                    } else {
-                        throw new Exception($"Failed to download available configs! (Error {response.StatusCode})");
-                    }
-                }
-            } catch (Exception e) {
-                Logger.Error(e);
-                if (availableConfigsFile.Exists) {
-                    return ConfigDataBase.FromJson(File.ReadAllText(availableConfigsFile.FullName));
-                }
-            }
-            return new();
         }
 
         public void FillConfigs(ConfigDataBase db) {

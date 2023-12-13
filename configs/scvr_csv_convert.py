@@ -95,13 +95,13 @@ def csv_to_json(csvFilePath, jsonFilePath):
             row_dict = {}
 
             if row['Headset Brand'] not in brands:
-                brands[row['Headset Brand']] = { "hmds": {} }
+                brands[row['Headset Brand']] = { }
 
             if row['Headset Model'] not in brands[row['Headset Brand']]:
-                brands[row['Headset Brand']]["hmds"][row['Headset Model']] = { "configs": {} }
+                brands[row['Headset Brand']][row['Headset Model']] = { }
 
-            if row['Lens Configuration'] not in brands[row['Headset Brand']]["hmds"][row['Headset Model']]:
-                brands[row['Headset Brand']]["hmds"][row['Headset Model']]["configs"][row['Lens Configuration']] = {}
+            if row['Lens Configuration'] not in brands[row['Headset Brand']][row['Headset Model']]:
+                brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = {}
 
             for key, value in row.items():
                 # Skip the keys that we don't want to include in the JSON file
@@ -144,7 +144,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 row_dict[key] = value
 
             # Add the row dictionary to the data dictionary
-            brands[row['Headset Brand']]["hmds"][row['Headset Model']]["configs"][row['Lens Configuration']] = row_dict
+            brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = row_dict
 
    data["brands"] = brands
 
