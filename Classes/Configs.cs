@@ -147,10 +147,10 @@ namespace SCVRPatcher {
         }
 
         public static bool operator >(Resolution a, Resolution b) {
-            return a.Width > b.Width && a.Height > b.Height;
+            return a.Width > b.Width || a.Height > b.Height;
         }
         public static bool operator <(Resolution a, Resolution b) {
-            return a.Width < b.Width && a.Height < b.Height;
+            return a.Width < b.Width || a.Height < b.Height;
         }
     }
 
