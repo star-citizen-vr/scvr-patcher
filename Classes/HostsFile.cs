@@ -81,24 +81,24 @@ namespace SCVRPatcher {
 
         public void Save(FileInfo file = null, bool backup = true) {
             file ??= HostFile;
-            Logger.Info($"Saving hosts file to {file.FullName}");
+            Logger.Info($"Saving hosts file to {file.Quote()}");
             if (file.Exists && backup) {
                 var backupFile = new FileInfo(file.FullName + ".bak");
-                Logger.Info($"Hosts file already exists, creating backup at {backupFile.FullName}");
+                Logger.Info($"Hosts file already exists, creating backup at {backupFile.Quote()}");
                 if (backupFile.Exists) backupFile.Delete();
                 file.MoveTo(backupFile.FullName);
             } // Why is this buggy?
             File.WriteAllText(file.FullName, this.ToString());
-            Logger.Info($"Saved hosts file to {file.FullName}");
+            Logger.Info($"Saved hosts file to {file.Quote()}");
         }
 
         public List<HostsEntry> Load(FileInfo file = null) {
             file ??= HostFile;
             if (!file.Exists) {
-                Logger.Error($"Hosts file not found: {file.FullName}");
+                Logger.Error($"Hosts file not found: {file.Quote()}");
                 return null;
             }
-            Logger.Trace($"Loading hosts file from {file.FullName}");
+            Logger.Trace($"Loading hosts file from {file.Quote()}");
             var lines = File.ReadAllLines(file.FullName);
             Logger.Info($"Loaded hosts file with {lines.Length} lines.");
             Entries.Clear();

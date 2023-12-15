@@ -87,14 +87,14 @@ namespace SCVRPatcher {
         }
         public static ConfigDataBase? FromFile(FileInfo file) {
             if (!file.Exists) {
-                Logger.Error($"Config file not found: {file.FullName}");
+                Logger.Error($"Config file not found: {file.Quote()}");
                 return null;
             }
             try { File.ReadAllText(file.FullName); } catch (Exception e) {
-                Logger.Error($"Error reading file {file.FullName}!", e);
+                Logger.Error($"Error reading file {file.Quote()}!", e);
             }
             var text = File.ReadAllText(file.FullName);
-            Logger.Debug($"Read {text.Length} chars from {file.FullName}");
+            Logger.Debug($"Read {text.Length} chars from {file.Quote()}");
             return FromJson(text);
         }
         public static ConfigDataBase? FromJson(string json) {

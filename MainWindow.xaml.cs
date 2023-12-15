@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static SCVRPatcher.VorpX;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
 using MessageBox = System.Windows.MessageBox;
@@ -22,10 +23,12 @@ namespace SCVRPatcher {
 
         internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
         internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
-        internal static ConfigDataBase configDatabase = new();
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
 
+        internal static ConfigDataBase configDatabase { get; private set; }
+        internal static EAC eac { get; private set; }
         internal static Game game { get; private set; }
+        internal static VorpX vorpx { get; private set; }
 
         public static void SetupLogging() {
             var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
@@ -60,13 +63,14 @@ namespace SCVRPatcher {
             }
             //game = new();
             InitializeComponent();
+            configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             FillHmds(configDatabase);
             stackpanel_config.Children.Clear();
-            var hf = new HostsFile();
-            hf.AddOrEnableDomain(AppSettings.Default.EACHostName, HostsFile.Localhost, AppSettings.Default.EACComment); // hf.DisableDomain(AppSettings.Default.EACHostName);
-
-            hf.Save(new FileInfo("hosts.txt"), true);
+            eac = new();
+            vorpx = new();
+            VREnableButton.IsEnabled = true;
+            // VRDisableButton.IsEnabled = true;
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -79,16 +83,16 @@ namespace SCVRPatcher {
             var offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
             if (onlineConfigs != null && onlineConfigs != offlineConfigs && MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                 onlineConfigs.ToFile(availableConfigsFile);
-                Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.FullName}");
+                Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.Quote()}");
                 configDatabase = onlineConfigs;
             } else if (offlineConfigs != null) {
-                Logger.Info($"Loaded config from {availableConfigsFile.FullName}");
+                Logger.Info($"Loaded config from {availableConfigsFile.Quote()}");
                 configDatabase = offlineConfigs;
             }
 
             //if (configDatabase.IsEmptyOrMissing) {
             //    Logger.Error($"Failed to load config from Url!");
-            //    Logger.Info($"Loading config from File: {availableConfigsFile.FullName}");
+            //    Logger.Info($"Loading config from File: {availableConfigsFile.Quote()}");
             //    configDatabase = GetAvailableConfigsFromFile(availableConfigsFile);
             //}
             if (configDatabase.IsEmptyOrMissing) {
@@ -111,6 +115,9 @@ namespace SCVRPatcher {
 
         public void FillHmds(ConfigDataBase db) {
             tree_hmds.Items.Clear();
+            if (db.IsEmptyOrMissing) {
+                Logger.Error("No configs available!"); return;
+            }
             foreach (var brand in db.Brands) {
                 var brandItem = new TreeViewItem() { Header = brand.Key };
                 foreach (var model in brand.Value) {
@@ -179,7 +186,19 @@ namespace SCVRPatcher {
         }
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
+            Logger.Info("Patching VR");
+            eac.Patch();
+            vorpx.Patch();
+            Logger.Info(vorpx.ToJson(true));
+            foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
+                Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
+            }
+        }
+
+        private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            eac.UnPatch();
+            vorpx.UnPatch();
         }
 
         private void tree_hmds_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {

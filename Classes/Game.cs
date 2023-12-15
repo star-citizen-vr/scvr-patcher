@@ -16,9 +16,9 @@ namespace SCVRPatcher {
 
         public Game() {
             BuildRootDirectory = GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
-            Logger.Debug($"Got game root directory: {BuildRootDirectory.FullName}");
+            Logger.Debug($"Got game root directory: {BuildRootDirectory.Quote()}");
             foreach (var buildDir in BuildDirectories) {
-                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.FullName})");
+                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.Quote()})");
             }
         }
 
@@ -36,13 +36,13 @@ namespace SCVRPatcher {
                 if (matchedExeFullPath == null) continue;
                 var matchedExe = new FileInfo(matchedExeFullPath);
                 if (matchedExe.Name == "StarCitizen.exe") {
-                    Logger.Debug($"Found Star Citizen as {subKey.Name}: {matchedExe.FullName}");
+                    Logger.Debug($"Found Star Citizen as {subKey.Name}: {matchedExe.Quote()}");
                     var dir = matchedExe.Directory?.Parent?.Parent;
                     if (dir is null || !dir.Exists) {
-                        Logger.Error($"Star Citizen's root directory does not exist or is invalid: {dir?.FullName}");
+                        Logger.Error($"Star Citizen's root directory does not exist or is invalid: {dir?.Quote()}");
                         continue;
                     }
-                    Logger.Debug($"Found Star Citizen's root directory: {dir.FullName}");
+                    Logger.Debug($"Found Star Citizen's root directory: {dir.Quote()}");
                     return dir;
                 }
             }

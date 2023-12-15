@@ -13,8 +13,8 @@
         <GridSplitter/>
         <StackPanel Orientation="Vertical">
             <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
-            <Button x:Name="VREnableButton" Content="Enable VR" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
-            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
+            <Button x:Name="VREnableButton" Content="Enable VR" IsEnabled="False" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
+            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" Click="VRDisableButton_Click" />
         </StackPanel>
         <GridSplitter/>
         <StackPanel x:Name="stackpanel_config">
