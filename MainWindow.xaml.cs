@@ -61,14 +61,14 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
-            //game = new();
+            game = new();
             InitializeComponent();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             FillHmds(configDatabase);
             stackpanel_config.Children.Clear();
             eac = new();
-            vorpx = new();
+           // vorpx = new();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }
@@ -186,13 +186,24 @@ namespace SCVRPatcher {
         }
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
+            var selectedConfig = GetSelectedConfig();
+            if (selectedConfig is null) {
+                MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var selectedResolution = GetSelectedResolution();
+            if (selectedResolution is null) {
+                MessageBox.Show("No config selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Logger.Info("Patching VR");
             eac.Patch();
-            vorpx.Patch();
-            Logger.Info(vorpx.ToJson(true));
-            foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
-                Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
-            }
+            // vorpx.Patch();
+            // Logger.Info(vorpx.ToJson(true));
+            // foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
+            //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
+            // }
+            game.Patch(selectedConfig, selectedResolution);
         }
 
         private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
@@ -201,28 +212,34 @@ namespace SCVRPatcher {
             vorpx.UnPatch();
         }
 
-        private void tree_hmds_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+        private HmdConfig? GetSelectedConfig() {
             var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
             var hasParent = selectedItem.Parent is not null;
             var hasChildren = selectedItem.Items.Count > 0;
-            if (!hasParent || hasChildren) return;
+            if (!hasParent || hasChildren) return null;
             var configName = selectedItem.Header.ToString();
             var hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
             var brandItem = (TreeViewItem)selectedItem.Parent;
             var brandName = (((TreeViewItem)brandItem.Parent).Header).ToString();
-            FillConfigList(configDatabase, configDatabase.GetConfig(brandName, hmdName, configName));
+            return configDatabase.GetConfig(brandName, hmdName, configName);
+        }
+
+        private Resolution? GetSelectedResolution() {
+            var selectedItem = (ListViewItem)list_configs.SelectedItem;
+            if (selectedItem is null) return null;
+            return (Resolution)selectedItem.Tag;
+        }
+
+        private void tree_hmds_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            var selectedConfig = GetSelectedConfig();
+            if (selectedConfig is null) return;
+            FillConfigList(configDatabase, selectedConfig);
         }
 
         private void list_configs_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
-            var hasParent = selectedItem.Parent is not null;
-            var hasChildren = selectedItem.Items.Count > 0;
-            if (!hasParent || hasChildren) return;
-            var configName = selectedItem.Header.ToString();
-            var hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
-            var brandItem = (TreeViewItem)selectedItem.Parent;
-            var brandName = (((TreeViewItem)brandItem.Parent).Header).ToString();
-            FillConfig(configDatabase.GetConfig(brandName, hmdName, configName));
+            var selectedConfig = GetSelectedConfig();
+            if (selectedConfig is null) return;
+            FillConfig(selectedConfig);
         }
     }
 }

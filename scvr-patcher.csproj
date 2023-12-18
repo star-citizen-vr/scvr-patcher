@@ -31,7 +31,6 @@
     <None Remove="App.config" />
     <None Remove="banner.png" />
     <None Remove="configs-converted.json" />
-    <None Remove="FodyWeavers.xml" />
     <None Remove="FodyWeavers.xsd" />
     <None Remove="NLog.config" />
     <None Remove="requirements.txt" />
@@ -50,12 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="FodyWeavers.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FodyWeavers.xsd">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="NLog.config">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

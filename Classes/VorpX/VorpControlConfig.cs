@@ -60,12 +60,12 @@ namespace SCVRPatcher {
                                 property.SetValue(iniFileData, value.Split(','));
                             } else if (property.PropertyType == typeof(bool)) {
                                 Logger.Debug($"Converting VorpX Config File Property from {value.GetType()} to {typeof(bool)} (bool)");
-                                if (value == "True") property.SetValue(iniFileData, true);
-                                else if (value == "False") {
-                                    Logger.Debug("Test 1");
-                                    property.SetValue(iniFileData, false, null);
-                                    Logger.Debug("Test 2");
-                                }
+                           //     if (value == "True") property.SetValue(iniFileData, true);
+                           //     else if (value == "False") {
+                           //         Logger.Debug("Test 1");
+                              //      property.SetValue(iniFileData, false, null);
+                              //      Logger.Debug("Test 2");
+                              //  }
                                 //Logger.Debug($"Converted VorpX Config File Property from {value.GetType()} to {typeof(bool)} (bool): {property.GetValue(iniFileData)}");
                             } else {
                                 var converter = TypeDescriptor.GetConverter(property.PropertyType);

@@ -15,11 +15,34 @@ namespace SCVRPatcher {
         public Dictionary<string, DirectoryInfo> BuildDirectories { get; private set; } = new();
 
         public Game() {
+            Initialize();
+        }
+
+        public void Initialize() {
             BuildRootDirectory = GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
             Logger.Debug($"Got game root directory: {BuildRootDirectory.Quote()}");
+            BuildDirectories.Clear();
+            foreach (var buildDirName in BuildDirectoryNames) {
+                var buildDir = BuildRootDirectory.Combine(buildDirName);
+                if (buildDir.Exists) BuildDirectories.Add(buildDirName, buildDir);
+            }
+        }
+        public bool Patch(HmdConfig config, Resolution resolution) {
             foreach (var buildDir in BuildDirectories) {
                 Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.Quote()})");
+                var profileDir = buildDir.Value.Combine("user", "Client", "0", "Profiles", "default");
+                var attributesFile = profileDir.CombineFile("attributes.xml");
+                if (!attributesFile.Exists) {
+                    Logger.Error($"Could not find {attributesFile.Quote()}!");
+                    continue;
+                }
+                var attributes = new AttributesFile(attributesFile);
+                if (!attributes.Patch(config, resolution)) {
+                    Logger.Error($"Failed to patch {attributesFile.Quote()}!");
+                    continue;
+                }
             }
+            return true;
         }
 
         public DirectoryInfo? GetGameRootDirFromRegistry() {
@@ -72,11 +95,6 @@ namespace SCVRPatcher {
                 return RequestGameRootDirFromUser(dir);
             }
             BuildRootDirectory = dir;
-            BuildDirectories.Clear();
-            foreach (var buildDirName in BuildDirectoryNames) {
-                var buildDir = new DirectoryInfo(Path.Combine(dir.FullName, buildDirName));
-                if (buildDir.Exists) BuildDirectories.Add(buildDirName, buildDir);
-            }
             return dir;
         }
     }
