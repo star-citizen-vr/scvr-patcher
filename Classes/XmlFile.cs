@@ -16,8 +16,6 @@ namespace SCVRPatcher {
 
         public abstract void Initizalize();
 
-        public abstract void AddOrUpdate(string name, string value);
-
         public abstract void Load(FileInfo? file = null);
 
         public abstract bool Patch(HmdConfig config, Resolution resolution);
