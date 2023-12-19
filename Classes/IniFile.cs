@@ -11,13 +11,7 @@ namespace SCVRPatcher {
         public FileInfo File { get; private set; }
         public IniData? _Data { get; set; }
 
-        public IniFile() {
-            if (!File.Exists) {
-                Logger.Warn($"File not found at {File.Quote()}");
-                return;
-            }
-            Load();
-        }
+        public IniFile() { }
         public IniFile(FileInfo file) {
             File = file;
             if (!File.Exists) {
@@ -29,6 +23,7 @@ namespace SCVRPatcher {
 
         public void Load(FileInfo? file = null) {
             file ??= File;
+            File = file;
             Logger.Info($"Loading INI File: {file.Quote()}");
             _Data = Parser.ReadFile(file.FullName);
             Logger.Info($"Loaded INI File");
@@ -38,7 +33,8 @@ namespace SCVRPatcher {
 
         public abstract bool Unpatch();
 
-        public void Save(FileInfo file, bool backup = true) {
+        public void Save(FileInfo? file = null, bool backup = true) {
+            file ??= File;
             Logger.Info($"Saving INI File: {file.Quote()}");
             if (backup) file.Backup();
             Parser.WriteFile(file.FullName, _Data);

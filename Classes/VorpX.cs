@@ -9,8 +9,8 @@ namespace SCVRPatcher {
         internal static readonly FileInfo VorpControlFile = VorpXConfigDir.CombineFile(".ini");
 
         public VorpControlConfig vorpControlConfig { get; set; }
-        public VorpConfig vorpConfig { get; set; }
-        public VorpXConfig vorpXConfig { get; set; }
+        //public VorpConfig vorpConfig { get; set; }
+        //public VorpXConfig vorpXConfig { get; set; }
 
         public VorpX() {
             Logger.Info("Initializing VorpX");
@@ -21,19 +21,21 @@ namespace SCVRPatcher {
 
         public void Load() {
             Logger.Info("Loading VorpX");
-            vorpControlConfig = new();
-            vorpConfig = new();
-            vorpXConfig = new();
+            vorpControlConfig = new(VorpControlConfig.File);
+            //vorpConfig = new();
+            //vorpXConfig = new();
             Logger.Info("Loaded VorpX");
         }
 
-        public void Patch() {
+        public void Patch(HmdConfig config, Resolution resolution) {
             Logger.Info("Patching VorpX");
+            vorpControlConfig.Patch(config, resolution);
             Logger.Info("Patched VorpX");
         }
 
         public void UnPatch() {
             Logger.Info("Unpatching VorpX");
+            vorpControlConfig.Unpatch();
             Logger.Info("Unpatched VorpX");
         }
     }

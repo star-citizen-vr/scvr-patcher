@@ -2,12 +2,10 @@
 using NLog.Config;
 using System.Drawing;
 using System.IO;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static SCVRPatcher.VorpX;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
 using MessageBox = System.Windows.MessageBox;
@@ -69,7 +67,7 @@ namespace SCVRPatcher {
             FillHmds(configDatabase);
             stackpanel_config.Children.Clear();
             eac = new();
-           // vorpx = new();
+            vorpx = new();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }
@@ -199,7 +197,7 @@ namespace SCVRPatcher {
             }
             Logger.Info("Patching VR");
             eac.Patch();
-            // vorpx.Patch();
+            vorpx.Patch(selectedConfig, selectedResolution);
             // Logger.Info(vorpx.ToJson(true));
             // foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
             //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
