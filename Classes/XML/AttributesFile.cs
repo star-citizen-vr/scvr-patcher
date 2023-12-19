@@ -6,7 +6,9 @@ using System.Xml.Serialization;
 namespace SCVRPatcher {
     public class AttributesFile : XmlFile {
         public Attributes Content { get; private set; }
-        public static readonly List<string> attributesToRemove = new() { "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater" };
+        public static readonly List<string> attributesToRemove = new() {
+            "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
+        };
 
         public AttributesFile(FileInfo file) : base(file) {
             Initizalize();
@@ -89,8 +91,9 @@ namespace SCVRPatcher {
             return true;
         }
 
-        public override void Save(FileInfo? file = null) {
+        public override void Save(FileInfo? file = null, bool backup = true) {
             file ??= File;
+            if (backup) file.Backup();
             using (var writer = XmlWriter.Create(File.CreateText(), Settings)) {
                 Serializer.Serialize(writer, Content);
             }

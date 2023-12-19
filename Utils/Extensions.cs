@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -18,6 +19,8 @@ using System.Windows.Forms;
 
 namespace SCVRPatcher {
     internal static class Extensions {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         #region Reflection
 
         public static Dictionary<string, object> ToDictionary(this object instanceToConvert) {
@@ -105,6 +108,26 @@ namespace SCVRPatcher {
         public static string ReadAllText(this FileInfo file) => File.ReadAllText(file.FullName);
 
         public static IEnumerable<string> ReadAllLines(this FileInfo file) => File.ReadAllLines(file.FullName);
+
+        public static void WriteAllText(this FileInfo file, string text) => File.WriteAllText(file.FullName, text);
+
+        public static void WriteAllLines(this FileInfo file, IEnumerable<string> lines) => File.WriteAllLines(file.FullName, lines);
+
+        public static FileInfo WithExtension(this FileInfo file, string extension) => new FileInfo(file.FullName + "." + extension);
+
+        public static FileInfo WithoutExtension(this FileInfo file, string extension) => new FileInfo(file.FullName.ReplaceLastOccurrence("." + extension, string.Empty));
+
+        public static bool Backup(this FileInfo file, bool force = false, string extension = "bak") {
+            var backupFile = file.WithExtension(extension);
+            if (backupFile.Exists && !force) Logger.Warn($"Backup file already exists: {backupFile.Quote()} {(force ? ", overwriting anyway..." : string.Empty)}");
+            try { file.CopyTo(backupFile.FullName, true); return true; } catch (Exception ex) { Logger.Error(ex); return false; }
+        }
+
+        public static bool Restore(this FileInfo file, string extension = "bak") {
+            var originalFile = file.WithoutExtension(extension);
+            if (!originalFile.Exists) Logger.Warn($"Original file does not exist: {originalFile.Quote()}");
+            try { file.CopyTo(originalFile.FullName, true); return true; } catch (Exception ex) { Logger.Error(ex); return false; }
+        }
 
         public static FileInfo CombineFile(this DirectoryInfo dir, params string[] paths) {
             var final = dir.FullName;

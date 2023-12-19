@@ -22,7 +22,7 @@ namespace SCVRPatcher {
 
         public abstract bool Unpatch();
 
-        public abstract void Save(FileInfo? file = null);
+        public abstract void Save(FileInfo? file = null, bool backup = true);
 
         //public void ToFile(FileInfo file) => file.WriteAllText(ToString());
         //public string ToString() {
