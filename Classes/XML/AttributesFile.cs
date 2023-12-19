@@ -10,23 +10,30 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace SCVRPatcher {
-    public class AttributesFile {
-        public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public static readonly XmlSerializer Serializer = new XmlSerializer(typeof(Attributes));
-        public static readonly XmlWriterSettings Settings = new XmlWriterSettings() { Indent = true, OmitXmlDeclaration = true };
-        public FileInfo File { get; private set; }
+    public class AttributesFile : XmlFile {
         public Attributes Content { get; private set; }
 
-        public AttributesFile(FileInfo file) {
-            File = file;
-            Load();
-            Logger.Info($"Loaded {File.FullName}");
+        public AttributesFile(FileInfo file) : base(file) {
+            Initizalize();
             foreach (var attr in Content.Attr) {
                 Logger.Info($"Found attribute: {attr.Name} = {attr.Value}");
             }
         }
 
-        public void AddOrUpdate(string name, string value) {
+        public override void Initizalize() {
+            Serializer = new XmlSerializer(typeof(Attributes));
+            Load();
+        }
+
+        public override void Load(FileInfo? file = null) {
+            file ??= File;
+            using (var reader = File.OpenText()) {
+                Content = Serializer.Deserialize(reader) as Attributes;
+            }
+            Logger.Info($"Loaded {File.FullName}");
+        }
+
+        public override void AddOrUpdate(string name, string value) {
             var attr = Content.Attr.FirstOrDefault(x => x.Name == name);
             if (attr is null) {
                 attr = new Attr() { Name = name, Value = value };
@@ -34,16 +41,10 @@ namespace SCVRPatcher {
             } else {
                 attr.Value = value;
             }
+            Logger.Info($"Set attribute: {attr.Name.Quote()} to {attr.Value.Quote()}");
         }
 
-        public void Load(FileInfo? file = null) {
-            file ??= File;
-            using (var reader = File.OpenText()) {
-                Content = Serializer.Deserialize(reader) as Attributes;
-            }
-        }
-
-        public bool Patch(HmdConfig config, Resolution resolution) {
+        public override bool Patch(HmdConfig config, Resolution resolution) {
             config.Fov.ToString();
             resolution.Height.ToString();
             resolution.Width.ToString();
@@ -70,15 +71,16 @@ namespace SCVRPatcher {
             return true;
         }
 
-        public bool Unpatch() {
+        public override bool Unpatch() {
             return true;
         }
 
-        public void Save(FileInfo? file = null) {
+        public override void Save(FileInfo? file = null) {
             file ??= File;
             using (var writer = XmlWriter.Create(File.CreateText(), Settings)) {
                 Serializer.Serialize(writer, Content);
             }
+            Logger.Info($"Saved {File.FullName}");
         }
 
         //public void ToFile(FileInfo file) => file.WriteAllText(ToString());
