@@ -9,13 +9,28 @@ namespace SCVRPatcher {
         public static readonly List<string> attributesToRemove = new() {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
-        //test
+        public static readonly Dictionary<string, object> attributesToSet = new() {
+            { "AutoZoomOnSelectedTarget", 0 },
+            { "AutoZoomOnSelectedTargetStrength", 0 },
+            { "CameraSpringMovement", 0 },
+            { "ChromaticAberration", 0 },
+            { "FilmGrain", 0 },
+            { "GForceHeadBobScale", 0 },
+            { "GForceZoomScale", 0 },
+            { "HeadtrackingEnableRollFPS", 0 },
+            { "LookAheadEnabledShip", 0 },
+            { "MotionBlur", 0 },
+            { "ShakeScale", 0 },
+            { "Sharpening", 0 },
+            { "VSync", 0 },
+            { "WindowMode", 2 },
+            { "ScatterDist", 0 },
+            { "TerrainTessDistance", 0 }
+        };
 
         public AttributesFile(FileInfo file) : base(file) {
             Initizalize();
-            foreach (var attr in Content.Attr) {
-                Logger.Info($"Found attribute: {attr.Name} = {attr.Value}");
-            }
+            Logger.Info($"Found attributes file with version {Content.Version} containing {Content.Attr.Count} attributes");
         }
 
         public override void Initizalize() {
@@ -37,20 +52,27 @@ namespace SCVRPatcher {
             return Content.Attr.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
-        public void AddOrUpdate(string name, object value) {
+        public bool AddOrUpdate(string name, object value) {
             if (value is null) throw new ArgumentNullException(nameof(value));
             var attr = Get(name).FirstOrDefault();
+            var changed = false;
             if (attr is null) {
                 attr = new Attr() { Name = name, Value = value.ToString() };
                 Content.Attr.Add(attr);
+                changed = true;
             } else {
-                attr.Value = value.ToString();
+                if (attr.Value != value.ToString()) {
+                    attr.Value = value.ToString();
+                    changed = true;
+                }
             }
-            Logger.Info($"Set attribute: {attr.Name.Quote()} to {attr.Value.Quote()}");
+            if (changed) Logger.Info($"Set attribute: {attr.Name.Quote()} to {attr.Value.Quote()}");
+            else Logger.Info($"Attribute {attr.Name.Quote()} already set to {attr.Value.Quote()}");
+            return changed;
         }
 
-        public void Remove(string key) => Remove(new List<string>() { key });
-        public void Remove(IEnumerable<string> keys) {
+        public bool Remove(string key) => Remove(new List<string>() { key });
+        public bool Remove(IEnumerable<string> keys) {
             var found = 0;
             foreach (var key in keys) {
                 var attr = Get(key).FirstOrDefault();
@@ -60,32 +82,22 @@ namespace SCVRPatcher {
                 }
             }
             Logger.Info($"Removed {found} / {keys.Count()} attributes.");
+            return found > 0;
         }
 
         public override bool Patch(HmdConfig config, Resolution resolution) {
             Logger.Info($"Patching {File.FullName}");
-            Remove(attributesToRemove);
-            AddOrUpdate("AutoZoomOnSelectedTarget", 0);
-            AddOrUpdate("AutoZoomOnSelectedTargetStrength", 0);
-            AddOrUpdate("CameraSpringMovement", 0);
-            AddOrUpdate("ChromaticAberration", 0);
-            AddOrUpdate("FilmGrain", 0);
-            AddOrUpdate("GForceHeadBobScale", 0);
-            AddOrUpdate("GForceZoomScale", 0);
-            AddOrUpdate("HeadtrackingEnableRollFPS", 0);
-            AddOrUpdate("LookAheadEnabledShip", 0);
-            AddOrUpdate("MotionBlur", 0);
-            AddOrUpdate("ShakeScale", 0);
-            AddOrUpdate("Sharpening", 0);
-            AddOrUpdate("VSync", 0);
-            AddOrUpdate("WindowMode", 2);
-            AddOrUpdate("ScatterDist", 0);
-            AddOrUpdate("TerrainTessDistance", 0);
-            if (config.Fov is not null) AddOrUpdate("FOV", config.Fov);
-            if (resolution.Height is not null) AddOrUpdate("Height", resolution.Height);
-            if (resolution.Width is not null) AddOrUpdate("Width", resolution.Width);
-            Save();
-            Logger.Info($"Patched {File.FullName}");
+            var changed = Remove(attributesToRemove);
+            foreach (var item in attributesToSet) {
+                changed |= AddOrUpdate(item.Key, item.Value);
+            }
+            if (config.Fov is not null) changed |= AddOrUpdate("FOV", config.Fov);
+            if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
+            if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
+            if (changed) {
+                Save();
+                Logger.Info($"Patched {File.FullName}");
+            } else Logger.Info($"No changes to {File.FullName}");
             return true;
         }
 

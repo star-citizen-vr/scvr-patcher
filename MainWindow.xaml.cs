@@ -69,7 +69,7 @@ namespace SCVRPatcher {
             FillHmds(configDatabase);
             stackpanel_config.Children.Clear();
             eac = new();
-           // vorpx = new();
+            vorpx = new();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }
@@ -199,7 +199,7 @@ namespace SCVRPatcher {
             }
             Logger.Info("Patching VR");
             eac.Patch();
-            // vorpx.Patch();
+            vorpx.Patch(selectedConfig, selectedResolution);
             // Logger.Info(vorpx.ToJson(true));
             // foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
             //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
