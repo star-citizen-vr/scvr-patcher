@@ -249,38 +249,26 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     remove_attributes_dict = data['common']['Attributes']['Remove me from attributes.xml if exists']
                     remove_attributes_dict.update(remove_attributes(value))
                     continue
-                # Grab the user optional attributes
-                """
+
+                # Grab the user optional attributes together
+                optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {})
                 if key in ["Attributes - Scatter Distance Options", "Attributes - Tesselation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
-                    optional_values = data['common']['Attributes']['User Options']
                     if key not in optional_values:
                         optional_values[key] = []
-                    optional_values[key].append({
-                        "ScatterDist": int(value),
-                        "Description": row["Headset Name"] + " (" + row["Headset Brand"] + " " + row["Headset Model"] + ")",
-                    })
-                    continue
-                """
-                # Grab the user optional attributes, scatter distance:
-                if key == "Attributes - Scatter Distance Options":
-                    optional_values = data['common']['Attributes']['User Options']
-                    if key not in optional_values:
-                        optional_values[key] = []
-                    
-                    # Split the input string into individual options
                     options = value.split(', ')
-                    
-                    for option in options:
-                        # Extract ScatterDist and Description from each option
-                        scatter_dist_match = re.match(r'ScatterDist: (\d+) \| (.+)', option)
-                        if scatter_dist_match:
-                            scatter_dist = int(scatter_dist_match.group(1))
-                            description = scatter_dist_match.group(2)
-                            
-                            optional_values[key].append({
-                                "ScatterDist": scatter_dist,
-                                "Description": description,
-                            })
+                    try:
+                        if key == "Attributes - Scatter Distance Options":
+                            attr_list = [{"ScatterDist": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
+                        elif key == "Attributes - Tesselation Distance Options":
+                            attr_list = [{"TerrainTessDistance": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
+                        elif key == "Attributes - Volumetric Clouds On/Off Options":
+                            attr_list = [{"SysSpecPlanetVolumetricClouds": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
+                        optional_values[key] = attr_list
+                    except ValueError as e:
+                        print(f"Error processing {key}: {e}") # Debug
+                        # print(f"Row data: {row}") # Hope you don't have to use this to debug :P
+                    continue
+
                 if key == "Concatenated Notes+Errors":
                     key = "Notes"
                     if value.replace(' ','').replace('|','') == '' : value = list()

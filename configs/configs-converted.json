@@ -132,6 +132,86 @@
                         "ScatterDist": 9000,
                         "Description": "Over 9000! (Custom)"
                     }
+                ],
+                "Attributes - Tesselation Distance Options": [
+                    {
+                        "TerrainTessDistance": 0,
+                        "Description": "In-Game Default (Medium)"
+                    },
+                    {
+                        "TerrainTessDistance": 5,
+                        "Description": "In-Game Preset (Low)"
+                    },
+                    {
+                        "TerrainTessDistance": 50,
+                        "Description": "In-Game Preset (High)"
+                    },
+                    {
+                        "TerrainTessDistance": 55,
+                        "Description": "Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 60,
+                        "Description": "Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 65,
+                        "Description": "Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 70,
+                        "Description": "Beyond Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 75,
+                        "Description": "Beyond Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 80,
+                        "Description": "Beyond Further (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 85,
+                        "Description": "Far (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 90,
+                        "Description": "Far (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 95,
+                        "Description": "Far (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 100,
+                        "Description": "Doubled (Custom - Recommended)"
+                    },
+                    {
+                        "TerrainTessDistance": 150,
+                        "Description": "Trippled (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 200,
+                        "Description": "Quadroupled (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 250,
+                        "Description": "Quintoupled (Custom)"
+                    },
+                    {
+                        "TerrainTessDistance": 300,
+                        "Description": "Sextupled (Custom)"
+                    }
+                ],
+                "Attributes - Volumetric Clouds On/Off Options": [
+                    {
+                        "SysSpecPlanetVolumetricClouds": 1,
+                        "Description": "Performance (Off - Recommended)"
+                    },
+                    {
+                        "SysSpecPlanetVolumetricClouds": 4,
+                        "Description": "Quality (On)"
+                    }
                 ]
             },
             "Other": {}
@@ -1221,9 +1301,6 @@
                             "p": "~90"
                         }
                     ],
-                    "Attributes - Scatter Distance Options": "ScatterDist: 0 | Medium (Default), ScatterDist: 750 | Low (In-Game Preset), ScatterDist: 1300 | High (In-Game Preset), ScatterDist: 1850 | Pretty High (Custom), ScatterDist: 2400 | Pretty High (Custom), ScatterDist: 2950 | Very High (Custom - Recommended), ScatterDist: 3500 | Very High (Custom), ScatterDist: 4050 | Extreme (Custom), ScatterDist: 4600 | Extreme (Custom), ScatterDist: 5150 | Supreme (Custom), ScatterDist: 5700 | Supreme (Custom), ScatterDist: 6250 | Ultimate (Custom), ScatterDist: 6800 | Ultimate (Custom), ScatterDist: 7350 | Hyperion (Custom), ScatterDist: 7900 | Hyperion (Custom), ScatterDist: 8450 | Ludicrous (Custom), ScatterDist: 9000 | Over 9000! (Custom)",
-                    "Attributes - Tesselation Distance Options": "TerrainTessDistance: 0 | In-Game Default (Medium), TerrainTessDistance: 5 | In-Game Preset (Low), TerrainTessDistance: 50 | In-Game Preset (High), TerrainTessDistance: 55 | Further (Custom), TerrainTessDistance: 60 | Further (Custom), TerrainTessDistance: 65 | Further (Custom), TerrainTessDistance: 70 | Beyond Further (Custom), TerrainTessDistance: 75 | Beyond Further (Custom), TerrainTessDistance: 80 | Beyond Further (Custom), TerrainTessDistance: 85 | Far (Custom), TerrainTessDistance: 90 | Far (Custom), TerrainTessDistance: 95 | Far (Custom), TerrainTessDistance: 100 | Doubled (Custom - Recommended), TerrainTessDistance: 150 | Trippled (Custom), TerrainTessDistance: 200 | Quadroupled (Custom), TerrainTessDistance: 250 | Quintoupled (Custom), TerrainTessDistance: 300 | Sextupled (Custom)",
-                    "Attributes - Volumetric Clouds On/Off Options": "SysSpecPlanetVolumetricClouds: 1 | Performance (Off - Recommended), SysSpecPlanetVolumetricClouds: 4 | Quality (On)",
                     "Attributes - Other": "WeaponFallbackConvergenceDistance: 1500, IgnoreWindowFocus: 1, ManualGimbalModeShipsDefault: 1"
                 }
             }
