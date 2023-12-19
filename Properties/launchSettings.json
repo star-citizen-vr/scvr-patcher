@@ -1,8 +1,8 @@
 {
-	"profiles": {
-		"scvr-patcher": {
-			"commandName": "Project",
-			"commandLineArgs": "--console --config \"D:\\Desktop\\scvr\\scvr-patcher\\configs\\configs-converted.json\""
-		}
-	}
+  "profiles": {
+    "scvr-patcher": {
+      "commandName": "Project",
+      "commandLineArgs": "--console"
+    }
+  }
 }
