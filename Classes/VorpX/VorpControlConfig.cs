@@ -1,11 +1,12 @@
 ﻿using IniParser.Model;
 using System.IO;
+using System.Windows.Media;
 
 namespace SCVRPatcher {
     public partial class VorpX {
         public class VorpControlConfig : IniFile {
             public static readonly FileInfo File = VorpX.VorpXConfigDir.CombineFile("vorpControl.ini");
-            public static readonly List<string> itemsToExclude = new() { "RSI Launcher.exe", "StarCitizen_Launcher.exe", "EasyAntiCheat_EOS_Setup.exe" };
+            public static readonly List<string> itemsToExclude = new() { "RSI Launcher.exe", "StarCitizen_Launcher.exe", "EasyAntiCheat_EOS_Setup.exe", "Virtual Desktop.exe", "VirtualDesktop.Streamer.exe" };
 
             public List<string> Excludes => _Data?.Sections.GetSectionData("Exclude").Keys.Select(c => c.Value).ToList();
 
