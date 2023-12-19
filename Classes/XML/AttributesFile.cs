@@ -62,6 +62,7 @@ namespace SCVRPatcher {
         }
 
         public override bool Patch(HmdConfig config, Resolution resolution) {
+            Logger.Info($"Patching {File.FullName}");
             Remove(attributesToRemove);
             AddOrUpdate("AutoZoomOnSelectedTarget", 0);
             AddOrUpdate("AutoZoomOnSelectedTargetStrength", 0);
@@ -83,11 +84,14 @@ namespace SCVRPatcher {
             if (resolution.Height is not null) AddOrUpdate("Height", resolution.Height);
             if (resolution.Width is not null) AddOrUpdate("Width", resolution.Width);
             Save();
+            Logger.Info($"Patched {File.FullName}");
             return true;
         }
 
         public override bool Unpatch() {
+            Logger.Info($"Unpatching {File.FullName}");
             // Save();
+            Logger.Info($"Unpatched {File.FullName}");
             return true;
         }
 
