@@ -9,6 +9,7 @@ namespace SCVRPatcher {
         public static readonly List<string> attributesToRemove = new() {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
+        //test
 
         public AttributesFile(FileInfo file) : base(file) {
             Initizalize();
