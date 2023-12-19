@@ -1,8 +1,12 @@
 import csv
 import json
+import re
 from re import compile
 
 resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
+attributes_fixed_regex = compile(r"(\w+):\s*([^,]+)")
+attributes_nameonly_regex = compile(r"\b(\w+)\b")
+attributes_optional_regex = compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)')
 
 """
 = row["Headset Name"]
@@ -112,20 +116,90 @@ def split_resolution(resolution: str):
     if match.group(4): dic["p"] = match.group(4).replace('%','').strip()
     return dic
 
+def fixed_attributes(attributes: str):
+    matches = attributes_fixed_regex.findall(attributes)
+    if not matches:
+        return None
+
+    # Extract values using match.group() as needed
+    attribute_dict = {key.strip(): value.strip() for key, value in matches}
+    return attribute_dict
+
+def remove_attributes(attributes):
+    matches = attributes_nameonly_regex.findall(attributes)
+    if not matches:
+        return None
+    return {attribute: None for attribute in matches}
+
+def optional_attributes(attributes):
+    options = [option.strip() for option in attributes.split(',')]
+    return options if options else None
+"""
+def optional_attributes(attributes):
+    matches = attributes_optional_regex.findall(attributes)
+    if not matches:
+        return None
+
+    # Extract values from matches
+    attribute_dict = {}
+    for match in matches:
+        key, value, description = match
+        if key not in attribute_dict:
+            attribute_dict[key] = []
+        attribute_dict[key].append({
+            "value": int(value),
+            "description": description.strip()
+        })
+
+    return attribute_dict if attribute_dict else None
+"""
+# Try and categorize fixed values
+"""
+def categorize_attributes(key, value, data):
+    categories = {
+        "Zoom Features": ["AutoZoomOnSelectedTarget", "AutoZoomOnSelectedTargetStrength", "ZoomSensitivityMultiplierToggle"],
+        "GForce Features": ["GForceHeadBobScale", "GForceZoomScale"],
+        "HeadTracking Features": ["HeadTrackingFaceWareDeadzoneRotationPitch", "HeadTrackingFaceWareDeadzoneRotationRoll", "HeadTrackingFaceWareDeadzoneRotationYaw", "HeadTrackingFaceWareSmoothingThreshold", "HeadTrackingFacewarePitchMultiplier", "HeadTrackingFacewareYawMultiplier", "HeadtrackingDisableDuringADS", "HeadtrackingDisableDuringWalking", "HeadtrackingEnableRollFPS", "HeadtrackingGlobalSmoothingPosition", "HeadtrackingGlobalSmoothingRotation", "HeadtrackingInactivityTime", "HeadtrackingSource", "HeadtrackingThirdPersonCameraToggle", "HeadtrackingToggle", "HeadtrackingToggleAutoCalibrate"],
+        "LookAhead Features": ["LookAheadStrengthForward", "LookAheadStrengthHorizonAlignment", "LookAheadStrengthHorizonLookAt", "LookAheadStrengthJumpPointSpline", "LookAheadStrengthMgvForward", "LookAheadStrengthMgvHorizonAlignment", "LookAheadStrengthMgvPitchYaw", "LookAheadStrengthMgvVJoy", "LookAheadStrengthQuantumBoostTarget", "LookAheadStrengthRoll", "LookAheadStrengthTargetSoft", "LookAheadStrengthTurretForward", "LookAheadStrengthTurretPitchYaw", "LookAheadStrengthTurretVJoy", "LookAheadStrengthVJoy", "LookAheadStrengthVelocityVector", "LookAheadStrengthYawPitch"],
+        "Tobii Features": ["TobiiHeadPositionScale", "TobiiHeadSensitivityRoll_Profile0", "TobiiHeadSensitivityRoll_Profile1"],
+        "Fixed Features": ["ChromaticAberration", "FilmGrain", "MotionBlur", "ShakeScale", "Sharpening", "VSync", "WindowMode"]
+    }
+    
+    for category, attributes in categories.items():
+        if key in attributes:
+            if category not in data:
+                data[category] = {}
+            data[category][key] = value
+            return True
+
+    return False
+"""
 def csv_to_json(csvFilePath, jsonFilePath):
-   # Create a dictionary to store the data
-   data = {}
-   data["common"] = {}
-   data["brands"] = {}
-   brands = data["brands"]
+    # Create a dictionary to store the data
+    data = {}
+    data["common"] = {
+        "Attributes": {  # Added "Attributes" section
+            "Fixed Values": {}, # All fixed values (including headtracking)
+            "Remove me from attributes.xml if exists": {}, # Lines that need to be removed from the attributes.xml
+            "User Options": {}, # Options listed to the user to choose from.
+            "Other": {} # Not sure if we want to do anything with these yet, but here they are.
+        },
+        "Resolutions": {
+            "Alternative Integer Resolutions (big list)": [],
+            "Give me all the resolutions": [],
+            "All Possible Lens Configurations": []
+        }
+    }
+    data["brands"] = {}
+    brands = data["brands"]
 
 
-   # Open the CSV file and read it using csv.DictReader
-   with open(csvFilePath, encoding='utf-8') as csvf:
-       csvReader = csv.DictReader(csvf)
+    # Open the CSV file and read it using csv.DictReader
+    with open(csvFilePath, encoding='utf-8') as csvf:
+        csvReader = csv.DictReader(csvf)
 
-       # Iterate over each row in the CSV file
-       for row in csvReader:
+        # Iterate over each row in the CSV file
+        for row in csvReader:
             #    print(row)
             # Create a dictionary for each row
             row_dict = {}
@@ -142,10 +216,20 @@ def csv_to_json(csvFilePath, jsonFilePath):
             for key, value in row.items():
                 # Skip the keys that we don't want to include in the JSON file
                 # if key not in ['Headset Name', 'Headset Brand', 'Headset Model', 'Lens Configuration', 'Concatenated Naming', 'All Possible Lens Configurations', 'Unique Database Identifier', 'FOV hor. (degrees)', 'FOV ver. (degrees)', 'FOV diag. (degrees)', 'Overlap (degrees)', 'HAM (hidden area mask - percentage)', 'Rot LE (view geometry - degrees)', 'Rot RE (view geometry - degrees)', 'FOV H-value (variable)', 'FOV V-value (variable)', 'FOV D-Value (variable)', 'FOV Overlap (variable)', 'Render target size (native) Width', 'Render target size (native) Height', 'Refresh Rate Max(Hz)', 'Note', 'Monitor (Ignore me)', 'SC Attributes FOV', 'Error Report (SC FOV Cap 120)', 'Raw Calculated Pixel Zoom Minimum', 'Raw Calculated Pixel Zoom Maximum', 'VorpX Pixel 1:1 Variable-Min', 'VorpX Pixel 1:1 Variable-Max', 'VorpX Config Pixel 1:1 Zoom (Calculated)', 'Error Report (Too Much Zoom For VorpX)', 'VorpX User Max (Not Complete)', 'Concatenated Notes+Errors', 'Native Horizontal', 'Native Vertical', 'Native Aspect Ratio', '4:3 Translation (H-locked) Width', '4:3 Translation (H-locked) Height', 'H-Locked Aspect Check', '4:3 Translation (V-limited) Width', '4:3 Translation (V-limited) Height', 'H-Limited Aspect Check', 'Custom Resolutions V-Translated', 'Custom Resolutions H-Translated (Preferred)', 'Combined Custom Resolutions', 'Every 6th up to 5440 x 4080', 'Every 8th up to 5440 x 4080', 'Every 10th up to 5440 x 4080', 'Every 6th+8th up to 5440 x 4080', 'Every 6th+8th+10th up to 5440 x 4080', 'All Integer Resolutions up to 5440 x 4080', 'Every 6th up to 19840 x 14880', 'Every 8th up to 19840 x 14880', 'Every 10th up to 19840 x 14880', 'Every 6th+8th up to 19840 x 14880', 'Every 6th+8th+10th up to 19840 x 14880', 'All Integer Resolutions up to 19840 x 14880']:
+                
+                # Try to categorize the attribute based on its functionality
+                """
+                if key in ["Attributes - Fixed Values", "Attributes - HeadTracking"]:
+                    fixed_values = data['common']['Attributes']['Fixed Values']
+                    if not categorize_attributes(key, value, fixed_values):
+                        # If not categorized, add it directly to "Fixed Features"
+                        fixed_values[key] = value
+                    continue
+                """
                 # Add the key-value pair to the row dictionary
                 if not value or value.strip() == '': continue
-                if key in ["Give me all the resolutions","Alternative Integer Resolutions (big list)","Alternative Integer Resolutions (small list)"]:
-                    data['common'][key] = [split_resolution(v) for v in value.split(', ') if v]
+                if key in ["Give me all the resolutions", "Alternative Integer Resolutions (big list)", "Alternative Integer Resolutions (small list)"]:
+                    data['common']['Resolutions'][key] = [split_resolution(v) for v in value.split(', ') if v]
                     continue
                 if key in [
                     "Monitor (Ignore me)",
@@ -155,6 +239,48 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     "Headset Model",
                     "Lens Configuration",
                 ]: continue
+                # Grab the fixed attrbiutes
+                if key in ["Attributes - Fixed Values", "Attributes - HeadTracking"]:
+                    fixed_values = data['common']['Attributes']['Fixed Values']
+                    fixed_values.update(fixed_attributes(value))
+                    continue
+                # Grab the remove me attributes
+                if key in ["Attributes - Remove These Lines from Attributes.xml"]:
+                    remove_attributes_dict = data['common']['Attributes']['Remove me from attributes.xml if exists']
+                    remove_attributes_dict.update(remove_attributes(value))
+                    continue
+                # Grab the user optional attributes
+                """
+                if key in ["Attributes - Scatter Distance Options", "Attributes - Tesselation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
+                    optional_values = data['common']['Attributes']['User Options']
+                    if key not in optional_values:
+                        optional_values[key] = []
+                    optional_values[key].append({
+                        "ScatterDist": int(value),
+                        "Description": row["Headset Name"] + " (" + row["Headset Brand"] + " " + row["Headset Model"] + ")",
+                    })
+                    continue
+                """
+                # Grab the user optional attributes, scatter distance:
+                if key == "Attributes - Scatter Distance Options":
+                    optional_values = data['common']['Attributes']['User Options']
+                    if key not in optional_values:
+                        optional_values[key] = []
+                    
+                    # Split the input string into individual options
+                    options = value.split(', ')
+                    
+                    for option in options:
+                        # Extract ScatterDist and Description from each option
+                        scatter_dist_match = re.match(r'ScatterDist: (\d+) \| (.+)', option)
+                        if scatter_dist_match:
+                            scatter_dist = int(scatter_dist_match.group(1))
+                            description = scatter_dist_match.group(2)
+                            
+                            optional_values[key].append({
+                                "ScatterDist": scatter_dist,
+                                "Description": description,
+                            })
                 if key == "Concatenated Notes+Errors":
                     key = "Notes"
                     if value.replace(' ','').replace('|','') == '' : value = list()
@@ -182,12 +308,42 @@ def csv_to_json(csvFilePath, jsonFilePath):
             # Add the row dictionary to the data dictionary
             brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = row_dict
 
-   data["brands"] = brands
+    data["brands"] = brands
 
-   # Open the output JSON file and write the data to it
-   with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
+    # Open the output JSON file and write the data to it
+    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
        jsonf.write(json.dumps(data, indent=4))
 
 csvFilePath = 'Simplified_Configurations.csv'
 jsonFilePath = 'configs-converted.json'
 csv_to_json(csvFilePath, jsonFilePath)
+
+"""
+newlist = []
+newdict = {}
+
+newlist.append("trgdefgbfg")
+
+newdict["eqweq"] = "fdsmflsdkf"
+
+
+"common": {
+	"Attributes": {
+		"Fixed Values":{
+			"ChromaticAberration": 0,
+			"FilmGrain": 0,
+			"MotionBlur": 0,
+			"ShakeScale": 1,
+			"Sharpening": 1,
+			"VSync": 0,
+			"WindowMode": 2,
+        }
+	},
+	"Resolutions: {
+		"Alternate Ineger Resolutions (small list)":,
+		"Alternative Integer Resolutions (big list)",
+		"Give me all the resolutions",
+		}
+	},
+"brands": {
+"""
