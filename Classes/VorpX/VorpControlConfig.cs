@@ -1,86 +1,42 @@
 ﻿using IniParser.Model;
-using IniParser;
-using NLog;
 using System.IO;
-using System.Diagnostics.Eventing.Reader;
-using System.ComponentModel;
 
 namespace SCVRPatcher {
     public partial class VorpX {
-        public class VorpControlConfig {
+        public class VorpControlConfig : IniFile {
             public static readonly FileInfo File = VorpX.VorpXConfigDir.CombineFile("vorpControl.ini");
-            public static FileIniDataParser Parser = new FileIniDataParser();
+            public static readonly List<string> itemsToExclude = new() { "RSI Launcher.exe", "StarCitizen_Launcher.exe", "EasyAntiCheat_EOS_Setup.exe" };
 
-            public IniData _Data;
-            public IniFileData Data { get; set; }
+            public List<string> Excludes => _Data?["Exclude"].ToDictionary().Values.Select(c => c.ToString()).ToList();
 
-            public VorpControlConfig() {
-                Logger.Info("Loading VorpControlConfig");
-                Logger.Debug($"VorpControlConfig.File: {File.Quote()}");
-                if (!File.Exists) {
-                    Logger.Warn($"VorpControlConfig File not found at {File.Quote()}");
-                    return;
+            public KeyData GetExcludesAsIniData(List<string> excludes) {
+                var dict = new KeyData("Exclude");
+                var cnt = 0;
+                foreach (var item in excludes) {
+                    dict.Value = new ($"sExcl{cnt}", item);
                 }
-                Load();
+                return dict;
             }
 
-            public void Load(FileInfo? file = null) {
-                file ??= File;
-                Logger.Info($"Loading VorpControlConfig File: {file.Quote()}");
-                _Data = Parser.ReadFile(file.FullName);
-                Data = ParseIniFile(_Data);
-                Logger.Info($"Loaded VorpControlConfig File");
-            }
-
-            public IniFileData ParseIniFile(IniData data) {
-                Logger.Info("Parsing VorpX Config File Data");
-                IniFileData iniFileData = new();
-                var categories = typeof(IniFileData).GetProperties();
-                foreach (var category in categories) {
-                    Logger.Debug($"Parsing VorpX Config File Category: [{category.Name}]");
-                    if (category.Name == "Exclude") {
-                        var excludedItems = new List<string>();
-                        var excludeSection = data["Exclude"];
-                        foreach (var excludedItem in excludeSection) {
-                            excludedItems.Add(excludedItem.Value);
-                        }
-                        category.SetValue(iniFileData, excludedItems);
-                        continue;
-                    } else {
-                        Logger.Debug($"Creating VorpX Config File Category: {category.Name} ({category.PropertyType})");
-                        category.SetValue(iniFileData, Activator.CreateInstance(category.PropertyType));
-                    }
-                    var properties = category.PropertyType.GetProperties();
-                    foreach (var property in properties) {
-                        var value = data[category.Name][property.Name];
-                        Logger.Debug($"Parsing VorpX Config File Property: {category.Name}.{property.Name}: {value}");
-                        if (value != null) {
-                            Logger.Debug($"Converting VorpX Config File Property from {value.GetType()} to {property.PropertyType}");
-                            if (property.PropertyType == typeof(List<string>)) {
-                                property.SetValue(iniFileData, value.Split(','));
-                            } else if (property.PropertyType == typeof(bool)) {
-                                Logger.Debug($"Converting VorpX Config File Property from {value.GetType()} to {typeof(bool)} (bool)");
-                           //     if (value == "True") property.SetValue(iniFileData, true);
-                           //     else if (value == "False") {
-                           //         Logger.Debug("Test 1");
-                              //      property.SetValue(iniFileData, false, null);
-                              //      Logger.Debug("Test 2");
-                              //  }
-                                //Logger.Debug($"Converted VorpX Config File Property from {value.GetType()} to {typeof(bool)} (bool): {property.GetValue(iniFileData)}");
-                            } else {
-                                var converter = TypeDescriptor.GetConverter(property.PropertyType);
-                                var canConvert = converter.CanConvertFrom(value.GetType());
-                                Logger.Debug($"Converting VorpX Config File Property from {value.GetType()} to {property.PropertyType}: {canConvert}");
-                                if (canConvert) {
-                                    property.SetValue(iniFileData, converter.ConvertFrom(value));
-                                } else {
-                                    Logger.Error($"Cannot convert value '{value}' of type '{value.GetType()}' to property '{property.Name}' of type '{property.PropertyType}'");
-                                }
-                            }
-                        }
+            public override bool Patch(HmdConfig config, Resolution resolution) {
+                Logger.Info($"Patching {File.FullName}");
+                var currentExcludes = Excludes;
+                foreach (var item in itemsToExclude) {
+                    if (!currentExcludes.Contains(item)) {
+                        currentExcludes.Add(item);
+                        Logger.Debug($"Excluded {item}");
                     }
                 }
-                return iniFileData;
+                _Data["Exclude"].SetKeyData(GetExcludesAsIniData(currentExcludes));
+
+                Logger.Info($"Patched {File.FullName}");
+                return true;
+            }
+
+            public override bool Unpatch() {
+                Logger.Info($"Unpatching {File.FullName}");
+                Logger.Info($"Unpatched {File.FullName}");
+                return true;
             }
 
             #region definitions
