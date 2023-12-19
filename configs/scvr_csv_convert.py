@@ -23,21 +23,45 @@ resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
 = row["FOV V-value (variable)"]
 = row["FOV D-Value (variable)"]
 = row["FOV Overlap (variable)"]
+= row["FOV H-check"]
+= row["H-FOV is same?"]
+= row["FOV V-check"]
+= row["V-FOV is same?"]
+= row["FOV hor. Deviation"]
+= row["FOV hor. Scaled Value"]
+= row["FOV hor. Coefficient"]
+= row["FOV ver. Deviation"]
+= row["FOV ver. Scaled Value"]
+= row["FOV ver. Coefficient"]
+= row["FOV diag. Deviation"]
+= row["FOV diag. Scaled Value"]
+= row["FOV diag. Coefficient"]
+= row["Overlap Deviation"]
+= row["Overlap Scaled Value"]
+= row["Overlap Coefficient"]
+= row["HAM Deviation"]
+= row["HAM Scaled Value"]
+= row["HAM Coefficient"]
+= row["Bias"]
+= row["SC Attributes FOV"]
+= row["Physical Per-Eye Resolution Width"]
+= row["Physical Per-Eye Resolution Height"]
 = row["Render target size (native) Width"]
 = row["Render target size (native) Height"]
 = row["Refresh Rate Max(Hz)"]
+= row["Refresh Rate Max(Hz) - VRCompare"]
+= row["Refresh is same?"]
 = row["Note"]
-= row["Monitor (Ignore me)"]
-= row["SC Attributes FOV"]
 = row["Error Report (SC FOV Cap 120)"]
 = row["Raw Calculated Pixel Zoom Minimum"]
 = row["Raw Calculated Pixel Zoom Maximum"]
 = row["VorpX Pixel 1:1 Variable-Min"]
 = row["VorpX Pixel 1:1 Variable-Max"]
 = row["VorpX Config Pixel 1:1 Zoom (Calculated)"]
+= row["V6 Calculator (WIP)"]
+= row["Desired Output"]
 = row["Error Report (Too Much Zoom For VorpX)"]
-= row["VorpX User Max (Not Complete)"]
-= row["Concatenated Notes+Errors"]
+= row["Brightness Max (%)"]
 = row["Native Horizontal"]
 = row["Native Vertical"]
 = row["Native Aspect Ratio"]
@@ -62,7 +86,19 @@ resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
 = row["Every 6th+8th up to 19840 x 14880"]
 = row["Every 6th+8th+10th up to 19840 x 14880"]
 = row["All Integer Resolutions up to 19840 x 14880"]
+= row["Attributes - FPS Color Correction Profile"]
+= row["Attributes - Flight Color Correction Profile"]
+= row["Attributes - Scatter Distance Options"]
+= row["Attributes - Tesselation Distance Options"]
+= row["Attributes - Volumetric Clouds On/Off Options"]
+= row["Attributes - HeadTracking"]
+= row["Attributes - Remove These Lines from Attributes.xml"]
+= row["Attributes - Fixed Values"]
+= row["Attributes - Other"]
+= row["Color Correction - FPS"]
+= row["Color Correction - Flight"]
 """
+
 
 def split_resolution(resolution: str):
     match = resolution_regex.match(resolution)
@@ -108,7 +144,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 # if key not in ['Headset Name', 'Headset Brand', 'Headset Model', 'Lens Configuration', 'Concatenated Naming', 'All Possible Lens Configurations', 'Unique Database Identifier', 'FOV hor. (degrees)', 'FOV ver. (degrees)', 'FOV diag. (degrees)', 'Overlap (degrees)', 'HAM (hidden area mask - percentage)', 'Rot LE (view geometry - degrees)', 'Rot RE (view geometry - degrees)', 'FOV H-value (variable)', 'FOV V-value (variable)', 'FOV D-Value (variable)', 'FOV Overlap (variable)', 'Render target size (native) Width', 'Render target size (native) Height', 'Refresh Rate Max(Hz)', 'Note', 'Monitor (Ignore me)', 'SC Attributes FOV', 'Error Report (SC FOV Cap 120)', 'Raw Calculated Pixel Zoom Minimum', 'Raw Calculated Pixel Zoom Maximum', 'VorpX Pixel 1:1 Variable-Min', 'VorpX Pixel 1:1 Variable-Max', 'VorpX Config Pixel 1:1 Zoom (Calculated)', 'Error Report (Too Much Zoom For VorpX)', 'VorpX User Max (Not Complete)', 'Concatenated Notes+Errors', 'Native Horizontal', 'Native Vertical', 'Native Aspect Ratio', '4:3 Translation (H-locked) Width', '4:3 Translation (H-locked) Height', 'H-Locked Aspect Check', '4:3 Translation (V-limited) Width', '4:3 Translation (V-limited) Height', 'H-Limited Aspect Check', 'Custom Resolutions V-Translated', 'Custom Resolutions H-Translated (Preferred)', 'Combined Custom Resolutions', 'Every 6th up to 5440 x 4080', 'Every 8th up to 5440 x 4080', 'Every 10th up to 5440 x 4080', 'Every 6th+8th up to 5440 x 4080', 'Every 6th+8th+10th up to 5440 x 4080', 'All Integer Resolutions up to 5440 x 4080', 'Every 6th up to 19840 x 14880', 'Every 8th up to 19840 x 14880', 'Every 10th up to 19840 x 14880', 'Every 6th+8th up to 19840 x 14880', 'Every 6th+8th+10th up to 19840 x 14880', 'All Integer Resolutions up to 19840 x 14880']:
                 # Add the key-value pair to the row dictionary
                 if not value or value.strip() == '': continue
-                if key in ["Give me all the resolutions","Alternative Interger Resolutions (big list)","Alternative Interger Resolutions (small list)"]:
+                if key in ["Give me all the resolutions","Alternative Integer Resolutions (big list)","Alternative Integer Resolutions (small list)"]:
                     data['common'][key] = [split_resolution(v) for v in value.split(', ') if v]
                     continue
                 if key in [
