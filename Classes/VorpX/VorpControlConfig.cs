@@ -1,6 +1,5 @@
 ﻿using IniParser.Model;
 using System.IO;
-using System.Windows.Media;
 
 namespace SCVRPatcher {
     public partial class VorpX {

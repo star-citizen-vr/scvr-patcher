@@ -2,12 +2,10 @@
 using NLog.Config;
 using System.Drawing;
 using System.IO;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static SCVRPatcher.VorpX;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
 using MessageBox = System.Windows.MessageBox;
