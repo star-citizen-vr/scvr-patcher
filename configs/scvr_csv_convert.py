@@ -6,7 +6,7 @@ from re import compile
 resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
 attributes_fixed_regex = compile(r"(\w+):\s*([^,]+)")
 attributes_nameonly_regex = compile(r"\b(\w+)\b")
-attributes_optional_regex = compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)')
+# attributes_optional_regex = compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)') # Ran into a few issues with this one. Just separated them manually below
 
 """
 = row["Headset Name"]
@@ -184,11 +184,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
             "User Options": {}, # Options listed to the user to choose from.
             "Other": {} # Not sure if we want to do anything with these yet, but here they are.
         },
-        "Resolutions": {
-            "Alternative Integer Resolutions (big list)": [],
-            "Give me all the resolutions": [],
-            "All Possible Lens Configurations": []
-        }
+        "Resolutions": {}
     }
     data["brands"] = {}
     brands = data["brands"]
@@ -226,6 +222,23 @@ def csv_to_json(csvFilePath, jsonFilePath):
                         fixed_values[key] = value
                     continue
                 """
+                # Process resolution data
+                if key in ["Physical Per-Eye Resolution Width", "Physical Per-Eye Resolution Height"]:
+                    if "Physical Per-Eye Resolution List" not in brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]:
+                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Physical Per-Eye Resolution List"] = []
+
+                    resolution = split_resolution(value)
+                    if resolution:
+                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Physical Per-Eye Resolution List"].append(resolution)
+
+                elif key in ["Render target size (native) Width", "Render target size (native) Height"]:
+                    if "Render target size (native) List" not in brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]:
+                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Render target size (native) List"] = []
+
+                    resolution = split_resolution(value)
+                    if resolution:
+                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Render target size (native) List"].append(resolution)
+                    continue
                 # Add the key-value pair to the row dictionary
                 if not value or value.strip() == '': continue
                 if key in ["Give me all the resolutions", "Alternative Integer Resolutions (big list)", "Alternative Integer Resolutions (small list)"]:
@@ -244,6 +257,11 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     fixed_values = data['common']['Attributes']['Fixed Values']
                     fixed_values.update(fixed_attributes(value))
                     continue
+                # Grab the other 'fixed' attrbiutes
+                if key in "Attributes - Other":
+                    fixed_values = data['common']['Attributes']['Other']
+                    fixed_values.update(fixed_attributes(value))
+                    continue
                 # Grab the remove me attributes
                 if key in ["Attributes - Remove These Lines from Attributes.xml"]:
                     remove_attributes_dict = data['common']['Attributes']['Remove me from attributes.xml if exists']
@@ -251,7 +269,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     continue
 
                 # Grab the user optional attributes together
-                optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {})
+                optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {}) # Temp
                 if key in ["Attributes - Scatter Distance Options", "Attributes - Tesselation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
                     if key not in optional_values:
                         optional_values[key] = []
@@ -313,25 +331,4 @@ newdict = {}
 newlist.append("trgdefgbfg")
 
 newdict["eqweq"] = "fdsmflsdkf"
-
-
-"common": {
-	"Attributes": {
-		"Fixed Values":{
-			"ChromaticAberration": 0,
-			"FilmGrain": 0,
-			"MotionBlur": 0,
-			"ShakeScale": 1,
-			"Sharpening": 1,
-			"VSync": 0,
-			"WindowMode": 2,
-        }
-	},
-	"Resolutions: {
-		"Alternate Ineger Resolutions (small list)":,
-		"Alternative Integer Resolutions (big list)",
-		"Give me all the resolutions",
-		}
-	},
-"brands": {
 """
