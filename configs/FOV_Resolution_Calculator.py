@@ -2,6 +2,7 @@
 
 # 2D (Mono) Terms:
 """
+    AS              - Aspect Ratio of HRES:VRES
     HRES            - Horizontal Resolution
     VRES            - Vertical Resolution
     HAR/H-FOV       - Horizontal Angular Range / Horizontal Field of View (Magenta Triangle)
