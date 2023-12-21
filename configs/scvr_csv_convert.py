@@ -1,12 +1,11 @@
 import csv
 import json
-import re
 from re import compile
 
 resolution_regex = compile(r"(\d+)\s[Xx]\s(\d+)\s\((.+?)\)\s*(.+)?")
 attributes_fixed_regex = compile(r"(\w+):\s*([^,]+)")
 attributes_nameonly_regex = compile(r"\b(\w+)\b")
-# attributes_optional_regex = compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)') # Ran into a few issues with this one. Just separated them manually below
+# attributes_optional_regex = re.compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)') # Ran into a few issues with this one. Just separated them manually below
 
 """
 = row["Headset Name"]
@@ -103,7 +102,6 @@ attributes_nameonly_regex = compile(r"\b(\w+)\b")
 = row["Color Correction - Flight"]
 """
 
-
 def split_resolution(resolution: str):
     match = resolution_regex.match(resolution)
     if not match: return None
@@ -196,15 +194,15 @@ def csv_to_json(csvFilePath, jsonFilePath):
 
         # Iterate over each row in the CSV file
         for row in csvReader:
-            #    print(row)
+            #print(row)
             # Create a dictionary for each row
             row_dict = {}
 
             if row['Headset Brand'] not in brands:
-                brands[row['Headset Brand']] = { }
+                brands[row['Headset Brand']] = {}
 
             if row['Headset Model'] not in brands[row['Headset Brand']]:
-                brands[row['Headset Brand']][row['Headset Model']] = { }
+                brands[row['Headset Brand']][row['Headset Model']] = {}
 
             if row['Lens Configuration'] not in brands[row['Headset Brand']][row['Headset Model']]:
                 brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = {}
@@ -212,7 +210,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
             for key, value in row.items():
                 # Skip the keys that we don't want to include in the JSON file
                 # if key not in ['Headset Name', 'Headset Brand', 'Headset Model', 'Lens Configuration', 'Concatenated Naming', 'All Possible Lens Configurations', 'Unique Database Identifier', 'FOV hor. (degrees)', 'FOV ver. (degrees)', 'FOV diag. (degrees)', 'Overlap (degrees)', 'HAM (hidden area mask - percentage)', 'Rot LE (view geometry - degrees)', 'Rot RE (view geometry - degrees)', 'FOV H-value (variable)', 'FOV V-value (variable)', 'FOV D-Value (variable)', 'FOV Overlap (variable)', 'Render target size (native) Width', 'Render target size (native) Height', 'Refresh Rate Max(Hz)', 'Note', 'Monitor (Ignore me)', 'SC Attributes FOV', 'Error Report (SC FOV Cap 120)', 'Raw Calculated Pixel Zoom Minimum', 'Raw Calculated Pixel Zoom Maximum', 'VorpX Pixel 1:1 Variable-Min', 'VorpX Pixel 1:1 Variable-Max', 'VorpX Config Pixel 1:1 Zoom (Calculated)', 'Error Report (Too Much Zoom For VorpX)', 'VorpX User Max (Not Complete)', 'Concatenated Notes+Errors', 'Native Horizontal', 'Native Vertical', 'Native Aspect Ratio', '4:3 Translation (H-locked) Width', '4:3 Translation (H-locked) Height', 'H-Locked Aspect Check', '4:3 Translation (V-limited) Width', '4:3 Translation (V-limited) Height', 'H-Limited Aspect Check', 'Custom Resolutions V-Translated', 'Custom Resolutions H-Translated (Preferred)', 'Combined Custom Resolutions', 'Every 6th up to 5440 x 4080', 'Every 8th up to 5440 x 4080', 'Every 10th up to 5440 x 4080', 'Every 6th+8th up to 5440 x 4080', 'Every 6th+8th+10th up to 5440 x 4080', 'All Integer Resolutions up to 5440 x 4080', 'Every 6th up to 19840 x 14880', 'Every 8th up to 19840 x 14880', 'Every 10th up to 19840 x 14880', 'Every 6th+8th up to 19840 x 14880', 'Every 6th+8th+10th up to 19840 x 14880', 'All Integer Resolutions up to 19840 x 14880']:
-                
+                #print(f"Processing key: {key}, value: {value}")
                 # Try to categorize the attribute based on its functionality
                 """
                 if key in ["Attributes - Fixed Values", "Attributes - HeadTracking"]:
@@ -222,23 +220,6 @@ def csv_to_json(csvFilePath, jsonFilePath):
                         fixed_values[key] = value
                     continue
                 """
-                # Process resolution data
-                if key in ["Physical Per-Eye Resolution Width", "Physical Per-Eye Resolution Height"]:
-                    if "Physical Per-Eye Resolution List" not in brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]:
-                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Physical Per-Eye Resolution List"] = []
-
-                    resolution = split_resolution(value)
-                    if resolution:
-                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Physical Per-Eye Resolution List"].append(resolution)
-
-                elif key in ["Render target size (native) Width", "Render target size (native) Height"]:
-                    if "Render target size (native) List" not in brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]:
-                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Render target size (native) List"] = []
-
-                    resolution = split_resolution(value)
-                    if resolution:
-                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']]["Render target size (native) List"].append(resolution)
-                    continue
                 # Add the key-value pair to the row dictionary
                 if not value or value.strip() == '': continue
                 if key in ["Give me all the resolutions", "Alternative Integer Resolutions (big list)", "Alternative Integer Resolutions (small list)"]:
@@ -267,7 +248,6 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     remove_attributes_dict = data['common']['Attributes']['Remove me from attributes.xml if exists']
                     remove_attributes_dict.update(remove_attributes(value))
                     continue
-
                 # Grab the user optional attributes together
                 optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {}) # Temp
                 if key in ["Attributes - Scatter Distance Options", "Attributes - Tesselation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
@@ -286,7 +266,6 @@ def csv_to_json(csvFilePath, jsonFilePath):
                         print(f"Error processing {key}: {e}") # Debug
                         # print(f"Row data: {row}") # Hope you don't have to use this to debug :P
                     continue
-
                 if key == "Concatenated Notes+Errors":
                     key = "Notes"
                     if value.replace(' ','').replace('|','') == '' : value = list()
