@@ -1,6 +1,8 @@
 #Terms and Definitions# 2D (Mono) Terms:
 """
-    HAR/H-FOV       - Horizontal Angular Rnage / Horizontal Field of View (Magenta Triangle)
+    HRES            - Horizontal Resolution
+    VRES            - Vertical Resolution
+    HAR/H-FOV       - Horizontal Angular Range / Horizontal Field of View (Magenta Triangle)
     VAR/V-FOV       - Vertical Angular Range / Vertical Field of View (Yellow Triangle)
     DAR/D-FOV       - Diagonal Angular Range / Diagonal Field of View (Cyan Triangle)
     NCP             - Near Clipping Plane
@@ -9,6 +11,10 @@
 
 #3D (Stereo) Terms:
 """
+    PE-HRES         - Per Eye Horizontal Resolution
+    PE-VRES         - Per Eye Vertical Resolution
+    RT-HRES         - Render Target Horizontal Resolution
+    RT-VRES         - Render Target Vertical Resolution
     NAR             - Native Aspect Ratio (of HMD)
     RRAR            - Render Resolution's Aspect Ratio (of HMD)
     OAR             - Overlap Angular Range (of HMD)
@@ -34,9 +40,17 @@
         If HAM = 0, HST-VAR = ST-VAR; Else If HAM != 0, HST-VAR = ST-VAR-(ST-VAR*HAM/100)
     
     PP              - Parallel Projection
-    VG              - View Geometry 
+    VG              - View Geometry
+    OPL             - Overscan Percentage of Loss (Parts of the 4:3 (or other) aspect ratio of Star Citizen that would be lost to the viewer's perspective should vertical be 1:1 PE-VRES:VRES) note: a small percentage would be good, especially for lower frame rates as the user looks left to right.
 
 """
+# Formulas:
+"""
+    ST-VAR = VAR
+    VAR = 
+"""
+
+
 
 # Sample Data:
 """
@@ -62,6 +76,56 @@
             |---------------------------------------------------------------|
 """
 
+# Sample 2 Data:
+"""
+Recommended render target size: [2468, 2740]                         
+                                                                     
+Left eye HAM mesh:                                   Right eye HAM mesh:
+     original vertices: 99, triangles: 33                 original vertices: 99, triangles: 33
+    optimized vertices: 38, n-gons: 3                    optimized vertices: 38, n-gons: 3
+             mesh area: 24.88 %                                   mesh area: 24.88 %
+                                                     
+Left eye to head transformation matrix:              Right eye to head transformation matrix:
+    [[ 0.996195,  0.      ,  0.087156, -0.029   ],       [[ 0.996195,  0.      , -0.087156,  0.029   ],
+     [ 0.      ,  1.      ,  0.      ,  0.      ],        [ 0.      ,  1.      ,  0.      ,  0.      ],
+     [-0.087156,  0.      ,  0.996195,  0.      ]]        [ 0.087156,  0.      ,  0.996195,  0.      ]]
+                                                     
+Left eye raw LRBT values:                            Right eye raw LRBT values:
+    left:        -1.279120                               left:        -1.257541
+    right:        1.258676                               right:        1.281748
+    bottom:      -1.408557                               bottom:      -1.407222
+    top:          1.413973                               top:          1.415720
+                                                     
+Left eye raw FOV:                                    Right eye raw FOV:
+    left:       -49.00 deg                               left:       -47.95 deg
+    right:       47.98 deg                               right:       49.06 deg
+    bottom:     -54.63 deg                               bottom:     -54.60 deg
+    top:         54.73 deg                               top:         54.76 deg
+    horiz.:      96.98 deg                               horiz.:      97.01 deg
+    vert.:      109.36 deg                               vert.:      109.37 deg
+                                                     
+Left eye head FOV:                                   Right eye head FOV:
+    left:       -54.00 deg                               left:       -42.95 deg
+    right:       42.98 deg                               right:       54.06 deg
+    bottom:     -54.52 deg                               bottom:     -54.50 deg
+    top:         54.63 deg                               top:         54.66 deg
+    horiz.:      96.98 deg                               horiz.:      97.01 deg
+    vert.:      109.15 deg                               vert.:      109.16 deg
+                            
+                            Total FOV:
+                                horizontal: 108.06 deg
+                                vertical:   109.16 deg
+                                diagonal:   114.43 deg
+                                overlap:     85.93 deg
+                            
+                            View geometry:
+                                left view rotation:    -5.0 deg
+                                right view rotation:    5.0 deg
+                                reported IPD:          58.0 mm
+
+"""
+
+
 # Steps that are needed:
 """
 1) Check that Parallel Projection is disabled on Pimax and Index headsets
@@ -75,16 +139,32 @@
 
 
 
-X) Calculate Star Citizen FOV from 4:3 Aspect ratio to set FOV.
+X) Calculate Star Citizen DAR based on 4:3 aspect ratio lock
+    Find HAR and VAR from DAR
+    
+    Match VAR to ST-VAR, Else Match VAR to HST-VAR
+
+    If VAR = ST-VAR/HST-VAR, FOV should be equal
+    Zoom VorpX to match V-RES
 
 
+    
 
+?   Target Render Res = Left Eye resolution - Over lap degrees + right eye resolution       ?
+
+    Check to see if headset target render res is wider than 4:3 aspect ratio, If so, look at 16:10 or 16:9 aspect ratios.
+
+
+    Cal all data to find render res + aspection ratio
+    change aspect to 4:3 and use fix vertical to find the new horizontal & diagonal
+    headset vertical = screen vertical
+    screen vertical lock to 4:3 and calculate new horizontal and old vertical to find new diagonal.
 
 """
 
 
 import math
-
+"""
 # Temporarily define the headset geometry
 headset_geometry = {
   "left": {"left": -51.65, "right": 41.65, "bottom": -51.88, "top": 51.88, "horiz": 93.31, "vert": 103.75},
@@ -104,4 +184,6 @@ view_geometry = {"left": 0.0, "right": 0.0, "IPD": 62.0}
 # Calculate the HMD total FOV
 #def calculate_fov_hmd(headset_geometry):
     # Check to see if Parallel Projection is on
-    #if 
+    if 
+
+"""
