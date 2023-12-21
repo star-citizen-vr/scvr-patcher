@@ -8,7 +8,7 @@ namespace SCVRPatcher {
 
         public EAC() {
             Logger.Info("Loading EAC");
-            Logger.Debug($"EACAppdataDir: {EACAppdataDir.Quote()}");
+            Logger.Debug($"EACAppdataDir: {EACAppdataDir.Quote()} (exists: {EACAppdataDir.Exists.ToYesNo()})");
         }
 
         public void Patch() {

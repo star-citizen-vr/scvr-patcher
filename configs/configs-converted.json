@@ -51,17 +51,17 @@
                 "VSync": "0",
                 "WindowMode": "2"
             },
-            "Remove me from attributes.xml if exists": {
-                "SysSpec": null,
-                "SysSpecGameEffects": null,
-                "SysSpecGasCloud": null,
-                "SysSpecObjectDetail": null,
-                "SysSpecParticles": null,
-                "SysSpecPostProcessing": null,
-                "SysSpecShading": null,
-                "SysSpecShadows": null,
-                "SysSpecWater": null
-            },
+            "Remove me from attributes.xml if exists": [
+                "SysSpec",
+                "SysSpecGameEffects",
+                "SysSpecGasCloud",
+                "SysSpecObjectDetail",
+                "SysSpecParticles",
+                "SysSpecPostProcessing",
+                "SysSpecShading",
+                "SysSpecShadows",
+                "SysSpecWater"
+            ],
             "User Options": {
                 "Attributes - Scatter Distance Options": [
                     {
@@ -1178,10 +1178,14 @@
         "Bigscreen": {
             "Beyond": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 2560.0,
-                    "Render target size (native) Width": 2688.0,
-                    "Render target size (native) Height": 2688.0,
+                    "Render target size": {
+                        "w": "2688",
+                        "h": "2688"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "2560"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 102.6,
                     "VorpX Config Pixel 1:1 Zoom": 1.085,
@@ -1310,10 +1314,14 @@
         "DPVR": {
             "E4": {
                 "Native+R120": {
-                    "Physical Per-Eye Resolution Width": 1832.0,
-                    "Physical Per-Eye Resolution Height": 1920.0,
-                    "Render target size (native) Width": 2204.0,
-                    "Render target size (native) Height": 2204.0,
+                    "Render target size": {
+                        "w": "2204",
+                        "h": "2204"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1832",
+                        "h": "1920"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 105.515,
                     "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -1430,10 +1438,14 @@
         "HP": {
             "Reverb": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2160.0,
-                    "Physical Per-Eye Resolution Height": 2160.0,
-                    "Render target size (native) Width": 1608.0,
-                    "Render target size (native) Height": 1576.0,
+                    "Render target size": {
+                        "w": "1608",
+                        "h": "1576"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2160",
+                        "h": "2160"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 102.4396,
                     "VorpX Config Pixel 1:1 Zoom": 1.085,
@@ -1536,10 +1548,14 @@
             },
             "Reverb G2": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2160.0,
-                    "Physical Per-Eye Resolution Height": 2160.0,
-                    "Render target size (native) Width": 2248.0,
-                    "Render target size (native) Height": 2192.0,
+                    "Render target size": {
+                        "w": "2248",
+                        "h": "2192"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2160",
+                        "h": "2160"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 102.0518,
                     "VorpX Config Pixel 1:1 Zoom": 1.21,
@@ -1656,10 +1672,14 @@
         "HTC": {
             "Vive": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 1080.0,
-                    "Physical Per-Eye Resolution Height": 1200.0,
-                    "Render target size (native) Width": 1852.0,
-                    "Render target size (native) Height": 2056.0,
+                    "Render target size": {
+                        "w": "1852",
+                        "h": "2056"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1080",
+                        "h": "1200"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 112.6678,
                     "VorpX Config Pixel 1:1 Zoom": 1.23,
@@ -1768,10 +1788,14 @@
             },
             "Vive Elite": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1912.0,
-                    "Render target size (native) Height": 2256.0,
+                    "Render target size": {
+                        "w": "1912",
+                        "h": "2256"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 105.2974,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -1880,10 +1904,14 @@
             },
             "Vive Focus 3": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2448.0,
-                    "Physical Per-Eye Resolution Height": 2448.0,
-                    "Render target size (native) Width": 3760.0,
-                    "Render target size (native) Height": 3760.0,
+                    "Render target size": {
+                        "w": "3760",
+                        "h": "3760"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2448",
+                        "h": "2448"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 116.43,
                     "VorpX Config Pixel 1:1 Zoom": 1.085,
@@ -2010,10 +2038,14 @@
             },
             "Vive Pro": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1600.0,
-                    "Render target size (native) Width": 2468.0,
-                    "Render target size (native) Height": 2740.0,
+                    "Render target size": {
+                        "w": "2468",
+                        "h": "2740"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1600"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 109.993,
                     "VorpX Config Pixel 1:1 Zoom": 1.235,
@@ -2140,10 +2172,14 @@
             },
             "Vive Pro 2": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2448.0,
-                    "Physical Per-Eye Resolution Height": 2448.0,
-                    "Render target size (native) Width": 3224.0,
-                    "Render target size (native) Height": 3224.0,
+                    "Render target size": {
+                        "w": "3224",
+                        "h": "3224"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2448",
+                        "h": "2448"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 110.4291,
                     "VorpX Config Pixel 1:1 Zoom": 1.16,
@@ -2276,10 +2312,14 @@
             },
             "Vive XR Streaming": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1728.0,
-                    "Render target size (native) Height": 1728.0,
+                    "Render target size": {
+                        "w": "1728",
+                        "h": "1728"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 106.37,
                     "VorpX Config Pixel 1:1 Zoom": 1.085,
@@ -2384,10 +2424,14 @@
         "Lenovo": {
             "Explorer": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1856.0,
-                    "Render target size (native) Height": 1852.0,
+                    "Render target size": {
+                        "w": "1856",
+                        "h": "1852"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 103.3639,
                     "VorpX Config Pixel 1:1 Zoom": 1.22,
@@ -2498,10 +2542,14 @@
         "Oculus": {
             "Meta Quest Pro": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 1800.0,
-                    "Physical Per-Eye Resolution Height": 1920.0,
-                    "Render target size (native) Width": 2160.0,
-                    "Render target size (native) Height": 2224.0,
+                    "Render target size": {
+                        "w": "2160",
+                        "h": "2224"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1800",
+                        "h": "1920"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 107.2533,
                     "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -2616,10 +2664,14 @@
             },
             "Quest": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 1832.0,
-                    "Physical Per-Eye Resolution Height": 1920.0,
-                    "Render target size (native) Width": 1808.0,
-                    "Render target size (native) Height": 2000.0,
+                    "Render target size": {
+                        "w": "1808",
+                        "h": "2000"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1832",
+                        "h": "1920"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 109.0587,
                     "VorpX Config Pixel 1:1 Zoom": 1.13,
@@ -2728,10 +2780,14 @@
             },
             "Quest 2": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 1832.0,
-                    "Physical Per-Eye Resolution Height": 1920.0,
-                    "Render target size (native) Width": 2352.0,
-                    "Render target size (native) Height": 2368.0,
+                    "Render target size": {
+                        "w": "2352",
+                        "h": "2368"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1832",
+                        "h": "1920"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 107.7093,
                     "VorpX Config Pixel 1:1 Zoom": 1.155,
@@ -2846,10 +2902,14 @@
             },
             "Quest 3": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 2064.0,
-                    "Physical Per-Eye Resolution Height": 2208.0,
-                    "Render target size (native) Width": 2064.0,
-                    "Render target size (native) Height": 2240.0,
+                    "Render target size": {
+                        "w": "2064",
+                        "h": "2240"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2064",
+                        "h": "2208"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 108.8892,
                     "VorpX Config Pixel 1:1 Zoom": 1.18,
@@ -2964,10 +3024,14 @@
             },
             "Rift CV1": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1344.0,
-                    "Render target size (native) Height": 1600.0,
+                    "Render target size": {
+                        "w": "1344",
+                        "h": "1600"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 94.1762,
                     "VorpX Config Pixel 1:1 Zoom": 1.19,
@@ -3064,10 +3128,14 @@
             },
             "Rift S": {
                 "Native+R80": {
-                    "Physical Per-Eye Resolution Width": 1280.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1648.0,
-                    "Render target size (native) Height": 1776.0,
+                    "Render target size": {
+                        "w": "1648",
+                        "h": "1776"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1280",
+                        "h": "1440"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 97.0662,
                     "VorpX Config Pixel 1:1 Zoom": 1.175,
@@ -3172,10 +3240,14 @@
         "Pico": {
             "4": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2160.0,
-                    "Physical Per-Eye Resolution Height": 2160.0,
-                    "Render target size (native) Width": 2160.0,
-                    "Render target size (native) Height": 2160.0,
+                    "Render target size": {
+                        "w": "2160",
+                        "h": "2160"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2160",
+                        "h": "2160"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 113.08,
                     "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -3290,10 +3362,14 @@
             },
             "Neo 3": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 1832.0,
-                    "Physical Per-Eye Resolution Height": 1920.0,
-                    "Render target size (native) Width": 2748.0,
-                    "Render target size (native) Height": 2880.0,
+                    "Render target size": {
+                        "w": "2748",
+                        "h": "2880"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1832",
+                        "h": "1920"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 103.475,
                     "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -3420,10 +3496,14 @@
             },
             "Neo 2": {
                 "Native+R72": {
-                    "Physical Per-Eye Resolution Width": 2048.0,
-                    "Physical Per-Eye Resolution Height": 2160.0,
-                    "Render target size (native) Width": 2352.0,
-                    "Render target size (native) Height": 2352.0,
+                    "Render target size": {
+                        "w": "2352",
+                        "h": "2352"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2048",
+                        "h": "2160"
+                    },
                     "Hz": 72.0,
                     "SC Attributes FOV": 110.26,
                     "VorpX Config Pixel 1:1 Zoom": 1.09,
@@ -3540,10 +3620,14 @@
         "Pimax": {
             "5K Plus": {
                 "Large+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 3412.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "3412",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 144.9507,
                     "VorpX Config Pixel 1:1 Zoom": 1.105,
@@ -3683,10 +3767,14 @@
                     ]
                 },
                 "Large+PP+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 5560.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "5560",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 144.0682,
                     "VorpX Config Pixel 1:1 Zoom": 1.185,
@@ -3826,10 +3914,14 @@
                     ]
                 },
                 "Normal+Native+R144": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2448.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2448",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 127.9308,
                     "VorpX Config Pixel 1:1 Zoom": 1.145,
@@ -3963,10 +4055,14 @@
                     ]
                 },
                 "Normal+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2560.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2560",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 128.4658,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -4100,10 +4196,14 @@
                     ]
                 },
                 "Normal+PP+R144": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2960.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2960",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 129.3133,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -4243,10 +4343,14 @@
                     ]
                 },
                 "Normal+PP+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 3080.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "3080",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 130.0433,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -4386,10 +4490,14 @@
                     ]
                 },
                 "Small+Native+R120": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2108.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2108",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 116.0658,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -4517,10 +4625,14 @@
                     ]
                 },
                 "Small+Native+R144": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2008.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2008",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 115.7658,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -4648,10 +4760,14 @@
                     ]
                 },
                 "Small+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2108.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2108",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 116.1558,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -4779,10 +4895,14 @@
                     ]
                 },
                 "Small+PP+R120": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2224.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2224",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 119.2533,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -4916,10 +5036,14 @@
                     ]
                 },
                 "Small+PP+R144": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2140.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2140",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 118.7233,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -5053,10 +5177,14 @@
                     ]
                 },
                 "Small+PP+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2228.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2228",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 119.3283,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -5190,10 +5318,14 @@
                     ]
                 },
                 "Tiny+Native+R120": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1812.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1812",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 105.3808,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -5315,10 +5447,14 @@
                     ]
                 },
                 "Tiny+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1816.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1816",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 105.4608,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -5440,10 +5576,14 @@
                     ]
                 },
                 "Tiny+PP+R120": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1776.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "1776",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 110.6258,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -5571,10 +5711,14 @@
                     ]
                 },
                 "Tiny+PP+R90": {
-                    "Physical Per-Eye Resolution Width": 2560.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1776.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "1776",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2560",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 110.6858,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -5704,10 +5848,14 @@
             },
             "8K": {
                 "Large+Native+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3024.0,
-                    "Render target size (native) Height": 1920.0,
+                    "Render target size": {
+                        "w": "3024",
+                        "h": "1920"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 145.3932,
                     "VorpX Config Pixel 1:1 Zoom": 1.105,
@@ -5831,10 +5979,14 @@
                     ]
                 },
                 "Large+PP+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3392.0,
-                    "Render target size (native) Height": 1656.0,
+                    "Render target size": {
+                        "w": "3392",
+                        "h": "1656"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 149.7144,
                     "VorpX Config Pixel 1:1 Zoom": 1.095,
@@ -5958,10 +6110,14 @@
                     ]
                 },
                 "Normal+Native+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2656.0,
-                    "Render target size (native) Height": 2244.0,
+                    "Render target size": {
+                        "w": "2656",
+                        "h": "2244"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 129.0383,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -6085,10 +6241,14 @@
                     ]
                 },
                 "Normal+PP+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2584.0,
-                    "Render target size (native) Height": 2276.0,
+                    "Render target size": {
+                        "w": "2584",
+                        "h": "2276"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 133.7658,
                     "VorpX Config Pixel 1:1 Zoom": 1.145,
@@ -6212,10 +6372,14 @@
                     ]
                 },
                 "Small+Native+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2428.0,
-                    "Render target size (native) Height": 2492.0,
+                    "Render target size": {
+                        "w": "2428",
+                        "h": "2492"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 116.8833,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -6339,10 +6503,14 @@
                     ]
                 },
                 "Small+PP+R80": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2220.0,
-                    "Render target size (native) Height": 2704.0,
+                    "Render target size": {
+                        "w": "2220",
+                        "h": "2704"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 80.0,
                     "SC Attributes FOV": 122.0008,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -6468,10 +6636,14 @@
             },
             "Artisan": {
                 "Small+Native+R90+I60": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2336.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2336",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 122.8583,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -6591,10 +6763,14 @@
                     ]
                 },
                 "Small+Native+R90+I70": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2060.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2060",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 114.5808,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -6714,10 +6890,14 @@
                     ]
                 },
                 "Small+PP+R90+I60": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2628.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2628",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 125.0658,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -6849,10 +7029,14 @@
                     ]
                 },
                 "Small+PP+R90+I70": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2152.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2152",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 118.0083,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -6978,10 +7162,14 @@
                     ]
                 },
                 "Tiny+Native+R90+I60": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1968.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1968",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 111.3433,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -7101,10 +7289,14 @@
                     ]
                 },
                 "Tiny+Native+R90+I70": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1780.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1780",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 104.0608,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -7218,10 +7410,14 @@
                     ]
                 },
                 "Tiny+PP+R90+I60": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 2004.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2004",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 115.3533,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -7347,10 +7543,14 @@
                     ]
                 },
                 "Tiny+PP+R90+I70": {
-                    "Physical Per-Eye Resolution Width": 1700.0,
-                    "Physical Per-Eye Resolution Height": 1440.0,
-                    "Render target size (native) Width": 1728.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "1728",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1700",
+                        "h": "1440"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 109.5983,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -7472,10 +7672,14 @@
             },
             "Crystal": {
                 "Native+R120": {
-                    "Physical Per-Eye Resolution Width": 2880.0,
-                    "Physical Per-Eye Resolution Height": 2880.0,
-                    "Render target size (native) Width": 4312.0,
-                    "Render target size (native) Height": 5100.0,
+                    "Render target size": {
+                        "w": "4312",
+                        "h": "5100"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2880",
+                        "h": "2880"
+                    },
                     "Hz": 120.0,
                     "SC Attributes FOV": 109.9432,
                     "VorpX Config Pixel 1:1 Zoom": 1.11,
@@ -7590,10 +7794,14 @@
             },
             "Vision 8K Plus": {
                 "Large+Native+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3348.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "3348",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 142.0208,
                     "VorpX Config Pixel 1:1 Zoom": 1.145,
@@ -7733,10 +7941,14 @@
                     ]
                 },
                 "Large+Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3412.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "3412",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 144.9507,
                     "VorpX Config Pixel 1:1 Zoom": 1.105,
@@ -7876,10 +8088,14 @@
                     ]
                 },
                 "Large+PP+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 5304.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "5304",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 142.4833,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -8019,10 +8235,14 @@
                     ]
                 },
                 "Large+PP+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 5560.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "5560",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 144.0682,
                     "VorpX Config Pixel 1:1 Zoom": 1.185,
@@ -8162,10 +8382,14 @@
                     ]
                 },
                 "Normal+Native+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2528.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2528",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 127.7508,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -8299,10 +8523,14 @@
                     ]
                 },
                 "Normal+Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2560.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2560",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 128.4658,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -8436,10 +8664,14 @@
                     ]
                 },
                 "Normal+PP+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3016.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "3016",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 129.3983,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -8579,10 +8811,14 @@
                     ]
                 },
                 "Normal+PP+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3080.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "3080",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 130.0433,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -8722,10 +8958,14 @@
                     ]
                 },
                 "Small+Native+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2092.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2092",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 115.5458,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -8853,10 +9093,14 @@
                     ]
                 },
                 "Small+Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2108.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "2108",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 116.1558,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -8984,10 +9228,14 @@
                     ]
                 },
                 "Small+PP+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2196.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2196",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 118.8158,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -9121,10 +9369,14 @@
                     ]
                 },
                 "Small+PP+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2228.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "2228",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 119.3283,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -9258,10 +9510,14 @@
                     ]
                 },
                 "Tiny+Native+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1804.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1804",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 104.9208,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -9383,10 +9639,14 @@
                     ]
                 },
                 "Tiny+Native+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1816.0,
-                    "Render target size (native) Height": 2104.0,
+                    "Render target size": {
+                        "w": "1816",
+                        "h": "2104"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 105.4608,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -9508,10 +9768,14 @@
                     ]
                 },
                 "Tiny+PP+R110": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1760.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "1760",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 110.0,
                     "SC Attributes FOV": 110.2633,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -9639,10 +9903,14 @@
                     ]
                 },
                 "Tiny+PP+R90": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 1776.0,
-                    "Render target size (native) Height": 2632.0,
+                    "Render target size": {
+                        "w": "1776",
+                        "h": "2632"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 110.6858,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -9772,10 +10040,14 @@
             },
             "Vision 8K X": {
                 "Large+Native+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 5008.0,
-                    "Render target size (native) Height": 3160.0,
+                    "Render target size": {
+                        "w": "5008",
+                        "h": "3160"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 142.9158,
                     "VorpX Config Pixel 1:1 Zoom": 1.145,
@@ -9907,10 +10179,14 @@
                     ]
                 },
                 "Large+PP+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 8260.0,
-                    "Render target size (native) Height": 3948.0,
+                    "Render target size": {
+                        "w": "8260",
+                        "h": "3948"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 143.1608,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -10012,10 +10288,14 @@
                     ]
                 },
                 "Normal+Native+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3728.0,
-                    "Render target size (native) Height": 3160.0,
+                    "Render target size": {
+                        "w": "3728",
+                        "h": "3160"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 128.5758,
                     "VorpX Config Pixel 1:1 Zoom": 1.145,
@@ -10153,10 +10433,14 @@
                     ]
                 },
                 "Normal+PP+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 4544.0,
-                    "Render target size (native) Height": 3948.0,
+                    "Render target size": {
+                        "w": "4544",
+                        "h": "3948"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 129.9208,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -10288,10 +10572,14 @@
                     ]
                 },
                 "Small+Native+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3052.0,
-                    "Render target size (native) Height": 3160.0,
+                    "Render target size": {
+                        "w": "3052",
+                        "h": "3160"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 116.3058,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -10423,10 +10711,14 @@
                     ]
                 },
                 "Small+PP+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 3268.0,
-                    "Render target size (native) Height": 3948.0,
+                    "Render target size": {
+                        "w": "3268",
+                        "h": "3948"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 119.2133,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -10558,10 +10850,14 @@
                     ]
                 },
                 "Tiny+Native+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2612.0,
-                    "Render target size (native) Height": 3160.0,
+                    "Render target size": {
+                        "w": "2612",
+                        "h": "3160"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 105.6858,
                     "VorpX Config Pixel 1:1 Zoom": 1.15,
@@ -10693,10 +10989,14 @@
                     ]
                 },
                 "Tiny+PP+R75": {
-                    "Physical Per-Eye Resolution Width": "UNABLE",
-                    "Physical Per-Eye Resolution Height": "UNABLE",
-                    "Render target size (native) Width": 2588.0,
-                    "Render target size (native) Height": 3948.0,
+                    "Render target size": {
+                        "w": "2588",
+                        "h": "3948"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "UNABLE",
+                        "h": "UNABLE"
+                    },
                     "Hz": 75.0,
                     "SC Attributes FOV": 110.5933,
                     "VorpX Config Pixel 1:1 Zoom": 1.225,
@@ -10826,10 +11126,14 @@
         "StarVR": {
             "One": {
                 "Compatible+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 1830.0,
-                    "Physical Per-Eye Resolution Height": 1464.0,
-                    "Render target size (native) Width": 1440.0,
-                    "Render target size (native) Height": 1440.0,
+                    "Render target size": {
+                        "w": "1440",
+                        "h": "1440"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1830",
+                        "h": "1464"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 108.7724,
                     "VorpX Config Pixel 1:1 Zoom": 1.31,
@@ -10919,10 +11223,14 @@
                     ]
                 },
                 "Normal+Native+R90": {
-                    "Physical Per-Eye Resolution Width": 1830.0,
-                    "Physical Per-Eye Resolution Height": 1464.0,
-                    "Render target size (native) Width": 5720.0,
-                    "Render target size (native) Height": 4304.0,
+                    "Render target size": {
+                        "w": "5720",
+                        "h": "4304"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1830",
+                        "h": "1464"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 163.57,
                     "VorpX Config Pixel 1:1 Zoom": 1.29,
@@ -11046,10 +11354,14 @@
         "Valve": {
             "Index": {
                 "Native+R144": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1600.0,
-                    "Render target size (native) Width": 2468.0,
-                    "Render target size (native) Height": 2740.0,
+                    "Render target size": {
+                        "w": "2468",
+                        "h": "2740"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1600"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 112.8262,
                     "VorpX Config Pixel 1:1 Zoom": 1.27,
@@ -11177,10 +11489,14 @@
                     "Attributes - Flight Color Correction Profile": "Brightness: 0.46, Contrast: 0.48, Gamma: 0.94"
                 },
                 "PP+R144": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1600.0,
-                    "Render target size (native) Width": 2468.0,
-                    "Render target size (native) Height": 2740.0,
+                    "Render target size": {
+                        "w": "2468",
+                        "h": "2740"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1600"
+                    },
                     "Hz": 144.0,
                     "SC Attributes FOV": 112.8337,
                     "VorpX Config Pixel 1:1 Zoom": 1.27,
@@ -11312,10 +11628,14 @@
         "Varjo": {
             "Aero": {
                 "Native+R90": {
-                    "Physical Per-Eye Resolution Width": 2880.0,
-                    "Physical Per-Eye Resolution Height": 2720.0,
-                    "Render target size (native) Width": 4148.0,
-                    "Render target size (native) Height": 3556.0,
+                    "Render target size": {
+                        "w": "4148",
+                        "h": "3556"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "2880",
+                        "h": "2720"
+                    },
                     "Hz": 90.0,
                     "SC Attributes FOV": 109.9836,
                     "VorpX Config Pixel 1:1 Zoom": 1.125,
@@ -11448,10 +11768,14 @@
             },
             "VR-2": {
                 "Native+R60": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1600.0,
-                    "Render target size (native) Width": 2048.0,
-                    "Render target size (native) Height": 2048.0,
+                    "Render target size": {
+                        "w": "2048",
+                        "h": "2048"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1600"
+                    },
                     "Hz": 60.0,
                     "SC Attributes FOV": 91.7966,
                     "VorpX Config Pixel 1:1 Zoom": 1.22,
@@ -11566,10 +11890,14 @@
             },
             "XR-1": {
                 "Native+R60": {
-                    "Physical Per-Eye Resolution Width": 1440.0,
-                    "Physical Per-Eye Resolution Height": 1600.0,
-                    "Render target size (native) Width": 2048.0,
-                    "Render target size (native) Height": 2048.0,
+                    "Render target size": {
+                        "w": "2048",
+                        "h": "2048"
+                    },
+                    "Physical Per-Eye Resolution": {
+                        "w": "1440",
+                        "h": "1600"
+                    },
                     "Hz": 60.0,
                     "SC Attributes FOV": 91.6866,
                     "VorpX Config Pixel 1:1 Zoom": 1.22,

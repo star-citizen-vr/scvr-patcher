@@ -123,12 +123,6 @@ def fixed_attributes(attributes: str):
     attribute_dict = {key.strip(): value.strip() for key, value in matches}
     return attribute_dict
 
-def remove_attributes(attributes):
-    matches = attributes_nameonly_regex.findall(attributes)
-    if not matches:
-        return None
-    return {attribute: None for attribute in matches}
-
 def optional_attributes(attributes):
     options = [option.strip() for option in attributes.split(',')]
     return options if options else None
@@ -178,7 +172,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
     data["common"] = {
         "Attributes": {  # Added "Attributes" section
             "Fixed Values": {}, # All fixed values (including headtracking)
-            "Remove me from attributes.xml if exists": {}, # Lines that need to be removed from the attributes.xml
+            "Remove me from attributes.xml if exists": [], # Lines that need to be removed from the attributes.xml
             "User Options": {}, # Options listed to the user to choose from.
             "Other": {} # Not sure if we want to do anything with these yet, but here they are.
         },
@@ -206,6 +200,12 @@ def csv_to_json(csvFilePath, jsonFilePath):
 
             if row['Lens Configuration'] not in brands[row['Headset Brand']][row['Headset Model']]:
                 brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = {}
+
+            if 'Render target size' not in row_dict:
+                row_dict['Render target size'] = {}
+
+            if 'Physical Per-Eye Resolution' not in row_dict:
+                row_dict['Physical Per-Eye Resolution'] = {}
 
             for key, value in row.items():
                 # Skip the keys that we don't want to include in the JSON file
@@ -239,14 +239,12 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     fixed_values.update(fixed_attributes(value))
                     continue
                 # Grab the other 'fixed' attrbiutes
-                if key in "Attributes - Other":
+                elif key in "Attributes - Other":
                     fixed_values = data['common']['Attributes']['Other']
                     fixed_values.update(fixed_attributes(value))
                     continue
-                # Grab the remove me attributes
-                if key in ["Attributes - Remove These Lines from Attributes.xml"]:
-                    remove_attributes_dict = data['common']['Attributes']['Remove me from attributes.xml if exists']
-                    remove_attributes_dict.update(remove_attributes(value))
+                elif key == "Attributes - Remove These Lines from Attributes.xml":
+                    data['common']['Attributes']['Remove me from attributes.xml if exists'] = value.split(', ')
                     continue
                 # Grab the user optional attributes together
                 optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {}) # Temp
@@ -272,8 +270,20 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     else: value = value.split(' | ')
                 elif key in ["Custom Resolution List","Custom Resolutions V-Translated","Custom Resolutions H-Translated (Preferred)","Combined Custom Resolutions","Every 6th up to 5440 x 4080","Every 8th up to 5440 x 4080","Every 10th up to 5440 x 4080","Every 6th+8th up to 5440 x 4080","Every 6th+8th+10th up to 5440 x 4080","All Integer Resolutions up to 5440 x 4080","Every 6th up to 19840 x 14880","Every 8th up to 19840 x 14880","Every 10th up to 19840 x 14880","Every 6th+8th up to 19840 x 14880","Every 6th+8th+10th up to 19840 x 14880","All Integer Resolutions up to 19840 x 14880"]:
                     value = [split_resolution(v) for v in value.split(', ') if v]
-                elif key == "All Possible Lens Configurations":
+                elif key in ["All Possible Lens Configurations"]:
                     value = value.split(', ')
+                elif key == "Physical Per-Eye Resolution Width":
+                    row_dict["Physical Per-Eye Resolution"]["w"] = value
+                    continue
+                elif key == "Physical Per-Eye Resolution Height":
+                    row_dict["Physical Per-Eye Resolution"]["h"] = value
+                    continue
+                elif key == "Render target size (native) Width":
+                    row_dict["Render target size"]["w"] = value
+                    continue
+                elif key == "Render target size (native) Height":
+                    row_dict["Render target size"]["h"] = value
+                    continue
                 else:
                     if value.startswith('W '): value = value[2:]
                     elif value.startswith('H '): value = value[2:]

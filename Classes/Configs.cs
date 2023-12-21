@@ -107,7 +107,7 @@ namespace SCVRPatcher {
             return null;
         }
     }
-    public static class Serialize {
+    public static partial class Serialize {
         public static string ToJson(this ConfigDataBase self) => JsonSerializer.Serialize(self, Converter.Settings);
     }
 
