@@ -44,26 +44,34 @@ namespace SCVRPatcher {
             Left,
             Right
         }
-        public static void ChangeTaskbarLocation(TaskbarLocation location) {
+        public static byte? ChangeTaskbarLocation(TaskbarLocation location) {
+            var wantedLocation = (byte)location;
             // get current taskbar location from registry
             var regPath = @"Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3";
             var regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(regPath, true);
             if (regKey is null) {
                 Logger.Error($"Failed to open registry key: {regPath}");
-                return;
+                return null;
             }
             var data = regKey.GetValue("Settings") as byte[];
             var taskbarLocation = data?[12];
-            Logger.Info($"Current taskbar location: {taskbarLocation}");
+            if (taskbarLocation == wantedLocation) {
+                Logger.Warn($"Taskbar is already in {location} location, doing nothing!");
+                return null;
+            }
+            Logger.Info($"Old taskbar location: {taskbarLocation}");
             // change taskbar location
-            data[12] = (byte)location;
+            data[12] = wantedLocation;
             regKey.SetValue("Settings", data);
             Logger.Info($"Changed taskbar location to: {location}");
             // restart explorer process
+            Logger.Info("Restarting explorer process...");
             var explorer = System.Diagnostics.Process.GetProcessesByName("explorer");
             explorer.ToList().ForEach(x => x.Kill());
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
             System.Diagnostics.Process.Start("explorer.exe");
+            Logger.Info("Explorer process restarted");
+            return taskbarLocation;
         }
     }
 }
