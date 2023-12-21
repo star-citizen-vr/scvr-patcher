@@ -69,8 +69,8 @@ def static_attributes(attributes: str):
         attribute_dict = {key.strip(): value.strip() for key, value in matches}
 
         # Insert debug print
-        print(f"Debug - static_attributes: {attributes}")
-        print(f"Debug - matches: {matches}")
+        #print(f"Debug - static_attributes: {attributes}")
+        #print(f"Debug - matches: {matches}")
 
         return attribute_dict  # Make sure to return the result
 
@@ -252,7 +252,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     continue
                 # Other Values - attributes_other_regex
                 elif key == "Attributes - Other Values":
-                    print("Before regex match:", value)
+                    #print("Before regex match:", value)
                     other_attributes_matches = attributes_nameonly_regex.finditer(value)
                     if other_attributes_matches:
                         other_attributes = [match.group(1) for match in other_attributes_matches]
