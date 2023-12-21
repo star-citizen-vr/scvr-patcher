@@ -127,7 +127,7 @@ def remove_attributes(attributes):
     matches = attributes_nameonly_regex.findall(attributes)
     if not matches:
         return None
-    return {attribute: None for attribute in matches}
+    return matches
 
 def optional_attributes(attributes):
     options = [option.strip() for option in attributes.split(',')]
