@@ -1,6 +1,5 @@
 ﻿using NLog;
 using NLog.Config;
-using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -25,9 +24,10 @@ namespace SCVRPatcher {
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
 
         internal static ConfigDataBase configDatabase { get; private set; }
-        internal static EAC eac { get; private set; }
-        internal static Game game { get; private set; }
-        internal static VorpX vorpx { get; private set; }
+        internal static EAC eac { get; private set; } = new();
+        internal static Game game { get; private set; } = new();
+        internal static VorpX vorpx { get; private set; } = new();
+        internal static Hmdq hmdq { get; private set; } = new();
 
         public static void SetupLogging() {
             var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
@@ -60,14 +60,24 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
-            game = new();
+
+            hmdq.Initialize();
+            hmdq.RunHmdq();
+            var hmdmanufacturer = hmdq.Data.Openvr.Properties.The0.PropManufacturerNameString;
+            var hmdmodel = hmdq.Data.Openvr.Properties.The0.PropModelNumberString;
+            var width = hmdq.Data.Openvr.Geometry.RecRts[0];
+            var height = hmdq.Data.Openvr.Geometry.RecRts[1];
+            var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
+            Logger.Info($"Manufacturer: {hmdmanufacturer} Model: {hmdmodel} {width}x{height} (fov: {verticalFov})");
+
+
+            game.Initialize();
             InitializeComponent();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
+
             FillHmds(configDatabase);
-            stackpanel_config.Children.Clear();
-            eac = new();
-            vorpx = new();
+            stackpanel_config.Children.Clear(); vorpx = new();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }

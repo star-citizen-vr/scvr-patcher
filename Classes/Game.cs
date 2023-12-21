@@ -14,13 +14,15 @@ namespace SCVRPatcher {
         public DirectoryInfo BuildRootDirectory { get; private set; }
         public Dictionary<string, DirectoryInfo> BuildDirectories { get; private set; } = new();
 
-        public Game() {
-            Initialize();
-        }
-
         public void Initialize() {
-            BuildRootDirectory = GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
+            BuildRootDirectory = GetLastUsedGameRootDir() ?? GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
             Logger.Debug($"Got game root directory: {BuildRootDirectory.Quote()}");
+            if (!BuildRootDirectory.Exists) {
+                var msg = $"Game root directory does not exist: {BuildRootDirectory.Quote()}";
+                Logger.Error(msg);
+                MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (AppSettings.Default.gameRootDir != BuildRootDirectory.FullName) AppSettings.Default.gameRootDir = BuildRootDirectory.FullName;
             BuildDirectories.Clear();
             foreach (var buildDirName in BuildDirectoryNames) {
                 var buildDir = BuildRootDirectory.Combine(buildDirName);
@@ -43,6 +45,12 @@ namespace SCVRPatcher {
                 }
             }
             return true;
+        }
+
+        public DirectoryInfo? GetLastUsedGameRootDir() {
+            if (string.IsNullOrWhiteSpace(AppSettings.Default.gameRootDir)) return null;
+            var dir = new DirectoryInfo(AppSettings.Default.gameRootDir);
+            return dir.Exists ? dir : null;
         }
 
         public DirectoryInfo? GetGameRootDirFromRegistry() {

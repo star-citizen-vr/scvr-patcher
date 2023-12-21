@@ -13,9 +13,8 @@ namespace SCVRPatcher {
         //public VorpXConfig vorpXConfig { get; set; }
 
         public VorpX() {
-            Logger.Info("Initializing VorpX");
-            Logger.Debug($"VorpXConfigDir: {VorpXConfigDir.Quote()}");
-            Load();
+            Logger.Debug("Initializing VorpX");
+            Logger.Debug($"VorpXConfigDir: {VorpXConfigDir.Quote()} (exists: {VorpXConfigDir.Exists.ToYesNo()})");
             Logger.Info("Initialized VorpX");
         }
 
