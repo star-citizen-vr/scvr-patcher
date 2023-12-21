@@ -1,4 +1,6 @@
-#Terms and Definitions# 2D (Mono) Terms:
+#Terms and Definitions
+
+# 2D (Mono) Terms:
 """
     HRES            - Horizontal Resolution
     VRES            - Vertical Resolution
@@ -125,6 +127,47 @@ Left eye head FOV:                                   Right eye head FOV:
 
 """
 
+# Sample 3 Data:
+"""
+Recommended render target size: [4312, 5100]
+
+Left eye HAM mesh:											  Right eye HAM mesh:
+     original vertices: 120, triangles: 40                         original vertices: 120, triangles: 40
+    optimized vertices: 48, n-gons: 4                             optimized vertices: 48, n-gons: 4
+             mesh area: 3.49 %                                             mesh area: 3.49 %
+                                                              
+Left eye to head transformation matrix:                       Right eye to head transformation matrix:
+    [[ 1.      ,  0.      ,  0.      , -0.034031],                [[ 1.      ,  0.      ,  0.      ,  0.034031],
+     [ 0.      ,  1.      ,  0.      ,  0.      ],                 [ 0.      ,  1.      ,  0.      ,  0.      ],
+     [ 0.      ,  0.      ,  1.      ,  0.      ]]                 [ 0.      ,  0.      ,  1.      ,  0.      ]]
+                                                              
+Left eye raw LRBT values:                                     Right eye raw LRBT values:
+    left:        -1.264092                                        left:        -0.889501
+    right:        0.889501                                        right:        1.264092
+    bottom:      -1.274264                                        bottom:      -1.274264
+    top:          1.274264                                        top:          1.274264
+                                                              
+Left eye head FOV:                                            Right eye head FOV:
+    left:       -51.65 deg                                        left:       -41.65 deg
+    right:       41.65 deg                                        right:       51.65 deg
+    bottom:     -51.88 deg                                        bottom:     -51.88 deg
+    top:         51.88 deg                                        top:         51.88 deg
+    horiz.:      93.31 deg                                        horiz.:      93.31 deg
+    vert.:      103.75 deg                                        vert.:      103.75 deg
+								
+								
+								Total FOV:
+									horizontal: 103.31 deg
+									vertical:   103.75 deg
+									diagonal:   115.99 deg
+									overlap:     83.31 deg
+								
+								View geometry:
+									left view rotation:     0.0 deg
+									right view rotation:    0.0 deg
+									reported IPD:          68.1 mm
+
+"""
 
 # Steps that are needed:
 """
@@ -162,6 +205,11 @@ X) Calculate Star Citizen DAR based on 4:3 aspect ratio lock
 
 """
 
+# Ask user prompts (ideas)
+"""
+Would you like to force an aspect ratio for your game to run in? (Automatic will use least amount of overscan, increasing performance)
+
+"""
 
 import math
 """
