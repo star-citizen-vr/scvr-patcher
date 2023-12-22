@@ -259,11 +259,11 @@ namespace SCVRPatcher {
     public partial class ViewGeom {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("left_rot")]
-        public virtual long? LeftRot { get; set; }
+        public virtual double? LeftRot { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("right_rot")]
-        public virtual long? RightRot { get; set; }
+        public virtual double? RightRot { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("ipd")]
