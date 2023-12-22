@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="scvr_patcher" GeneratedClassName="AppSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SCVRPatcher" GeneratedClassName="AppSettings">
   <Profiles />
   <Settings>
     <Setting Name="availableConfigsUrl" Type="(Web Service URL)" Scope="Application">
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="availableConfigsFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">configs.json</Value>
+    </Setting>
+    <Setting Name="DiscordInviteUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://discord.gg/K2AvaAJwvS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

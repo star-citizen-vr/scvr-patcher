@@ -1,6 +1,8 @@
 ﻿using NLog;
 using NLog.Config;
+using Octokit;
 using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +21,7 @@ namespace SCVRPatcher {
         // test
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
+        internal static Utils.AssemblyAttributes AssemblyAttributes { get; } = new();
         internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
         internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
@@ -40,6 +43,14 @@ namespace SCVRPatcher {
         }
 
         public MainWindow() {
+
+            var assembly = typeof(MainWindow).Assembly;
+            var attributes = assembly.GetCustomAttributes(false);
+            var title = attributes.OfType<System.Reflection.AssemblyTitleAttribute>().FirstOrDefault();
+            var version = attributes.OfType<System.Reflection.AssemblyFileVersionAttribute>().FirstOrDefault();
+            var repositoryUrl = attributes.OfType<System.Reflection.AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl");
+
+
             SetupLogging();
             Logger.Info($"Started {Application.Current.MainWindow.Title}");
             var args = Environment.GetCommandLineArgs();
@@ -79,7 +90,7 @@ namespace SCVRPatcher {
             }
 
 
-            game.Initialize();
+            //game.Initialize();
             InitializeComponent();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
@@ -257,6 +268,51 @@ namespace SCVRPatcher {
             var selectedConfig = GetSelectedConfig();
             if (selectedConfig is null) return;
             FillConfig(selectedConfig);
+        }
+
+        private void onAboutButtonClicked(object sender, RoutedEventArgs e) {
+            AssemblyAttributes.RepositoryUrl.OpenInDefaultBrowser();
+        }
+
+        private void onCheckForUpdatesClicked(object sender, RoutedEventArgs e) {
+            var githubUrl = AssemblyAttributes.RepositoryUrl;
+            var githubUser = githubUrl.Segments[1].TrimEnd('/');
+            var githubRepo = githubUrl.Segments[2].TrimEnd('/');
+            Logger.Debug($"Getting self from Github release: {githubUser}/{githubRepo}");
+            var client = new GitHubClient(new ProductHeaderValue("SCVRPatcher"));
+            var release = client.Repository.Release.GetLatest(githubUser, githubRepo).Result;
+            Logger.Debug($"Found latest release {release.Name} ({release.TagName})");
+            if (release.TagName == AssemblyAttributes.Version) {
+                var msg = $"Version {release.TagName} is already latest, nothing to update!";
+                Logger.Info(msg);
+                MessageBox.Show(msg, "No update available", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            var asset = release.Assets.First(a => a.Name.EndsWith(".zip"));
+            var downloadUrl = asset.BrowserDownloadUrl;
+            Logger.Debug($"Downloading {downloadUrl}");
+            var tempPath = Utils.GetTempFile().WithExtension("zip");
+            using (var client2 = new WebClient()) {
+                client2.DownloadFile(downloadUrl, tempPath.FullName);
+            }
+            Logger.Debug($"Downloaded to {tempPath}");
+            var currentPath = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            currentPath.Directory.OpenInExplorer();
+            tempPath.OpenInExplorer();
+        }
+
+        private void onDiscordButtonClicked(object sender, RoutedEventArgs e) {
+            new Uri(AppSettings.Default.DiscordInviteUrl).OpenInDefaultBrowser();
+        }
+
+        private void onOpenFileButtonClicked(object sender, RoutedEventArgs e) {
+            var buttonText = ((Button)sender).Content.ToString();
+            MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void onOpenDirectoryButtonClicked(object sender, RoutedEventArgs e) {
+            var buttonText = ((Button)sender).Content.ToString();
+            MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

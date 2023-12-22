@@ -6,22 +6,47 @@
         xmlns:local="clr-namespace:SCVRPatcher"
         mc:Ignorable="d"
         Title="Star Citizen VR Patcher" Height="500" Width="1150">
-    <StackPanel Orientation="Horizontal">
-        <TreeView x:Name="tree_hmds" SelectedItemChanged="tree_hmds_SelectedItemChanged" MinWidth="200"/>
-        <GridSplitter/>
-        <ListView x:Name="list_configs" MinWidth="250" SelectionChanged="list_configs_SelectionChanged" SelectionMode="Single"/>
-        <GridSplitter/>
-        <StackPanel Orientation="Vertical">
-            <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
-            <Button x:Name="VREnableButton" Content="Enable VR" IsEnabled="False" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
-            <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" Click="VRDisableButton_Click" />
-        </StackPanel>
-        <GridSplitter/>
-        <StackPanel x:Name="stackpanel_config">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Label: " />
-                <TextBox Text="Textbox" />
+    <StackPanel Orientation="Vertical">
+        <ToolBar >
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="Open"/>
+                    <MenuItem Header="Close"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Copy"/>
+                    <MenuItem Header="Paste"/>
+                </MenuItem>
+                <MenuItem Header="Settings"/>
+                <MenuItem Header="Debug">
+                    <MenuItem Header="Open Config Database" Click="onOpenFileButtonClicked"/>
+                    <MenuItem Header="Open Star Citizen Root Directory" Click="onOpenDirectoryButtonClicked"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="About this software" Click="onAboutButtonClicked" />
+                    <MenuItem Header="Check for updates" Click="onCheckForUpdatesClicked"/>
+                    <MenuItem Header="SCVR Discord" Click="onDiscordButtonClicked"/>
+                </MenuItem>
+            </Menu>
+        </ToolBar>
+        <StackPanel Orientation="Horizontal">
+            <TreeView x:Name="tree_hmds" SelectedItemChanged="tree_hmds_SelectedItemChanged" MinWidth="200"/>
+            <GridSplitter/>
+            <ListView x:Name="list_configs" MinWidth="250" SelectionChanged="list_configs_SelectionChanged" SelectionMode="Single"/>
+            <GridSplitter/>
+            <StackPanel Orientation="Vertical">
+                <Image Source="pack://application:,,,/banner.png" Width="400" VerticalAlignment="Top" Margin="0,0,0,75" />
+                <Button x:Name="VREnableButton" Content="Enable VR" IsEnabled="False" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
+                <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" Click="VRDisableButton_Click" />
+            </StackPanel>
+            <GridSplitter/>
+            <StackPanel x:Name="stackpanel_config">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Label: " />
+                    <TextBox Text="Textbox" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
+        <StatusBar Visibility="Collapsed" />
     </StackPanel>
 </Window>
