@@ -3,58 +3,58 @@
         "Attributes": {
             "Static Values": {
                 "Forced Attributes": {
-                    "ChromaticAberration": "0",
-                    "FilmGrain": "0",
-                    "MotionBlur": "0",
-                    "ShakeScale": "1",
-                    "Sharpening": "1",
-                    "VSync": "0",
-                    "WindowMode": "2"
+                    "ChromaticAberration": 0,
+                    "FilmGrain": 0,
+                    "MotionBlur": 0,
+                    "ShakeScale": 1,
+                    "Sharpening": 1,
+                    "VSync": 0,
+                    "WindowMode": 2
                 },
                 "Look Ahead Features": {
-                    "LookAheadStrengthForward": "1",
-                    "LookAheadStrengthHorizonAlignment": "1",
-                    "LookAheadStrengthHorizonLookAt": "1",
-                    "LookAheadStrengthJumpPointSpline": "1",
-                    "LookAheadStrengthMgvForward": "1",
-                    "LookAheadStrengthMgvHorizonAlignment": "1",
-                    "LookAheadStrengthMgvPitchYaw": "1",
-                    "LookAheadStrengthMgvVJoy": "1",
-                    "LookAheadStrengthQuantumBoostTarget": "1",
-                    "LookAheadStrengthRoll": "1",
-                    "LookAheadStrengthTargetSoft": "1",
-                    "LookAheadStrengthTurretForward": "1",
-                    "LookAheadStrengthTurretPitchYaw": "1",
-                    "LookAheadStrengthTurretVJoy": "1",
-                    "LookAheadStrengthVJoy": "1",
-                    "LookAheadStrengthVelocityVector": "1",
-                    "LookAheadStrengthYawPitch": "1"
+                    "LookAheadStrengthForward": 1,
+                    "LookAheadStrengthHorizonAlignment": 1,
+                    "LookAheadStrengthHorizonLookAt": 1,
+                    "LookAheadStrengthJumpPointSpline": 1,
+                    "LookAheadStrengthMgvForward": 1,
+                    "LookAheadStrengthMgvHorizonAlignment": 1,
+                    "LookAheadStrengthMgvPitchYaw": 1,
+                    "LookAheadStrengthMgvVJoy": 1,
+                    "LookAheadStrengthQuantumBoostTarget": 1,
+                    "LookAheadStrengthRoll": 1,
+                    "LookAheadStrengthTargetSoft": 1,
+                    "LookAheadStrengthTurretForward": 1,
+                    "LookAheadStrengthTurretPitchYaw": 1,
+                    "LookAheadStrengthTurretVJoy": 1,
+                    "LookAheadStrengthVJoy": 1,
+                    "LookAheadStrengthVelocityVector": 1,
+                    "LookAheadStrengthYawPitch": 1
                 },
                 "Head Tracking Features": {
-                    "HeadTrackingFaceWareDeadzoneRotationPitch": "10",
-                    "HeadTrackingFaceWareDeadzoneRotationRoll": "2",
-                    "HeadTrackingFaceWareDeadzoneRotationYaw": "10",
-                    "HeadTrackingFaceWareSmoothingThreshold": "1",
-                    "HeadTrackingFacewarePitchMultiplier": "8",
-                    "HeadTrackingFacewareYawMultiplier": "8",
-                    "HeadtrackingDisableDuringADS": "0",
-                    "HeadtrackingDisableDuringWalking": "0",
-                    "HeadtrackingEnableRollFPS": "1",
-                    "HeadtrackingGlobalSmoothingPosition": "0",
-                    "HeadtrackingGlobalSmoothingRotation": "0",
-                    "HeadtrackingInactivityTime": "2",
-                    "HeadtrackingThirdPersonCameraToggle": "1",
-                    "HeadtrackingToggle": "1",
-                    "HeadtrackingToggleAutoCalibrate": "0",
-                    "TobiiHeadPositionScale": "3"
+                    "HeadTrackingFaceWareDeadzoneRotationPitch": 10,
+                    "HeadTrackingFaceWareDeadzoneRotationRoll": 2,
+                    "HeadTrackingFaceWareDeadzoneRotationYaw": 10,
+                    "HeadTrackingFaceWareSmoothingThreshold": 1,
+                    "HeadTrackingFacewarePitchMultiplier": 8,
+                    "HeadTrackingFacewareYawMultiplier": 8,
+                    "HeadtrackingDisableDuringADS": 0,
+                    "HeadtrackingDisableDuringWalking": 0,
+                    "HeadtrackingEnableRollFPS": 1,
+                    "HeadtrackingGlobalSmoothingPosition": 0,
+                    "HeadtrackingGlobalSmoothingRotation": 0,
+                    "HeadtrackingInactivityTime": 2,
+                    "HeadtrackingThirdPersonCameraToggle": 1,
+                    "HeadtrackingToggle": 1,
+                    "HeadtrackingToggleAutoCalibrate": 0,
+                    "TobiiHeadPositionScale": 3
                 },
                 "Auto Zoom Features": {
-                    "AutoZoomOnSelectedTarget": "0",
-                    "AutoZoomOnSelectedTargetStrength": "0"
+                    "AutoZoomOnSelectedTarget": 0,
+                    "AutoZoomOnSelectedTargetStrength": 0
                 },
                 "G Force Features": {
-                    "GForceHeadBobScale": "0",
-                    "GForceZoomScale": "0"
+                    "GForceHeadBobScale": 0,
+                    "GForceZoomScale": 0
                 }
             },
             "Remove Lines": [
@@ -139,7 +139,7 @@
                         "Description": "Over 9000! (Custom)"
                     }
                 ],
-                "Attributes - Tesselation Distance Options": [
+                "Attributes - Tessellation Distance Options": [
                     {
                         "TerrainTessDistance": 0,
                         "Description": "In-Game Default (Medium)"
@@ -212,11 +212,19 @@
                 "Attributes - Volumetric Clouds On/Off Options": [
                     {
                         "SysSpecPlanetVolumetricClouds": 1,
-                        "Description": "Performance (Off - Recommended)"
+                        "Description": "Performance (Off - Disable if your GPU still struggles with clouds when at the 4 major planets of stanton, this will load the old 2D clouds)"
+                    },
+                    {
+                        "SysSpecPlanetVolumetricClouds": 2,
+                        "Description": "Recommended (On - Recommended for VR, aliasing on distant objects.)"
+                    },
+                    {
+                        "SysSpecPlanetVolumetricClouds": 3,
+                        "Description": "Quality (On - Raises quality on distant objects slightly)"
                     },
                     {
                         "SysSpecPlanetVolumetricClouds": 4,
-                        "Description": "Quality (On)"
+                        "Description": "EXTREME (On - Best quality at the cost of lots of performance even on modern hardware)"
                     }
                 ]
             },
