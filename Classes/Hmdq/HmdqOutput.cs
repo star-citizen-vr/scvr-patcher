@@ -32,6 +32,9 @@ namespace SCVRPatcher {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("checksum")]
         public virtual string Checksum { get; set; }
+
+        [JsonIgnore]
+        public virtual bool IsEmpty => Openvr.Error is not null && Oculus.Error is not null;
     }
 
     public partial class Misc {
@@ -59,6 +62,10 @@ namespace SCVRPatcher {
     }
 
     public partial class Openvr {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("error@")]
+        public virtual string Error { get; set; }
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("rt_path")]
         public virtual string RtPath { get; set; }

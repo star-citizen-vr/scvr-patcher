@@ -72,5 +72,14 @@ namespace SCVRPatcher {
                 return ((string)(this["availableConfigsFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://discord.gg/K2AvaAJwvS")]
+        public string DiscordInviteUrl {
+            get {
+                return ((string)(this["DiscordInviteUrl"]));
+            }
+        }
     }
 }

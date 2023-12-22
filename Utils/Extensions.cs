@@ -1,9 +1,11 @@
-﻿using NLog;
+﻿using Humanizer;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -89,6 +91,12 @@ namespace SCVRPatcher {
 
         #region DirectoryInfo
 
+        public static void OpenInExplorer(this DirectoryInfo dir) => Utils.StartProcess("explorer.exe", args: dir.Quote());
+
+        public static void ShowInExplorer(this DirectoryInfo dir) => Utils.StartProcess("explorer.exe", args: dir.Parent.Quote());
+
+        public static string ToFullString(this DirectoryInfo dir) => $"{dir.Quote()}{(dir.Exists ? " (exists)" : string.Empty)}{(dir.EnumerateFileSystemInfos().Any() ? " (not empty)" : " (empty)")}";
+
         public static string Quote(this DirectoryInfo dir) => SurroundWith(dir.FullName, "\"");
 
         public static DirectoryInfo Combine(this DirectoryInfo dir, params string[] paths) {
@@ -102,6 +110,14 @@ namespace SCVRPatcher {
         #endregion DirectoryInfo
 
         #region FileInfo
+
+        public static void OpenWithDefaultApp(this FileInfo file) => System.Diagnostics.Process.Start(file.FullName);
+
+        public static void OpenInExplorer(this FileInfo file) => Utils.StartProcess("explorer.exe", args: file.Quote());
+
+        public static void ShowInExplorer(this FileInfo file) => Utils.StartProcess("explorer.exe", args: file.Directory.Quote());
+
+        public static string ToFullString(this FileInfo file) => $"{file.Quote()}{(file.Exists ? " (" + file.Length.Bytes().Humanize() + ")" : string.Empty)}";
 
         public static string Quote(this FileInfo file) => SurroundWith(file.FullName, "\"");
 
@@ -198,6 +214,10 @@ namespace SCVRPatcher {
 
         public static bool IsNullOrEmpty(this string source) {
             return string.IsNullOrEmpty(source);
+        }
+
+        public static bool IsNullOrWhiteSpace(this string source) {
+            return string.IsNullOrWhiteSpace(source);
         }
 
         public static string[] Split(this string source, string split, int count = -1, StringSplitOptions options = StringSplitOptions.None) {
@@ -301,6 +321,25 @@ namespace SCVRPatcher {
         #endregion List
 
         #region Uri
+
+        public static void OpenInDefaultBrowser(this Uri url) {
+            try {
+                System.Diagnostics.Process.Start(url.AbsoluteUri);
+            } catch (Exception ex) {
+                Logger.Error(ex);
+                try {
+                    var startInfo = new System.Diagnostics.ProcessStartInfo {
+                        FileName = url.AbsoluteUri,
+                        UseShellExecute = true
+                    };
+                    System.Diagnostics.Process.Start(startInfo);
+                } catch (Exception ex2) {
+                    Logger.Error(ex2);
+                    MessageBox.Show($"We were unable to open the URL\n{url.AbsoluteUri.Quote()}\nin your default browser!\n\nTherefor has been copied to your clipboard instead!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clipboard.SetText(url.AbsoluteUri);
+                }
+            }
+        }
 
         private static readonly Regex QueryRegex = new Regex(@"[?&](\w[\w.]*)=([^?&]+)");
 
@@ -520,5 +559,21 @@ namespace SCVRPatcher {
             public static readonly IsoDateTimeOffsetConverter Singleton = new IsoDateTimeOffsetConverter();
         }
         #endregion
+
+        #region Others
+
+        public enum PropertyScope {
+            User,
+            Application
+        }
+
+        public static PropertyScope GetScope(this SettingsPropertyValue property) {
+            throw new NotImplementedException("SettingsPropertyValue.GetScope()");
+            if (property.Property.Attributes["System.Configuration.UserScopedSettingAttribute"] != null && property.IsDirty)
+                return PropertyScope.User;
+            return PropertyScope.Application;
+        }
+
+        #endregion Others
     }
 }
