@@ -761,19 +761,19 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewLeftDegrees_Float")]
-        public virtual long? PropFieldOfViewLeftDegreesFloat { get; set; }
+        public virtual double? PropFieldOfViewLeftDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewRightDegrees_Float")]
-        public virtual long? PropFieldOfViewRightDegreesFloat { get; set; }
+        public virtual double? PropFieldOfViewRightDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewTopDegrees_Float")]
-        public virtual long? PropFieldOfViewTopDegreesFloat { get; set; }
+        public virtual double? PropFieldOfViewTopDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewBottomDegrees_Float")]
-        public virtual long? PropFieldOfViewBottomDegreesFloat { get; set; }
+        public virtual double? PropFieldOfViewBottomDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_TrackingRangeMinimumMeters_Float")]
