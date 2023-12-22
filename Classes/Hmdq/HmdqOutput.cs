@@ -781,7 +781,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_TrackingRangeMaximumMeters_Float")]
-        public virtual long? PropTrackingRangeMaximumMetersFloat { get; set; }
+        public virtual double? PropTrackingRangeMaximumMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ModeLabel_String")]
