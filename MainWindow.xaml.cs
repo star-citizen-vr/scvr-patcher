@@ -281,6 +281,7 @@ namespace SCVRPatcher {
             Logger.Debug($"Getting self from Github release: {githubUser}/{githubRepo}");
             var client = new GitHubClient(new ProductHeaderValue("SCVRPatcher"));
             var release = client.Repository.Release.GetLatest(githubUser, githubRepo).Result;
+            Logger.Debug($"Installed version: {AssemblyAttributes.Version}");
             Logger.Debug($"Found latest release {release.Name} ({release.TagName})");
             if (release.TagName == AssemblyAttributes.Version) {
                 var msg = $"Version {release.TagName} is already latest, nothing to update!";
@@ -306,13 +307,22 @@ namespace SCVRPatcher {
         }
 
         private void onOpenFileButtonClicked(object sender, RoutedEventArgs e) {
-            var buttonText = ((Button)sender).Content.ToString();
+            var buttonText = ((MenuItem)sender).Header.ToString();
             MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void onOpenDirectoryButtonClicked(object sender, RoutedEventArgs e) {
-            var buttonText = ((Button)sender).Content.ToString();
+            var buttonText = ((MenuItem)sender).Header.ToString();
             MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void onSettingsButtonClicked(object sender, RoutedEventArgs e) {
+            var settingsWindow = new UI.Settings();
+            settingsWindow.Show();
+        }
+
+        private void onExitButtonClicked(object sender, RoutedEventArgs e) {
+            Application.Current.Shutdown();
         }
     }
 }

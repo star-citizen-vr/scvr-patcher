@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -558,5 +559,21 @@ namespace SCVRPatcher {
             public static readonly IsoDateTimeOffsetConverter Singleton = new IsoDateTimeOffsetConverter();
         }
         #endregion
+
+        #region Others
+
+        public enum PropertyScope {
+            User,
+            Application
+        }
+
+        public static PropertyScope GetScope(this SettingsPropertyValue property) {
+            throw new NotImplementedException("SettingsPropertyValue.GetScope()");
+            if (property.Property.Attributes["System.Configuration.UserScopedSettingAttribute"] != null && property.IsDirty)
+                return PropertyScope.User;
+            return PropertyScope.Application;
+        }
+
+        #endregion Others
     }
 }

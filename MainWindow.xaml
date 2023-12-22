@@ -10,14 +10,9 @@
         <ToolBar >
             <Menu>
                 <MenuItem Header="File">
-                    <MenuItem Header="Open"/>
-                    <MenuItem Header="Close"/>
+                    <MenuItem Header="Exit" Click="onExitButtonClicked"/>
                 </MenuItem>
-                <MenuItem Header="Edit">
-                    <MenuItem Header="Copy"/>
-                    <MenuItem Header="Paste"/>
-                </MenuItem>
-                <MenuItem Header="Settings"/>
+                <MenuItem Header="Settings" Click="onSettingsButtonClicked"/>
                 <MenuItem Header="Debug">
                     <MenuItem Header="Open Config Database" Click="onOpenFileButtonClicked"/>
                     <MenuItem Header="Open Star Citizen Root Directory" Click="onOpenDirectoryButtonClicked"/>
