@@ -19,15 +19,28 @@ attributes_other_regex = compile(r'(?:(?P<key>[^:\n]+):\s*(?P<value>[^,\n]+),?\s
 = row["Physical Per-Eye Resolution Height"]
 = row["Render target size (native) Width"]
 = row["Render target size (native) Height"]
-= row["Hz"]
+= row["Refresh Rate Max(Hz)"]
 = row["SC Attributes FOV"]
-= row["VorpX Config Pixel 1:1 Zoom"]
+= row["VorpX Config Pixel 1:1 Zoom (Calculated)"]
 = row["All Possible Lens Configurations"]
-= row["Custom Resolution List"]
-= row["Alternative Integer Resolutions (small list)"]
-= row["Alternative Integer Resolutions (big list)"]
-= row["Give me all the resolutions"]
 """
+# Resolutions
+"""
+= row["Combined Custom Resolutions"]
+= row["Every 6th up to 5440 x 4080"]
+= row["Every 8th up to 5440 x 4080"]
+= row["Every 10th up to 5440 x 4080"]
+= row["Every 6th+8th up to 5440 x 4080"]
+= row["Every 6th+8th+10th up to 5440 x 4080"]
+= row["All Integer Resolutions up to 5440 x 4080"]
+= row["Every 6th up to 19840 x 14880"]
+= row["Every 8th up to 19840 x 14880"]
+= row["Every 10th up to 19840 x 14880"]
+= row["Every 6th+8th up to 19840 x 14880"]
+= row["Every 6th+8th+10th up to 19840 x 14880"]
+= row["All Integer Resolutions up to 19840 x 14880"]
+"""
+
 # Attributes
 """
 = row["Attributes - HDR Check if Enabled Historically"]
@@ -131,6 +144,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 "Auto Zoom Features": {},   # AutoZoom Attributes
                 "G Force Features": {}   #Gforce Attributes
             }, # All static attributes we should set, should the user decide they want to over ride.
+            "Check Lines": [], # Lines that need to be checked from the attributes.xml
             "Remove Lines": [], # Lines that need to be removed from the attributes.xml
             "User Options": {}, # Options listed to the user to choose from.
             "Other": {} # Not sure if we want to do anything with these yet, but here they are.
@@ -248,16 +262,19 @@ def csv_to_json(csvFilePath, jsonFilePath):
                             print(f"Row data: {row}")
                         continue                
 
-                # Remove Attribute Lines
+                # Grab the Remove Attribute Lines
                 elif key == "Attributes - Remove Lines":
                     data['common']['Attributes']['Remove Lines'] = value.split(', ')
+                    continue
+                # Grab the HDR Attributes Lines
+                elif key == "Attributes - HDR Check if Enabled Historically":
+                    data['common']['Attributes']['Check Lines'] = value.split(', ')
                     continue
                 # Other Values - attributes_other_regex
                 elif key == "Attributes - Other Values":
                     #print("Before regex match:", value)
                     other_attributes_matches = attributes_nameonly_regex.finditer(value)
                     if other_attributes_matches:
-                        print("test")
                         other_attributes = [match.group(1) for match in other_attributes_matches]
                         #print("After regex match:", other_attributes)
                         #print("Before update:", data['common']['Attributes']['Other'])

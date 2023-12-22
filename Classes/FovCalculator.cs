@@ -12,6 +12,8 @@ namespace SCVRPatcher.Classes
         internal void Initialize()
         {
             Logger.Info($"{nameof(FovCalculator)}");
+
+            //
         }
     }
 }

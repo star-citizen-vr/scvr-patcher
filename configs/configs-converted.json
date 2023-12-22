@@ -57,6 +57,10 @@
                     "GForceZoomScale": 0
                 }
             },
+            "Check Lines": [
+                "HDRMaxBrightness",
+                "HDRRefWhite"
+            ],
             "Remove Lines": [
                 "SysSpec",
                 "SysSpecGameEffects",
@@ -1323,8 +1327,7 @@
                             "d": "High Quality",
                             "p": "~90"
                         }
-                    ],
-                    "Attributes - HDR Check if Enabled Historically": "HDRMaxBrightness, HDRRefWhite"
+                    ]
                 }
             }
         },
