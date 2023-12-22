@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using Octokit;
+using SCVRPatcher.Classes;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -31,6 +32,7 @@ namespace SCVRPatcher {
         internal static Game game { get; private set; } = new();
         internal static VorpX vorpx { get; private set; } = new();
         internal static Hmdq hmdq { get; private set; } = new();
+        internal static FovCalculator fovcalc { get; private set; } = new();
 
         public static void SetupLogging() {
             var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
@@ -88,9 +90,10 @@ namespace SCVRPatcher {
                 var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
                 Logger.Info($"Manufacturer: {hmdmanufacturer} Model: {hmdmodel} {width}x{height} (fov: {verticalFov})");
             }
+            fovcalc.Initialize();
 
 
-            //game.Initialize();
+            game.Initialize();
             InitializeComponent();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
