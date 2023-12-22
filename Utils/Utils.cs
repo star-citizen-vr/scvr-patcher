@@ -1,5 +1,8 @@
-﻿using NLog;
+﻿using Humanizer;
+using NLog;
+using System.Diagnostics.SymbolStore;
 using System.IO;
+using System.Management;
 
 namespace SCVRPatcher {
     internal class Utils {
@@ -36,6 +39,42 @@ namespace SCVRPatcher {
             //    Task.Delay(250).Wait();
             //}
             return new FileInfo(tempPath);
+        }
+
+        public class PageFile {
+            public FileInfo File { get; set; }
+            public string? Caption { get; set; }
+            public uint? PeakUsage { get; set; }
+            public string Size => File.Length.Bytes().Humanize();
+            public PageFile(ManagementBaseObject obj) {
+                File = new FileInfo(obj.GetPropertyValue("Name") as string);
+                Caption = obj.GetPropertyValue("Caption") as string;
+                PeakUsage = (uint)obj.GetPropertyValue("PeakUsage");
+            }
+            public PageFile(FileInfo file) {
+                File = file;
+            }
+            public override string ToString() {
+                return $"{File.Quote()} ({Size})";
+            }
+        }
+
+        public static List<PageFile> GetPageFileSizes() {
+            List<PageFile> dict = new();
+            using (var query = new ManagementObjectSearcher("SELECT * FROM Win32_PageFileUsage")) {
+                foreach (ManagementBaseObject obj in query.Get()) {
+                    dict.Add(new PageFile(obj));
+                }
+            }
+            var allVolumes = DriveInfo.GetDrives();
+            foreach (var volume in allVolumes) {
+                var pageFile = new PageFile(new FileInfo($"{volume.Name}pagefile.sys"));
+                var hasPageFile = dict.Any(x => x.File.FullName == pageFile.File.FullName);
+                if (pageFile.File.Exists && !hasPageFile) {
+                    Logger.Warn($"PageFile {pageFile} exists but is not enabled, check your windows page file settings!");
+                }
+            }
+            return dict;
         }
 
         public enum TaskbarLocation {

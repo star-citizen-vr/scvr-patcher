@@ -16,7 +16,7 @@ namespace SCVRPatcher {
 
         public void Initialize() {
             BuildRootDirectory = GetLastUsedGameRootDir() ?? GetGameRootDirFromRegistry() ?? RequestGameRootDirFromUser();
-            Logger.Debug($"Got game root directory: {BuildRootDirectory.Quote()}");
+            Logger.Debug($"Got game root directory: {BuildRootDirectory.ToFullString()}");
             if (!BuildRootDirectory.Exists) {
                 var msg = $"Game root directory does not exist: {BuildRootDirectory.Quote()}";
                 Logger.Error(msg);
@@ -31,7 +31,7 @@ namespace SCVRPatcher {
         }
         public bool Patch(HmdConfig config, Resolution resolution) {
             foreach (var buildDir in BuildDirectories) {
-                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.Quote()})");
+                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.ToFullString()})");
                 var profileDir = buildDir.Value.Combine("user", "Client", "0", "Profiles", "default");
                 var attributesFile = profileDir.CombineFile("attributes.xml");
                 if (!attributesFile.Exists) {
@@ -73,7 +73,7 @@ namespace SCVRPatcher {
                         Logger.Error($"Star Citizen's root directory does not exist or is invalid: {dir?.Quote()}");
                         continue;
                     }
-                    Logger.Debug($"Found Star Citizen's root directory: {dir.Quote()}");
+                    Logger.Debug($"Found Star Citizen's root directory: {dir.ToFullString()}");
                     return dir;
                 }
             }

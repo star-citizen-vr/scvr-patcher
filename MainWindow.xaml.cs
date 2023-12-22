@@ -60,15 +60,23 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
-
+            var pageFiles = Utils.GetPageFileSizes();
+            foreach (var pageFile in pageFiles) {
+                Logger.Info($"PageFile: {pageFile}");
+            }
             hmdq.Initialize();
             hmdq.RunHmdq();
-            var hmdmanufacturer = hmdq.Data.Openvr.Properties.The0.PropManufacturerNameString;
-            var hmdmodel = hmdq.Data.Openvr.Properties.The0.PropModelNumberString;
-            var width = hmdq.Data.Openvr.Geometry.RecRts[0];
-            var height = hmdq.Data.Openvr.Geometry.RecRts[1];
-            var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
-            Logger.Info($"Manufacturer: {hmdmanufacturer} Model: {hmdmodel} {width}x{height} (fov: {verticalFov})");
+            if (hmdq.Data.IsEmpty) {
+                Logger.Error("Failed to get HMD info through HMDQ!");
+                var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } else {
+                var hmdmanufacturer = hmdq.Data.Openvr.Properties.The0.PropManufacturerNameString;
+                var hmdmodel = hmdq.Data.Openvr.Properties.The0.PropModelNumberString;
+                var width = hmdq.Data.Openvr.Geometry.RecRts[0];
+                var height = hmdq.Data.Openvr.Geometry.RecRts[1];
+                var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
+                Logger.Info($"Manufacturer: {hmdmanufacturer} Model: {hmdmodel} {width}x{height} (fov: {verticalFov})");
+            }
 
 
             game.Initialize();

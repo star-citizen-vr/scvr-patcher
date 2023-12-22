@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Humanizer;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -89,6 +90,8 @@ namespace SCVRPatcher {
 
         #region DirectoryInfo
 
+        public static string ToFullString(this DirectoryInfo dir) => $"{dir.Quote()}{(dir.Exists ? " (exists)" : string.Empty)}{(dir.EnumerateFileSystemInfos().Any() ? " (not empty)" : " (empty)")}";
+
         public static string Quote(this DirectoryInfo dir) => SurroundWith(dir.FullName, "\"");
 
         public static DirectoryInfo Combine(this DirectoryInfo dir, params string[] paths) {
@@ -102,6 +105,8 @@ namespace SCVRPatcher {
         #endregion DirectoryInfo
 
         #region FileInfo
+
+        public static string ToFullString(this FileInfo file) => $"{file.Quote()}{(file.Exists ? " (" + file.Length.Bytes().Humanize() + ")" : string.Empty)}";
 
         public static string Quote(this FileInfo file) => SurroundWith(file.FullName, "\"");
 
