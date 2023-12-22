@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 public class Hmdq {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -15,6 +16,8 @@ public class Hmdq {
     };
     private FileInfo Path { get; set; }
     public HmdqOutput Data { get; private set; }
+    public virtual bool IsEmpty => Data.Openvr.Error is not null && Data.Oculus.Error is not null;
+    public Property Hmd => Data.Openvr.Properties.First(p => p.Value.PropRenderModelNameString == "generic_hmd").Value;
 
     public void Initialize() {
         Logger.Debug("Initializing HMDQ");

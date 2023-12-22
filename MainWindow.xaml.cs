@@ -77,12 +77,13 @@ namespace SCVRPatcher {
             }
             hmdq.Initialize();
             hmdq.RunHmdq();
-            if (hmdq.Data.IsEmpty) {
+            if (hmdq.IsEmpty) {
                 Logger.Error("Failed to get HMD info through HMDQ!");
                 var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                var hmdmanufacturer = hmdq.Data.Openvr.Properties.The0.PropManufacturerNameString;
-                var hmdmodel = hmdq.Data.Openvr.Properties.The0.PropModelNumberString;
+                var hmd = hmdq.Hmd;
+                var hmdmanufacturer = hmd.PropManufacturerNameString;
+                var hmdmodel = hmd.PropModelNumberString;
                 var width = hmdq.Data.Openvr.Geometry.RecRts[0];
                 var height = hmdq.Data.Openvr.Geometry.RecRts[1];
                 var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
