@@ -49,8 +49,8 @@
 """
 # Formulas:
 """
-    ST-VAR = VAR
-    VAR = 
+    ST-VAR = VAR = "vertical"
+    
 """
 
 

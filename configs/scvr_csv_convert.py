@@ -34,7 +34,7 @@ attributes_other_regex = compile(r'(?:(?P<key>[^:\n]+):\s*(?P<value>[^,\n]+),?\s
 = row["Attributes - FPS Color Correction Profile"]
 = row["Attributes - Flight Color Correction Profile"]
 = row["Attributes - Scatter Distance Options"]
-= row["Attributes - Tesselation Distance Options"]
+= row["Attributes - Tessellation Distance Options"]
 = row["Attributes - Volumetric Clouds On/Off Options"]
 = row["Attributes - Look Ahead"]
 = row["Attributes - Head Tracking"]
@@ -45,7 +45,9 @@ attributes_other_regex = compile(r'(?:(?P<key>[^:\n]+):\s*(?P<value>[^,\n]+),?\s
 = row["Attributes - Other Values"]
 """
 
-
+def convert_if_number(value: str):
+    if value.isdigit(): return int(value)
+    return value
 
 def split_resolution(resolution: str):
     match = resolution_regex.match(resolution)
@@ -66,7 +68,7 @@ def static_attributes(attributes: str):
             return None
 
         # Extract values using match.group() as needed
-        attribute_dict = {key.strip(): value.strip() for key, value in matches}
+        attribute_dict = {key.strip(): convert_if_number(value.strip()) for key, value in matches}
 
         # Insert debug print
         #print(f"Debug - static_attributes: {attributes}")
@@ -255,6 +257,7 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     #print("Before regex match:", value)
                     other_attributes_matches = attributes_nameonly_regex.finditer(value)
                     if other_attributes_matches:
+                        print("test")
                         other_attributes = [match.group(1) for match in other_attributes_matches]
                         #print("After regex match:", other_attributes)
                         #print("Before update:", data['common']['Attributes']['Other'])
@@ -265,17 +268,22 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     continue
                 # Grab the user optional attributes together
                 optional_values = data.get('common', {}).get('Attributes', {}).get('User Options', {}) # Temp
-                if key in ["Attributes - Scatter Distance Options", "Attributes - Tesselation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
+                if key in ["Attributes - Scatter Distance Options", "Attributes - Tessellation Distance Options", "Attributes - Volumetric Clouds On/Off Options"]:
                     if key not in optional_values:
                         optional_values[key] = []
-                    options = value.split(', ')
+                    options = value.split('; ')
                     try:
                         if key == "Attributes - Scatter Distance Options":
                             attr_list = [{"ScatterDist": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
-                        elif key == "Attributes - Tesselation Distance Options":
+                        elif key == "Attributes - Tessellation Distance Options":
                             attr_list = [{"TerrainTessDistance": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
                         elif key == "Attributes - Volumetric Clouds On/Off Options":
-                            attr_list = [{"SysSpecPlanetVolumetricClouds": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
+                            attr_list = [] # [{"SysSpecPlanetVolumetricClouds": int(option.split(':')[-1].strip().split()[0]), "Description": option.split(' | ')[1]} for option in options]
+                            for option in options:
+                                option_split = option.split(' | ')
+                                attrib_value = option_split[0].split(': ')
+                                description = option_split[1]
+                                attr_list.append({"SysSpecPlanetVolumetricClouds": int(attrib_value[1]), "Description": description})
                         optional_values[key] = attr_list
                     except ValueError as e:
                         print(f"Error processing {key}: {e}") # Debug
