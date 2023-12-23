@@ -83,13 +83,7 @@ namespace SCVRPatcher {
                 Logger.Error("Failed to get HMD info through HMDQ!");
                 var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                var hmd = hmdq.Hmd;
-                var hmdmanufacturer = hmd.PropManufacturerNameString;
-                var hmdmodel = hmd.PropModelNumberString;
-                var width = hmdq.Data.Openvr.Geometry.RecRts[0];
-                var height = hmdq.Data.Openvr.Geometry.RecRts[1];
-                var verticalFov = hmdq.Data.Openvr.Geometry.FovTot.FovVer;
-                Logger.Info($"Manufacturer: {hmdmanufacturer} Model: {hmdmodel} {width}x{height} (fov: {verticalFov})");
+                Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
             }
             fovcalc.Initialize();
 

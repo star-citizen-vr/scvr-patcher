@@ -6,7 +6,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
-using System.Text.Json.Serialization;
 
 public class Hmdq {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -17,7 +16,12 @@ public class Hmdq {
     private FileInfo Path { get; set; }
     public HmdqOutput Data { get; private set; }
     public virtual bool IsEmpty => Data.Openvr.Error is not null && Data.Oculus.Error is not null;
-    public Property Hmd => Data.Openvr.Properties.First(p => p.Value.PropRenderModelNameString == "generic_hmd").Value;
+    public Property OpenVrHmd => Data.Openvr.Properties.First(p => p.Value.PropRenderModelNameString == "generic_hmd").Value;
+    public string Manufacturer => OpenVrHmd.PropManufacturerNameString ?? Data.Oculus.Properties.Hmd.PropManufacturerString;
+    public string Model => OpenVrHmd.PropModelNumberString ?? Data.Oculus.Properties.Hmd.PropProductNameString;
+    public long Width => Data.Openvr.Geometry.RecRts is not null ? Data.Openvr.Geometry.RecRts[0] : Data.Oculus.Geometry.DefaultFov.RecRts[0];
+    public long Height => Data.Openvr.Geometry.RecRts is not null ? Data.Openvr.Geometry.RecRts[1] : Data.Oculus.Geometry.DefaultFov.RecRts[1];
+    public float? VerticalFov => Data.Openvr.Geometry.FovTot.FovVer ?? Data.Oculus.Geometry.DefaultFov.FovTot.FovVer;
 
     public void Initialize() {
         Logger.Debug("Initializing HMDQ");
