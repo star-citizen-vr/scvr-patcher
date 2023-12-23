@@ -26,7 +26,7 @@ namespace SCVRPatcher {
     using System.Text.Json;
     using System.Text.Json.Serialization;
     using static SCVRPatcher.Extensions;
-
+#region definitions
     public partial class HmdqOutput {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("misc")]
@@ -56,7 +56,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("log_ver")]
-        public virtual long? LogVer { get; set; }
+        public virtual uint? LogVer { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("os_ver")]
@@ -88,15 +88,15 @@ namespace SCVRPatcher {
     public partial class Devices {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("HMD")]
-        public virtual long? Hmd { get; set; }
+        public virtual uint? Hmd { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("trackers")]
-        public virtual long? Trackers { get; set; }
+        public virtual uint? Trackers { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("ctrl_types")]
-        public virtual long? CtrlTypes { get; set; }
+        public virtual uint? CtrlTypes { get; set; }
     }
 
     public partial class OculusGeometry {
@@ -173,45 +173,45 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_left")]
-        public virtual double? DegLeft { get; set; }
+        public virtual float? DegLeft { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_right")]
-        public virtual double? DegRight { get; set; }
+        public virtual float? DegRight { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_bottom")]
-        public virtual double? DegBottom { get; set; }
+        public virtual float? DegBottom { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_top")]
-        public virtual double? DegTop { get; set; }
+        public virtual float? DegTop { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_hor")]
-        public virtual double? DegHor { get; set; }
+        public virtual float? DegHor { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("deg_ver")]
-        public virtual double? DegVer { get; set; }
+        public virtual float? DegVer { get; set; }
     }
 
     public partial class FovTot {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("fov_hor")]
-        public virtual double? FovHor { get; set; }
+        public virtual float? FovHor { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("fov_ver")]
-        public virtual double? FovVer { get; set; }
+        public virtual float? FovVer { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("fov_diag")]
-        public virtual double? FovDiag { get; set; }
+        public virtual float? FovDiag { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("overlap")]
-        public virtual double? Overlap { get; set; }
+        public virtual float? Overlap { get; set; }
     }
 
     public partial class DefaultFovHamMesh {
@@ -227,7 +227,7 @@ namespace SCVRPatcher {
     public partial class PurpleLeft {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("ham_area")]
-        public virtual double? HamArea { get; set; }
+        public virtual float? HamArea { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("verts_raw")]
@@ -259,19 +259,19 @@ namespace SCVRPatcher {
     public partial class RawEyeLeft {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("tan_left")]
-        public virtual double? TanLeft { get; set; }
+        public virtual float? TanLeft { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("tan_right")]
-        public virtual double? TanRight { get; set; }
+        public virtual float? TanRight { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("tan_bottom")]
-        public virtual double? TanBottom { get; set; }
+        public virtual float? TanBottom { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("tan_top")]
-        public virtual double? TanTop { get; set; }
+        public virtual float? TanTop { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("error@")]
@@ -279,7 +279,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("aspect")]
-        public virtual double? Aspect { get; set; }
+        public virtual float? Aspect { get; set; }
     }
 
     public partial class RenderDesc {
@@ -319,15 +319,15 @@ namespace SCVRPatcher {
     public partial class ViewGeom {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("left_rot")]
-        public virtual double? LeftRot { get; set; }
+        public virtual float? LeftRot { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("right_rot")]
-        public virtual double? RightRot { get; set; }
+        public virtual float? RightRot { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("ipd")]
-        public virtual double? Ipd { get; set; }
+        public virtual float? Ipd { get; set; }
     }
 
     public partial class MaxFov {
@@ -387,7 +387,7 @@ namespace SCVRPatcher {
     public partial class Hmd {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_HmdType_Uint32")]
-        public virtual long? PropHmdTypeUint32 { get; set; }
+        public virtual uint? PropHmdTypeUint32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ProductName_String")]
@@ -399,11 +399,11 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_VendorId_Uint16")]
-        public virtual long? PropVendorIdUint16 { get; set; }
+        public virtual ushort? PropVendorIdUint16 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ProductId_Uint16")]
-        public virtual long? PropProductIdUint16 { get; set; }
+        public virtual ushort? PropProductIdUint16 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_SerialNumber_String")]
@@ -411,31 +411,31 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FirmwareMajor_Uint16")]
-        public virtual long? PropFirmwareMajorUint16 { get; set; }
+        public virtual ushort? PropFirmwareMajorUint16 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FirmwareMinor_Uint16")]
-        public virtual long? PropFirmwareMinorUint16 { get; set; }
+        public virtual ushort? PropFirmwareMinorUint16 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_AvailableHmdCaps_Uint32")]
-        public virtual long? PropAvailableHmdCapsUint32 { get; set; }
+        public virtual uint? PropAvailableHmdCapsUint32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DefaultHmdCaps_Uint32")]
-        public virtual long? PropDefaultHmdCapsUint32 { get; set; }
+        public virtual uint? PropDefaultHmdCapsUint32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_AvailableTrackingCaps_Uint32")]
-        public virtual long? PropAvailableTrackingCapsUint32 { get; set; }
+        public virtual uint? PropAvailableTrackingCapsUint32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DefaultTrackingCaps_Uint32")]
-        public virtual long? PropDefaultTrackingCapsUint32 { get; set; }
+        public virtual uint? PropDefaultTrackingCapsUint32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayRefreshRate_Float")]
-        public virtual double? PropDisplayRefreshRateFloat { get; set; }
+        public virtual float? PropDisplayRefreshRateFloat { get; set; }
     }
 
     public partial class Openvr {
@@ -548,19 +548,19 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_HardwareRevision_Uint64")]
-        public virtual long? PropHardwareRevisionUint64 { get; set; }
+        public virtual uint? PropHardwareRevisionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FirmwareVersion_Uint64")]
-        public virtual long? PropFirmwareVersionUint64 { get; set; }
+        public virtual uint? PropFirmwareVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FPGAVersion_Uint64")]
-        public virtual long? PropFpgaVersionUint64 { get; set; }
+        public virtual uint? PropFpgaVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_VRCVersion_Uint64")]
-        public virtual long? PropVrcVersionUint64 { get; set; }
+        public virtual uint? PropVrcVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_BlockServerShutdown_Bool")]
@@ -576,7 +576,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DeviceClass_Int32")]
-        public virtual long? PropDeviceClassInt32 { get; set; }
+        public virtual uint? PropDeviceClassInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_HasCamera_Bool")]
@@ -588,7 +588,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ParentDriver_Uint64")]
-        public virtual long? PropParentDriverUint64 { get; set; }
+        public virtual uint? PropParentDriverUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ResourceRoot_String")]
@@ -600,11 +600,11 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_NumCameras_Int32")]
-        public virtual long? PropNumCamerasInt32 { get; set; }
+        public virtual uint? PropNumCamerasInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraFrameLayout_Int32")]
-        public virtual long? PropCameraFrameLayoutInt32 { get; set; }
+        public virtual uint? PropCameraFrameLayoutInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_AdditionalDeviceSettingsPath_String")]
@@ -628,7 +628,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_EstimatedDeviceFirstUseTime_Int32")]
-        public virtual long? PropEstimatedDeviceFirstUseTimeInt32 { get; set; }
+        public virtual uint? PropEstimatedDeviceFirstUseTimeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ReportsTimeSinceVSync_Bool")]
@@ -636,39 +636,39 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_SecondsFromVsyncToPhotons_Float")]
-        public virtual double? PropSecondsFromVsyncToPhotonsFloat { get; set; }
+        public virtual float? PropSecondsFromVsyncToPhotonsFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayFrequency_Float")]
-        public virtual double? PropDisplayFrequencyFloat { get; set; }
+        public virtual float? PropDisplayFrequencyFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_UserIpdMeters_Float")]
-        public virtual double? PropUserIpdMetersFloat { get; set; }
+        public virtual float? PropUserIpdMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CurrentUniverseId_Uint64")]
-        public virtual long? PropCurrentUniverseIdUint64 { get; set; }
+        public virtual uint? PropCurrentUniverseIdUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_PreviousUniverseId_Uint64")]
-        public virtual long? PropPreviousUniverseIdUint64 { get; set; }
+        public virtual uint? PropPreviousUniverseIdUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCType_Int32")]
-        public virtual long? PropDisplayMcTypeInt32 { get; set; }
+        public virtual uint? PropDisplayMcTypeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCOffset_Float")]
-        public virtual long? PropDisplayMcOffsetFloat { get; set; }
+        public virtual uint? PropDisplayMcOffsetFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCScale_Float")]
-        public virtual long? PropDisplayMcScaleFloat { get; set; }
+        public virtual uint? PropDisplayMcScaleFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_EdidVendorID_Int32")]
-        public virtual long? PropEdidVendorIdInt32 { get; set; }
+        public virtual uint? PropEdidVendorIdInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCImageLeft_String")]
@@ -680,11 +680,11 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCBlackClamp_Float")]
-        public virtual long? PropDisplayGcBlackClampFloat { get; set; }
+        public virtual uint? PropDisplayGcBlackClampFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_EdidProductID_Int32")]
-        public virtual long? PropEdidProductIdInt32 { get; set; }
+        public virtual uint? PropEdidProductIdInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraToHeadTransform_Matrix34")]
@@ -692,19 +692,19 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCType_Int32")]
-        public virtual long? PropDisplayGcTypeInt32 { get; set; }
+        public virtual uint? PropDisplayGcTypeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCOffset_Float")]
-        public virtual long? PropDisplayGcOffsetFloat { get; set; }
+        public virtual uint? PropDisplayGcOffsetFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCScale_Float")]
-        public virtual long? PropDisplayGcScaleFloat { get; set; }
+        public virtual uint? PropDisplayGcScaleFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCPrescale_Float")]
-        public virtual long? PropDisplayGcPrescaleFloat { get; set; }
+        public virtual uint? PropDisplayGcPrescaleFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayGCImage_String")]
@@ -712,27 +712,27 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_LensCenterLeftU_Float")]
-        public virtual double? PropLensCenterLeftUFloat { get; set; }
+        public virtual float? PropLensCenterLeftUFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_LensCenterLeftV_Float")]
-        public virtual double? PropLensCenterLeftVFloat { get; set; }
+        public virtual float? PropLensCenterLeftVFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_LensCenterRightU_Float")]
-        public virtual double? PropLensCenterRightUFloat { get; set; }
+        public virtual float? PropLensCenterRightUFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_LensCenterRightV_Float")]
-        public virtual double? PropLensCenterRightVFloat { get; set; }
+        public virtual float? PropLensCenterRightVFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_UserHeadToEyeDepthMeters_Float")]
-        public virtual long? PropUserHeadToEyeDepthMetersFloat { get; set; }
+        public virtual uint? PropUserHeadToEyeDepthMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraFirmwareVersion_Uint64")]
-        public virtual long? PropCameraFirmwareVersionUint64 { get; set; }
+        public virtual uint? PropCameraFirmwareVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraFirmwareDescription_String")]
@@ -740,23 +740,23 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraCompatibilityMode_Int32")]
-        public virtual long? PropCameraCompatibilityModeInt32 { get; set; }
+        public virtual uint? PropCameraCompatibilityModeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ScreenshotHorizontalFieldOfViewDegrees_Float")]
-        public virtual long? PropScreenshotHorizontalFieldOfViewDegreesFloat { get; set; }
+        public virtual uint? PropScreenshotHorizontalFieldOfViewDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ScreenshotVerticalFieldOfViewDegrees_Float")]
-        public virtual long? PropScreenshotVerticalFieldOfViewDegreesFloat { get; set; }
+        public virtual uint? PropScreenshotVerticalFieldOfViewDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ExpectedTrackingReferenceCount_Int32")]
-        public virtual long? PropExpectedTrackingReferenceCountInt32 { get; set; }
+        public virtual uint? PropExpectedTrackingReferenceCountInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ExpectedControllerCount_Int32")]
-        public virtual long? PropExpectedControllerCountInt32 { get; set; }
+        public virtual uint? PropExpectedControllerCountInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_NamedIconPathControllerLeftDeviceOff_String")]
@@ -776,7 +776,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_MinimumIpdStepMeters_Float")]
-        public virtual double? PropMinimumIpdStepMetersFloat { get; set; }
+        public virtual float? PropMinimumIpdStepMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ImuToHeadTransform_Matrix34")]
@@ -804,7 +804,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_AdditionalRadioFeatures_Uint64")]
-        public virtual long? PropAdditionalRadioFeaturesUint64 { get; set; }
+        public virtual uint? PropAdditionalRadioFeaturesUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CameraDistortionFunction_Int32_Array")]
@@ -820,7 +820,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_HmdTrackingStyle_Int32")]
-        public virtual long? PropHmdTrackingStyleInt32 { get; set; }
+        public virtual uint? PropHmdTrackingStyleInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_HmdColumnCorrectionSettingPrefix_String")]
@@ -860,15 +860,15 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMinAnalogGain_Float")]
-        public virtual double? PropDisplayMinAnalogGainFloat { get; set; }
+        public virtual float? PropDisplayMinAnalogGainFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMaxAnalogGain_Float")]
-        public virtual double? PropDisplayMaxAnalogGainFloat { get; set; }
+        public virtual float? PropDisplayMaxAnalogGainFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DashboardScale_Float")]
-        public virtual long? PropDashboardScaleFloat { get; set; }
+        public virtual uint? PropDashboardScaleFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Hmd_EnableParallelRenderCameras_Bool")]
@@ -876,11 +876,11 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_IpdUIRangeMinMeters_Float")]
-        public virtual double? PropIpdUiRangeMinMetersFloat { get; set; }
+        public virtual float? PropIpdUiRangeMinMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_IpdUIRangeMaxMeters_Float")]
-        public virtual double? PropIpdUiRangeMaxMetersFloat { get; set; }
+        public virtual float? PropIpdUiRangeMaxMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Hmd_SupportsHDCP14LegacyCompat_Bool")]
@@ -900,19 +900,19 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DSCVersion_Int32")]
-        public virtual long? PropDscVersionInt32 { get; set; }
+        public virtual uint? PropDscVersionInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DSCSliceCount_Int32")]
-        public virtual long? PropDscSliceCountInt32 { get; set; }
+        public virtual uint? PropDscSliceCountInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DSCBPPx16_Int32")]
-        public virtual long? PropDscbpPx16Int32 { get; set; }
+        public virtual uint? PropDscbpPx16Int32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Audio_DefaultPlaybackDeviceVolume_Float")]
-        public virtual double? PropAudioDefaultPlaybackDeviceVolumeFloat { get; set; }
+        public virtual float? PropAudioDefaultPlaybackDeviceVolumeFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Audio_SupportsDualSpeakerAndJackOutput_Bool")]
@@ -972,7 +972,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ControllerHandSelectionPriority_Int32")]
-        public virtual long? PropControllerHandSelectionPriorityInt32 { get; set; }
+        public virtual uint? PropControllerHandSelectionPriorityInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DriverVersion_String")]
@@ -996,7 +996,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_GraphicsAdapterLuid_Uint64")]
-        public virtual long? PropGraphicsAdapterLuidUint64 { get; set; }
+        public virtual uint? PropGraphicsAdapterLuidUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DriverProvidedChaperonePath_String")]
@@ -1036,11 +1036,11 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_RadioVersion_Uint64")]
-        public virtual long? PropRadioVersionUint64 { get; set; }
+        public virtual uint? PropRadioVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_BootloaderVersion_Uint64")]
-        public virtual long? PropBootloaderVersionUint64 { get; set; }
+        public virtual uint? PropBootloaderVersionUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CompositeFirmwareVersion_String")]
@@ -1048,32 +1048,32 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewLeftDegrees_Float")]
-        public virtual long? PropFieldOfViewLeftDegreesFloat { get; set; }
+        public virtual uint? PropFieldOfViewLeftDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewRightDegrees_Float")]
-        public virtual long? PropFieldOfViewRightDegreesFloat { get; set; }
+        public virtual uint? PropFieldOfViewRightDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewTopDegrees_Float")]
-        public virtual long? PropFieldOfViewTopDegreesFloat { get; set; }
+        public virtual uint? PropFieldOfViewTopDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_FieldOfViewBottomDegrees_Float")]
-        public virtual long? PropFieldOfViewBottomDegreesFloat { get; set; }
+        public virtual uint? PropFieldOfViewBottomDegreesFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_TrackingRangeMinimumMeters_Float")]
-        public virtual double? PropTrackingRangeMinimumMetersFloat { get; set; }
+        public virtual float? PropTrackingRangeMinimumMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_TrackingRangeMaximumMeters_Float")]
-        public virtual long? PropTrackingRangeMaximumMetersFloat { get; set; }
+        public virtual uint? PropTrackingRangeMaximumMetersFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ModeLabel_String")]
         [JsonConverter(typeof(ParseStringConverter))]
-        public virtual long? PropModeLabelString { get; set; }
+        public virtual uint? PropModeLabelString { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_CanWirelessIdentify_Bool")]
@@ -1081,28 +1081,29 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Nonce_Int32")]
-        public virtual long? PropNonceInt32 { get; set; }
+        public virtual uint? PropNonceInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_SupportedButtons_Uint64")]
-        public virtual long? PropSupportedButtonsUint64 { get; set; }
+        public virtual uint? PropSupportedButtonsUint64 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Axis0Type_Int32")]
-        public virtual long? PropAxis0TypeInt32 { get; set; }
+        public virtual uint? PropAxis0TypeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Axis1Type_Int32")]
-        public virtual long? PropAxis1TypeInt32 { get; set; }
+        public virtual uint? PropAxis1TypeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_Axis2Type_Int32")]
-        public virtual long? PropAxis2TypeInt32 { get; set; }
+        public virtual uint? PropAxis2TypeInt32 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ControllerRoleHint_Int32")]
-        public virtual long? PropControllerRoleHintInt32 { get; set; }
+        public virtual uint? PropControllerRoleHintInt32 { get; set; }
     }
+#endregion definitions
 
     public partial class HmdqOutput {
         public static HmdqOutput FromJson(string json) => JsonSerializer.Deserialize<HmdqOutput>(json, SCVRPatcher.Converter.Settings);

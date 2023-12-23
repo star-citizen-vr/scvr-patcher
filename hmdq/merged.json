@@ -1807,7 +1807,8 @@
                 "Prop_DisplayRefreshRate_Float": 119.99999237060547
             },
             "LTouch": null,
-            "RTouch": null
+            "RTouch": null,
+            "XBox": null
         },
         "geometry": {
             "default_fov": {
