@@ -55,6 +55,18 @@
                 "G Force Features": {
                     "GForceHeadBobScale": 0,
                     "GForceZoomScale": 0
+                },
+                "DCCPINE:": {
+                    "FPS": {
+                        "B": "0.87",
+                        "C": "0.76",
+                        "G": "0.59"
+                    },
+                    "Flight": {
+                        "B": "0.46",
+                        "C": "0.48",
+                        "G": "0.94"
+                    }
                 }
             },
             "Check Lines": [
@@ -11505,8 +11517,26 @@
                             "p": "~81"
                         }
                     ],
-                    "Attributes - FPS Color Correction Profile": "Brightness: 0.87, Contrast: 0.76, Gamma: 0.59",
-                    "Attributes - Flight Color Correction Profile": "Brightness: 0.46, Contrast: 0.48, Gamma: 0.94"
+                    "FPS": {
+                        "B": "0.87",
+                        "C": "0.76",
+                        "G": "0.59"
+                    },
+                    "Attributes - FPS Color Correction Profile": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "Flight": {
+                        "B": "0.46",
+                        "C": "0.48",
+                        "G": "0.94"
+                    },
+                    "Attributes - Flight Color Correction Profile": [
+                        null,
+                        null,
+                        null
+                    ]
                 },
                 "PP+R144": {
                     "Render target size": {
@@ -11640,8 +11670,26 @@
                             "p": "~81"
                         }
                     ],
-                    "Attributes - FPS Color Correction Profile": "Brightness: 0.87, Contrast: 0.76, Gamma: 0.59",
-                    "Attributes - Flight Color Correction Profile": "Brightness: 0.46, Contrast: 0.48, Gamma: 0.94"
+                    "FPS": {
+                        "B": "0.87",
+                        "C": "0.76",
+                        "G": "0.59"
+                    },
+                    "Attributes - FPS Color Correction Profile": [
+                        null,
+                        null,
+                        null
+                    ],
+                    "Flight": {
+                        "B": "0.46",
+                        "C": "0.48",
+                        "G": "0.94"
+                    },
+                    "Attributes - Flight Color Correction Profile": [
+                        null,
+                        null,
+                        null
+                    ]
                 }
             }
         },

@@ -7,6 +7,8 @@ attributes_static_regex = compile(r"(\w+):\s*([^,]+)")
 attributes_nameonly_regex = compile(r"\b(\w+)\b")
 # attributes_optional_regex = re.compile(r'(\w+): (\d+) \| \(([\w\s-]+)\)') # Ran into a few issues with this one. Just separated them manually below
 attributes_other_regex = compile(r'(?:(?P<key>[^:\n]+):\s*(?P<value>[^,\n]+),?\s*)+') # Having issues using static_regex... built this to specifically handle the 'other values'
+color_regex = compile(r'Brightness: (\d+\.\d+), Contrast: (\d+\.\d+), Gamma: (\d+\.\d+)')
+
 
 # Main
 """
@@ -24,6 +26,7 @@ attributes_other_regex = compile(r'(?:(?P<key>[^:\n]+):\s*(?P<value>[^,\n]+),?\s
 = row["VorpX Config Pixel 1:1 Zoom (Calculated)"]
 = row["All Possible Lens Configurations"]
 """
+
 # Resolutions
 """
 = row["Combined Custom Resolutions"]
@@ -74,6 +77,15 @@ def split_resolution(resolution: str):
     if match.group(4): dic["p"] = match.group(4).replace('%','').strip()
     return dic
 
+def color_combo(color: str):
+    match = color_regex.match(color)
+    if not match: return None
+    dic = {}
+    if match.group(1): dic["B"] = (match.group(1))
+    if match.group(2): dic["C"] = (match.group(2))
+    if match.group(3): dic["G"] = (match.group(3))
+    return dic
+
 def static_attributes(attributes: str):
     try:
         matches = attributes_static_regex.findall(attributes)
@@ -98,40 +110,7 @@ def static_attributes(attributes: str):
 def optional_attributes(attributes):
     options = [option.strip() for option in attributes.split(',')]
     return options if options else None
-"""
-def optional_attributes(attributes):
-    matches = attributes_optional_regex.findall(attributes)
-    if not matches:
-        return None
 
-    # Extract values from matches
-    attribute_dict = {}
-    for match in matches:
-        key, value, description = match
-        if key not in attribute_dict:
-            attribute_dict[key] = []
-        attribute_dict[key].append({
-            "value": int(value),
-            "description": description.strip()
-        })
-
-    return attribute_dict if attribute_dict else None
-"""
-# Try and categorize static values
-"""def categorize_attributes(key, value, data):
-    categories = {
-        
-    }
-    
-    for category, attributes in categories.items():
-        if key in attributes:
-            if category not in data:
-                data[category] = {}
-            data[category][key] = value
-            return True
-
-    return False
-"""
 def csv_to_json(csvFilePath, jsonFilePath):
     # Create a dictionary to store the data
     data = {}
@@ -142,7 +121,19 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 "Look Ahead Features": {},  # LookAhead Attributes
                 "Head Tracking Features": {},   # HeadTracking (Headtracking) Attributes + Tobii
                 "Auto Zoom Features": {},   # AutoZoom Attributes
-                "G Force Features": {}   #Gforce Attributes
+                "G Force Features": {},   #Gforce Attributes
+                "DCCPINE:": {       # Default color correction profiles if none exist for a specific headset - Recommended (The default is pulled from the Valve Index - Since it has a TN panel, it's a good starting point for most headsets since they're all LCDs or higher in quality)
+                    "FPS": {            # If the user tends to spend more time in FPS mode, they should use these as base settings for color correction
+                        "Brightness": {},
+                        "Contrast": {},
+                        "Gamma": {}
+                    },
+                    "Flight": {         # If the user tends to spend more time in Flight mode, they should use these as base settings for color correction
+                        "Brightness": {},
+                        "Contrast": {},
+                        "Gamma": {}
+                    }
+                }
             }, # All static attributes we should set, should the user decide they want to over ride.
             "Check Lines": [], # Lines that need to be checked from the attributes.xml
             "Remove Lines": [], # Lines that need to be removed from the attributes.xml
@@ -161,7 +152,6 @@ def csv_to_json(csvFilePath, jsonFilePath):
 
         # Iterate over each row in the CSV file
         for row in csvReader:
-            #print(row)
             # Create a dictionary for each row
             row_dict = {}
 
@@ -173,6 +163,18 @@ def csv_to_json(csvFilePath, jsonFilePath):
 
             if row['Lens Configuration'] not in brands[row['Headset Brand']][row['Headset Model']]:
                 brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']] = {}
+
+            # Check if the color correction profiles are not empty
+            color_correction_key = 'Color Correction Profile'
+            if color_correction_key in row and row[color_correction_key] != '':
+                # Process color correction profile
+                color_combo_matches = color_regex.match(row[color_correction_key])
+                if color_combo_matches:
+                    color_combo_dict = color_combo(row[color_correction_key])
+                    # Update the data structure with color_combo_dict
+                    if color_correction_key not in brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']][row['Color Correction Profiles']]:
+                        brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']][row['Color Correction Profiles']][color_correction_key] = {}
+                    brands[row['Headset Brand']][row['Headset Model']][row['Lens Configuration']][row['Color Correction Profiles']][color_correction_key] = color_combo_dict
 
             if 'Render target size' not in row_dict:
                 row_dict['Render target size'] = {}
@@ -270,6 +272,31 @@ def csv_to_json(csvFilePath, jsonFilePath):
                 elif key == "Attributes - HDR Check if Enabled Historically":
                     data['common']['Attributes']['Check Lines'] = value.split(', ')
                     continue
+                # HDR Attributes Lines
+                elif key == "Attributes - HDR Check if Enabled Historically":
+                    data['common']['Attributes']['Check Lines'] = value.split(', ')
+                    continue
+                # Grab the default color correction profile specifically from Valve Index to list off in the common attributes list for the user to choose from categorized by FPS and Flight and then by Brightness, Contrast, and Gamma with decimal values
+                elif key in ["Attributes - FPS Color Correction Profile", "Attributes - Flight Color Correction Profile"]:
+                    color_combo_matches = color_regex.match(value)
+                    if color_combo_matches:
+                        color_combo_dict = color_combo(value)
+                        # Put FPS colors in FPS dict, Flight colors in Flight dict
+                        if key == "Attributes - FPS Color Correction Profile":
+                            data['common']['Attributes']['Static Values']['DCCPINE:']['FPS'] = color_combo_dict
+                        elif key == "Attributes - Flight Color Correction Profile":
+                            data['common']['Attributes']['Static Values']['DCCPINE:']['Flight'] = color_combo_dict
+                    else:
+                        split_result = key.split(': ')
+                        if len(split_result) > 1:
+                            attribute_name = split_result[1]
+                            if attribute_name in data['common']['Attributes']['Static Values']['DCCPINE:']:
+                                data['common']['Attributes']['Static Values']['DCCPINE:'][attribute_name] = color_combo_dict
+                            else:
+                                print(f"Invalid attribute name: {attribute_name}")
+                        else:
+                            print(f"Unexpected split result length: {len(split_result)}")
+                            continue
                 # Other Values - attributes_other_regex
                 elif key == "Attributes - Other Values":
                     #print("Before regex match:", value)
@@ -306,11 +333,24 @@ def csv_to_json(csvFilePath, jsonFilePath):
                         print(f"Error processing {key}: {e}") # Debug
                         # print(f"Row data: {row}") # Hope you don't have to use this to debug :P
                     continue
+                # Grab brightness, contrast, and gamma values from each headset, categorized by FPS and Flight, and then by Brightness, Contrast, and Gamma. This will be listed under the "Attributes - FPS Color Correction Profile" and "Attributes - Flight Color Correction Profile" keys
+                elif key in ["Attributes - FPS Color Correction Profile", "Attributes - Flight Color Correction Profile"]:
+                    color_combo_matches = color_regex.match(value)
+                    if color_combo_matches:
+                        color_combo_dict = color_combo(value)
+                        # Put FPS colors in FPS dict, Flight colors in Flight dict
+                        if key == "Attributes - FPS Color Correction Profile":
+                            row_dict['FPS'] = color_combo_dict
+                        elif key == "Attributes - Flight Color Correction Profile":
+                            row_dict['Flight'] = color_combo_dict
+                    else:
+                        print(f"Invalid attribute format: {value}")
+                        continue
                 if key == "Concatenated Notes+Errors":
                     key = "Notes"
                     if value.replace(' ','').replace('|','') == '' : value = list()
                     else: value = value.split(' | ')
-                elif key in ["Custom Resolution List","Custom Resolutions V-Translated","Custom Resolutions H-Translated (Preferred)","Combined Custom Resolutions","Every 6th up to 5440 x 4080","Every 8th up to 5440 x 4080","Every 10th up to 5440 x 4080","Every 6th+8th up to 5440 x 4080","Every 6th+8th+10th up to 5440 x 4080","All Integer Resolutions up to 5440 x 4080","Every 6th up to 19840 x 14880","Every 8th up to 19840 x 14880","Every 10th up to 19840 x 14880","Every 6th+8th up to 19840 x 14880","Every 6th+8th+10th up to 19840 x 14880","All Integer Resolutions up to 19840 x 14880"]:
+                elif key in ["Custom Resolution List","Custom Resolutions V-Translated","Custom Resolutions H-Translated (Preferred)","Combined Custom Resolutions","Every 6th up to 5440 x 4080","Every 8th up to 5440 x 4080","Every 10th up to 5440 x 4080","Every 6th+8th up to 5440 x 4080","Every 6th+8th+10th up to 5440 x 4080","All Integer Resolutions up to 5440 x 4080","Every 6th up to 19840 x 14880","Every 8th up to 19840 x 14880","Every 10th up to 19840 x 14880","Every 6th+8th up to 19840 x 14880","Every 6th+8th+10th up to 19840 x 14880","All Integer Resolutions up to 19840 x 14880", "Attributes - FPS Color Correction Profile", "Attributes - FPS Color Correction Profile", "Attributes - Flight Color Correction Profile", "Attributes - Flight Color Correction Profile", "Attributes - DCCPINE: FPS Brightness", "Attributes - DCCPINE: FPS Contrast", "Attributes - DCCPINE: FPS Gamma", "Attributes - DCCPINE: Flight Brightness"]:
                     value = [split_resolution(v) for v in value.split(', ') if v]
                 elif key in ["All Possible Lens Configurations"]:
                     value = value.split(', ')
@@ -331,8 +371,8 @@ def csv_to_json(csvFilePath, jsonFilePath):
                     elif value.startswith('H '): value = value[2:]
                     if value.endswith('Hz'): value = value[:-2]
                     if value.endswith('px'): value = value[:-2]
-                    if 'aw ' in value: exit(1) # pls fix in csv
-                    value = value.replace('\u00b0','')
+                    if 'aw ' in value: exit(1) # pls fix in csv ...Pretty sure I fixed this...
+                    value = value.replace('\u00b0','') # Remove degree symbol
                 if not isinstance(value, list):
                     if value.isdigit(): value = int(value)
                     try:
