@@ -73,6 +73,10 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
+            if (!parser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
+                Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
+                Utils.RestartAsAdmin(args);
+            }
             var pageFiles = Utils.GetPageFileSizes();
             foreach (var pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
