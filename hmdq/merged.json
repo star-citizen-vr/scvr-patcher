@@ -6,6 +6,7 @@
         "os_ver": "10.0.22621.2861"
     },
     "openvr": {
+        "error@": "OpenVR Error",
         "rt_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamVR",
         "rt_ver": "2.2.3",
         "devices": [
