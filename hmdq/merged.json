@@ -288,6 +288,8 @@
                 "Prop_HasVirtualDisplayComponent_Bool": false,
                 "Prop_ControllerType_String": "indexhmd",
                 "Prop_ControllerHandSelectionPriority_Int32": 0,
+                "Prop_Audio_DefaultPlaybackDeviceId_String": "{0.0.0.00000000}.{acd0505a-9ef1-46d4-a222-5cd78272c923}",
+                "Prop_Audio_DefaultRecordingDeviceId_String": "{0.0.1.00000000}.{a60587e4-9b32-4715-8878-3a12da5d3967}",
                 "Prop_DriverVersion_String": "1.75.0",
                 "Prop_RegisteredDeviceType_String": "anon@75CBC1DD62CC75720C0D8365",
                 "Prop_IsOnDesktop_Bool": false,
@@ -300,8 +302,6 @@
                 "Prop_DriverRequestsReducedRendering_Bool": false,
                 "Prop_DriverProvidedChaperoneVisibility_Bool": false,
                 "Prop_Hmd_SupportsGpuBusMonitoring_Bool": true,
-                "Prop_Audio_DefaultPlaybackDeviceId_String": "{0.0.0.00000000}.{9603d94f-9fc9-4e23-a5ca-2e4e0214f6fb}",
-                "Prop_Audio_DefaultRecordingDeviceId_String": "{0.0.1.00000000}.{333ae428-cb2e-4293-8685-376fa3fe66e9}",
                 "Prop_NamedIconPathDeviceAlertLow_String": ""
             },
             "1": {
