@@ -439,7 +439,7 @@ if user_input == 'yes':
     plt.scatter(outlier_attributes, predicted_outlier_fov_4_1, label='Outlier Predicted FOV (4:1)', color='#8B0000', marker='x')
 
     # Plot the outlier points for 16:3 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_4_1, label='Outlier Predicted FOV (4:1)', color='#8B0050', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_16_3, label='Outlier Predicted FOV (16:3)', color='#8B0050', marker='x')
 
 else:
     extension_range = np.linspace(min(attributes_32_9), max(attributes_32_9), num=100).reshape(-1, 1)
