@@ -2,14 +2,17 @@
 using NLog.Config;
 using Octokit;
 using SCVRPatcher.Classes;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
+using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -83,14 +86,59 @@ namespace SCVRPatcher {
             }
             hmdq.Initialize();
             hmdq.RunHmdq();
-            if (hmdq.IsEmpty) {
+            if (hmdq.IsEmpty)
+            {
                 Logger.Error("Failed to get HMD info through HMDQ!");
-                var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else {
+                var isSteamVRRunning = Process.GetProcessesByName("vrmonitor").Length > 0;
+                var isOculusRunning = Process.GetProcessesByName("OVRServer_x64").Length > 0;
+                if (!isSteamVRRunning && !isOculusRunning)
+                {
+                    Logger.Error("SteamVR or Oculus not running!");
+                    //var _ = MessageBox.Show("SteamVR or Oculus not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    // present user with option to start SteamVR or continue without starting either
+                    var result = System.Windows.MessageBox.Show("Oculus not running! Start Oculus?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // start Oculus with oculus:// uri protocol
+                        Logger.Info("Starting Oculus!");
+                        var oculusUri = new Uri("oculus://");
+                        oculusUri.OpenInDefaultBrowser();
+                        // wait for Oculus process to start and then continue
+                        var oculusProcess = Process.GetProcessesByName("OVRServer_x64");
+                        while (oculusProcess.Length == 0)
+                        {
+                            System.Threading.Thread.Sleep(1000);
+                            oculusProcess = Process.GetProcessesByName("OVRServer_x64");
+                        }
+                        // ToDo: initialize HMDQ again
+                    }
+                    else
+                    {
+                        result = MessageBox.Show("SteamVR not running! Start SteamVR?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            // start SteamVR with steam://run/250820
+                            Logger.Info("Starting SteamVR!");
+                            var steamUri = new Uri("steam://run/250820");
+                            steamUri.OpenInDefaultBrowser();
+                            // wait for SteamVR process to start and then continue
+                            var steamProcess = Process.GetProcessesByName("vrmonitor");
+                            while (steamProcess.Length == 0)
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                steamProcess = Process.GetProcessesByName("vrmonitor");
+                            }
+                            // ToDo: initialize HMDQ again
+                        }
+                    }
+                }
+                // var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
             }
             fovcalc.Initialize();
-
+            
 
             game.Initialize();
             InitializeComponent();

@@ -24,8 +24,8 @@ namespace SCVRPatcher {
             { "Sharpening", 0 },
             { "VSync", 0 },
             { "WindowMode", 2 },
-            { "ScatterDist", 0 },
-            { "TerrainTessDistance", 0 }
+            //{ "ScatterDist", 0 },
+            //{ "TerrainTessDistance", 0 }
         };
 
         public AttributesFile(FileInfo file) : base(file) {
