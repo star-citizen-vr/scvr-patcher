@@ -72,18 +72,33 @@ outlier_attributes_4_3 = outlier_attributes.reshape(-1, 1)
 poly_outlier_attributes_4_3 = poly_features_4_3.transform(outlier_attributes_4_3)
 predicted_outlier_fov_4_3 = model_4_3.predict(poly_outlier_attributes_4_3)
 
-# Generate additional attribute values for extension
-extension_range = np.linspace(15, 120).reshape(-1, 1)
+# Prompt user to show outlier data or not
+user_input = input("Do you want to show outlier data? (yes/no): ").lower()
 
-# Predict FOV for the extension range for 32:9 aspect ratio
+# Update show_outliers based on user input
+if user_input == 'yes':
+    show_outliers = 'yes'
+    extension_range = np.linspace(min(outlier_attributes), max(outlier_attributes), num=100).reshape(-1, 1)
+    # Plot the outlier points for 32:9 aspect ratio
+    plt.scatter(outlier_attributes, predicted_outlier_fov_32_9, label='Outlier Predicted FOV (32:9)', color='blue', marker='x')
+
+    # Plot the outlier points for 16:9 aspect ratio
+    plt.scatter(outlier_attributes, predicted_outlier_fov_16_9, label='Outlier Predicted FOV (16:9)', color='green', marker='x')
+
+    #Plot the outlier points for 4:3 aspect ratio
+    plt.scatter(outlier_attributes, predicted_outlier_fov_4_3, label='Outlier Predicted FOV (4:3)', color='red', marker='x')
+else:
+    extension_range = np.linspace(min(attributes_32_9), max(attributes_32_9), num=100).reshape(-1, 1)
+
+# Generate predictions for the extension range for 32:9 aspect ratio
 poly_extension_range_32_9 = poly_features_32_9.transform(extension_range)
 predicted_extension_fov_32_9 = model_32_9.predict(poly_extension_range_32_9)
 
-# Predict FOV for the extension range for 16:9 aspect ratio
+# Generate predictions for the extension range for 16:9 aspect ratio
 poly_extension_range_16_9 = poly_features_16_9.transform(extension_range)
 predicted_extension_fov_16_9 = model_16_9.predict(poly_extension_range_16_9)
 
-# Predict FOV for the extension range for 4:3 aspect ratio
+# Generate predictions for the extension range for 4:3 aspect ratio
 poly_extension_range_4_3 = poly_features_4_3.transform(extension_range)
 predicted_extension_fov_4_3 = model_4_3.predict(poly_extension_range_4_3)
 
@@ -92,35 +107,27 @@ plt.scatter(attributes_32_9, fov_32_9, label='32:9 Integer FOV degrees', color='
 plt.plot(attributes_32_9, predicted_fov_32_9, color='blue', linestyle='--', label='32:9 Predicted FOV')
 
 # Plot the results for 16:9 aspect ratio
-plt.scatter(attributes_16_9, fov_16_9, label='16:9 Integer FOV degrees', color='red')
-plt.plot(attributes_16_9, predicted_fov_16_9, color='red', linestyle='--', label='16:9 Predicted FOV')
+plt.scatter(attributes_16_9, fov_16_9, label='16:9 Integer FOV degrees', color='green')
+plt.plot(attributes_16_9, predicted_fov_16_9, color='green', linestyle='--', label='16:9 Predicted FOV')
 
-# Plot the results for 4:3 aspect ratio
-plt.scatter(attributes_4_3, fov_4_3, label='4:3 Integer FOV degrees', color='green')
-plt.plot(attributes_4_3, predicted_fov_4_3, color='green', linestyle='--', label='4:3 Predicted FOV')
+# Plot the results for 4:3 aspect ratioyes
+
+plt.scatter(attributes_4_3, fov_4_3, label='4:3 Integer FOV degrees', color='red')
+plt.plot(attributes_4_3, predicted_fov_4_3, color='red', linestyle='--', label='4:3 Predicted FOV')
 
 # Draw the horizontal line for the fixed FOV
 plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Valve Index FOV ({fixed_fov:.2f})')
 
-# Plot the extension for 32:9 aspect ratio
+# Plot the extension range for 32:9 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_32_9, color='blue', linestyle='--')
 
-# Plot the extension for 16:9 aspect ratio
-plt.plot(extension_range, predicted_extension_fov_16_9, color='red', linestyle='--')
+# Plot the extension range for 16:9 aspect ratio
+plt.plot(extension_range, predicted_extension_fov_16_9, color='green', linestyle='--')
 
-# Plot the extension for 4:3 aspect ratio
-plt.plot(extension_range, predicted_extension_fov_4_3, color='green', linestyle='--')
+# Plot the extension range for 4:3 aspect ratio
+plt.plot(extension_range, predicted_extension_fov_4_3, color='red', linestyle='--')
 
-# Plot the outlier points for 32:9 aspect ratio
-plt.scatter(outlier_attributes, predicted_outlier_fov_32_9, label='Outlier Predicted FOV (32:9)', color='blue', marker='x')
-
-# Plot the outlier points for 16:9 aspect ratio
-plt.scatter(outlier_attributes, predicted_outlier_fov_16_9, label='Outlier Predicted FOV (16:9)', color='red', marker='x')
-
-# Plot the outlier points for 4:3 aspect ratio
-plt.scatter(outlier_attributes, predicted_outlier_fov_4_3, label='Outlier Predicted FOV (4:3)', color='green', marker='x')
-
-plt.xlabel('attributes.xml')
-plt.ylabel('Game Actual FOV')
+plt.xlabel('attributes.xml FOV value')
+plt.ylabel('Game Actual FOV in Degrees')
 plt.legend()
 plt.show()
