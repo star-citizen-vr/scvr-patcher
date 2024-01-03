@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MS.WindowsAPICodePack.Internal;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 //Terms and Definitions
 // 2D (Mono) Terms:
@@ -80,10 +83,15 @@ namespace SCVRPatcher.Classes
     internal class FovCalculator
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution(); // How do I get this from the other cs files?
+        internal static Hmdq hmdq { get; private set; } = new();
+
         internal void Initialize()
         {
             Logger.Info($"{nameof(FovCalculator)}");
-            
+
+            // pull main monitor resolution from the system
+            mainScreenResolution = Utils.GetMainScreenResolution();
         }
     }
 }

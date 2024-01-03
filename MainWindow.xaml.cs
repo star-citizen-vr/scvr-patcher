@@ -136,11 +136,9 @@ namespace SCVRPatcher {
                         }
                     }
                 }
-                // var _ = MessageBox.Show("Failed to get HMD info from HMDQ!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
-                // inject pulled headset information and ...
                 var detectedHmdConfig = new HmdConfig()
                 {
                     Fov = hmdq.VerticalFov,
