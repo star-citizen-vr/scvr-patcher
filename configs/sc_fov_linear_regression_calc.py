@@ -16,6 +16,8 @@ attributes_16_9 = np.array([54.5364, 55.3576, 56.1859, 57.0216, 57.8648, 58.7155
                            73.4799, 74.4824, 75.4951, 76.5183, 77.5521, 78.5967, 79.6522, 80.7188, 81.7965, 82.8857, 83.9863])
 fov_16_9 = np.array([85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106,
                      107, 108, 109, 110, 111, 112, 113, 114, 115, 116])
+# Your fixed FOV value
+fixed_fov = 114.0841655
 
 # Reshape the data to meet scikit-learn requirements
 attributes_32_9 = attributes_32_9.reshape(-1, 1)
@@ -43,6 +45,9 @@ plt.plot(attributes_32_9, predicted_fov_32_9, color='blue', linestyle='--', labe
 
 plt.scatter(attributes_16_9, fov_16_9, label='16:9 Actual FOV', color='red')
 plt.plot(attributes_16_9, predicted_fov_16_9, color='red', linestyle='--', label='16:9 Predicted FOV')
+
+# Draw the horizontal line for the fixed FOV
+plt.axhline(y=fixed_fov, color='black', linestyle='-', label=f'Valve Index ({fixed_fov:.2f})')
 
 plt.xlabel('attributes.xml')
 plt.ylabel('Game Actual FOV')
