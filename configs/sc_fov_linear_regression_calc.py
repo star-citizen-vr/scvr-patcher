@@ -53,7 +53,7 @@ poly_outlier_attributes_16_9 = poly_features_16_9.transform(outlier_attributes_1
 predicted_outlier_fov_16_9 = model_16_9.predict(poly_outlier_attributes_16_9)
 
 # Generate additional attribute values for extension
-extension_range = np.linspace(15, 120, 1000).reshape(-1, 1)
+extension_range = np.linspace(15, 120).reshape(-1, 1)
 
 # Predict FOV for the extension range for 32:9 aspect ratio
 poly_extension_range_32_9 = poly_features_32_9.transform(extension_range)
@@ -72,7 +72,7 @@ plt.scatter(attributes_16_9, fov_16_9, label='16:9 Integer FOV degrees', color='
 plt.plot(attributes_16_9, predicted_fov_16_9, color='red', linestyle='--', label='16:9 Predicted FOV')
 
 # Draw the horizontal line for the fixed FOV
-plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Fixed FOV ({fixed_fov:.2f})')
+plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Valve Index FOV ({fixed_fov:.2f})')
 
 # Plot the extension for 32:9 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_32_9, color='blue', linestyle='--')
