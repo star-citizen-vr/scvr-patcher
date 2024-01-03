@@ -24,6 +24,7 @@ namespace SCVRPatcher {
     using System.Net.Http;
     using System.Text;
     using System.CodeDom;
+    using Brand = Dictionary < string, Dictionary<string, Dictionary<string, HmdConfig>>>;
 
     public partial class ConfigDataBase {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
@@ -34,7 +35,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("brands")]
-        public Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>> Brands { get; set; }
+        public Brand Brands { get; set; }
 
         [JsonIgnore]
         public bool IsEmptyOrMissing => Brands is null || Brands.Count == 0;

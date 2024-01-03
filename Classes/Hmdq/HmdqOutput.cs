@@ -666,7 +666,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCOffset_Float")]
-        public virtual uint? PropDisplayMcOffsetFloat { get; set; }
+        public virtual float? PropDisplayMcOffsetFloat { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_DisplayMCScale_Float")]
@@ -794,7 +794,7 @@ namespace SCVRPatcher {
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ImuFactoryGyroScale_Vector3")]
-        public virtual List<long> PropImuFactoryGyroScaleVector3 { get; set; }
+        public virtual List<double> PropImuFactoryGyroScaleVector3 { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Prop_ImuFactoryAccelerometerBias_Vector3")]

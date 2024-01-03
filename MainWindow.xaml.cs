@@ -15,6 +15,7 @@ using Label = System.Windows.Controls.Label;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
+using Brand = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, SCVRPatcher.HmdConfig>>>;
 
 namespace SCVRPatcher {
 
@@ -84,6 +85,9 @@ namespace SCVRPatcher {
             foreach (var pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
             }
+
+            configDatabase = new();
+            LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             hmdq.Initialize();
             hmdq.RunHmdq();
             if (hmdq.IsEmpty)
@@ -136,15 +140,28 @@ namespace SCVRPatcher {
             }
             else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
+                // inject pulled headset information and ...
+                var detectedHmdConfig = new HmdConfig()
+                {
+                    Fov = hmdq.VerticalFov,
+                    CustomResolutions = new List<Resolution>() {
+                    new Resolution() {
+                        Height = hmdq.Height,
+                        Width = hmdq.Width,
+                        Description = "Pulled from HMDQ",
+                        Percentage = "100"
+                    }
+                }
+                };
+                var detectedHmd = new Dictionary<string, HmdConfig>() { { "Current", detectedHmdConfig } };
+                var detectedBrand = new Dictionary<string, Dictionary<string, HmdConfig>>() { { "Brand", detectedHmd } };
+                configDatabase.Brands.Add("Detected", detectedBrand);
+
+                Logger.Info($"Added HMDQ info to configDatabase");
             }
             fovcalc.Initialize();
-            
-
             game.Initialize();
             InitializeComponent();
-            configDatabase = new();
-            LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
-
             FillHmds(configDatabase);
             stackpanel_config.Children.Clear(); vorpx = new();
             VREnableButton.IsEnabled = true;
@@ -198,6 +215,11 @@ namespace SCVRPatcher {
             }
             foreach (var brand in db.Brands) {
                 var brandItem = new TreeViewItem() { Header = brand.Key };
+                if (brand.Key == "Detected")
+                {
+                    var redBrush = new SolidColorBrush(Colors.DarkGreen);
+                    brandItem.Foreground = redBrush;
+                }
                 foreach (var model in brand.Value) {
                     var modelItem = new TreeViewItem() { Header = model.Key };
                     foreach (var config in model.Value) {
