@@ -188,7 +188,7 @@ fov_16_3 = [
 ]
 
 # Your fixed FOV value
-fixed_fov = 109.1593028
+fixed_fov = 72
 
 # Outlier attributes.xml values
 outlier_attributes = np.array([15, 120]) # Extremes that attributes.xml can read (fov unknown as they are locked to the known minimum/maximum)
@@ -575,7 +575,7 @@ plt.plot(attributes_16_3, predicted_fov_16_3, color='#8B0050', linestyle='--', l
 ### DRAW EXAMPLE HEADSET H-FOV ###
 
 # Draw the horizontal line for the fixed FOV
-plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Valve Index Example H-FOV ({fixed_fov:.2f})')
+plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Quest 3 Example H-FOV ({fixed_fov:.2f})')
 
 
 ### PLOT EXTENSION RANGE ###
