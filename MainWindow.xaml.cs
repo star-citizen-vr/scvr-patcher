@@ -157,10 +157,18 @@ namespace SCVRPatcher {
 
                 Logger.Info($"Added HMDQ info to configDatabase");
             }
+            // If HMDQ info was successfully pulled, initialize fovcalc so that we can find the correct fov for the aspect ratio of the user's current main monitor resolution
             fovcalc.Initialize();
+            // Else, calculate alternative fov's for additional aspect ratios and resolutions that will be presented to the user as other options to choose from
+
+
             game.Initialize();
             InitializeComponent();
+
+            //If we fail to pull HMD information from HMDQ, we should present the user with a list of HMD's to choose from using the configDatabase
             FillHmds(configDatabase);
+
+
             stackpanel_config.Children.Clear(); vorpx = new();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;

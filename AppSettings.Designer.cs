@@ -11,7 +11,9 @@
 namespace SCVRPatcher {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGenerated
+        
+        ()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class AppSettings : global::System.Configuration.ApplicationSettingsBase {
         

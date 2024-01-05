@@ -101,7 +101,12 @@ else:
         # Put a dot where Target FOV crosses the outlier range prediction line
         plt.scatter(crossed_attributes_value_outlier, target_fov, color='black', marker='o', s=100)
         # Finalize the plot
-        plt.xlabel('attributes.xml FOV value')
+        plt.xlabel('
+
+
+
+
+s.xml FOV value')
         plt.ylabel('Actual Game Horizontal Degrees (Points on Whole Number)')
         plt.legend()
         plt.show()

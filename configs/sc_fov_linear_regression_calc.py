@@ -5,21 +5,30 @@ import matplotlib.pyplot as plt
 
 '''
 1:1
+6:5
 5:4
 4:3
+7:5
 3:2
 16:10
 27:16
 16:9
 256:135
+2:1
 64:27
 43:18
 12:5
+45:16
+3:1
 32:9
 4:1
 16:3
+80:9
 '''
 # Data for 1:1 aspect ratio
+
+
+# Data for 6:5 aspect ratio
 
 
 # Data for 5:4 aspect ratio
@@ -47,6 +56,9 @@ fov_4_3 = [
     69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
     90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
 ]
+
+# Data for 7:5 aspect ratio
+
 
 # Data for 3:2 aspect ratio
 poly_attributes_3_2 = [
@@ -153,6 +165,12 @@ fov_12_5 = [
     120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130
 ]
 
+# Data for 45:16 aspect ratio
+
+
+# Data for 3:1 aspect ratio
+
+
 # Data for 32:9 aspect ratio
 poly_attributes_32_9 = [
     54.7682, 55.7536, 56.7626, 57.796, 58.8547, 59.9396, 61.0517, 62.1919, 63.3614, 64.5611,
@@ -187,6 +205,9 @@ fov_16_3 = [
     140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156
 ]
 
+# Data for 80:9 aspect ratio
+
+
 # Your fixed FOV value
 fixed_fov = 72
 
@@ -195,8 +216,10 @@ outlier_attributes = np.array([15, 120]) # Extremes that attributes.xml can read
 
 '''
 1:1
+6:5
 5:4
 4:3
+7:5
 3:2
 16:10
 27:16
@@ -206,15 +229,20 @@ outlier_attributes = np.array([15, 120]) # Extremes that attributes.xml can read
 64:27
 43:18
 12:5
+45:16
+3:1
 32:9
 4:1
 16:3
+80:9
 '''
 
 # Convert to NumPy array
 #attributes_1_1 = np.array(poly_attributes_1_1).reshape(-1, 1)
+#attributes_6_5 = np.array(poly_attributes_6_5).reshape(-1, 1)
 attributes_5_4 = np.array(poly_attributes_5_4).reshape(-1, 1)
 attributes_4_3 = np.array(poly_attributes_4_3).reshape(-1, 1)
+#attributes_7_5 = np.array(poly_attributes_7_5).reshape(-1, 1)
 attributes_3_2 = np.array(poly_attributes_3_2).reshape(-1, 1)
 attributes_16_10 = np.array(poly_attributes_16_10).reshape(-1, 1)
 attributes_27_16 = np.array(poly_attributes_27_16).reshape(-1, 1)
@@ -224,9 +252,12 @@ attributes_256_135 = np.array(poly_attributes_256_135).reshape(-1, 1)
 attributes_64_27 = np.array(poly_attributes_64_27).reshape(-1, 1)
 attributes_43_18 = np.array(poly_attributes_43_18).reshape(-1, 1)
 attributes_12_5 = np.array(poly_attributes_12_5).reshape(-1, 1)
+#attributes_45_16 = np.array(poly_attributes_45_16).reshape(-1, 1)
+#attributes_3_1 = np.array(poly_attributes_3_1).reshape(-1, 1)
 attributes_32_9 = np.array(poly_attributes_32_9).reshape(-1, 1)
 attributes_4_1 = np.array(poly_attributes_4_1).reshape(-1, 1)
 attributes_16_3 = np.array(poly_attributes_16_3).reshape(-1, 1)
+#attributes_80_9 = np.array(poly_attributes_80_9).reshape(-1, 1)
 
 # Create polynomial features
 poly_degree = 2  # You can try different degrees
@@ -234,11 +265,17 @@ poly_degree = 2  # You can try different degrees
 #poly_features_1_1 = PolynomialFeatures(degree=poly_degree)
 #poly_attributes_1_1 = poly_features_1_1.fit_transform(attributes_1_1)
 
+#poly_features_6_5 = PolynomialFeatures(degree=poly_degree)
+#poly_attributes_6_5 = poly_features_6_5.fit_transform(attributes_6_5)
+
 poly_features_5_4 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_5_4 = poly_features_5_4.fit_transform(attributes_5_4)
 
 poly_features_4_3 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_4_3 = poly_features_4_3.fit_transform(attributes_4_3)
+
+#poly_features_7_5 = PolynomialFeatures(degree=poly_degree)
+#poly_attributes_7_5 = poly_features_7_5.fit_transform(attributes_7_5)
 
 poly_features_3_2 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_3_2 = poly_features_3_2.fit_transform(attributes_3_2)
@@ -267,6 +304,12 @@ poly_attributes_43_18 = poly_features_43_18.fit_transform(attributes_43_18)
 poly_features_12_5 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_12_5 = poly_features_12_5.fit_transform(attributes_12_5)
 
+#poly_features_45_16 = PolynomialFeatures(degree=poly_degree)
+#poly_attributes_45_16 = poly_features_45_16.fit_transform(attributes_45_16)
+
+#poly_features_3_1 = PolynomialFeatures(degree=poly_degree)
+#poly_attributes_3_1 = poly_features_3_1.fit_transform(attributes_3_1)
+
 poly_features_32_9 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_32_9 = poly_features_32_9.fit_transform(attributes_32_9)
 
@@ -276,10 +319,16 @@ poly_attributes_4_1 = poly_features_4_1.fit_transform(attributes_4_1)
 poly_features_16_3 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_16_3 = poly_features_16_3.fit_transform(attributes_16_3)
 
+#poly_features_80_9 = PolynomialFeatures(degree=poly_degree)
+#poly_attributes_80_9 = poly_features_80_9.fit_transform(attributes_80_9)
+
+
 # Fit the model
 #model_1_1 = LinearRegression().fit(poly_attributes_1_1, fov_1_1)
+#model_6_5 = LinearRegression().fit(poly_attributes_6_5, fov_6_5)
 model_5_4 = LinearRegression().fit(poly_attributes_5_4, fov_5_4)
 model_4_3 = LinearRegression().fit(poly_attributes_4_3, fov_4_3)
+#model_7_5 = LinearRegression().fit(poly_attributes_7_5, fov_7_5)
 model_3_2 = LinearRegression().fit(poly_attributes_3_2, fov_3_2)
 model_16_10 = LinearRegression().fit(poly_attributes_16_10, fov_16_10)
 model_27_16 = LinearRegression().fit(poly_attributes_27_16, fov_27_16)
@@ -289,14 +338,42 @@ model_256_135 = LinearRegression().fit(poly_attributes_256_135, fov_256_135)
 model_64_27 = LinearRegression().fit(poly_attributes_64_27, fov_64_27)
 model_43_18 = LinearRegression().fit(poly_attributes_43_18, fov_43_18)
 model_12_5 = LinearRegression().fit(poly_attributes_12_5, fov_12_5)
+#model_45_16 = LinearRegression().fit(poly_attributes_45_16, fov_45_16)
+#model_3_1 = LinearRegression().fit(poly_attributes_3_1, fov_3_1)
 model_32_9 = LinearRegression().fit(poly_attributes_32_9, fov_32_9)
 model_4_1 = LinearRegression().fit(poly_attributes_4_1, fov_4_1)
 model_16_3 = LinearRegression().fit(poly_attributes_16_3, fov_16_3)
+#model_80_9 = LinearRegression().fit(poly_attributes_80_9, fov_80_9)
+
+'''
+1:1
+6:5
+5:4
+4:3
+7:5
+3:2
+16:10
+27:16
+16:9
+256:135
+2:1
+64:27
+43:18
+12:5
+45:16
+3:1
+32:9
+4:1
+16:3
+80:9
+'''
 
 # Predict using the model
 #predicted_fov_1_1 = model_1_1.predict(poly_attributes_1_1)
+#predicted_fov_6_5 = model_6_5.predict(poly_attributes_6_5)
 predicted_fov_5_4 = model_5_4.predict(poly_attributes_5_4)
 predicted_fov_4_3 = model_4_3.predict(poly_attributes_4_3)
+#predicted_fov_7_5 = model_7_5.predict(poly_attributes_7_5)
 predicted_fov_3_2 = model_3_2.predict(poly_attributes_3_2)
 predicted_fov_16_10 = model_16_10.predict(poly_attributes_16_10)
 predicted_fov_27_16 = model_27_16.predict(poly_attributes_27_16)
@@ -306,14 +383,22 @@ predicted_fov_256_135 = model_256_135.predict(poly_attributes_256_135)
 predicted_fov_64_27 = model_64_27.predict(poly_attributes_64_27)
 predicted_fov_43_18 = model_43_18.predict(poly_attributes_43_18)
 predicted_fov_12_5 = model_12_5.predict(poly_attributes_12_5)
+#predicted_fov_45_16 = model_45_16.predict(poly_attributes_45_16)
+#predicted_fov_3_1 = model_3_1.predict(poly_attributes_3_1)
 predicted_fov_32_9 = model_32_9.predict(poly_attributes_32_9)
 predicted_fov_4_1 = model_4_1.predict(poly_attributes_4_1)
 predicted_fov_16_3 = model_16_3.predict(poly_attributes_16_3)
+#predicted_fov_80_9 = model_80_9.predict(poly_attributes_80_9)
 
 # Predict FOV for outlier attributes.xml values for 1:1 aspect ratio
 #outlier_attributes_1_1 = outlier_attributes.reshape(-1, 1)
 #poly_outlier_attributes_1_1 = poly_features_1_1.transform(outlier_attributes_1_1)
 #predicted_outlier_fov_1_1 = model_1_1.predict(poly_outlier_attributes_1_1)
+
+# Predict FOV for outlier attributes.xml values for 6:5 aspect ratio
+#outlier_attributes_6_5 = outlier_attributes.reshape(-1, 1)
+#poly_outlier_attributes_6_5 = poly_features_6_5.transform(outlier_attributes_6_5)
+#predicted_outlier_fov_6_5 = model_6_5.predict(poly_outlier_attributes_6_5)
 
 # Predict FOV for outlier attributes.xml values for 5:4 aspect ratio
 outlier_attributes_5_4 = outlier_attributes.reshape(-1, 1)
@@ -324,6 +409,11 @@ predicted_outlier_fov_5_4 = model_5_4.predict(poly_outlier_attributes_5_4)
 outlier_attributes_4_3 = outlier_attributes.reshape(-1, 1)
 poly_outlier_attributes_4_3 = poly_features_4_3.transform(outlier_attributes_4_3)
 predicted_outlier_fov_4_3 = model_4_3.predict(poly_outlier_attributes_4_3)
+
+# Predict FOV for outlier attributes.xml values for 7:5 aspect ratio
+#outlier_attributes_7_5 = outlier_attributes.reshape(-1, 1)
+#poly_outlier_attributes_7_5 = poly_features_7_5.transform(outlier_attributes_7_5)
+#predicted_outlier_fov_7_5 = model_7_5.predict(poly_outlier_attributes_7_5)
 
 # Predict FOV for outlier attributes.xml values for 3:2 aspect ratio
 outlier_attributes_3_2 = outlier_attributes.reshape(-1, 1)
@@ -370,6 +460,16 @@ outlier_attributes_12_5 = outlier_attributes.reshape(-1, 1)
 poly_outlier_attributes_12_5 = poly_features_12_5.transform(outlier_attributes_12_5)
 predicted_outlier_fov_12_5 = model_12_5.predict(poly_outlier_attributes_12_5)
 
+# Predict FOV for outlier attributes.xml values for 45:16 aspect ratio
+#outlier_attributes_45_16 = outlier_attributes.reshape(-1, 1)
+#poly_outlier_attributes_45_16 = poly_features_45_16.transform(outlier_attributes_45_16)
+#predicted_outlier_fov_45_16 = model_45_16.predict(poly_outlier_attributes_45_16)
+
+# Predict FOV for outlier attributes.xml values for 3:1 aspect ratio
+#outlier_attributes_3_1 = outlier_attributes.reshape(-1, 1)
+#poly_outlier_attributes_3_1 = poly_features_3_1.transform(outlier_attributes_3_1)
+#predicted_outlier_fov_3_1 = model_3_1.predict(poly_outlier_attributes_3_1)
+
 # Predict FOV for outlier attributes.xml values for 32:9 aspect ratio
 outlier_attributes_32_9 = outlier_attributes.reshape(-1, 1)
 poly_outlier_attributes_32_9 = poly_features_32_9.transform(outlier_attributes_32_9)
@@ -385,6 +485,11 @@ outlier_attributes_16_3 = outlier_attributes.reshape(-1, 1)
 poly_outlier_attributes_16_3 = poly_features_16_3.transform(outlier_attributes_16_3)
 predicted_outlier_fov_16_3 = model_16_3.predict(poly_outlier_attributes_16_3)
 
+# Predict FOV for outlier attributes.xml values for 80:9 aspect ratio
+#outlier_attributes_80_9 = outlier_attributes.reshape(-1, 1)
+#poly_outlier_attributes_80_9 = poly_features_80_9.transform(outlier_attributes_80_9)
+#predicted_outlier_fov_80_9 = model_80_9.predict(poly_outlier_attributes_80_9)
+
 # Prompt user to show outlier data or not
 user_input = input("Do you want to show outlier data? (yes/no): ").lower()
 
@@ -399,11 +504,17 @@ if user_input == 'yes':
     # Plot the outlier points for 1:1 aspect ratio
     #plt.scatter(outlier_attributes, predicted_outlier_fov_1_1, label='Outlier Predicted FOV (1:1)', color='dark pink', marker='x')
 
+    # Plot the outlier points for 6:5 aspect ratio
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_6_5, label='Outlier Predicted FOV (6:5)', color='dark green', marker='x')
+
     # Plot the outlier points for 5:4 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_5_4, label='Outlier Predicted FOV (5:4)', color='orange', marker='x')
 
     # Plot the outlier points for 4:3 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_4_3, label='Outlier Predicted FOV (4:3)', color='red', marker='x')
+
+    # Plot the outlier points for 7:5 aspect ratio
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_7_5, label='Outlier Predicted FOV (7:5)', color='dark purple', marker='x')
 
     # Plot the outlier points for 3:2 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_3_2, label='Outlier Predicted FOV (3:2)', color='maroon', marker='x')
@@ -432,6 +543,12 @@ if user_input == 'yes':
     # Plot the outlier points for 12:5 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_12_5, label='Outlier Predicted FOV (12:5)', color='#006400', marker='x')
 
+    # Plot the outlier points for 45:16 aspect ratio
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_45_16, label='Outlier Predicted FOV (45:16)', color='dark orange', marker='x')
+
+    # Plot the outlier points for 3:1 aspect ratio
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_3_1, label='Outlier Predicted FOV (3:1)', color='dark red', marker='x')
+
     # Plot the outlier points for 32:9 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_32_9, label='Outlier Predicted FOV (32:9)', color='blue', marker='x')
 
@@ -440,6 +557,9 @@ if user_input == 'yes':
 
     # Plot the outlier points for 16:3 aspect ratio
     plt.scatter(outlier_attributes, predicted_outlier_fov_16_3, label='Outlier Predicted FOV (16:3)', color='#8B0050', marker='x')
+
+    # Plot the outlier points for 80:9 aspect ratio
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_80_9, label='Outlier Predicted FOV (80:9)', color='dark cyan', marker='x')
 
 else:
     extension_range = np.linspace(min(attributes_32_9), max(attributes_32_9), num=100).reshape(-1, 1)
@@ -452,6 +572,10 @@ else:
 #poly_extension_range_1_1 = poly_features_1_1.transform(extension_range)
 #predicted_extension_fov_1_1 = model_1_1.predict(poly_extension_range_1_1)
     
+# Generate predictions for the extension range for 6:5 aspect ratio
+#poly_extension_range_6_5 = poly_features_6_5.transform(extension_range)
+#predicted_extension_fov_6_5 = model_6_5.predict(poly_extension_range_6_5)
+    
 # Generate predictions for the extension range for 5:4 aspect ratio
 poly_extension_range_5_4 = poly_features_5_4.transform(extension_range)
 predicted_extension_fov_5_4 = model_5_4.predict(poly_extension_range_5_4)
@@ -459,6 +583,10 @@ predicted_extension_fov_5_4 = model_5_4.predict(poly_extension_range_5_4)
 # Generate predictions for the extension range for 4:3 aspect ratio
 poly_extension_range_4_3 = poly_features_4_3.transform(extension_range)
 predicted_extension_fov_4_3 = model_4_3.predict(poly_extension_range_4_3)
+
+# Generate predictions for the extension range for 7:5 aspect ratio
+#poly_extension_range_7_5 = poly_features_7_5.transform(extension_range)
+#predicted_extension_fov_7_5 = model_7_5.predict(poly_extension_range_7_5)
 
 # Generate predictions for the extension range for 3:2 aspect ratio
 poly_extension_range_3_2 = poly_features_3_2.transform(extension_range)
@@ -496,6 +624,10 @@ predicted_extension_fov_43_18 = model_43_18.predict(poly_extension_range_43_18)
 poly_extension_range_12_5 = poly_features_12_5.transform(extension_range)
 predicted_extension_fov_12_5 = model_12_5.predict(poly_extension_range_12_5)
 
+# Generate predictions for the extension range for 45:16 aspect ratio
+#poly_extension_range_45_16 = poly_features_45_16.transform(extension_range)
+#predicted_extension_fov_45_16 = model_45_16.predict(poly_extension_range_45_16)
+
 # Generate predictions for the extension range for 32:9 aspect ratio
 poly_extension_range_32_9 = poly_features_32_9.transform(extension_range)
 predicted_extension_fov_32_9 = model_32_9.predict(poly_extension_range_32_9)
@@ -515,6 +647,10 @@ predicted_extension_fov_16_3 = model_16_3.predict(poly_extension_range_16_3)
 #plt.scatter(attributes_1_1, fov_1_1, label='1:1 Integer FOV degrees', color='dark pink')
 #plt.plot(attributes_1_1, predicted_fov_1_1, color='dark pink', linestyle='--', label='1:1 Predicted FOV')
 
+# Plot the results for 6:5 aspect ratio
+#plt.scatter(attributes_6_5, fov_6_5, label='6:5 Integer FOV degrees', color='dark green')
+#plt.plot(attributes_6_5, predicted_fov_6_5, color='dark green', linestyle='--', label='6:5 Predicted FOV')
+
 # Plot the results for 5:4 aspect ratio
 plt.scatter(attributes_5_4, fov_5_4, label='5:4 Integer FOV degrees', color='orange')
 plt.plot(attributes_5_4, predicted_fov_5_4, color='orange', linestyle='--', label='5:4 Predicted FOV')
@@ -522,6 +658,10 @@ plt.plot(attributes_5_4, predicted_fov_5_4, color='orange', linestyle='--', labe
 # Plot the results for 4:3 aspect ratio
 plt.scatter(attributes_4_3, fov_4_3, label='4:3 Integer FOV degrees', color='red')
 plt.plot(attributes_4_3, predicted_fov_4_3, color='red', linestyle='--', label='4:3 Predicted FOV')
+
+# Plot the results for 7:5 aspect ratio
+#plt.scatter(attributes_7_5, fov_7_5, label='7:5 Integer FOV degrees', color='dark purple')
+#plt.plot(attributes_7_5, predicted_fov_7_5, color='dark purple', linestyle='--', label='7:5 Predicted FOV')
 
 # Plot the results for 3:2 aspect ratio
 plt.scatter(attributes_3_2, fov_3_2, label='3:2 Integer FOV degrees', color='maroon')
@@ -559,6 +699,14 @@ plt.plot(attributes_43_18, predicted_fov_43_18, color='#FFD700', linestyle='--',
 plt.scatter(attributes_12_5, fov_12_5, label='12:5 Integer FOV degrees', color='#006400')
 plt.plot(attributes_12_5, predicted_fov_12_5, color='#006400', linestyle='--', label='12:5 Predicted FOV')
 
+# Plot the results for 45:16 aspect ratio
+#plt.scatter(attributes_45_16, fov_45_16, label='45:16 Integer FOV degrees', color='dark orange')
+#plt.plot(attributes_45_16, predicted_fov_45_16, color='dark orange', linestyle='--', label='45:16 Predicted FOV')
+
+# Plot the results for 3:1 aspect ratio
+#plt.scatter(attributes_3_1, fov_3_1, label='3:1 Integer FOV degrees', color='dark red')
+#plt.plot(attributes_3_1, predicted_fov_3_1, color='dark red', linestyle='--', label='3:1 Predicted FOV')
+
 # Plot the results for 32:9 aspect ratio
 plt.scatter(attributes_32_9, fov_32_9, label='32:9 Integer FOV degrees', color='blue')
 plt.plot(attributes_32_9, predicted_fov_32_9, color='blue', linestyle='--', label='32:9 Predicted FOV')
@@ -570,6 +718,10 @@ plt.plot(attributes_4_1, predicted_fov_4_1, color='#8B0000', linestyle='--', lab
 # Plot the results for 16:3 aspect ratio
 plt.scatter(attributes_16_3, fov_16_3, label='16:3 Integer FOV degrees', color='#8B0050')
 plt.plot(attributes_16_3, predicted_fov_16_3, color='#8B0050', linestyle='--', label='16:3 Predicted FOV')
+
+# Plot the results for 80:9 aspect ratio
+#plt.scatter(attributes_80_9, fov_80_9, label='80:9 Integer FOV degrees', color='dark cyan')
+#plt.plot(attributes_80_9, predicted_fov_80_9, color='dark cyan', linestyle='--', label='80:9 Predicted FOV')
 
 
 ### DRAW EXAMPLE HEADSET H-FOV ###
@@ -583,11 +735,17 @@ plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Quest 3 Example H-
 # Plot the extension range for 1:1 aspect ratio
 #plt.plot(extension_range, predicted_extension_fov_1_1, color='dark pink', linestyle='--')
 
+# Plot the extension range for 6:5 aspect ratio
+#plt.plot(extension_range, predicted_extension_fov_6_5, color='dark green', linestyle='--')
+
 # Plot the extension range for 5:4 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_5_4, color='orange', linestyle='--')
 
 # Plot the extension range for 4:3 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_4_3, color='red', linestyle='--')
+
+# Plot the extension range for 7:5 aspect ratio
+#plt.plot(extension_range, predicted_extension_fov_7_5, color='dark purple', linestyle='--')
 
 # Plot the extension range for 3:2 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_3_2, color='maroon', linestyle='--')
@@ -616,6 +774,12 @@ plt.plot(extension_range, predicted_extension_fov_43_18, color='#FFD700', linest
 # Plot the extension range for 12:5 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_12_5, color='#006400', linestyle='--')
 
+# Plot the extension range for 45:16 aspect ratio
+#plt.plot(extension_range, predicted_extension_fov_45_16, color='dark orange', linestyle='--')
+
+# Plot the extension range for 3:1 aspect ratio
+#plt.plot(extension_range, predicted_extension_fov_3_1, color='dark red', linestyle='--')
+
 # Plot the extension range for 32:9 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_32_9, color='blue', linestyle='--')
 
@@ -624,6 +788,65 @@ plt.plot(extension_range, predicted_extension_fov_4_1, color='#8B0000', linestyl
 
 # Plot the extension range for 16:3 aspect ratio
 plt.plot(extension_range, predicted_extension_fov_16_3, color='#8B0050', linestyle='--')
+
+# Plot the extension range for 80:9 aspect ratio
+#plt.plot(extension_range, predicted_extension_fov_80_9, color='dark cyan', linestyle='--')
+
+
+# Using all the data and predictions previously calculated, prompt the user for a new aspect ratio and predict the game-fov and attributes.xml fov for that new aspect ratio. Color that new aspect ratio's data and predictions in grey.
+# The user will input the data in this format (without the quotes): "width:height"
+
+# Prompt user for new aspect ratio
+user_input = input("Enter a new aspect ratio (width:height): ").lower()
+
+# Split the user input into width and height
+width, height = user_input.split(":")
+width = float(width)
+height = float(height)
+
+# Calculate the new aspect ratio
+aspect_ratio = width / height
+
+# List all aspect ratios as aspect_ratios, here is my list of aspect ratios in the following format without quotes "width:height": 1:1, 6:5, 5:4, 4:3, 7:5, 3:2, 16:10, 27:16, 16:9, 256:135, 2:1, 64:27, 43:18, 12:5, 45:16, 3:1, 32:9, 4:1, 16:3, 80:9
+aspect_ratios = ["1:1", "6:5", "5:4", "4:3", "7:5", "3:2", "16:10", "27:16", "16:9", "256:135", "2:1", "64:27", "43:18", "12:5", "45:16", "3:1", "32:9", "4:1", "16:3", "80:9"]
+
+# Plot new prediction points with "x" marker along "dashed" line colored in grey for the new aspect ratio based on all the predictions calculated previously
+# if aspect ratio isn't already in the list of aspect ratios, then calculate the new predictions and plot them
+# combine all models previously used so that the user can input any aspect ratio and get a prediction
+if aspect_ratio not in aspect_ratios:
+    # Add the new aspect ratio to the list of aspect ratios
+    aspect_ratios.append(aspect_ratio)
+
+    # Build a new model based on all poly_features and models previously used
+    poly_features_new_aspect = PolynomialFeatures(degree=2)
+    # Build a new model based on all model_w_h previously used
+    model_new_aspect = LinearRegression()
+
+    # Calculate the new predictions based on the width and height provided by the user
+    new_attributes = np.array([width, height])
+    new_attributes = new_attributes.reshape(-1, 1)
+    # Gather all aspect ratios used before, and build a new poly_features and model based on them
+    for i in range(len(aspect_ratios)):
+        width, height = aspect_ratios[i].split(":")
+        width = float(width)
+        height = float(height)
+        new_attributes = np.append(new_attributes, [[width], [height]], axis=0)
+        new_attributes = new_attributes.reshape(-1, 1)
+    poly_features_new_aspect = poly_features_new_aspect.fit(new_attributes)
+    poly_new_attributes = poly_features_new_aspect.transform(new_attributes)
+    model_new_aspect = model_new_aspect.fit(poly_new_attributes, fov)
+    predicted_new_fov = model_new_aspect.predict(poly_new_attributes)
+    predicted_new_attributes = model_new_aspect.predict(poly_new_attributes)
+
+
+
+    # Plot the new predictions
+    plt.scatter(new_attributes, predicted_new_fov, label=f'New Predicted FOV ({aspect_ratio:.2f})', color='grey', marker='x')
+    plt.scatter(predicted_new_attributes, predicted_new_fov, color='grey', marker='x')
+
+    # Print the new predictions
+    print(f'New Predicted FOV ({aspect_ratio:.2f}): {predicted_new_fov:.2f}')
+    print(f'New Predicted attributes.xml FOV ({aspect_ratio:.2f}): {predicted_new_attributes:.2f}')
 
 plt.xlabel('attributes.xml FOV value')
 plt.ylabel('Actual Game Horizontal Degrees (Points on Whole Number)')

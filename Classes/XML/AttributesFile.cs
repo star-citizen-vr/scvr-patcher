@@ -9,7 +9,12 @@ namespace SCVRPatcher {
         public static readonly List<string> attributesToRemove = new() {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
-        public static readonly Dictionary<string, object> attributesToSet = new() {
+        public static readonly Dictionary<string, object> 
+sToSet = new() {
+
+
+
+
             { "AutoZoomOnSelectedTarget", 0 },
             { "AutoZoomOnSelectedTargetStrength", 0 },
             { "CameraSpringMovement", 0 },

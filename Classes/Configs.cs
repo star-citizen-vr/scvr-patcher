@@ -10,7 +10,8 @@
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 
-namespace SCVRPatcher {
+namespace SCVRPatcher
+{
     using System;
     using System.Collections.Generic;
 
@@ -24,9 +25,10 @@ namespace SCVRPatcher {
     using System.Net.Http;
     using System.Text;
     using System.CodeDom;
-    using Brand = Dictionary < string, Dictionary<string, Dictionary<string, HmdConfig>>>;
+    using Brand = Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>>;
 
-    public partial class ConfigDataBase {
+    public partial class ConfigDataBase
+    {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -40,7 +42,8 @@ namespace SCVRPatcher {
         [JsonIgnore]
         public bool IsEmptyOrMissing => Brands is null || Brands.Count == 0;
 
-        public HmdConfig GetConfig(string brand, string hmd, string config) {
+        public HmdConfig GetConfig(string brand, string hmd, string config)
+        {
             Logger.Info($"Trying to get config for {brand}/{hmd}/{config}");
             var b = Brands.First(b => b.Key == brand);
             var h = b.Value.First(h => h.Key == hmd);
@@ -48,12 +51,17 @@ namespace SCVRPatcher {
             return c.Value;
         }
 
-        public List<string> GetPath(HmdConfig config) {
+        public List<string> GetPath(HmdConfig config)
+        {
             var path = new List<string>();
-            foreach (var brand in Brands) {
-                foreach (var hmd in brand.Value) {
-                    foreach (var c in hmd.Value) {
-                        if (c.Value == config) {
+            foreach (var brand in Brands)
+            {
+                foreach (var hmd in brand.Value)
+                {
+                    foreach (var c in hmd.Value)
+                    {
+                        if (c.Value == config)
+                        {
                             path.Add(brand.Key);
                             path.Add(hmd.Key);
                             path.Add(c.Key);
@@ -65,54 +73,73 @@ namespace SCVRPatcher {
             return path;
         }
 
-        public void ToFile(FileInfo file) {
+        public void ToFile(FileInfo file)
+        {
             File.WriteAllText(file.FullName, this.ToJson());
         }
 
-        public static ConfigDataBase? FromUrl(Uri uri) {
-            try {
-                using (var client = new HttpClient()) {
+        public static ConfigDataBase? FromUrl(Uri uri)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
                     Logger.Info($"Downloading available configs from {uri}...");
                     var response = client.GetAsync(uri).Result;
-                    if (response.IsSuccessStatusCode) {
+                    if (response.IsSuccessStatusCode)
+                    {
                         var json = response.Content.ReadAsStringAsync().Result;
                         return ConfigDataBase.FromJson(json);
-                    } else {
+                    }
+                    else
+                    {
                         throw new Exception($"Failed to download available configs! (Error {response.StatusCode})");
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Logger.Error(e);
             }
             return null;
         }
-        public static ConfigDataBase? FromFile(FileInfo file) {
-            if (!file.Exists) {
+        public static ConfigDataBase? FromFile(FileInfo file)
+        {
+            if (!file.Exists)
+            {
                 Logger.Error($"Config file not found: {file.Quote()}");
                 return null;
             }
-            try { File.ReadAllText(file.FullName); } catch (Exception e) {
+            try { File.ReadAllText(file.FullName); }
+            catch (Exception e)
+            {
                 Logger.Error($"Error reading file {file.Quote()}!", e);
             }
             var text = File.ReadAllText(file.FullName);
             Logger.Debug($"Read {text.Length} chars from {file.Quote()}");
             return FromJson(text);
         }
-        public static ConfigDataBase? FromJson(string json) {
-            try {
+        public static ConfigDataBase? FromJson(string json)
+        {
+            try
+            {
                 var db = JsonSerializer.Deserialize<ConfigDataBase>(json, Converter.Settings);
                 return db;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Logger.Error($"Error parsing json: {e} (Length: {json.Length})");
             }
             return null;
         }
     }
-    public static partial class Serialize {
+    public static partial class Serialize
+    {
         public static string ToJson(this ConfigDataBase self) => JsonSerializer.Serialize(self, Converter.Settings);
     }
 
-    public partial class Common {
+    public partial class Common
+    {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("Alternative Interger Resolutions (small list)")]
         public virtual List<Resolution> AlternativeIntergerResolutionsSmallList { get; set; }
@@ -126,7 +153,8 @@ namespace SCVRPatcher {
         public virtual List<Resolution> GiveMeAllTheResolutions { get; set; }
     }
 
-    public partial class Resolution {
+    public partial class Resolution
+    {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("w")]
         public virtual double? Width { get; set; }
@@ -140,22 +168,26 @@ namespace SCVRPatcher {
         [JsonPropertyName("p")]
         public virtual string? Percentage { get; set; }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             var sb = new StringBuilder($"{Width} x {Height}");
             if (!string.IsNullOrEmpty(Description)) sb.Append($" ({Description})");
             if (!string.IsNullOrEmpty(Percentage)) sb.Append($" {Percentage}%");
             return sb.ToString();
         }
 
-        public static bool operator >(Resolution a, Resolution b) {
+        public static bool operator >(Resolution a, Resolution b)
+        {
             return a.Width > b.Width || a.Height > b.Height;
         }
-        public static bool operator <(Resolution a, Resolution b) {
+        public static bool operator <(Resolution a, Resolution b)
+        {
             return a.Width < b.Width || a.Height < b.Height;
         }
     }
 
-    public partial class HmdConfig {
+    public partial class HmdConfig
+    {
 
         //[JsonIgnore]
         //public string Brand;
@@ -202,35 +234,39 @@ namespace SCVRPatcher {
 
         //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         //[JsonPropertyName("SC Attributes FOV")]
-        //public virtual long? ScAttributesFov { get; set; }
+        //public virtual long? Sc
+        sFov { get; set; }
 
-        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        //[JsonPropertyName("Notes")]
-        //public virtual List<string>? Notes { get; set; } = new();
 
-        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        //[JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
-        //public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
 
-        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        //[JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
-        //public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
 
-        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        //[JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
-        //public virtual double? VorpXConfigPixel11Zoom { get; set; }
+    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    //[JsonPropertyName("Notes")]
+    //public virtual List<string>? Notes { get; set; } = new();
 
-        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        //[JsonPropertyName("Custom Resolution List")]
-        //public virtual List<string> CustomResolutionList { get; set; } = new();
-        //public virtual List<string> CustomResolutionList { get; set; } = new();
-    }
+    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    //[JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
+    //public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
 
-    //public enum ErrorReportScFovCap120 { ScCanTNativelyRunYourHeadsetSFov, UseVorpXZoomFunction };
+    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    //[JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
+    //public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
 
-    //public enum VorpXConfigPixel11Zoom { WAwAwAw, YouWillNeedToFindThisSetting };
+    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    //[JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
+    //public virtual double? VorpXConfigPixel11Zoom { get; set; }
 
-    internal static class Converter {
+    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    //[JsonPropertyName("Custom Resolution List")]
+    //public virtual List<string> CustomResolutionList { get; set; } = new();
+    //public virtual List<string> CustomResolutionList { get; set; } = new();
+}
+
+//public enum ErrorReportScFovCap120 { ScCanTNativelyRunYourHeadsetSFov, UseVorpXZoomFunction };
+
+//public enum VorpXConfigPixel11Zoom { WAwAwAw, YouWillNeedToFindThisSetting };
+
+internal static class Converter {
         public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.General) {
             Converters =
             {
