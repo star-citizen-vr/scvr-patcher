@@ -49,7 +49,7 @@ fov_16_9 = [
 ]
 
 # Your fixed FOV value
-fixed_fov = 170
+fixed_fov = 120
 
 # Outlier attributes.xml values
 outlier_attributes = np.array([15, 120])
@@ -90,7 +90,7 @@ if should_plot_extension:
         extension_range = np.linspace(15, 120, num=100).reshape(-1, 1)
         poly_extension_range = poly_features.transform(extension_range)
         predicted_extension_fov = data["model"].predict(poly_extension_range)
-        plt.plot(extension_range, predicted_extension_fov, color=color, linestyle='--')
+        plt.plot(extension_range, predicted_extension_fov, color=color, linestyle='--', label=f'Extension Range ({ratio})')
 
         # Mark the ends (15, 120) with 'x' in the same color as the aspect ratio
         plt.scatter([15, 120], data["model"].predict(poly_features.transform([[15], [120]])), color=color, marker='x')

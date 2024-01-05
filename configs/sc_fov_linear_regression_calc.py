@@ -26,7 +26,15 @@ import matplotlib.pyplot as plt
 80:9
 '''
 # Data for 1:1 aspect ratio
+#poly_attributes_1_1 will list all whole integers between 54 to 84
+poly_attributes_1_1 = [ 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 
+                        64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 
+                        74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 
+                        84 ]
 
+fov_1_1 = [ 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 
+            65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 
+            75, 76, 77, 78, 79, 80, 81, 82, 83, 84 ]
 
 # Data for 6:5 aspect ratio
 
@@ -206,7 +214,11 @@ fov_16_3 = [
 ]
 
 # Data for 80:9 aspect ratio
+poly_attributes_80_9 = [55.782, 57.8813, 60.1213, 62.5152, 65.0774, 67.8238, 70.7722, 73.9416, 77.3531, 81.0293
+]
 
+fov_80_9 = [156, 157, 158, 159, 160, 161, 162, 163, 164, 165
+]
 
 # Your fixed FOV value
 fixed_fov = 72
@@ -238,7 +250,7 @@ outlier_attributes = np.array([15, 120]) # Extremes that attributes.xml can read
 '''
 
 # Convert to NumPy array
-#attributes_1_1 = np.array(poly_attributes_1_1).reshape(-1, 1)
+attributes_1_1 = np.array(poly_attributes_1_1).reshape(-1, 1)
 #attributes_6_5 = np.array(poly_attributes_6_5).reshape(-1, 1)
 attributes_5_4 = np.array(poly_attributes_5_4).reshape(-1, 1)
 attributes_4_3 = np.array(poly_attributes_4_3).reshape(-1, 1)
@@ -257,13 +269,13 @@ attributes_12_5 = np.array(poly_attributes_12_5).reshape(-1, 1)
 attributes_32_9 = np.array(poly_attributes_32_9).reshape(-1, 1)
 attributes_4_1 = np.array(poly_attributes_4_1).reshape(-1, 1)
 attributes_16_3 = np.array(poly_attributes_16_3).reshape(-1, 1)
-#attributes_80_9 = np.array(poly_attributes_80_9).reshape(-1, 1)
+attributes_80_9 = np.array(poly_attributes_80_9).reshape(-1, 1)
 
 # Create polynomial features
 poly_degree = 2  # You can try different degrees
 
-#poly_features_1_1 = PolynomialFeatures(degree=poly_degree)
-#poly_attributes_1_1 = poly_features_1_1.fit_transform(attributes_1_1)
+poly_features_1_1 = PolynomialFeatures(degree=poly_degree)
+poly_attributes_1_1 = poly_features_1_1.fit_transform(attributes_1_1)
 
 #poly_features_6_5 = PolynomialFeatures(degree=poly_degree)
 #poly_attributes_6_5 = poly_features_6_5.fit_transform(attributes_6_5)
@@ -319,12 +331,12 @@ poly_attributes_4_1 = poly_features_4_1.fit_transform(attributes_4_1)
 poly_features_16_3 = PolynomialFeatures(degree=poly_degree)
 poly_attributes_16_3 = poly_features_16_3.fit_transform(attributes_16_3)
 
-#poly_features_80_9 = PolynomialFeatures(degree=poly_degree)
-#poly_attributes_80_9 = poly_features_80_9.fit_transform(attributes_80_9)
+poly_features_80_9 = PolynomialFeatures(degree=poly_degree)
+poly_attributes_80_9 = poly_features_80_9.fit_transform(attributes_80_9)
 
 
 # Fit the model
-#model_1_1 = LinearRegression().fit(poly_attributes_1_1, fov_1_1)
+model_1_1 = LinearRegression().fit(poly_attributes_1_1, fov_1_1)
 #model_6_5 = LinearRegression().fit(poly_attributes_6_5, fov_6_5)
 model_5_4 = LinearRegression().fit(poly_attributes_5_4, fov_5_4)
 model_4_3 = LinearRegression().fit(poly_attributes_4_3, fov_4_3)
@@ -343,7 +355,7 @@ model_12_5 = LinearRegression().fit(poly_attributes_12_5, fov_12_5)
 model_32_9 = LinearRegression().fit(poly_attributes_32_9, fov_32_9)
 model_4_1 = LinearRegression().fit(poly_attributes_4_1, fov_4_1)
 model_16_3 = LinearRegression().fit(poly_attributes_16_3, fov_16_3)
-#model_80_9 = LinearRegression().fit(poly_attributes_80_9, fov_80_9)
+model_80_9 = LinearRegression().fit(poly_attributes_80_9, fov_80_9)
 
 '''
 1:1
@@ -369,7 +381,7 @@ model_16_3 = LinearRegression().fit(poly_attributes_16_3, fov_16_3)
 '''
 
 # Predict using the model
-#predicted_fov_1_1 = model_1_1.predict(poly_attributes_1_1)
+predicted_fov_1_1 = model_1_1.predict(poly_attributes_1_1)
 #predicted_fov_6_5 = model_6_5.predict(poly_attributes_6_5)
 predicted_fov_5_4 = model_5_4.predict(poly_attributes_5_4)
 predicted_fov_4_3 = model_4_3.predict(poly_attributes_4_3)
@@ -388,12 +400,12 @@ predicted_fov_12_5 = model_12_5.predict(poly_attributes_12_5)
 predicted_fov_32_9 = model_32_9.predict(poly_attributes_32_9)
 predicted_fov_4_1 = model_4_1.predict(poly_attributes_4_1)
 predicted_fov_16_3 = model_16_3.predict(poly_attributes_16_3)
-#predicted_fov_80_9 = model_80_9.predict(poly_attributes_80_9)
+predicted_fov_80_9 = model_80_9.predict(poly_attributes_80_9)
 
 # Predict FOV for outlier attributes.xml values for 1:1 aspect ratio
-#outlier_attributes_1_1 = outlier_attributes.reshape(-1, 1)
-#poly_outlier_attributes_1_1 = poly_features_1_1.transform(outlier_attributes_1_1)
-#predicted_outlier_fov_1_1 = model_1_1.predict(poly_outlier_attributes_1_1)
+outlier_attributes_1_1 = outlier_attributes.reshape(-1, 1)
+poly_outlier_attributes_1_1 = poly_features_1_1.transform(outlier_attributes_1_1)
+predicted_outlier_fov_1_1 = model_1_1.predict(poly_outlier_attributes_1_1)
 
 # Predict FOV for outlier attributes.xml values for 6:5 aspect ratio
 #outlier_attributes_6_5 = outlier_attributes.reshape(-1, 1)
@@ -486,9 +498,9 @@ poly_outlier_attributes_16_3 = poly_features_16_3.transform(outlier_attributes_1
 predicted_outlier_fov_16_3 = model_16_3.predict(poly_outlier_attributes_16_3)
 
 # Predict FOV for outlier attributes.xml values for 80:9 aspect ratio
-#outlier_attributes_80_9 = outlier_attributes.reshape(-1, 1)
-#poly_outlier_attributes_80_9 = poly_features_80_9.transform(outlier_attributes_80_9)
-#predicted_outlier_fov_80_9 = model_80_9.predict(poly_outlier_attributes_80_9)
+outlier_attributes_80_9 = outlier_attributes.reshape(-1, 1)
+poly_outlier_attributes_80_9 = poly_features_80_9.transform(outlier_attributes_80_9)
+predicted_outlier_fov_80_9 = model_80_9.predict(poly_outlier_attributes_80_9)
 
 # Prompt user to show outlier data or not
 user_input = input("Do you want to show outlier data? (yes/no): ").lower()
@@ -498,68 +510,130 @@ if user_input == 'yes':
     show_outliers = 'yes'
     extension_range = np.linspace(min(outlier_attributes), max(outlier_attributes), num=100).reshape(-1, 1)
 
+    ### Plot only the minimum outlier point with an 'x' ###
 
-    ### PLOT OUTLIER DATA ###
+    # Plot the minimum outlier point for 1:1 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_1_1[0], label='Min/Max H-FOV (1:1)', color='#AA336A', marker='x')
+
+    # Plot the minimum outlier point for 6:5 aspect ratio
+    #plt.scatter(min(outlier_attributes), predicted_outlier_fov_6_5[0], label='Min/Max H-FOV (6:5)', color='dark green', marker='x')
+
+    # Plot the minimum outlier point for 5:4 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_5_4[0], label='Min/Max H-FOV (5:4)', color='orange', marker='x')
+
+    # Plot the minimum outlier point for 4:3 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_4_3[0], label='Min/Max H-FOV (4:3)', color='red', marker='x')
+
+    # Plot the minimum outlier point for 7:5 aspect ratio
+    #plt.scatter(min(outlier_attributes), predicted_outlier_fov_7_5[0], label='Min/Max H-FOV (7:5)', color='dark purple', marker='x')
+
+    # Plot the minimum outlier point for 3:2 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_3_2[0], label='Min/Max H-FOV (3:2)', color='maroon', marker='x')
+
+    # Plot the minimum outlier point for 16:10 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_16_10[0], label='Min/Max H-FOV (16:10)', color='purple', marker='x')
+
+    # Plot the minimum outlier point for 27:16 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_27_16[0], label='Min/Max H-FOV (27:16)', color='pink', marker='x')
+
+    # Plot the minimum outlier point for 16:9 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_16_9[0], label='Min/Max H-FOV (16:9)', color='teal', marker='x')
+
+    # Plot the minimum outlier point for 256:135 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_256_135[0], label='Min/Max H-FOV (256:135)', color='cyan', marker='x')
+
+    # Plot the minimum outlier point for 2:1 aspect ratio
+    #plt.scatter(min(outlier_attributes), predicted_outlier_fov_2_1[0], label='Min/Max H-FOV (2:1)', color='dark blue', marker='x')
+
+    # Plot the minimum outlier point for 64:27 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_64_27[0], label='Min/Max H-FOV (64:27)', color='lime', marker='x')
+
+    # Plot the minimum outlier point for 43:18 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_43_18[0], label='Min/Max H-FOV (43:18)', color='#FFD700', marker='x')
+
+    # Plot the minimum outlier point for 12:5 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_12_5[0], label='Min/Max H-FOV (12:5)', color='#006400', marker='x')
+
+    # Plot the minimum outlier point for 45:16 aspect ratio
+    #plt.scatter(min(outlier_attributes), predicted_outlier_fov_45_16[0], label='Min/Max H-FOV (45:16)', color='dark orange', marker='x')
+
+    # Plot the minimum outlier point for 3:1 aspect ratio
+    #plt.scatter(min(outlier_attributes), predicted_outlier_fov_3_1[0], label='Min/Max H-FOV (3:1)', color='dark red', marker='x')
+
+    # Plot the minimum outlier point for 32:9 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_32_9[0], label='Min/Max H-FOV (32:9)', color='blue', marker='x')
+
+    # Plot the minimum outlier point for 4:1 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_4_1[0], label='Min/Max H-FOV (4:1)', color='#8B0000', marker='x')
+
+    # Plot the minimum outlier point for 16:3 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_16_3[0], label='Min/Max H-FOV (16:3)', color='#8B0050', marker='x')
+
+    # Plot the minimum outlier point for 80:9 aspect ratio
+    plt.scatter(min(outlier_attributes), predicted_outlier_fov_80_9[0], label='Min/Max H-FOV (80:9)', color='#008B8B', marker='x')
+
+    """### PLOT OUTLIER DATA ###
 
     # Plot the outlier points for 1:1 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_1_1, label='Outlier Predicted FOV (1:1)', color='dark pink', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_1_1, label='Min/Max (1:1)', color='#AA336A', marker='x')
 
     # Plot the outlier points for 6:5 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_6_5, label='Outlier Predicted FOV (6:5)', color='dark green', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_6_5, label='Min/Max (6:5)', color='dark green', marker='x')
 
     # Plot the outlier points for 5:4 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_5_4, label='Outlier Predicted FOV (5:4)', color='orange', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_5_4, label='Min/Max (5:4)', color='orange', marker='x')
 
     # Plot the outlier points for 4:3 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_4_3, label='Outlier Predicted FOV (4:3)', color='red', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_4_3, label='Min/Max (4:3)', color='red', marker='x')
 
     # Plot the outlier points for 7:5 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_7_5, label='Outlier Predicted FOV (7:5)', color='dark purple', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_7_5, label='Min/Max (7:5)', color='dark purple', marker='x')
 
     # Plot the outlier points for 3:2 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_3_2, label='Outlier Predicted FOV (3:2)', color='maroon', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_3_2, label='Min/Max (3:2)', color='maroon', marker='x')
 
     # Plot the outlier points for 16:10 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_16_10, label='Outlier Predicted FOV (16:10)', color='purple', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_16_10, label='Min/Max (16:10)', color='purple', marker='x')
 
     # Plot the outlier points for 27:16 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_27_16, label='Outlier Predicted FOV (27:16)', color='pink', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_27_16, label='Min/Max (27:16)', color='pink', marker='x')
 
     # Plot the outlier points for 16:9 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_16_9, label='Outlier Predicted FOV (16:9)', color='teal', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_16_9, label='Min/Max (16:9)', color='teal', marker='x')
 
     # Plot the outlier points for 256:135 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_256_135, label='Outlier Predicted FOV (256:135)', color='cyan', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_256_135, label='Min/Max (256:135)', color='cyan', marker='x')
 
     # Plot the outlier points for 2:1 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_2_1, label='Outlier Predicted FOV (2:1)', color='dark blue', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_2_1, label='Min/Max (2:1)', color='dark blue', marker='x')
 
     # Plot the outlier points for 64:27 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_64_27, label='Outlier Predicted FOV (64:27)', color='lime', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_64_27, label='Min/Max (64:27)', color='lime', marker='x')
 
     # Plot the outlier points for 43:18 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_43_18, label='Outlier Predicted FOV (43:18)', color='#FFD700', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_43_18, label='Min/Max (43:18)', color='#FFD700', marker='x')
 
     # Plot the outlier points for 12:5 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_12_5, label='Outlier Predicted FOV (12:5)', color='#006400', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_12_5, label='Min/Max (12:5)', color='#006400', marker='x')
 
     # Plot the outlier points for 45:16 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_45_16, label='Outlier Predicted FOV (45:16)', color='dark orange', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_45_16, label='Min/Max (45:16)', color='dark orange', marker='x')
 
     # Plot the outlier points for 3:1 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_3_1, label='Outlier Predicted FOV (3:1)', color='dark red', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_3_1, label='Min/Max (3:1)', color='dark red', marker='x')
 
     # Plot the outlier points for 32:9 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_32_9, label='Outlier Predicted FOV (32:9)', color='blue', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_32_9, label='Min/Max (32:9)', color='blue', marker='x')
 
     # Plot the outlier points for 4:1 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_4_1, label='Outlier Predicted FOV (4:1)', color='#8B0000', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_4_1, label='Min/Max (4:1)', color='#8B0000', marker='x')
 
     # Plot the outlier points for 16:3 aspect ratio
-    plt.scatter(outlier_attributes, predicted_outlier_fov_16_3, label='Outlier Predicted FOV (16:3)', color='#8B0050', marker='x')
+    plt.scatter(outlier_attributes, predicted_outlier_fov_16_3, label='Min/Max (16:3)', color='#8B0050', marker='x')
 
     # Plot the outlier points for 80:9 aspect ratio
-    #plt.scatter(outlier_attributes, predicted_outlier_fov_80_9, label='Outlier Predicted FOV (80:9)', color='dark cyan', marker='x')
+    #plt.scatter(outlier_attributes, predicted_outlier_fov_80_9, label='Min/Max (80:9)', color='#008B8B', marker='x')"""
+
 
 else:
     extension_range = np.linspace(min(attributes_32_9), max(attributes_32_9), num=100).reshape(-1, 1)
@@ -569,8 +643,8 @@ else:
 
 
 # Generate predictions for the extension range for 1:1 aspect ratio
-#poly_extension_range_1_1 = poly_features_1_1.transform(extension_range)
-#predicted_extension_fov_1_1 = model_1_1.predict(poly_extension_range_1_1)
+poly_extension_range_1_1 = poly_features_1_1.transform(extension_range)
+predicted_extension_fov_1_1 = model_1_1.predict(poly_extension_range_1_1)
     
 # Generate predictions for the extension range for 6:5 aspect ratio
 #poly_extension_range_6_5 = poly_features_6_5.transform(extension_range)
@@ -640,88 +714,92 @@ predicted_extension_fov_4_1 = model_4_1.predict(poly_extension_range_4_1)
 poly_extension_range_16_3 = poly_features_16_3.transform(extension_range)
 predicted_extension_fov_16_3 = model_16_3.predict(poly_extension_range_16_3)
 
+# Generate predictions for the extension range for 80:9 aspect ratio
+poly_extension_range_80_9 = poly_features_80_9.transform(extension_range)
+predicted_extension_fov_80_9 = model_80_9.predict(poly_extension_range_80_9)
+
 
 ### PLOT RESULTS ###
 
 # Plot the results for 1:1 aspect ratio
-#plt.scatter(attributes_1_1, fov_1_1, label='1:1 Integer FOV degrees', color='dark pink')
-#plt.plot(attributes_1_1, predicted_fov_1_1, color='dark pink', linestyle='--', label='1:1 Predicted FOV')
+plt.scatter(attributes_1_1, fov_1_1, label='1:1 Options presented to User', color='#AA336A')
+plt.plot(attributes_1_1, predicted_fov_1_1, color='#AA336A', linestyle='--', label='1:1 H-FOV to Attributes.xml Value')
 
 # Plot the results for 6:5 aspect ratio
-#plt.scatter(attributes_6_5, fov_6_5, label='6:5 Integer FOV degrees', color='dark green')
-#plt.plot(attributes_6_5, predicted_fov_6_5, color='dark green', linestyle='--', label='6:5 Predicted FOV')
+#plt.scatter(attributes_6_5, fov_6_5, label='6:5 Options presented to User', color='dark green')
+#plt.plot(attributes_6_5, predicted_fov_6_5, color='dark green', linestyle='--', label='6:5 H-FOV to Attributes.xml Value')
 
 # Plot the results for 5:4 aspect ratio
-plt.scatter(attributes_5_4, fov_5_4, label='5:4 Integer FOV degrees', color='orange')
-plt.plot(attributes_5_4, predicted_fov_5_4, color='orange', linestyle='--', label='5:4 Predicted FOV')
+plt.scatter(attributes_5_4, fov_5_4, label='5:4 Options presented to User', color='orange')
+plt.plot(attributes_5_4, predicted_fov_5_4, color='orange', linestyle='--', label='5:4 H-FOV to Attributes.xml Value')
 
 # Plot the results for 4:3 aspect ratio
-plt.scatter(attributes_4_3, fov_4_3, label='4:3 Integer FOV degrees', color='red')
-plt.plot(attributes_4_3, predicted_fov_4_3, color='red', linestyle='--', label='4:3 Predicted FOV')
+plt.scatter(attributes_4_3, fov_4_3, label='4:3 Options presented to User', color='red')
+plt.plot(attributes_4_3, predicted_fov_4_3, color='red', linestyle='--', label='4:3 H-FOV to Attributes.xml Value')
 
 # Plot the results for 7:5 aspect ratio
-#plt.scatter(attributes_7_5, fov_7_5, label='7:5 Integer FOV degrees', color='dark purple')
-#plt.plot(attributes_7_5, predicted_fov_7_5, color='dark purple', linestyle='--', label='7:5 Predicted FOV')
+#plt.scatter(attributes_7_5, fov_7_5, label='7:5 Options presented to User', color='dark purple')
+#plt.plot(attributes_7_5, predicted_fov_7_5, color='dark purple', linestyle='--', label='7:5 H-FOV to Attributes.xml Value')
 
 # Plot the results for 3:2 aspect ratio
-plt.scatter(attributes_3_2, fov_3_2, label='3:2 Integer FOV degrees', color='maroon')
-plt.plot(attributes_3_2, predicted_fov_3_2, color='maroon', linestyle='--', label='3:2 Predicted FOV')
+plt.scatter(attributes_3_2, fov_3_2, label='3:2 Options presented to User', color='maroon')
+plt.plot(attributes_3_2, predicted_fov_3_2, color='maroon', linestyle='--', label='3:2 H-FOV to Attributes.xml Value')
 
 # Plot the results for 16:10 aspect ratio
-plt.scatter(attributes_16_10, fov_16_10, label='16:10 Integer FOV degrees', color='purple')
-plt.plot(attributes_16_10, predicted_fov_16_10, color='purple', linestyle='--', label='16:10 Predicted FOV')
+plt.scatter(attributes_16_10, fov_16_10, label='16:10 Options presented to User', color='purple')
+plt.plot(attributes_16_10, predicted_fov_16_10, color='purple', linestyle='--', label='16:10 H-FOV to Attributes.xml Value')
 
 # Plot the results for 27:16 aspect ratio
-plt.scatter(attributes_27_16, fov_27_16, label='27:16 Integer FOV degrees', color='pink')
-plt.plot(attributes_27_16, predicted_fov_27_16, color='pink', linestyle='--', label='27:16 Predicted FOV')
+plt.scatter(attributes_27_16, fov_27_16, label='27:16 Options presented to User', color='pink')
+plt.plot(attributes_27_16, predicted_fov_27_16, color='pink', linestyle='--', label='27:16 H-FOV to Attributes.xml Value')
 
 # Plot the results for 16:9 aspect ratio
-plt.scatter(attributes_16_9, fov_16_9, label='16:9 Integer FOV degrees', color='teal')
-plt.plot(attributes_16_9, predicted_fov_16_9, color='teal', linestyle='--', label='16:9 Predicted FOV')
+plt.scatter(attributes_16_9, fov_16_9, label='16:9 Options presented to User', color='teal')
+plt.plot(attributes_16_9, predicted_fov_16_9, color='teal', linestyle='--', label='16:9 H-FOV to Attributes.xml Value')
 
 # Plot the results for 256:135 aspect ratio
-plt.scatter(attributes_256_135, fov_256_135, label='256:135 Integer FOV degrees', color='cyan')
-plt.plot(attributes_256_135, predicted_fov_256_135, color='cyan', linestyle='--', label='256:135 Predicted FOV')
+plt.scatter(attributes_256_135, fov_256_135, label='256:135 Options presented to User', color='cyan')
+plt.plot(attributes_256_135, predicted_fov_256_135, color='cyan', linestyle='--', label='256:135 H-FOV to Attributes.xml Value')
 
 # Plot the results for 2:1 aspect ratio
-#plt.scatter(attributes_2_1, fov_2_1, label='2:1 Integer FOV degrees', color='dark blue')
-#plt.plot(attributes_2_1, predicted_fov_2_1, color='dark blue', linestyle='--', label='2:1 Predicted FOV')
+#plt.scatter(attributes_2_1, fov_2_1, label='2:1 Options presented to User', color='dark blue')
+#plt.plot(attributes_2_1, predicted_fov_2_1, color='dark blue', linestyle='--', label='2:1 H-FOV to Attributes.xml Value')
 
 # Plot the results for 64:27 aspect ratio
-plt.scatter(attributes_64_27, fov_64_27, label='64:27 Integer FOV degrees', color='lime')
-plt.plot(attributes_64_27, predicted_fov_64_27, color='lime', linestyle='--', label='64:27 Predicted FOV')
+plt.scatter(attributes_64_27, fov_64_27, label='64:27 Options presented to User', color='lime')
+plt.plot(attributes_64_27, predicted_fov_64_27, color='lime', linestyle='--', label='64:27 H-FOV to Attributes.xml Value')
 
 # Plot the results for 43:18 aspect ratio
-plt.scatter(attributes_43_18, fov_43_18, label='43:18 Integer FOV degrees', color='#FFD700')
-plt.plot(attributes_43_18, predicted_fov_43_18, color='#FFD700', linestyle='--', label='43:18 Predicted FOV')
+plt.scatter(attributes_43_18, fov_43_18, label='43:18 Options presented to User', color='#FFD700')
+plt.plot(attributes_43_18, predicted_fov_43_18, color='#FFD700', linestyle='--', label='43:18 H-FOV to Attributes.xml Value')
 
 # Plot the results for 12:5 aspect ratio
-plt.scatter(attributes_12_5, fov_12_5, label='12:5 Integer FOV degrees', color='#006400')
-plt.plot(attributes_12_5, predicted_fov_12_5, color='#006400', linestyle='--', label='12:5 Predicted FOV')
+plt.scatter(attributes_12_5, fov_12_5, label='12:5 Options presented to User', color='#006400')
+plt.plot(attributes_12_5, predicted_fov_12_5, color='#006400', linestyle='--', label='12:5 H-FOV to Attributes.xml Value')
 
 # Plot the results for 45:16 aspect ratio
-#plt.scatter(attributes_45_16, fov_45_16, label='45:16 Integer FOV degrees', color='dark orange')
-#plt.plot(attributes_45_16, predicted_fov_45_16, color='dark orange', linestyle='--', label='45:16 Predicted FOV')
+#plt.scatter(attributes_45_16, fov_45_16, label='45:16 Options presented to User', color='dark orange')
+#plt.plot(attributes_45_16, predicted_fov_45_16, color='dark orange', linestyle='--', label='45:16 H-FOV to Attributes.xml Value')
 
 # Plot the results for 3:1 aspect ratio
-#plt.scatter(attributes_3_1, fov_3_1, label='3:1 Integer FOV degrees', color='dark red')
-#plt.plot(attributes_3_1, predicted_fov_3_1, color='dark red', linestyle='--', label='3:1 Predicted FOV')
+#plt.scatter(attributes_3_1, fov_3_1, label='3:1 Options presented to User', color='dark red')
+#plt.plot(attributes_3_1, predicted_fov_3_1, color='dark red', linestyle='--', label='3:1 H-FOV to Attributes.xml Value')
 
 # Plot the results for 32:9 aspect ratio
-plt.scatter(attributes_32_9, fov_32_9, label='32:9 Integer FOV degrees', color='blue')
-plt.plot(attributes_32_9, predicted_fov_32_9, color='blue', linestyle='--', label='32:9 Predicted FOV')
+plt.scatter(attributes_32_9, fov_32_9, label='32:9 Options presented to User', color='blue')
+plt.plot(attributes_32_9, predicted_fov_32_9, color='blue', linestyle='--', label='32:9 H-FOV to Attributes.xml Value')
 
 # Plot the results for 4:1 aspect ratio
-plt.scatter(attributes_4_1, fov_4_1, label='4:1 Integer FOV degrees', color='#8B0000')
-plt.plot(attributes_4_1, predicted_fov_4_1, color='#8B0000', linestyle='--', label='4:1 Predicted FOV')
+plt.scatter(attributes_4_1, fov_4_1, label='4:1 Options presented to User', color='#8B0000')
+plt.plot(attributes_4_1, predicted_fov_4_1, color='#8B0000', linestyle='--', label='4:1 H-FOV to Attributes.xml Value')
 
 # Plot the results for 16:3 aspect ratio
-plt.scatter(attributes_16_3, fov_16_3, label='16:3 Integer FOV degrees', color='#8B0050')
-plt.plot(attributes_16_3, predicted_fov_16_3, color='#8B0050', linestyle='--', label='16:3 Predicted FOV')
+plt.scatter(attributes_16_3, fov_16_3, label='16:3 Options presented to User', color='#8B0050')
+plt.plot(attributes_16_3, predicted_fov_16_3, color='#8B0050', linestyle='--', label='16:3 H-FOV to Attributes.xml Value')
 
 # Plot the results for 80:9 aspect ratio
-#plt.scatter(attributes_80_9, fov_80_9, label='80:9 Integer FOV degrees', color='dark cyan')
-#plt.plot(attributes_80_9, predicted_fov_80_9, color='dark cyan', linestyle='--', label='80:9 Predicted FOV')
+plt.scatter(attributes_80_9, fov_80_9, label='80:9 Options presented to User', color='#008B8B')
+plt.plot(attributes_80_9, predicted_fov_80_9, color='#008B8B', linestyle='--', label='80:9 H-FOV to Attributes.xml Value')
 
 
 ### DRAW EXAMPLE HEADSET H-FOV ###
@@ -733,7 +811,7 @@ plt.axhline(y=fixed_fov, color='grey', linestyle='-', label=f'Quest 3 Example H-
 ### PLOT EXTENSION RANGE ###
 
 # Plot the extension range for 1:1 aspect ratio
-#plt.plot(extension_range, predicted_extension_fov_1_1, color='dark pink', linestyle='--')
+plt.plot(extension_range, predicted_extension_fov_1_1, color='#AA336A', linestyle='--')
 
 # Plot the extension range for 6:5 aspect ratio
 #plt.plot(extension_range, predicted_extension_fov_6_5, color='dark green', linestyle='--')
@@ -790,65 +868,31 @@ plt.plot(extension_range, predicted_extension_fov_4_1, color='#8B0000', linestyl
 plt.plot(extension_range, predicted_extension_fov_16_3, color='#8B0050', linestyle='--')
 
 # Plot the extension range for 80:9 aspect ratio
-#plt.plot(extension_range, predicted_extension_fov_80_9, color='dark cyan', linestyle='--')
+plt.plot(extension_range, predicted_extension_fov_80_9, color='#008B8B', linestyle='--')
 
+# mark an 'x' on the top most value of the extension range for each aspect ratio
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_1_1)], np.max(predicted_extension_fov_1_1), marker='x', color='#AA336A')
+#plt.scatter(extension_range[np.argmax(predicted_extension_fov_6_5)], np.max(predicted_extension_fov_6_5), marker='x', color='dark green')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_5_4)], np.max(predicted_extension_fov_5_4), marker='x', color='orange')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_4_3)], np.max(predicted_extension_fov_4_3), marker='x', color='red')
+#plt.scatter(extension_range[np.argmax(predicted_extension_fov_7_5)], np.max(predicted_extension_fov_7_5), marker='x', color='dark purple')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_3_2)], np.max(predicted_extension_fov_3_2), marker='x', color='maroon')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_16_10)], np.max(predicted_extension_fov_16_10), marker='x', color='purple')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_27_16)], np.max(predicted_extension_fov_27_16), marker='x', color='pink')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_16_9)], np.max(predicted_extension_fov_16_9), marker='x', color='teal')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_256_135)], np.max(predicted_extension_fov_256_135), marker='x', color='cyan')
+#plt.scatter(extension_range[np.argmax(predicted_extension_fov_2_1)], np.max(predicted_extension_fov_2_1), marker='x', color='dark blue')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_64_27)], np.max(predicted_extension_fov_64_27), marker='x', color='lime')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_43_18)], np.max(predicted_extension_fov_43_18), marker='x', color='#FFD700')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_12_5)], np.max(predicted_extension_fov_12_5), marker='x', color='#006400')
+#plt.scatter(extension_range[np.argmax(predicted_extension_fov_45_16)], np.max(predicted_extension_fov_45_16), marker='x', color='dark orange')
+#plt.scatter(extension_range[np.argmax(predicted_extension_fov_3_1)], np.max(predicted_extension_fov_3_1), marker='x', color='dark red')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_32_9)], np.max(predicted_extension_fov_32_9), marker='x', color='blue')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_4_1)], np.max(predicted_extension_fov_4_1), marker='x', color='#8B0000')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_16_3)], np.max(predicted_extension_fov_16_3), marker='x', color='#8B0050')
+plt.scatter(extension_range[np.argmax(predicted_extension_fov_80_9)], np.max(predicted_extension_fov_80_9), marker='x', color='#008B8B')
 
-# Using all the data and predictions previously calculated, prompt the user for a new aspect ratio and predict the game-fov and attributes.xml fov for that new aspect ratio. Color that new aspect ratio's data and predictions in grey.
-# The user will input the data in this format (without the quotes): "width:height"
-
-# Prompt user for new aspect ratio
-user_input = input("Enter a new aspect ratio (width:height): ").lower()
-
-# Split the user input into width and height
-width, height = user_input.split(":")
-width = float(width)
-height = float(height)
-
-# Calculate the new aspect ratio
-aspect_ratio = width / height
-
-# List all aspect ratios as aspect_ratios, here is my list of aspect ratios in the following format without quotes "width:height": 1:1, 6:5, 5:4, 4:3, 7:5, 3:2, 16:10, 27:16, 16:9, 256:135, 2:1, 64:27, 43:18, 12:5, 45:16, 3:1, 32:9, 4:1, 16:3, 80:9
-aspect_ratios = ["1:1", "6:5", "5:4", "4:3", "7:5", "3:2", "16:10", "27:16", "16:9", "256:135", "2:1", "64:27", "43:18", "12:5", "45:16", "3:1", "32:9", "4:1", "16:3", "80:9"]
-
-# Plot new prediction points with "x" marker along "dashed" line colored in grey for the new aspect ratio based on all the predictions calculated previously
-# if aspect ratio isn't already in the list of aspect ratios, then calculate the new predictions and plot them
-# combine all models previously used so that the user can input any aspect ratio and get a prediction
-if aspect_ratio not in aspect_ratios:
-    # Add the new aspect ratio to the list of aspect ratios
-    aspect_ratios.append(aspect_ratio)
-
-    # Build a new model based on all poly_features and models previously used
-    poly_features_new_aspect = PolynomialFeatures(degree=2)
-    # Build a new model based on all model_w_h previously used
-    model_new_aspect = LinearRegression()
-
-    # Calculate the new predictions based on the width and height provided by the user
-    new_attributes = np.array([width, height])
-    new_attributes = new_attributes.reshape(-1, 1)
-    # Gather all aspect ratios used before, and build a new poly_features and model based on them
-    for i in range(len(aspect_ratios)):
-        width, height = aspect_ratios[i].split(":")
-        width = float(width)
-        height = float(height)
-        new_attributes = np.append(new_attributes, [[width], [height]], axis=0)
-        new_attributes = new_attributes.reshape(-1, 1)
-    poly_features_new_aspect = poly_features_new_aspect.fit(new_attributes)
-    poly_new_attributes = poly_features_new_aspect.transform(new_attributes)
-    model_new_aspect = model_new_aspect.fit(poly_new_attributes, fov)
-    predicted_new_fov = model_new_aspect.predict(poly_new_attributes)
-    predicted_new_attributes = model_new_aspect.predict(poly_new_attributes)
-
-
-
-    # Plot the new predictions
-    plt.scatter(new_attributes, predicted_new_fov, label=f'New Predicted FOV ({aspect_ratio:.2f})', color='grey', marker='x')
-    plt.scatter(predicted_new_attributes, predicted_new_fov, color='grey', marker='x')
-
-    # Print the new predictions
-    print(f'New Predicted FOV ({aspect_ratio:.2f}): {predicted_new_fov:.2f}')
-    print(f'New Predicted attributes.xml FOV ({aspect_ratio:.2f}): {predicted_new_attributes:.2f}')
-
-plt.xlabel('attributes.xml FOV value')
-plt.ylabel('Actual Game Horizontal Degrees (Points on Whole Number)')
+plt.xlabel('attributes.xml FOV value (Min 15, Max 120)')
+plt.ylabel('Actual Game Horizontal Degrees (whole numbers / degrees)')
 plt.legend()
 plt.show()
