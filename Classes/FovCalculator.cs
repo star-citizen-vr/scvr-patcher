@@ -92,7 +92,7 @@ namespace SCVRPatcher.Classes
             Logger.Info($"{nameof(FovCalculator)}");
 
             // pull main monitor resolution from the system
-            mainScreenResolution = Utils.GetMainScreenResolution();
+            //mainScreenResolution = Utils.GetMainScreenResolution();
 
             // use the current fov and render resolution from HMDQ to calculate the fov we need for the current main monitor resolution and aspect ratio
 
