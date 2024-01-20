@@ -363,7 +363,8 @@ namespace SCVRPatcher {
             if (name != null) {
                 FieldInfo field = type.GetField(name);
                 if (field != null) {
-                    Description
+                    //Check for Description Attributes in the Field
+                    DescriptionAttribute
                         attr = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
                     if (attr != null) {
                         return attr.Description;

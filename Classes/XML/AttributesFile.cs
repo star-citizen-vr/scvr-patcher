@@ -93,6 +93,8 @@ sToSet = new() {
         public override bool Patch(HmdConfig config, Resolution resolution) {
             Logger.Info($"Patching {File.FullName}");
             var changed = Remove(attributesToRemove);
+            // fix the next line
+            var attributesToSet = sToSet.Where(x => !Get(x.Key).Any()).ToDictionary(x => x.Key, x => x.Value);
             foreach (var item in attributesToSet) {
                 changed |= AddOrUpdate(item.Key, item.Value);
             }

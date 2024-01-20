@@ -235,7 +235,7 @@ namespace SCVRPatcher
         //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         //[JsonPropertyName("SC Attributes FOV")]
         //public virtual long? Sc
-        sFov { get; set; }
+        //sFOV { get; set; }
 
 
 
