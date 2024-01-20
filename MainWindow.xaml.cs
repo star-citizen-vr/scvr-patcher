@@ -136,6 +136,10 @@ namespace SCVRPatcher {
                         }
                     }
                 }
+                else
+                {
+                    Logger.Info("SteamVR or Oculus running!");
+                }
             }
             else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
@@ -143,13 +147,13 @@ namespace SCVRPatcher {
                 {
                     Fov = hmdq.VerticalFov,
                     CustomResolutions = new List<Resolution>() {
-                    new Resolution() {
-                        Height = hmdq.Height,
-                        Width = hmdq.Width,
-                        Description = "Pulled from HMDQ",
-                        Percentage = "100"
+                        new Resolution() {
+                           Height = hmdq.Height,
+                           Width = hmdq.Width,
+                           Description = "Pulled from HMDQ",
+                           Percentage = "100"
+                        }
                     }
-                }
                 };
                 var detectedHmd = new Dictionary<string, HmdConfig>() { { "Current", detectedHmdConfig } };
                 var detectedBrand = new Dictionary<string, Dictionary<string, HmdConfig>>() { { "Brand", detectedHmd } };
@@ -157,17 +161,9 @@ namespace SCVRPatcher {
 
                 Logger.Info($"Added HMDQ info to configDatabase");
             }
-
-            // IF HMDQ info was succeessfully pulled, take HMDQ V-FOV value and use it for attributes.xml
-
-
-            // If HMDQ info was not successfully pulled, initialize fovcalc so that we can find the correct fov for the aspect ratio of the user's current game resolution settings
             fovcalc.Initialize();
-            // Else, calculate alternative fov's for additional aspect ratios and resolutions that will be presented to the user as other options to choose from
             game.Initialize();
             InitializeComponent();
-
-            //If we fail to pull HMD information from HMDQ, we should present the user with a list of HMD's to choose from using the configDatabase
             FillHmds(configDatabase);
 
             stackpanel_config.Children.Clear(); vorpx = new();
