@@ -36,7 +36,6 @@ namespace SCVRPatcher {
         internal static Game game { get; private set; } = new();
         internal static VorpX vorpx { get; private set; } = new();
         internal static Hmdq hmdq { get; private set; } = new();
-        internal static FovCalculator fovcalc { get; private set; } = new();
 
         public static void SetupLogging() {
             var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
@@ -58,7 +57,7 @@ namespace SCVRPatcher {
 
 
             SetupLogging();
-            Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC, make sure to not hang here...
+            Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
             var parser = new CommandLineParser(args);
