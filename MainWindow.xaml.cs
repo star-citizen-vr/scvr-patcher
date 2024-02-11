@@ -58,7 +58,7 @@ namespace SCVRPatcher {
 
 
             SetupLogging();
-            Logger.Info($"Started {Application.Current.MainWindow.Title}");
+            Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC, make sure to not hang here...
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
             var parser = new CommandLineParser(args);
