@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCVRPatcher"
         mc:Ignorable="d"
-        Title="Star Citizen VR Patcher" Height="500" Width="1150">
+        Title="Star Citizen VR Patcher" Height="500" Width="1150" Loaded="Window_Loaded">
     <StackPanel Orientation="Vertical">
         <ToolBar >
             <Menu>

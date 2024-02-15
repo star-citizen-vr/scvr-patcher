@@ -17,7 +17,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 
 namespace SCVRPatcher {
     internal static class Extensions {
@@ -180,8 +180,8 @@ namespace SCVRPatcher {
 
         #region UI
 
-        public static IEnumerable<TreeNode> GetAllChilds(this TreeNodeCollection nodes) {
-            foreach (TreeNode node in nodes) {
+        public static IEnumerable<System.Windows.Forms.TreeNode> GetAllChilds(this System.Windows.Forms.TreeNodeCollection nodes) {
+            foreach (System.Windows.Forms.TreeNode node in nodes) {
                 yield return node;
 
                 foreach (var child in GetAllChilds(node.Nodes))
@@ -335,7 +335,7 @@ namespace SCVRPatcher {
                     System.Diagnostics.Process.Start(startInfo);
                 } catch (Exception ex2) {
                     Logger.Error(ex2);
-                    MessageBox.Show($"We were unable to open the URL\n{url.AbsoluteUri.Quote()}\nin your default browser!\n\nTherefor has been copied to your clipboard instead!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"We were unable to open the URL\n{url.AbsoluteUri.Quote()}\nin your default browser!\n\nTherefor has been copied to your clipboard instead!", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     Clipboard.SetText(url.AbsoluteUri);
                 }
             }

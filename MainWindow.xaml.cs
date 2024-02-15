@@ -166,6 +166,11 @@ namespace SCVRPatcher {
             // VRDisableButton.IsEnabled = true;
         }
 
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+
+        }
+
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool AllocConsole();
