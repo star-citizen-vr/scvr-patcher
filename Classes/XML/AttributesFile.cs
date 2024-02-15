@@ -11,10 +11,6 @@ namespace SCVRPatcher {
         };
         public static readonly Dictionary<string, object>
         sToSet = new() {
-
-
-
-
             { "AutoZoomOnSelectedTarget", 0 },
             { "AutoZoomOnSelectedTargetStrength", 0 },
             { "CameraSpringMovement", 0 },
