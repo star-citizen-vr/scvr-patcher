@@ -49,13 +49,11 @@ namespace SCVRPatcher {
         }
 
         public MainWindow() {
-
             var assembly = typeof(MainWindow).Assembly;
             var attributes = assembly.GetCustomAttributes(false);
             var title = attributes.OfType<System.Reflection.AssemblyTitleAttribute>().FirstOrDefault();
             var version = attributes.OfType<System.Reflection.AssemblyFileVersionAttribute>().FirstOrDefault();
             var repositoryUrl = attributes.OfType<System.Reflection.AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl");
-
 
             SetupLogging();
             Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
@@ -84,6 +82,10 @@ namespace SCVRPatcher {
                     Utils.RestartAsAdmin(args);
                 else MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
             var pageFiles = Utils.GetPageFileSizes();
             foreach (var pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
@@ -164,11 +166,6 @@ namespace SCVRPatcher {
             stackpanel_config.Children.Clear();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
-        }
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
