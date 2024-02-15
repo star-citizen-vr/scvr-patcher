@@ -172,6 +172,18 @@ namespace SCVRPatcher {
             stackpanel_config.Children.Clear();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
+
+            // This checkbox thing... breaking my brain...
+
+            //if (ChangeResolutionCheckbox.IsChecked == true) {
+            //    Logger.Info("ChangeResolutionCheckbox is checked");
+            //    // set a variable that a user wants to change the resolution to match their hmd
+            //    var useHMDResolution = true;
+            //    } else
+            //{
+            //       Logger.Info("ChangeResolutionCheckbox is not checked");
+            //    var useHMDResolution = false;
+            //}
             this.Height = oldHeight; this.Width = oldWidth; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
         }
 

@@ -104,12 +104,14 @@ namespace SCVRPatcher {
             }
             if (config.Fov is not null) changed |= AddOrUpdate("FOV", config.Fov);
             // TODO: Add a way to change resolution based on if user checks a checkbox, see below
-            if (config.ChangeResolutionCheckbox is true) {
-                Logger.Info("Changing resolution to match HMD");
-                if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
-                if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
-                Logger.Info($"Changed resolution to {resolution.Width}x{resolution.Height}");
-            }
+            // I'm not able to figure out how to get the 'isChecked' to work here....
+
+            //if { 
+            //Logger.Info("Changing resolution to match HMD");
+            //    if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
+            //    if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
+            //    Logger.Info($"Changed resolution to {resolution.Width}x{resolution.Height}");
+            //}
             if (changed) {
                 Save();
                 Logger.Info($"Patched {File.FullName}");
