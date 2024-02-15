@@ -216,6 +216,10 @@ namespace SCVRPatcher
         [JsonPropertyName("Custom Resolution List")]
         public virtual List<Resolution> CustomResolutions { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("Change Resolution Checkbox")]
+        public virtual bool? ChangeResolutionCheckbox { get; set; }
+
         //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         //[JsonPropertyName("Headset Name")]
         //public virtual string HeadsetName { get; set; }
@@ -240,33 +244,33 @@ namespace SCVRPatcher
 
 
 
-    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    //[JsonPropertyName("Notes")]
-    //public virtual List<string>? Notes { get; set; } = new();
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Notes")]
+        //public virtual List<string>? Notes { get; set; } = new();
 
-    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    //[JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
-    //public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Suggested Minimum VorpX Pixel 1:1 Zoom")]
+        //public virtual double? SuggestedMinimumVorpXPixel11Zoom { get; set; }
 
-    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    //[JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
-    //public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Suggested Maximum VorpX Pixel 1:1 Zoom")]
+        //public virtual double? SuggestedMaximumVorpXPixel11Zoom { get; set; }
 
-    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    //[JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
-    //public virtual double? VorpXConfigPixel11Zoom { get; set; }
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("VorpX Config Pixel 1:1 Zoom")]
+        //public virtual double? VorpXConfigPixel11Zoom { get; set; }
 
-    //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    //[JsonPropertyName("Custom Resolution List")]
-    //public virtual List<string> CustomResolutionList { get; set; } = new();
-    //public virtual List<string> CustomResolutionList { get; set; } = new();
-}
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        //[JsonPropertyName("Custom Resolution List")]
+        //public virtual List<string> CustomResolutionList { get; set; } = new();
+        //public virtual List<string> CustomResolutionList { get; set; } = new();
+    }
 
-//public enum ErrorReportScFovCap120 { ScCanTNativelyRunYourHeadsetSFov, UseVorpXZoomFunction };
+    //public enum ErrorReportScFovCap120 { ScCanTNativelyRunYourHeadsetSFov, UseVorpXZoomFunction };
 
-//public enum VorpXConfigPixel11Zoom { WAwAwAw, YouWillNeedToFindThisSetting };
+    //public enum VorpXConfigPixel11Zoom { WAwAwAw, YouWillNeedToFindThisSetting };
 
-internal static class Converter {
+    internal static class Converter {
         public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.General) {
             Converters =
             {
