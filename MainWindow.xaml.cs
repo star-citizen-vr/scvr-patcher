@@ -173,7 +173,9 @@ namespace SCVRPatcher {
         public void LoadAvailableConfigs(Uri availableConfigsUrl, FileInfo availableConfigsFile) {
             //Logger.Info($"Loading config from Url: {availableConfigsUrl}");
             var onlineConfigs = ConfigDataBase.FromUrl(availableConfigsUrl);
+            Logger.Debug($"onlineConfigs: null={onlineConfigs == null} IsEmptyOrMissing={onlineConfigs?.IsEmptyOrMissing} ({availableConfigsUrl})");
             var offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
+            Logger.Debug($"offlineConfigs: null={offlineConfigs == null} IsEmptyOrMissing={offlineConfigs?.IsEmptyOrMissing} ({availableConfigsFile})");
             if (onlineConfigs != null) {
                 Logger.Debug($"onlineConfigs available");
                 if (onlineConfigs != offlineConfigs) {
