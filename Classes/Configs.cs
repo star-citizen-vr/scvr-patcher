@@ -217,7 +217,7 @@ namespace SCVRPatcher
         public virtual List<Resolution> CustomResolutions { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        [JsonPropertyName("Change Resolution Checkbox")]
+        [JsonPropertyName("Change Game Window Resolution Checkbox")]
         public virtual bool? ChangeResolutionCheckbox { get; set; }
 
         //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
