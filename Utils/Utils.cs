@@ -166,7 +166,7 @@ namespace SCVRPatcher {
         }*/
 
         public static bool IsAlreadyRunning(string appName) {
-            System.Threading.Mutex m = new System.Threading.Mutex(false, appName);
+            Mutex m = new Mutex(false, appName);
             if (m.WaitOne(1, false) == false) {
                 return true;
             }

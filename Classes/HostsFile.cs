@@ -81,6 +81,7 @@ namespace SCVRPatcher {
 
         public void Save(FileInfo file = null, bool backup = true) {
             file ??= HostFile;
+            var original_file = new FileInfo(file.FullName); // This is a workaround for a bug in the File.MoveTo method idk valve pls fix
             Logger.Info($"Saving hosts file to {file.Quote()}");
             if (file.Exists && backup) {
                 var backupFile = new FileInfo(file.FullName + ".bak");
@@ -88,8 +89,8 @@ namespace SCVRPatcher {
                 if (backupFile.Exists) backupFile.Delete();
                 file.MoveTo(backupFile.FullName);
             } // Why is this buggy?
-            File.WriteAllText(file.FullName, this.ToString());
-            Logger.Info($"Saved hosts file to {file.Quote()}");
+            File.WriteAllText(original_file.FullName, this.ToString());
+            Logger.Info($"Saved hosts file to {original_file.Quote()}");
         }
 
         public List<HostsEntry> Load(FileInfo file = null) {
