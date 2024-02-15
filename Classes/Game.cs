@@ -47,21 +47,17 @@ namespace SCVRPatcher {
             return true;
         }
 
-        public bool Unpatch()
-        {
-            foreach (var buildDir in BuildDirectories)
-            {
+        public bool Unpatch() {
+            foreach (var buildDir in BuildDirectories) {
                 Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.ToFullString()})");
                 var profileDir = buildDir.Value.Combine("user", "Client", "0", "Profiles", "default");
                 var attributesFile = profileDir.CombineFile("attributes.xml");
-                if (!attributesFile.Exists)
-                {
+                if (!attributesFile.Exists) {
                     Logger.Error($"Could not find {attributesFile.Quote()}!");
                     continue;
                 }
                 var attributes = new AttributesFile(attributesFile);
-                if (!attributes.Unpatch())
-                {
+                if (!attributes.Unpatch()) {
                     Logger.Error($"Failed to unpatch {attributesFile.Quote()}!");
                     continue;
                 }
@@ -69,7 +65,7 @@ namespace SCVRPatcher {
             return true;
         }
 
-            public DirectoryInfo? GetLastUsedGameRootDir() {
+        public DirectoryInfo? GetLastUsedGameRootDir() {
             if (string.IsNullOrWhiteSpace(AppSettings.Default.gameRootDir)) return null;
             var dir = new DirectoryInfo(AppSettings.Default.gameRootDir);
             return dir.Exists ? dir : null;
@@ -111,7 +107,11 @@ namespace SCVRPatcher {
             var subDirNames = string.Join(", ", BuildDirectoryNames);
             dialog.Title = $"Select Star Citizen's root directory (Containing {subDirNames})";
             var result = dialog.ShowDialog();
-            if (result != CommonFileDialogResult.Ok) Environment.Exit(0);
+            if (result != CommonFileDialogResult.Ok) {
+                Logger.Warn("User cancelled directory selection, exiting...");
+                MessageBox.Show("You must select a directory!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(0);
+            }
             Logger.Debug($"User selected directory: {dialog.FileName}");
             var dir = new DirectoryInfo(dialog.FileName);
             if (!dir.Exists) {

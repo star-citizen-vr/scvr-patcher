@@ -33,10 +33,10 @@ namespace SCVRPatcher {
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
 
         internal static ConfigDataBase configDatabase { get; private set; }
-        internal static EAC eac { get; private set; } = new();
-        internal static Game game { get; private set; } = new();
-        internal static VorpX vorpx { get; private set; } = new();
-        internal static Hmdq hmdq { get; private set; } = new();
+        internal static EAC eac { get; private set; }
+        internal static Game game { get; private set; }
+        internal static VorpX vorpx { get; private set; }
+        internal static Hmdq hmdq { get; private set; }
 
         public static void SetupLogging() {
             var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
@@ -79,74 +79,68 @@ namespace SCVRPatcher {
             }
             if (!parser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
                 Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
-                Utils.RestartAsAdmin(args);
+                var result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                    Utils.RestartAsAdmin(args);
+                else MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             var pageFiles = Utils.GetPageFileSizes();
             foreach (var pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
             }
 
+            eac = new();
+            game = new();
             vorpx = new();
+            hmdq = new();
             vorpx.Load();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             hmdq.Initialize();
             hmdq.RunHmdq();
-            if (hmdq.IsEmpty)
-            {
+            if (hmdq.IsEmpty) {
                 Logger.Error("Failed to get HMD info through HMDQ!");
                 var isSteamVRRunning = Process.GetProcessesByName("vrmonitor").Length > 0;
                 var isOculusRunning = Process.GetProcessesByName("OVRServer_x64").Length > 0;
-                if (!isSteamVRRunning && !isOculusRunning)
-                {
+                if (!isSteamVRRunning && !isOculusRunning) {
                     Logger.Error("SteamVR or Oculus not running!");
                     //var _ = MessageBox.Show("SteamVR or Oculus not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     // present user with option to start SteamVR or continue without starting either
                     var result = System.Windows.MessageBox.Show("Oculus not running! Start Oculus?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                    if (result == MessageBoxResult.Yes)
-                    {
+                    if (result == MessageBoxResult.Yes) {
                         // start Oculus with oculus:// uri protocol
                         Logger.Info("Starting Oculus!");
                         var oculusUri = new Uri("oculus://");
                         oculusUri.OpenInDefaultBrowser();
                         // wait for Oculus process to start and then continue
                         var oculusProcess = Process.GetProcessesByName("OVRServer_x64");
-                        while (oculusProcess.Length == 0)
-                        {
+                        while (oculusProcess.Length == 0) {
                             System.Threading.Thread.Sleep(1000);
                             oculusProcess = Process.GetProcessesByName("OVRServer_x64");
                         }
                         // ToDo: initialize HMDQ again
-                    }
-                    else
-                    {
+                    } else {
                         result = MessageBox.Show("SteamVR not running! Start SteamVR?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                        if (result == MessageBoxResult.Yes)
-                        {
+                        if (result == MessageBoxResult.Yes) {
                             // start SteamVR with steam://run/250820
                             Logger.Info("Starting SteamVR!");
                             var steamUri = new Uri("steam://run/250820");
                             steamUri.OpenInDefaultBrowser();
                             // wait for SteamVR process to start and then continue
                             var steamProcess = Process.GetProcessesByName("vrmonitor");
-                            while (steamProcess.Length == 0)
-                            {
+                            while (steamProcess.Length == 0) {
                                 System.Threading.Thread.Sleep(1000);
                                 steamProcess = Process.GetProcessesByName("vrmonitor");
                             }
                             // ToDo: initialize HMDQ again
                         }
                     }
-                }
-                else
-                {
+                } else {
                     Logger.Info("SteamVR or Oculus running!");
                 }
-            }
-            else {
+            } else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
-                var detectedHmdConfig = new HmdConfig()
-                {
+                var detectedHmdConfig = new HmdConfig() {
                     Fov = hmdq.VerticalFov,
                     CustomResolutions = new List<Resolution>() {
                         new Resolution() {
@@ -167,7 +161,7 @@ namespace SCVRPatcher {
             InitializeComponent();
             FillHmds(configDatabase);
 
-            stackpanel_config.Children.Clear(); 
+            stackpanel_config.Children.Clear();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }
@@ -219,8 +213,7 @@ namespace SCVRPatcher {
             }
             foreach (var brand in db.Brands) {
                 var brandItem = new TreeViewItem() { Header = brand.Key };
-                if (brand.Key == "Detected")
-                {
+                if (brand.Key == "Detected") {
                     var redBrush = new SolidColorBrush(Colors.DarkGreen);
                     brandItem.Foreground = redBrush;
                 }
