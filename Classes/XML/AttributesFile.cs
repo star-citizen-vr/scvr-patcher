@@ -11,10 +11,6 @@ namespace SCVRPatcher {
         };
         public static readonly Dictionary<string, object> 
         sToSet = new() {
-
-
-
-
             { "AutoZoomOnSelectedTarget", 0 },
             { "AutoZoomOnSelectedTargetStrength", 0 },
             { "CameraSpringMovement", 0 },
@@ -118,7 +114,6 @@ namespace SCVRPatcher {
         public override bool Unpatch() {
             Logger.Info($"Unpatching {File.FullName}");
             File.Restore(); // TODO: Inform the user, that changing attributes settings while VR enabled, will not save when attributes are reverted. Add a way for new attributes to get saved to the old file... or something
-                            // TODO: Unpatch host file changes
             //Save();
             Logger.Info($"Unpatched {File.FullName}");
             return true;
