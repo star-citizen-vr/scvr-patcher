@@ -43,10 +43,10 @@ namespace SCVRPatcher {
         public static void PatchHostsFile(bool backup = true) {
             if (!Utils.IsAdmin()) {
                 var hostsLine = $"{HostsFile.Localhost} {AppSettings.Default.EACHostName} # {AppSettings.Default.EACComment}";
-                var result = MessageBox.Show($"Since you did not start this program as Administrator, you will now have to open\n\n{HostsFile.HostFile.Quote()}\n\nand add the following line:\n\n{hostsLine}\n\nWhen you click on OK it will be copied to your clipboard and the hosts file will be opened for editing.", "Manual edit required", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                var result = MessageBox.Show($"Since you did not start this program as Administrator, you will now have to open\n\n{HostsFile.HostFile.Quote()}\n\nand add the following line:\n\n{hostsLine}\n\nWhen you click on OK it will be copied to your clipboard and the hosts file will be opened in explorer.", "Manual edit required", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (result == DialogResult.OK) {
                     System.Windows.Forms.Clipboard.SetText(hostsLine);
-                    HostsFile.HostFile.OpenWithDefaultApp();
+                    HostsFile.HostFile.ShowInExplorer();
                 }
                 return;
             }
