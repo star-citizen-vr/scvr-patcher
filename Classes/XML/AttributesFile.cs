@@ -10,7 +10,7 @@ namespace SCVRPatcher {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
         public static readonly Dictionary<string, object> 
-sToSet = new() {
+        sToSet = new() {
 
 
 
@@ -93,18 +93,20 @@ sToSet = new() {
         public override bool Patch(HmdConfig config, Resolution resolution) {
             Logger.Info($"Patching {File.FullName}");
             var changed = Remove(attributesToRemove);
+            Logger.Info($"Removed {attributesToRemove.Count} attributes.");
             // fix the next line
             var attributesToSet = sToSet.Where(x => !Get(x.Key).Any()).ToDictionary(x => x.Key, x => x.Value);
             foreach (var item in attributesToSet) {
                 changed |= AddOrUpdate(item.Key, item.Value);
+                Logger.Info($"Set attribute: {item.Key} to {item.Value}");
             }
             if (config.Fov is not null) changed |= AddOrUpdate("FOV", config.Fov);
-            // TODO: Add a way to change resolution based on if user checks a checkbox
-            if (config.ChangeResolutionCheckbox is true)
-            {
+            // TODO: Add a way to change resolution based on if user checks a checkbox, see below
+            if (config.ChangeResolutionCheckbox is true) {
                 Logger.Info("Changing resolution to match HMD");
                 if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
                 if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
+                Logger.Info($"Changed resolution to {resolution.Width}x{resolution.Height}");
             }
             if (changed) {
                 Save();
