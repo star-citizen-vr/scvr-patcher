@@ -9,7 +9,7 @@ namespace SCVRPatcher {
         public static readonly List<string> attributesToRemove = new() {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
-        public static readonly Dictionary<string, object> 
+        public static readonly Dictionary<string, object>
         sToSet = new() {
 
 
@@ -95,7 +95,13 @@ namespace SCVRPatcher {
             var changed = Remove(attributesToRemove);
             Logger.Info($"Removed {attributesToRemove.Count} attributes.");
             // fix the next line
-            var attributesToSet = sToSet.Where(x => !Get(x.Key).Any()).ToDictionary(x => x.Key, x => x.Value);
+            var attributesToSet = new Dictionary<string, object>(); // sToSet.Where(x => !Get(x.Key).Any()).ToDictionary(x => x.Key, x => x.Value);
+            foreach (var attribute in sToSet) {
+                var existingAttributes = Get(attribute.Key);
+                if (existingAttributes.Count > 0) {
+                    attributesToSet.Add(attribute.Key, attribute.Value);
+                }
+            }
             foreach (var item in attributesToSet) {
                 changed |= AddOrUpdate(item.Key, item.Value);
                 Logger.Info($"Set attribute: {item.Key} to {item.Value}");
@@ -119,7 +125,7 @@ namespace SCVRPatcher {
             Logger.Info($"Unpatching {File.FullName}");
             File.Restore(); // TODO: Inform the user, that changing attributes settings while VR enabled, will not save when attributes are reverted. Add a way for new attributes to get saved to the old file... or something
                             // TODO: Unpatch host file changes
-            //Save();
+                            //Save();
             Logger.Info($"Unpatched {File.FullName}");
             return true;
         }
