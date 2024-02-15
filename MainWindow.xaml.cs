@@ -31,6 +31,7 @@ namespace SCVRPatcher {
         internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
         internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
+        internal static CommandLineParser CommandLineParser { get; private set; }
 
         internal static ConfigDataBase configDatabase { get; private set; }
         internal static EAC eac { get; private set; }
@@ -59,8 +60,8 @@ namespace SCVRPatcher {
             Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
-            var parser = new CommandLineParser(args);
-            var configsArg = parser.GetStringArgument("config");
+            CommandLineParser = new CommandLineParser(args);
+            var configsArg = CommandLineParser.GetStringArgument("config");
             if (configsArg != null) {
                 Logger.Info($"--config argument: {configsArg}");
                 if (File.Exists(configsArg)) {
@@ -71,21 +72,23 @@ namespace SCVRPatcher {
                     availableConfigsUrl = uriResult;
                 } else Logger.Error($"Invalid --config argument: \"{configsArg}\"");
             }
-            if (parser.GetSwitchArgument("console", 'c')) {
+            if (CommandLineParser.GetSwitchArgument("console", 'c')) {
                 AllocConsole();
                 Logger.Info("Console ready!");
-            }
-            if (!parser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
-                Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
-                var result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                    Utils.RestartAsAdmin(args);
-                else MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            var oldHeight = this.Height; this.Height = 0; var oldWidth = this.Width; this.Width = 0; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
+            if (!CommandLineParser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
+                Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
+                var result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                    Utils.RestartAsAdmin();
+                else MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             var pageFiles = Utils.GetPageFileSizes();
             foreach (var pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
@@ -166,6 +169,7 @@ namespace SCVRPatcher {
             stackpanel_config.Children.Clear();
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
+            this.Height = oldHeight; this.Width = oldWidth; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -295,6 +299,8 @@ namespace SCVRPatcher {
         }
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
+            VREnableButton.IsEnabled = false;
+            VRDisableButton.IsEnabled = true;
             var selectedConfig = GetSelectedConfig();
             if (selectedConfig is null) {
                 MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -318,7 +324,8 @@ namespace SCVRPatcher {
         }
 
         private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
-            //MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            VRDisableButton.IsEnabled = false;
+            VREnableButton.IsEnabled = true;
             eac.UnPatch();
             vorpx.UnPatch();
             game.Unpatch();

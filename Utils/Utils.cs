@@ -168,15 +168,16 @@ namespace SCVRPatcher {
             currentP.Kill();
         }
 
-        public static void RestartAsAdmin(string[] arguments) {
+        public static void RestartAsAdmin(string[]? arguments = null) {
             if (IsAdmin()) {
                 Logger.Warn("Wanted to restart as admin, but we already are. duh");
                 return;
             }
             try {
+                var args = arguments ?? Environment.GetCommandLineArgs().Skip(1).ToArray();
                 var startInfo = new ProcessStartInfo {
                     FileName = Application.ExecutablePath,
-                    Arguments = string.Join(" ", arguments),
+                    Arguments = string.Join(" ", args),
                     Verb = "runas"
                 };
                 Process.Start(startInfo);
