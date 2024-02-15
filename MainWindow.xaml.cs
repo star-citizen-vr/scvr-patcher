@@ -1,7 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using Octokit;
-using SCVRPatcher.Classes;
+// using SCVRPatcher.Classes;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -16,6 +16,7 @@ using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 using Brand = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, SCVRPatcher.HmdConfig>>>;
+using System.Windows.Controls.Primitives;
 
 namespace SCVRPatcher {
 
@@ -85,6 +86,8 @@ namespace SCVRPatcher {
                 Logger.Info($"PageFile: {pageFile}");
             }
 
+            vorpx = new();
+            vorpx.Load();
             configDatabase = new();
             LoadAvailableConfigs(availableConfigsUrl, availableConfigsFile);
             hmdq.Initialize();
@@ -160,12 +163,11 @@ namespace SCVRPatcher {
 
                 Logger.Info($"Added HMDQ info to configDatabase");
             }
-            fovcalc.Initialize();
             game.Initialize();
             InitializeComponent();
             FillHmds(configDatabase);
 
-            stackpanel_config.Children.Clear(); vorpx = new();
+            stackpanel_config.Children.Clear(); 
             VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
         }
@@ -195,7 +197,7 @@ namespace SCVRPatcher {
             if (configDatabase.IsEmptyOrMissing) {
                 Logger.Error("No configs available!");
                 var result = System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
+                //Application.Current.Shutdown();
                 return;
             }
             Logger.Info($"Loaded {configDatabase.Brands.Count} brands.");
@@ -306,12 +308,17 @@ namespace SCVRPatcher {
             //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
             // }
             game.Patch(selectedConfig, selectedResolution);
+            Logger.Info("Patched VR");
+            MessageBox.Show("Success, patched Attriubtes for VR. \nPlease launch RSI Launcher", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show("Not implemented yet, silly :)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             eac.UnPatch();
             vorpx.UnPatch();
+            game.Unpatch();
+            MessageBox.Show("VR Disabled", "Success, rolled back Attriubtes.", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         private HmdConfig? GetSelectedConfig() {

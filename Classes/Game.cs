@@ -47,7 +47,29 @@ namespace SCVRPatcher {
             return true;
         }
 
-        public DirectoryInfo? GetLastUsedGameRootDir() {
+        public bool Unpatch()
+        {
+            foreach (var buildDir in BuildDirectories)
+            {
+                Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.ToFullString()})");
+                var profileDir = buildDir.Value.Combine("user", "Client", "0", "Profiles", "default");
+                var attributesFile = profileDir.CombineFile("attributes.xml");
+                if (!attributesFile.Exists)
+                {
+                    Logger.Error($"Could not find {attributesFile.Quote()}!");
+                    continue;
+                }
+                var attributes = new AttributesFile(attributesFile);
+                if (!attributes.Unpatch())
+                {
+                    Logger.Error($"Failed to unpatch {attributesFile.Quote()}!");
+                    continue;
+                }
+            }
+            return true;
+        }
+
+            public DirectoryInfo? GetLastUsedGameRootDir() {
             if (string.IsNullOrWhiteSpace(AppSettings.Default.gameRootDir)) return null;
             var dir = new DirectoryInfo(AppSettings.Default.gameRootDir);
             return dir.Exists ? dir : null;
