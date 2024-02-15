@@ -579,7 +579,14 @@ namespace SCVRPatcher {
         }
 
         public static string ToFullString(this ProcessStartInfo processStartInfo) {
-            return $"{processStartInfo.FileName.Quote()} {processStartInfo.Arguments}";
+            var ret = new List<string>();
+            ret.Add($"FileName=\"{processStartInfo.FileName}\"");
+            ret.Add($"Arguments=\"{processStartInfo.Arguments}\"");
+            ret.Add($"Verb=\"{processStartInfo.Verb}\"");
+            ret.Add($"UseShellExecute=\"{processStartInfo.UseShellExecute}\"");
+            ret.Add($"WorkingDirectory=\"{processStartInfo.WorkingDirectory}\"");
+            ret.Add($"WindowStyle=\"{processStartInfo.WindowStyle}\"");
+            return $"ProcessStartInfo({string.Join(',', ret)})"; // $"{processStartInfo.FileName.Quote()} {processStartInfo.Arguments}";
         }
 
         #endregion Others

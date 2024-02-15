@@ -60,6 +60,9 @@ namespace SCVRPatcher {
             Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
             var args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
+            var processName = Process.GetCurrentProcess().ProcessName;
+            var alreadyRunning = Utils.IsAlreadyRunning(processName);
+            if (alreadyRunning) Logger.Warn($"Already running as {Process.GetProcessesByName(processName).Select(p => p.Id).ToJson()}");
             CommandLineParser = new CommandLineParser(args);
             var configsArg = CommandLineParser.GetStringArgument("config");
             if (configsArg != null) {

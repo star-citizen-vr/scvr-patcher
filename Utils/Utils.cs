@@ -112,6 +112,10 @@ namespace SCVRPatcher {
                 return null;
             }
             var data = regKey.GetValue("Settings") as byte[];
+            if (data is null) {
+                Logger.Error("Unable to get taskbar location!");
+                return null;
+            }
             var taskbarLocation = data?[12];
             if (taskbarLocation == wantedLocation) {
                 Logger.Warn($"Taskbar is already in {location} location, doing nothing!");
@@ -133,7 +137,10 @@ namespace SCVRPatcher {
         }
 
         public static FileInfo getOwnPath() {
-            return new FileInfo(Path.GetDirectoryName(Application.ExecutablePath));
+            //Logger.Debug($"Application.ExecutablePath: {Application.ExecutablePath}");
+            //Logger.Debug($"Assembly.GetExecutingAssembly().Location: {Assembly.GetExecutingAssembly()?.Location}");
+            //Logger.Debug($"Assembly.GetEntryAssembly().Location: {Assembly.GetEntryAssembly()?.Location}");
+            return new FileInfo(Application.ExecutablePath ?? Assembly.GetExecutingAssembly()?.Location ?? Assembly.GetEntryAssembly()?.Location);
         }
         /*[DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);*/
@@ -159,13 +166,16 @@ namespace SCVRPatcher {
             if (m.WaitOne(1, false) == false) {
                 return true;
             }
+            if (Process.GetProcessesByName(appName).Length > 1) {
+                return true;
+            }
             return false;
         }
 
         internal static void Exit() {
-            Application.Exit();
-            var currentP = Process.GetCurrentProcess();
-            currentP.Kill();
+            try { Application.Exit(); } catch { }
+            try { Environment.Exit(0); } catch { }
+            try { Process.GetCurrentProcess().Kill(); } catch { }
         }
 
         public static void RestartAsAdmin(string[]? arguments = null) {
@@ -178,19 +188,19 @@ namespace SCVRPatcher {
                 var args = arguments ?? Environment.GetCommandLineArgs().Skip(1).ToArray();
                 var startInfo = new ProcessStartInfo {
                     UseShellExecute = true,
-                    WorkingDirectory = Environment.CurrentDirectory,
-                    FileName = Assembly.GetEntryAssembly().Location,
+                    WorkingDirectory = Environment.CurrentDirectory ?? getOwnPath().DirectoryName,
+                    FileName = getOwnPath().FullName,
                     Arguments = string.Join(" ", args),
                     Verb = "runas"
                 };
-                Logger.Debug(startInfo.ToJson());
+                Logger.Debug(startInfo.ToFullString());
                 Task.Factory.StartNew(() => {
                     Process.Start(startInfo);
                     Exit();
                 });
 
             } catch (Exception ex) {
-                Logger.Error("Unable to restart as admin!", ex.Message);
+                Logger.Error($"Unable to restart as admin: {ex.Message}");
                 MessageBox.Show("Unable to restart as admin for you. Please do this manually now!", "Can't restart as admin", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Exit();
             }

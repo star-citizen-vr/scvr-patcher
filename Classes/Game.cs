@@ -110,7 +110,7 @@ namespace SCVRPatcher {
             if (result != CommonFileDialogResult.Ok) {
                 Logger.Warn("User cancelled directory selection, exiting...");
                 MessageBox.Show("You must select a directory!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Environment.Exit(0);
+                Utils.Exit();
             }
             Logger.Debug($"User selected directory: {dialog.FileName}");
             var dir = new DirectoryInfo(dialog.FileName);
