@@ -153,7 +153,7 @@ namespace SCVRPatcher {
                            Height = hmdq.Height,
                            Width = hmdq.Width,
                            Description = "Pulled from HMDQ",
-                           Percentage = "100"
+                           //Percentage = "100"
                         }
                     }
                 };
@@ -215,7 +215,7 @@ namespace SCVRPatcher {
         public void FillHmds(ConfigDataBase db) {
             tree_hmds.Items.Clear();
             if (db.IsEmptyOrMissing) {
-                Logger.Error("No configs available!"); return;
+                Logger.Error("Still no configs available!"); return;
             }
             foreach (var brand in db.Brands) {
                 var brandItem = new TreeViewItem() { Header = brand.Key };
