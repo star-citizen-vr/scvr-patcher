@@ -174,14 +174,21 @@ namespace SCVRPatcher {
                 return;
             }
             try {
+                Logger.Info("Restarting as admin...");
                 var args = arguments ?? Environment.GetCommandLineArgs().Skip(1).ToArray();
                 var startInfo = new ProcessStartInfo {
-                    FileName = Application.ExecutablePath,
+                    UseShellExecute = true,
+                    WorkingDirectory = Environment.CurrentDirectory,
+                    FileName = Assembly.GetEntryAssembly().Location,
                     Arguments = string.Join(" ", args),
                     Verb = "runas"
                 };
-                Process.Start(startInfo);
-                Exit();
+                Logger.Debug(startInfo.ToJson());
+                Task.Factory.StartNew(() => {
+                    Process.Start(startInfo);
+                    Exit();
+                });
+
             } catch (Exception ex) {
                 Logger.Error("Unable to restart as admin!", ex.Message);
                 MessageBox.Show("Unable to restart as admin for you. Please do this manually now!", "Can't restart as admin", MessageBoxButtons.OK, MessageBoxIcon.Error);

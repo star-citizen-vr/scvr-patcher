@@ -6,11 +6,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -574,6 +576,10 @@ namespace SCVRPatcher {
             if (property.Property.Attributes["System.Configuration.UserScopedSettingAttribute"] != null && property.IsDirty)
                 return PropertyScope.User;
             return PropertyScope.Application;
+        }
+
+        public static string ToFullString(this ProcessStartInfo processStartInfo) {
+            return $"{processStartInfo.FileName.Quote()} {processStartInfo.Arguments}";
         }
 
         #endregion Others
