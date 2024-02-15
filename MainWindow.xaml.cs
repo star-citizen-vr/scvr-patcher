@@ -174,11 +174,19 @@ namespace SCVRPatcher {
             //Logger.Info($"Loading config from Url: {availableConfigsUrl}");
             var onlineConfigs = ConfigDataBase.FromUrl(availableConfigsUrl);
             var offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
-            if (onlineConfigs != null && onlineConfigs != offlineConfigs && MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                onlineConfigs.ToFile(availableConfigsFile);
-                Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.Quote()}");
+            if (onlineConfigs != null) {
+                Logger.Debug($"onlineConfigs available");
+                if (onlineConfigs != offlineConfigs) {
+                    Logger.Info("onlineConfigs and offlineConfigs differ!");
+                    var result = MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes) {
+                        onlineConfigs.ToFile(availableConfigsFile);
+                        Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.Quote()}");
+                    } else { Logger.Info("User chose not to overwrite offline configs."); }
+                }
                 configDatabase = onlineConfigs;
-            } else if (offlineConfigs != null) {
+            }
+            if (offlineConfigs != null) {
                 Logger.Info($"Loaded config from {availableConfigsFile.Quote()}");
                 configDatabase = offlineConfigs;
             }
