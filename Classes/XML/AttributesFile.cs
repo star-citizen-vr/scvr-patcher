@@ -99,12 +99,13 @@ sToSet = new() {
                 changed |= AddOrUpdate(item.Key, item.Value);
             }
             if (config.Fov is not null) changed |= AddOrUpdate("FOV", config.Fov);
-            if (config.ChangeResolutionCheckbox is true)
+            // TODO: Add a way to change resolution based on if user checks a checkbox
+            /*if (config.ChangeResolutionCheckbox is true)
             {
                 Logger.Info("Changing resolution to match HMD");
                 if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
                 if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
-            }
+            }*/
             if (changed) {
                 Save();
                 Logger.Info($"Patched {File.FullName}");
