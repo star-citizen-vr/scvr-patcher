@@ -1,5 +1,5 @@
-﻿using IniParser.Model;
-using IniParser;
+﻿using IniParser;
+using IniParser.Model;
 using NLog;
 using System.IO;
 

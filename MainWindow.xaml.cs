@@ -1,23 +1,18 @@
-﻿using NLog;
+﻿using AutoUpdaterDotNET;
+using NLog;
 using NLog.Config;
-using Octokit;
 // using SCVRPatcher.Classes;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Media;
 using Application = System.Windows.Application;
 using Label = System.Windows.Controls.Label;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
-using Brand = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, SCVRPatcher.HmdConfig>>>;
-using System.Windows.Controls.Primitives;
-using AutoUpdaterDotNET;
 
 namespace SCVRPatcher {
 

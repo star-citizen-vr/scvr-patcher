@@ -1,6 +1,4 @@
-﻿using IniParser;
-using IniParser.Model;
-using System.IO;
+﻿using System.IO;
 
 namespace SCVRPatcher {
     public partial class VorpX {

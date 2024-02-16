@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Application = System.Windows.Application;
+﻿using Application = System.Windows.Application;
 
 namespace SCVRPatcher {
 
