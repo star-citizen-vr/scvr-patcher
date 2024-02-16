@@ -1,8 +1,6 @@
 ﻿using AutoUpdaterDotNET;
 using NLog;
 using NLog.Config;
-
-// using SCVRPatcher.Classes;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -21,26 +19,24 @@ namespace SCVRPatcher {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-
-        // test
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         internal static Utils.AssemblyAttributes AssemblyAttributes { get; } = new();
-        internal static Uri availableConfigsUrl = new Uri(AppSettings.Default.availableConfigsUrl);
-        internal static FileInfo availableConfigsFile = new FileInfo(AppSettings.Default.availableConfigsFile);
+        internal static Uri availableConfigsUrl = new(AppSettings.Default.availableConfigsUrl);
+        internal static FileInfo availableConfigsFile = new(AppSettings.Default.availableConfigsFile);
         internal static Resolution mainScreenResolution = Utils.GetMainScreenResolution();
-        internal static CommandLineParser CommandLineParser { get; private set; }
+        internal static CommandLineParser? CommandLineParser { get; private set; }
 
-        internal static ConfigDataBase configDatabase { get; private set; }
-        internal static EAC eac { get; private set; }
-        internal static Game game { get; private set; }
-        internal static VorpX vorpx { get; private set; }
-        internal static Hmdq hmdq { get; private set; }
+        internal static ConfigDataBase? configDatabase { get; private set; }
+        internal static EAC? eac { get; private set; }
+        internal static Game? game { get; private set; }
+        internal static VorpX? vorpx { get; private set; }
+        internal static Hmdq? hmdq { get; private set; }
 
         public static void SetupLogging() {
-            var stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
+            Stream? stream = typeof(MainWindow).Assembly.GetManifestResourceStream("SCVRPatcher.NLog.config");
             string xml;
-            using (var reader = new StreamReader(stream)) {
+            using (StreamReader reader = new(stream)) {
                 xml = reader.ReadToEnd();
             }
             LogManager.Configuration = XmlLoggingConfiguration.CreateFromXmlString(xml);
@@ -48,53 +44,60 @@ namespace SCVRPatcher {
         }
 
         public MainWindow() {
-            var assembly = typeof(MainWindow).Assembly;
-            var attributes = assembly.GetCustomAttributes(false);
-            var title = attributes.OfType<System.Reflection.AssemblyTitleAttribute>().FirstOrDefault();
-            var version = attributes.OfType<System.Reflection.AssemblyFileVersionAttribute>().FirstOrDefault();
-            var repositoryUrl = attributes.OfType<System.Reflection.AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl");
+            System.Reflection.Assembly assembly = typeof(MainWindow).Assembly;
+            object[] attributes = assembly.GetCustomAttributes(false);
+            System.Reflection.AssemblyTitleAttribute? title = attributes.OfType<System.Reflection.AssemblyTitleAttribute>().FirstOrDefault();
+            System.Reflection.AssemblyFileVersionAttribute? version = attributes.OfType<System.Reflection.AssemblyFileVersionAttribute>().FirstOrDefault();
+            System.Reflection.AssemblyMetadataAttribute? repositoryUrl = attributes.OfType<System.Reflection.AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl");
 
             SetupLogging();
             Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
-            var args = Environment.GetCommandLineArgs();
+            string[] args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
-            var processName = Process.GetCurrentProcess().ProcessName;
-            var alreadyRunning = Utils.IsAlreadyRunning(processName);
-            if (alreadyRunning) Logger.Warn($"Already running as {Process.GetProcessesByName(processName).Select(p => p.Id).ToJson()}");
+            string processName = Process.GetCurrentProcess().ProcessName;
+            bool alreadyRunning = Utils.IsAlreadyRunning(processName);
+            if (alreadyRunning) {
+                Logger.Warn($"Already running as {Process.GetProcessesByName(processName).Select(p => p.Id).ToJson()}");
+            }
+
             CommandLineParser = new CommandLineParser(args);
-            var configsArg = CommandLineParser.GetStringArgument("config");
+            string? configsArg = CommandLineParser.GetStringArgument("config");
             if (configsArg != null) {
                 Logger.Info($"--config argument: {configsArg}");
                 if (File.Exists(configsArg)) {
                     Logger.Info($"--config argument is a file: {configsArg}");
                     availableConfigsFile = new FileInfo(configsArg);
-                } else if (Uri.TryCreate(configsArg, UriKind.Absolute, out var uriResult)) {
+                } else if (Uri.TryCreate(configsArg, UriKind.Absolute, out Uri? uriResult)) {
                     Logger.Info($"--config argument is a url: {configsArg}");
                     availableConfigsUrl = uriResult;
-                } else Logger.Error($"Invalid --config argument: \"{configsArg}\"");
+                } else {
+                    Logger.Error($"Invalid --config argument: \"{configsArg}\"");
+                }
             }
             if (CommandLineParser.GetSwitchArgument("console", 'c')) {
-                AllocConsole();
+                _ = AllocConsole();
                 Logger.Info("Console ready!");
             }
             AutoUpdater.RunUpdateAsAdmin = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            var oldHeight = this.Height; this.Height = 0; var oldWidth = this.Width; this.Width = 0; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
+            double oldHeight = Height; Height = 0; double oldWidth = Width; Width = 0; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
             if (!CommandLineParser.GetSwitchArgument("no-update")) {
                 AutoUpdater.Start("https://raw.githubusercontent.com/star-citizen-vr/scvr-patcher/csharp/release.xml");
             }
             if (!CommandLineParser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
                 Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
-                var result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) {
                     Utils.RestartAsAdmin();
-                else MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                } else {
+                    _ = MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
-            var pageFiles = Utils.GetPageFileSizes();
-            foreach (var pageFile in pageFiles) {
+            List<Utils.PageFile> pageFiles = Utils.GetPageFileSizes();
+            foreach (Utils.PageFile pageFile in pageFiles) {
                 Logger.Info($"PageFile: {pageFile}");
             }
 
@@ -109,20 +112,20 @@ namespace SCVRPatcher {
             hmdq.RunHmdq();
             if (hmdq.IsEmpty) {
                 Logger.Error("Failed to get HMD info through HMDQ!");
-                var isSteamVRRunning = Process.GetProcessesByName("vrmonitor").Length > 0;
-                var isOculusRunning = Process.GetProcessesByName("OVRServer_x64").Length > 0;
+                bool isSteamVRRunning = Process.GetProcessesByName("vrmonitor").Length > 0;
+                bool isOculusRunning = Process.GetProcessesByName("OVRServer_x64").Length > 0;
                 if (!isSteamVRRunning && !isOculusRunning) {
                     Logger.Error("SteamVR or Oculus not running!");
                     //var _ = MessageBox.Show("SteamVR or Oculus not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     // present user with option to start SteamVR or continue without starting either
-                    var result = System.Windows.MessageBox.Show("Oculus not running! Start Oculus?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    MessageBoxResult result = System.Windows.MessageBox.Show("Oculus not running! Start Oculus?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
                     if (result == MessageBoxResult.Yes) {
                         // start Oculus with oculus:// uri protocol
                         Logger.Info("Starting Oculus!");
-                        var oculusUri = new Uri("oculus://");
+                        Uri oculusUri = new("oculus://");
                         oculusUri.OpenInDefaultBrowser();
                         // wait for Oculus process to start and then continue
-                        var oculusProcess = Process.GetProcessesByName("OVRServer_x64");
+                        Process[] oculusProcess = Process.GetProcessesByName("OVRServer_x64");
                         while (oculusProcess.Length == 0) {
                             System.Threading.Thread.Sleep(1000);
                             oculusProcess = Process.GetProcessesByName("OVRServer_x64");
@@ -133,10 +136,10 @@ namespace SCVRPatcher {
                         if (result == MessageBoxResult.Yes) {
                             // start SteamVR with steam://run/250820
                             Logger.Info("Starting SteamVR!");
-                            var steamUri = new Uri("steam://run/250820");
+                            Uri steamUri = new("steam://run/250820");
                             steamUri.OpenInDefaultBrowser();
                             // wait for SteamVR process to start and then continue
-                            var steamProcess = Process.GetProcessesByName("vrmonitor");
+                            Process[] steamProcess = Process.GetProcessesByName("vrmonitor");
                             while (steamProcess.Length == 0) {
                                 System.Threading.Thread.Sleep(1000);
                                 steamProcess = Process.GetProcessesByName("vrmonitor");
@@ -149,19 +152,19 @@ namespace SCVRPatcher {
                 }
             } else {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
-                var detectedHmdConfig = new HmdConfig() {
+                HmdConfig detectedHmdConfig = new() {
                     Fov = hmdq.VerticalFov,
-                    CustomResolutions = new List<Resolution>() {
+                    CustomResolutions = [
                         new Resolution() {
-                           Height = hmdq.Height,
-                           Width = hmdq.Width,
-                           Description = "Pulled from HMDQ",
-                           //Percentage = "100"
+                            Height = hmdq.Height,
+                            Width = hmdq.Width,
+                            Description = "Pulled from HMDQ",
+                            //Percentage = "100"
                         }
-                    }
+                    ]
                 };
-                var detectedHmd = new Dictionary<string, HmdConfig>() { { "Current", detectedHmdConfig } };
-                var detectedBrand = new Dictionary<string, Dictionary<string, HmdConfig>>() { { "Brand", detectedHmd } };
+                Dictionary<string, HmdConfig> detectedHmd = new() { { "Current", detectedHmdConfig } };
+                Dictionary<string, Dictionary<string, HmdConfig>> detectedBrand = new() { { "Brand", detectedHmd } };
                 configDatabase.Brands.Add("Detected", detectedBrand);
 
                 Logger.Info($"Added HMDQ info to configDatabase");
@@ -185,7 +188,7 @@ namespace SCVRPatcher {
             //       Logger.Info("ChangeResolutionCheckbox is not checked");
             //    var useHMDResolution = false;
             //}
-            this.Height = oldHeight; this.Width = oldWidth; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
+            Height = oldHeight; Width = oldWidth; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -194,15 +197,15 @@ namespace SCVRPatcher {
 
         public void LoadAvailableConfigs(Uri availableConfigsUrl, FileInfo availableConfigsFile) {
             //Logger.Info($"Loading config from Url: {availableConfigsUrl}");
-            var onlineConfigs = ConfigDataBase.FromUrl(availableConfigsUrl);
+            ConfigDataBase? onlineConfigs = ConfigDataBase.FromUrl(availableConfigsUrl);
             Logger.Debug($"onlineConfigs: null={onlineConfigs == null} IsEmptyOrMissing={onlineConfigs?.IsEmptyOrMissing} ({availableConfigsUrl})");
-            var offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
+            ConfigDataBase? offlineConfigs = ConfigDataBase.FromFile(availableConfigsFile);
             Logger.Debug($"offlineConfigs: null={offlineConfigs == null} IsEmptyOrMissing={offlineConfigs?.IsEmptyOrMissing} ({availableConfigsFile})");
             if (onlineConfigs != null) {
                 Logger.Debug($"onlineConfigs available");
                 if (onlineConfigs != offlineConfigs) {
                     Logger.Info("onlineConfigs and offlineConfigs differ!");
-                    var result = MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
                         onlineConfigs.ToFile(availableConfigsFile);
                         Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.Quote()}");
@@ -222,7 +225,7 @@ namespace SCVRPatcher {
             //}
             if (configDatabase.IsEmptyOrMissing) {
                 Logger.Error("No configs available!");
-                var result = System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _ = System.Windows.MessageBox.Show("No configs available!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 //Application.Current.Shutdown();
                 return;
             }
@@ -243,88 +246,104 @@ namespace SCVRPatcher {
             if (db.IsEmptyOrMissing) {
                 Logger.Error("Still no configs available!"); return;
             }
-            foreach (var brand in db.Brands) {
-                var brandItem = new TreeViewItem() { Header = brand.Key };
+            foreach (KeyValuePair<string, Dictionary<string, Dictionary<string, HmdConfig>>> brand in db.Brands) {
+                TreeViewItem brandItem = new() { Header = brand.Key };
                 if (brand.Key == "Detected") {
-                    var redBrush = new SolidColorBrush(Colors.DarkGreen);
+                    SolidColorBrush redBrush = new(Colors.DarkGreen);
                     brandItem.Foreground = redBrush;
                 }
-                foreach (var model in brand.Value) {
-                    var modelItem = new TreeViewItem() { Header = model.Key };
-                    foreach (var config in model.Value) {
-                        var configItem = new TreeViewItem() { Header = config.Key };
-                        modelItem.Items.Add(configItem);
+                foreach (KeyValuePair<string, Dictionary<string, HmdConfig>> model in brand.Value) {
+                    TreeViewItem modelItem = new() { Header = model.Key };
+                    foreach (KeyValuePair<string, HmdConfig> config in model.Value) {
+                        TreeViewItem configItem = new() { Header = config.Key };
+                        _ = modelItem.Items.Add(configItem);
                     }
-                    brandItem.Items.Add(modelItem);
+                    _ = brandItem.Items.Add(modelItem);
                 }
-                tree_hmds.Items.Add(brandItem);
+                _ = tree_hmds.Items.Add(brandItem);
             }
         }
 
         public void FillConfigList(ConfigDataBase db, HmdConfig config) {
             list_configs.Items.Clear();
-            var redBrush = new SolidColorBrush(Colors.Red);
-            foreach (var res in config.CustomResolutions) {
-                var item = new ListViewItem() { Content = res.ToString(), Tag = res };
+            SolidColorBrush redBrush = new(Colors.Red);
+            foreach (Resolution res in config.CustomResolutions) {
+                ListViewItem item = new() { Content = res.ToString(), Tag = res };
                 if (res > mainScreenResolution) {
                     item.Foreground = redBrush;
                     item.ToolTip = $"Resolution is higher than your main screen's resolution! ({mainScreenResolution.Width} x {mainScreenResolution.Height})";
                 }
-                list_configs.Items.Add(item);
+                _ = list_configs.Items.Add(item);
             }
             // sort list_configs
             list_configs.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Tag.Width", System.ComponentModel.ListSortDirection.Ascending));
         }
 
         private void FillConfig(HmdConfig config) {
-            if (config is null) return;
+            if (config is null) {
+                return;
+            }
+
             stackpanel_config.Children.Clear();
             Logger.Info($"Filling config: {config}");
-            stackpanel_config.Children.Add(new Label() { Content = string.Join(" ", configDatabase.GetPath(config)) });
+            _ = stackpanel_config.Children.Add(new Label() { Content = string.Join(" ", configDatabase.GetPath(config)) });
             Type t = config.GetType();
-            Dictionary<string, object> Items = new();
-            foreach (var item in t.GetProperties()) {
-                var value = item.GetValue(config);
-                if (value is null) continue;
+            Dictionary<string, object> Items = [];
+            foreach (System.Reflection.PropertyInfo item in t.GetProperties()) {
+                object? value = item.GetValue(config);
+                if (value is null) {
+                    continue;
+                }
                 //if (new string[] { "Brand", "Model", "Name" }.Contains(item.Name)) continue;
                 Items.Add(item.Name, value);
             }
-            foreach (var item in t.GetFields()) {
-                var value = item.GetValue(config);
-                if (value is null) continue;
+            foreach (System.Reflection.FieldInfo item in t.GetFields()) {
+                object? value = item.GetValue(config);
+                if (value is null) {
+                    continue;
+                }
+
                 Items.Add(item.Name, value);
             }
-            foreach (var item in Items) {
-                var value = item.Value;
-                if (value is null) continue;
-                if (value is System.Collections.IList) continue;
-                var label = new Label();
-                label.Content = item.Key + ":";
-                label.VerticalAlignment = VerticalAlignment.Center;
-                //label.HorizontalAlignment = HorizontalAlignment.Right;
-                label.Margin = new Thickness(0, 0, 5, 0);
-                var textbox = new TextBox();
-                textbox.Text = value.ToString();
-                textbox.VerticalAlignment = VerticalAlignment.Center;
-                //textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
-                textbox.Margin = new Thickness(0, 0, 5, 0);
+            foreach (KeyValuePair<string, object> item in Items) {
+                object? value = item.Value;
+                if (value is null) {
+                    continue;
+                }
+
+                if (value is System.Collections.IList) {
+                    continue;
+                }
+
+                Label label = new() {
+                    Content = item.Key + ":",
+                    VerticalAlignment = VerticalAlignment.Center,
+                    //label.HorizontalAlignment = HorizontalAlignment.Right;
+                    Margin = new Thickness(0, 0, 5, 0)
+                };
+                TextBox textbox = new() {
+                    Text = value.ToString(),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    //textbox.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    Margin = new Thickness(0, 0, 5, 0)
+                };
                 // add label and textbox to stackpanel_config
-                stackpanel_config.Children.Add(label);
-                stackpanel_config.Children.Add(textbox);
+                _ = stackpanel_config.Children.Add(label);
+                _ = stackpanel_config.Children.Add(textbox);
             }
         }
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
             VREnableButton.IsEnabled = false;
             VRDisableButton.IsEnabled = true;
-            var selectedConfig = GetSelectedConfig();
+            HmdConfig? selectedConfig = GetSelectedConfig();
             if (selectedConfig is null) {
-                MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _ = MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var selectedResolution = GetSelectedResolution();
+            Resolution? selectedResolution = GetSelectedResolution();
             if (selectedResolution is null) {
-                MessageBox.Show("No config selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _ = MessageBox.Show("No config selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Logger.Info("Patching VR");
@@ -334,12 +353,12 @@ namespace SCVRPatcher {
             // foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
             //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
             // }
-            game.Patch(selectedConfig, selectedResolution);
+            _ = game.Patch(selectedConfig, selectedResolution);
             Logger.Info("Patched VR");
-            MessageBox.Show("Success, patched Attriubtes for VR. Open the RSI Launcher and Launch the game!", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show("Success, patched Attriubtes for VR. Open the RSI Launcher and Launch the game!", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
             /*Logger.Info("Opening RSI Launcher");
             MessageBox.Show("Opening RSI Launcher", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);*/
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
 
             // TODO: See if we can launch the RSI Launcher and then check if starcitizen.exe is running, and if it is, then minimize this window
             /*var rsiLauncherPath = Utils.GetRsiLauncherPath();
@@ -361,8 +380,8 @@ namespace SCVRPatcher {
                     System.Threading.Thread.Sleep(1000);
                 }
                 Logger.Info("Star Citizen stopped running");
-                this.WindowState = WindowState.Normal;
-                this.Activated += (s, e) => this.Topmost = true;
+                WindowState = WindowState.Normal;
+                Activated += (s, e) => Topmost = true;
                 // TODO: Can't get this to come back as active window.. maybe we can do something else...
             }
         }
@@ -372,38 +391,46 @@ namespace SCVRPatcher {
             VREnableButton.IsEnabled = true;
             eac.UnPatch();
             vorpx.UnPatch();
-            game.Unpatch();
-            MessageBox.Show("VR Disabled", "Success, rolled back Attriubtes.", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = game.Unpatch();
+            _ = MessageBox.Show("VR Disabled", "Success, rolled back Attriubtes.", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private HmdConfig? GetSelectedConfig() {
-            var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
+            TreeViewItem selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
             // TODO: If a user hits Enable VR before selecting a config, we crash here...
-            var hasParent = selectedItem.Parent is not null;
-            var hasChildren = selectedItem.Items.Count > 0;
-            if (!hasParent || hasChildren) return null;
-            var configName = selectedItem.Header.ToString();
-            var hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
-            var brandItem = (TreeViewItem)selectedItem.Parent;
-            var brandName = (((TreeViewItem)brandItem.Parent).Header).ToString();
+            bool hasParent = selectedItem.Parent is not null;
+            bool hasChildren = selectedItem.Items.Count > 0;
+            if (!hasParent || hasChildren) {
+                return null;
+            }
+
+            string? configName = selectedItem.Header.ToString();
+            string? hmdName = ((TreeViewItem)selectedItem.Parent).Header.ToString();
+            TreeViewItem brandItem = (TreeViewItem)selectedItem.Parent;
+            string? brandName = ((TreeViewItem)brandItem.Parent).Header.ToString();
             return configDatabase.GetConfig(brandName, hmdName, configName);
         }
 
         private Resolution? GetSelectedResolution() {
-            var selectedItem = (ListViewItem)list_configs.SelectedItem;
-            if (selectedItem is null) return null;
-            return (Resolution)selectedItem.Tag;
+            ListViewItem? selectedItem = (ListViewItem)list_configs.SelectedItem;
+            return selectedItem is null ? null : (Resolution)selectedItem.Tag;
         }
 
         private void tree_hmds_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
-            var selectedConfig = GetSelectedConfig();
-            if (selectedConfig is null) return;
+            HmdConfig? selectedConfig = GetSelectedConfig();
+            if (selectedConfig is null) {
+                return;
+            }
+
             FillConfigList(configDatabase, selectedConfig);
         }
 
         private void list_configs_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var selectedConfig = GetSelectedConfig();
-            if (selectedConfig is null) return;
+            HmdConfig? selectedConfig = GetSelectedConfig();
+            if (selectedConfig is null) {
+                return;
+            }
+
             FillConfig(selectedConfig);
         }
 
@@ -420,17 +447,17 @@ namespace SCVRPatcher {
         }
 
         private void onOpenFileButtonClicked(object sender, RoutedEventArgs e) {
-            var buttonText = ((MenuItem)sender).Header.ToString();
-            MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            string? buttonText = ((MenuItem)sender).Header.ToString();
+            _ = MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void onOpenDirectoryButtonClicked(object sender, RoutedEventArgs e) {
-            var buttonText = ((MenuItem)sender).Header.ToString();
-            MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            string? buttonText = ((MenuItem)sender).Header.ToString();
+            _ = MessageBox.Show(buttonText, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void onSettingsButtonClicked(object sender, RoutedEventArgs e) {
-            var settingsWindow = new UI.Settings();
+            UI.Settings settingsWindow = new();
             settingsWindow.Show();
         }
 
