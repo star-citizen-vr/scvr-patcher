@@ -20,9 +20,9 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <FileVersion>3.0.0.0</FileVersion>
+    <FileVersion>3.1.0.0</FileVersion>
     <PackageReleaseNotes>https://github.com/star-citizen-vr/scvr-patcher/releases</PackageReleaseNotes>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <AssemblyVersion>3.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
