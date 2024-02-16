@@ -174,7 +174,7 @@ namespace SCVRPatcher {
             FillHmds(configDatabase);
 
             stackpanel_config.Children.Clear();
-            VREnableButton.IsEnabled = true;
+            //VREnableButton.IsEnabled = true;
             // VRDisableButton.IsEnabled = true;
 
             // This checkbox thing... breaking my brain...
@@ -334,8 +334,8 @@ namespace SCVRPatcher {
         }
 
         private void VREnableButton_Click(object sender, RoutedEventArgs e) {
-            VREnableButton.IsEnabled = false;
-            VRDisableButton.IsEnabled = true;
+            //VREnableButton.IsEnabled = false;
+            //VRDisableButton.IsEnabled = true;
             HmdConfig? selectedConfig = GetSelectedConfig();
             if (selectedConfig is null) {
                 _ = MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -387,8 +387,8 @@ namespace SCVRPatcher {
         }
 
         private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
-            VRDisableButton.IsEnabled = false;
-            VREnableButton.IsEnabled = true;
+            //VRDisableButton.IsEnabled = false;
+            //VREnableButton.IsEnabled = true;
             eac.UnPatch();
             vorpx.UnPatch();
             _ = game.Unpatch();
