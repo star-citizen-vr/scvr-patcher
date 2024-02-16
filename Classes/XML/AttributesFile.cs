@@ -1,5 +1,6 @@
 ﻿using NLog;
 using System.IO;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -90,7 +91,6 @@ namespace SCVRPatcher {
             Logger.Info($"Patching {File.FullName}");
             var changed = Remove(attributesToRemove);
             Logger.Info($"Removed {attributesToRemove.Count} attributes.");
-            // fix the next line
             var attributesToSet = new Dictionary<string, object>(); // sToSet.Where(x => !Get(x.Key).Any()).ToDictionary(x => x.Key, x => x.Value);
             foreach (var attribute in sToSet) {
                 var existingAttributes = Get(attribute.Key);
@@ -122,6 +122,7 @@ namespace SCVRPatcher {
         public override bool Unpatch() {
             Logger.Info($"Unpatching {File.FullName}");
             File.Restore(); // TODO: Inform the user, that changing attributes settings while VR enabled, will not save when attributes are reverted. Add a way for new attributes to get saved to the old file... or something
+            MessageBox.Show("Any changes you made to your attribute file during VR gameplay, was just removed as we are back on your old settings.", "Unpatched", MessageBoxButton.OK, MessageBoxImage.Information);
                             //Save();
             Logger.Info($"Unpatched {File.FullName}");
             return true;

@@ -320,5 +320,11 @@ namespace SCVRPatcher {
         {
             throw new NotImplementedException();
         }
+
+        // TODO: Implement this method
+        internal static object GetVorpxPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -349,6 +349,9 @@ namespace SCVRPatcher {
                 return;
             }
             else Process.Start("C:\\Program Files\\Roberts Space Industries\\RSI Launcher\\RSI Launcher.exe");*/
+
+            // TODO: See if we can start vorpx after RSI Launcher is started...
+
             //the RSI launcher will open, users will launnch the game, and the 'starcitizen.exe' application will start running. I want to check if the 'starcitizen.exe' is running, and if it is, then I want to loop to check if starcitizen.exe stops running. If it stops running, then I want to unminimize this window
             // TODO: If a user closes the RSI Launcher before launching star citizen, we won't bring up the window, currently... Perhaps look at this later.
             if (Process.GetProcessesByName("starcitizen").Length > 0) {
