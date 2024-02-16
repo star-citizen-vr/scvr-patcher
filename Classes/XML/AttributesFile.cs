@@ -5,11 +5,14 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace SCVRPatcher {
+
     public class AttributesFile : XmlFile {
         public Attributes Content { get; private set; }
+
         public static readonly List<string> attributesToRemove = new() {
             "SysSpec", "SysSpecGameEffects", "SysSpecGasCloud", "SysSpecObjectDetail", "SysSpecParticles", "SysSpecPostProcessing", "SysSpecShading", "SysSpecShadows", "SysSpecWater"
         };
+
         public static readonly Dictionary<string, object>
         sToSet = new() {
             { "AutoZoomOnSelectedTarget", 0 },
@@ -74,6 +77,7 @@ namespace SCVRPatcher {
         }
 
         public bool Remove(string key) => Remove(new List<string>() { key });
+
         public bool Remove(IEnumerable<string> keys) {
             var found = 0;
             foreach (var key in keys) {
@@ -106,7 +110,7 @@ namespace SCVRPatcher {
             // TODO: Add a way to change resolution based on if user checks a checkbox, see below
             // I'm not able to figure out how to get the 'isChecked' to work here....
 
-            //if { 
+            //if {
             //Logger.Info("Changing resolution to match HMD");
             //    if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
             //    if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
@@ -138,6 +142,7 @@ namespace SCVRPatcher {
         }
 
         #region definitions
+
         [XmlRoot(ElementName = "Attr")]
         public class Attr {
 
@@ -157,6 +162,7 @@ namespace SCVRPatcher {
             [XmlAttribute(AttributeName = "Version")]
             public int Version { get; set; }
         }
+
         #endregion definitions
     }
 }
