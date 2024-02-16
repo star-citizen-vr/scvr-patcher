@@ -11,7 +11,9 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace SCVRPatcher {
+
     internal class Utils {
+
         public class AssemblyAttributes {
             public string Title { get; set; }
             public string Version { get; set; }
@@ -27,25 +29,32 @@ namespace SCVRPatcher {
                 PackageReleaseNotes = new Uri(attributes.OfType<AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "PackageReleaseNotes").Value);
             }
         }
+
         internal class Screen {
             public System.Windows.Forms.Screen _Screen { get; set; }
             public Resolution Resolution { get; set; }
+
             public Screen(System.Windows.Forms.Screen screen) {
                 _Screen = screen;
                 Resolution = new Resolution() { Width = screen.Bounds.Width, Height = screen.Bounds.Height };
             }
+
             public override string ToString() {
                 return $"{_Screen.DeviceName} ({Resolution.Width} x {Resolution.Height}) {(_Screen.Primary ? "[primary]" : "")}";
             }
         }
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static Resolution GetMainScreenResolution() {
             var screen = System.Windows.Forms.Screen.PrimaryScreen;
             return new Resolution() { Width = screen.Bounds.Width, Height = screen.Bounds.Height };
         }
+
         public static IEnumerable<Screen> GetAllScreens() {
             return System.Windows.Forms.Screen.AllScreens.ToList().Select(s => new Screen(s));
         }
+
         public static FileInfo GetTempFile() {
             var tries = 0;
             var tempPath = Path.GetTempFileName();
@@ -67,14 +76,17 @@ namespace SCVRPatcher {
             public string? Caption { get; set; }
             public uint? PeakUsage { get; set; }
             public string Size => File.Length.Bytes().Humanize();
+
             public PageFile(ManagementBaseObject obj) {
                 File = new FileInfo(obj.GetPropertyValue("Name") as string);
                 Caption = obj.GetPropertyValue("Caption") as string;
                 PeakUsage = (uint)obj.GetPropertyValue("PeakUsage");
             }
+
             public PageFile(FileInfo file) {
                 File = file;
             }
+
             public override string ToString() {
                 return $"{File.Quote()} ({Size})";
             }
@@ -104,6 +116,7 @@ namespace SCVRPatcher {
             Left,
             Right
         }
+
         public static byte? ChangeTaskbarLocation(TaskbarLocation location) {
             var wantedLocation = (byte)location;
             // get current taskbar location from registry
@@ -144,6 +157,7 @@ namespace SCVRPatcher {
             //Logger.Debug($"Assembly.GetEntryAssembly().Location: {Assembly.GetEntryAssembly()?.Location}");
             return new FileInfo(Application.ExecutablePath ?? Assembly.GetExecutingAssembly()?.Location ?? Assembly.GetEntryAssembly()?.Location);
         }
+
         /*[DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);*/
         /*public static void BringSelfToFront()
@@ -200,7 +214,6 @@ namespace SCVRPatcher {
                     Process.Start(startInfo);
                     Exit();
                 });
-
             } catch (Exception ex) {
                 Logger.Error($"Unable to restart as admin: {ex.Message}");
                 MessageBox.Show("Unable to restart as admin for you. Please do this manually now!", "Can't restart as admin", MessageBoxButtons.OK, MessageBoxIcon.Error);

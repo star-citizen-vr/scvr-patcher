@@ -3,11 +3,13 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace SCVRPatcher.UI {
+
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
     public partial class Settings : Window {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public Settings() {
             InitializeComponent();
             FillSettings();
@@ -65,7 +67,6 @@ namespace SCVRPatcher.UI {
         }
 
         private void onSaveButtonClicked(object sender, RoutedEventArgs e) {
-
         }
     }
 }

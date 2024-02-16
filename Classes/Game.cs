@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows;
 
 namespace SCVRPatcher {
+
     internal class Game {
         public const string Name = "Star Citizen";
         public const string Author = "Cloud Imperium Games";
@@ -29,6 +30,7 @@ namespace SCVRPatcher {
                 if (buildDir.Exists) BuildDirectories.Add(buildDirName, buildDir);
             }
         }
+
         public bool Patch(HmdConfig config, Resolution resolution) {
             foreach (var buildDir in BuildDirectories) {
                 Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.ToFullString()})");

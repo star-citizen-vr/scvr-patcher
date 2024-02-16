@@ -2,7 +2,9 @@
 using System.IO;
 
 namespace SCVRPatcher {
+
     public partial class VorpX {
+
         public class VorpControlConfig : IniFile {
             public static readonly FileInfo File = VorpX.VorpXConfigDir.CombineFile("vorpControl.ini");
             public static readonly List<string> itemsToExclude = new() { "RSI Launcher.exe", "StarCitizen_Launcher.exe", "EasyAntiCheat_EOS_Setup.exe", "Virtual Desktop.exe", "VirtualDesktop.Streamer.exe" };
@@ -13,7 +15,8 @@ namespace SCVRPatcher {
                 Load(File);
             }
 
-            public VorpControlConfig(FileInfo file) : base(file) { }
+            public VorpControlConfig(FileInfo file) : base(file) {
+            }
 
             public SectionData GetExcludesAsIniData(List<string> excludes) {
                 var dict = new SectionData("Exclude");
@@ -54,6 +57,7 @@ namespace SCVRPatcher {
             }
 
             #region definitions
+
             public class IniFileData {
                 public General? General { get; set; }
                 public Injection? Injection { get; set; }
@@ -61,11 +65,13 @@ namespace SCVRPatcher {
                 public VirtualDisplay? VirtualDisplay { get; set; }
                 public List<string> Exclude { get; set; } = new();
             }
+
             public class General {
                 public bool bRunAsAdmin { get; set; }
                 public bool bProfileUpdates { get; set; }
                 public bool bLegacyUpdater { get; set; }
             }
+
             public class Injection {
                 public int iInjectMode { get; set; }
                 public int iStartKillTimeout { get; set; }
@@ -73,9 +79,11 @@ namespace SCVRPatcher {
                 public bool bForceAlternativeInjection { get; set; }
                 public bool bMinimizeRuntimeWindowsOnGameExit { get; set; }
             }
+
             public class Display {
                 public bool bRestoreWindows { get; set; }
             }
+
             public class VirtualDisplay {
                 public bool bManualAttach { get; set; }
                 public bool bNoDisplayAttach { get; set; }
@@ -83,8 +91,8 @@ namespace SCVRPatcher {
                 public bool bResolutionsAbove4K { get; set; }
                 public string sCustomResolutions { get; set; }
             }
-            #endregion
+
+            #endregion definitions
         }
     }
-
 }

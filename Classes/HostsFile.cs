@@ -6,8 +6,10 @@ namespace SCVRPatcher {
 
     internal class HostsFile {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         //private static readonly Regex EntryRegex = new Regex(@"^([\w.]+)\s+(.*)$");
         private static readonly Regex WhiteSpaceRegex = new Regex(@"\s+");
+
         internal static readonly IPAddress Null = new IPAddress(new byte[] { 0, 0, 0, 0 });
         internal static readonly IPAddress Localhost = new IPAddress(new byte[] { 127, 0, 0, 1 });
         internal static FileInfo HostFile = new FileInfo(Environment.GetEnvironmentVariable("windir") + @"\System32\drivers\etc\hosts");

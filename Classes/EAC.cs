@@ -4,6 +4,7 @@ using System.Windows;
 using MessageBox = System.Windows.MessageBox;
 
 namespace SCVRPatcher {
+
     internal class EAC {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         public static readonly DirectoryInfo EACAppdataDir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasyAntiCheat"));

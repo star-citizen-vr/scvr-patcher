@@ -4,6 +4,7 @@ using NLog;
 using System.IO;
 
 namespace SCVRPatcher {
+
     public abstract class IniFile {
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public static FileIniDataParser Parser = new FileIniDataParser();
@@ -11,7 +12,9 @@ namespace SCVRPatcher {
         public FileInfo File { get; private set; }
         public IniData? _Data { get; set; }
 
-        public IniFile() { }
+        public IniFile() {
+        }
+
         public IniFile(FileInfo file) {
             File = file;
             if (!File.Exists) {

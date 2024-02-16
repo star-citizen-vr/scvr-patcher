@@ -1,1758 +1,1758 @@
 {
-  "misc": {
-    "time": "2023-12-23 20:37:46",
-    "hmdq_ver": "2.1.7",
-    "log_ver": 5,
-    "os_ver": "10.0.19041.3803"
-  },
-  "openvr": {
-    "rt_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamVR",
-    "rt_ver": "2.2.3",
-    "devices": [
-      [
-        0,
-        1
-      ],
-      [
-        1,
-        4
-      ],
-      [
-        2,
-        4
-      ]
-    ],
-    "properties": {
-      "0": {
-        "Prop_TrackingSystemName_String": "lighthouse",
-        "Prop_ModelNumber_String": "Index",
-        "Prop_SerialNumber_String": "anon@B1940405A87B06314BB89832",
-        "Prop_RenderModelName_String": "generic_hmd",
-        "Prop_WillDriftInYaw_Bool": false,
-        "Prop_ManufacturerName_String": "Valve",
-        "Prop_TrackingFirmwareVersion_String": "1623823641 WMBUILD-W64$@wmbuild-w64 2021-06-16 FPGA 538(2.26/9/2) BL 1555018550",
-        "Prop_HardwareRevision_String": "product 34 rev 21.65.9 lot 2000/0/0 0",
-        "Prop_AllWirelessDongleDescriptions_String": "anon@3B5CC1831C716605FE9F9677",
-        "Prop_Firmware_UpdateAvailable_Bool": false,
-        "Prop_Firmware_ManualUpdate_Bool": false,
-        "Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
-        "Prop_HardwareRevision_Uint64": 571818249,
-        "Prop_FirmwareVersion_Uint64": 1623823641,
-        "Prop_FPGAVersion_Uint64": 538,
-        "Prop_VRCVersion_Uint64": 1623823641,
-        "Prop_BlockServerShutdown_Bool": false,
-        "Prop_ContainsProximitySensor_Bool": true,
-        "Prop_Firmware_ProgrammingTarget_String": "anon@B1940405A87B06314BB89832",
-        "Prop_DeviceClass_Int32": 1,
-        "Prop_HasCamera_Bool": true,
-        "Prop_Firmware_ForceUpdateRequired_Bool": false,
-        "Prop_ParentDriver_Uint64": 8589934597,
-        "Prop_ResourceRoot_String": "indexhmd",
-        "Prop_InputProfilePath_String": "{indexhmd}/input/indexhmd_profile.json",
-        "Prop_NumCameras_Int32": 2,
-        "Prop_CameraFrameLayout_Int32": 34,
-        "Prop_AdditionalDeviceSettingsPath_String": "{indexhmd}/additional.vrsettings",
-        "Prop_Identifiable_Bool": false,
-        "Prop_Firmware_RemindUpdate_Bool": false,
-        "Prop_ManufacturerSerialNumber_String": "AUAB9474000F",
-        "Prop_ComputedSerialNumber_String": "eb6df639be11bf42585cb2c215a1f50c",
-        "Prop_EstimatedDeviceFirstUseTime_Int32": 1627288314,
-        "Prop_ReportsTimeSinceVSync_Bool": true,
-        "Prop_SecondsFromVsyncToPhotons_Float": 0.012116000056266785,
-        "Prop_DisplayFrequency_Float": 79.9988784790039,
-        "Prop_UserIpdMeters_Float": 0.06628766655921936,
-        "Prop_CurrentUniverseId_Uint64": 1627288313,
-        "Prop_PreviousUniverseId_Uint64": 0,
-        "Prop_DisplayMCType_Int32": 0,
-        "Prop_DisplayMCOffset_Float": 0.0,
-        "Prop_DisplayMCScale_Float": 0.0,
-        "Prop_EdidVendorID_Int32": 38489,
-        "Prop_DisplayMCImageLeft_String": "",
-        "Prop_DisplayMCImageRight_String": "",
-        "Prop_DisplayGCBlackClamp_Float": 0.0,
-        "Prop_EdidProductID_Int32": 37288,
-        "Prop_CameraToHeadTransform_Matrix34": [
-          [
-            0.9966246485710144,
-            -0.007532943040132523,
-            0.0817471444606781,
-            -0.06748999655246735
-          ],
-          [
-            0.006749730557203293,
-            0.9999286532402039,
-            0.009853040799498558,
-            -0.03294000029563904
-          ],
-          [
-            -0.08181554079055786,
-            -0.009268011897802353,
-            0.9966043829917908,
-            -0.09473000466823578
-          ]
-        ],
-        "Prop_DisplayGCType_Int32": 0,
-        "Prop_DisplayGCOffset_Float": 0.0,
-        "Prop_DisplayGCScale_Float": 0.0,
-        "Prop_DisplayGCPrescale_Float": 1.0,
-        "Prop_DisplayGCImage_String": "",
-        "Prop_LensCenterLeftU_Float": 0.5084571242332458,
-        "Prop_LensCenterLeftV_Float": 0.5021986961364746,
-        "Prop_LensCenterRightU_Float": 0.49401378631591797,
-        "Prop_LensCenterRightV_Float": 0.5008478164672852,
-        "Prop_UserHeadToEyeDepthMeters_Float": 0.0,
-        "Prop_CameraFirmwareVersion_Uint64": 1099511627785,
-        "Prop_CameraFirmwareDescription_String": "Etron_776_20200407_v009_Bulk",
-        "Prop_CameraCompatibilityMode_Int32": 0,
-        "Prop_ScreenshotHorizontalFieldOfViewDegrees_Float": 70.0,
-        "Prop_ScreenshotVerticalFieldOfViewDegrees_Float": 70.0,
-        "Prop_ExpectedTrackingReferenceCount_Int32": 2,
-        "Prop_ExpectedControllerCount_Int32": 2,
-        "Prop_NamedIconPathControllerLeftDeviceOff_String": "{indexcontroller}/icons/left_controller_status_off.png",
-        "Prop_NamedIconPathControllerRightDeviceOff_String": "{indexcontroller}/icons/right_controller_status_off.png",
-        "Prop_NamedIconPathTrackingReferenceDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
-        "Prop_CameraToHeadTransforms_Matrix34_Array": [
-          [
-            [
-              0.9966246485710144,
-              -0.007532943040132523,
-              0.0817471444606781,
-              -0.06748999655246735
-            ],
-            [
-              0.006749730557203293,
-              0.9999286532402039,
-              0.009853040799498558,
-              -0.03294000029563904
-            ],
-            [
-              -0.08181554079055786,
-              -0.009268011897802353,
-              0.9966043829917908,
-              -0.09473000466823578
-            ]
-          ],
-          [
-            [
-              0.9975187182426453,
-              -0.00863541942089796,
-              -0.06987015157938004,
-              0.06748999655246735
-            ],
-            [
-              0.010128365829586983,
-              0.9997273087501526,
-              0.02104145474731922,
-              -0.03294000029563904
-            ],
-            [
-              0.06966939568519592,
-              -0.021696915850043297,
-              0.9973341822624207,
-              -0.09473000466823578
-            ]
-          ]
-        ],
-        "Prop_MinimumIpdStepMeters_Float": 0.0020000000949949026,
-        "Prop_ImuToHeadTransform_Matrix34": [
-          [
-            3.422854177870249e-08,
-            -0.9999999403953552,
-            0.0,
-            0.05333999916911125
-          ],
-          [
-            -0.9999999403953552,
-            3.422854177870249e-08,
-            0.0,
-            0.0370200015604496
-          ],
-          [
-            0.0,
-            -0.0,
-            -0.9999999403953552,
-            -0.08298999816179276
-          ]
-        ],
-        "Prop_ImuFactoryGyroBias_Vector3": [
-          0.03307650238275528,
-          0.00984142441302538,
-          0.011898566037416458
-        ],
-        "Prop_ImuFactoryGyroScale_Vector3": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "Prop_ImuFactoryAccelerometerBias_Vector3": [
-          -0.07898508757352829,
-          -0.04373602196574211,
-          0.1427011787891388
-        ],
-        "Prop_ImuFactoryAccelerometerScale_Vector3": [
-          1.0011683702468872,
-          1.0000909566879272,
-          0.9990932941436768
-        ],
-        "Prop_ConfigurationIncludesLighthouse20Features_Bool": true,
-        "Prop_AdditionalRadioFeatures_Uint64": 2,
-        "Prop_CameraDistortionFunction_Int32_Array": [
-          2,
-          2
-        ],
-        "Prop_CameraDistortionCoefficients_Float_Array": [
-          -3.6770126805180895e-34,
-          1.5653470754623413,
-          -5.596141230828533e+28,
-          1.2700759172439575,
-          -3.696885824203491,
-          -1.5885989665985107,
-          7090370772992.0,
-          1.4211336374282837,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          1.6810495607326205e-34,
-          1.5660117864608765,
-          2.0390760260835528e-11,
-          1.2054829597473145,
-          -6.800444274390993e-38,
-          -1.5755211114883423,
-          0.603952944278717,
-          1.4109338521957397,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        "Prop_ExpectedControllerType_String": "knuckles",
-        "Prop_HmdTrackingStyle_Int32": 1,
-        "Prop_HmdColumnCorrectionSettingPrefix_String": "indexHmdColumnOffset_0455F2C",
-        "Prop_CameraSupportsCompatibilityModes_Bool": false,
-        "Prop_SupportsRoomViewDepthProjection_Bool": true,
-        "Prop_DisplayAvailableFrameRates_Float_Array": [
-          79.9988784790039,
-          90.00262451171875,
-          120.01903533935547,
-          144.00022888183594
-        ],
-        "Prop_DisplaySupportsMultipleFramerates_Bool": true,
-        "Prop_DisplayColorMultLeft_Vector3": [
-          1.0,
-          1.0,
-          0.8500000238418579
-        ],
-        "Prop_DisplayColorMultRight_Vector3": [
-          1.0,
-          1.0,
-          0.8500000238418579
-        ],
-        "Prop_DisplaySupportsRuntimeFramerateChange_Bool": true,
-        "Prop_DisplaySupportsAnalogGain_Bool": true,
-        "Prop_DisplayMinAnalogGain_Float": 0.004999999888241291,
-        "Prop_DisplayMaxAnalogGain_Float": 1.600000023841858,
-        "Prop_DashboardScale_Float": 1.0,
-        "Prop_Hmd_EnableParallelRenderCameras_Bool": true,
-        "Prop_IpdUIRangeMinMeters_Float": 0.057999998331069946,
-        "Prop_IpdUIRangeMaxMeters_Float": 0.07000000029802322,
-        "Prop_Hmd_SupportsHDCP14LegacyCompat_Bool": true,
-        "Prop_Hmd_SupportsMicMonitoring_Bool": true,
-        "Prop_Hmd_SupportsDisplayPortTrainingMode_Bool": true,
-        "Prop_Hmd_SupportsAppThrottling_Bool": true,
-        "Prop_DSCVersion_Int32": 0,
-        "Prop_DSCSliceCount_Int32": 0,
-        "Prop_DSCBPPx16_Int32": 0,
-        "Prop_Audio_DefaultPlaybackDeviceId_String": "{0.0.0.00000000}.{acd0505a-9ef1-46d4-a222-5cd78272c923}",
-        "Prop_Audio_DefaultRecordingDeviceId_String": "{0.0.1.00000000}.{a60587e4-9b32-4715-8878-3a12da5d3967}",
-        "Prop_Audio_DefaultPlaybackDeviceVolume_Float": 0.699999988079071,
-        "Prop_Audio_SupportsDualSpeakerAndJackOutput_Bool": true,
-        "Prop_NamedIconPathDeviceOff_String": "{indexhmd}/icons/headset_status_off.png",
-        "Prop_NamedIconPathDeviceSearching_String": "{indexhmd}/icons/headset_status_searching.gif",
-        "Prop_NamedIconPathDeviceSearchingAlert_String": "{indexhmd}/icons/headset_status_searching_alert.gif",
-        "Prop_NamedIconPathDeviceReady_String": "{indexhmd}/icons/headset_status_ready.png",
-        "Prop_NamedIconPathDeviceReadyAlert_String": "{indexhmd}/icons/headset_status_ready_alert.png",
-        "Prop_NamedIconPathDeviceNotReady_String": "{indexhmd}/icons/headset_status_error.png",
-        "Prop_NamedIconPathDeviceStandby_String": "{indexhmd}/icons/headset_status_standby.png",
-        "Prop_NamedIconPathDeviceStandbyAlert_String": "{indexhmd}/icons/headset_status_standby_alert.png",
-        "Prop_HasDisplayComponent_Bool": true,
-        "Prop_HasCameraComponent_Bool": true,
-        "Prop_HasDriverDirectModeComponent_Bool": false,
-        "Prop_HasVirtualDisplayComponent_Bool": false,
-        "Prop_ControllerType_String": "indexhmd",
-        "Prop_ControllerHandSelectionPriority_Int32": 0
-      },
-      "1": {
-        "Prop_TrackingSystemName_String": "lighthouse",
-        "Prop_ModelNumber_String": "Valve SR Imp",
-        "Prop_SerialNumber_String": "anon@DDC32DC4561CBA806C0ABB4E",
-        "Prop_RenderModelName_String": "lh_basestation_valve_gen2",
-        "Prop_ManufacturerName_String": "Valve Corporation",
-        "Prop_TrackingFirmwareVersion_String": "3008",
-        "Prop_HardwareRevision_String": "Valve Corp., 1004, 0.0, FB94211890 V001017-20.A ",
-        "Prop_Firmware_UpdateAvailable_Bool": false,
-        "Prop_Firmware_ManualUpdate_Bool": false,
-        "Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
-        "Prop_HardwareRevision_Uint64": 150994959,
-        "Prop_FirmwareVersion_Uint64": 3008,
-        "Prop_RadioVersion_Uint64": 521,
-        "Prop_DeviceClass_Int32": 4,
-        "Prop_ParentDriver_Uint64": 8589934597,
-        "Prop_ResourceRoot_String": "lighthouse",
-        "Prop_BootloaderVersion_Uint64": 772,
-        "Prop_CompositeFirmwareVersion_String": "R: 2.9.2004771     M: 1.8.2004742     B: 3.4.3782793    ",
-        "Prop_FieldOfViewLeftDegrees_Float": 75.0,
-        "Prop_FieldOfViewRightDegrees_Float": 75.0,
-        "Prop_FieldOfViewTopDegrees_Float": 55.0,
-        "Prop_FieldOfViewBottomDegrees_Float": 55.0,
-        "Prop_TrackingRangeMinimumMeters_Float": 0.5,
-        "Prop_TrackingRangeMaximumMeters_Float": 6.0,
-        "Prop_ModeLabel_String": "1",
-        "Prop_CanWirelessIdentify_Bool": true,
-        "Prop_Nonce_Int32": 26599,
-        "Prop_NamedIconPathDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
-        "Prop_NamedIconPathDeviceSearching_String": "{lighthouse}/icons/base2_status_searching.gif",
-        "Prop_NamedIconPathDeviceSearchingAlert_String": "{lighthouse}/icons/base2_status_searching_alert.gif",
-        "Prop_NamedIconPathDeviceReady_String": "{lighthouse}/icons/base2_status_ready.png",
-        "Prop_NamedIconPathDeviceReadyAlert_String": "{lighthouse}/icons/base2_status_ready_alert.png",
-        "Prop_NamedIconPathDeviceNotReady_String": "{lighthouse}/icons/base2_status_error.png",
-        "Prop_NamedIconPathDeviceStandby_String": "{lighthouse}/icons/base2_status_standby.png",
-        "Prop_NamedIconPathDeviceAlertLow_String": "{lighthouse}/icons/base_status_ready_low.png",
-        "Prop_ControllerType_String": "",
-        "Prop_ControllerHandSelectionPriority_Int32": 0
-      },
-      "2": {
-        "Prop_TrackingSystemName_String": "lighthouse",
-        "Prop_ModelNumber_String": "Valve SR Imp",
-        "Prop_SerialNumber_String": "anon@CE87EA51C984122AF57643F6",
-        "Prop_RenderModelName_String": "lh_basestation_valve_gen2",
-        "Prop_ManufacturerName_String": "Valve Corporation",
-        "Prop_TrackingFirmwareVersion_String": "3008",
-        "Prop_HardwareRevision_String": "0x0900000f",
-        "Prop_Firmware_UpdateAvailable_Bool": false,
-        "Prop_Firmware_ManualUpdate_Bool": false,
-        "Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
-        "Prop_HardwareRevision_Uint64": 150994959,
-        "Prop_FirmwareVersion_Uint64": 3008,
-        "Prop_DeviceClass_Int32": 4,
-        "Prop_ParentDriver_Uint64": 8589934597,
-        "Prop_ResourceRoot_String": "lighthouse",
-        "Prop_FieldOfViewLeftDegrees_Float": 75.0,
-        "Prop_FieldOfViewRightDegrees_Float": 75.0,
-        "Prop_FieldOfViewTopDegrees_Float": 55.0,
-        "Prop_FieldOfViewBottomDegrees_Float": 55.0,
-        "Prop_TrackingRangeMinimumMeters_Float": 0.5,
-        "Prop_TrackingRangeMaximumMeters_Float": 6.0,
-        "Prop_ModeLabel_String": "2",
-        "Prop_CanWirelessIdentify_Bool": true,
-        "Prop_Nonce_Int32": 58910,
-        "Prop_NamedIconPathDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
-        "Prop_NamedIconPathDeviceSearching_String": "{lighthouse}/icons/base2_status_searching.gif",
-        "Prop_NamedIconPathDeviceSearchingAlert_String": "{lighthouse}/icons/base2_status_searching_alert.gif",
-        "Prop_NamedIconPathDeviceReady_String": "{lighthouse}/icons/base2_status_ready.png",
-        "Prop_NamedIconPathDeviceReadyAlert_String": "{lighthouse}/icons/base2_status_ready_alert.png",
-        "Prop_NamedIconPathDeviceNotReady_String": "{lighthouse}/icons/base2_status_error.png",
-        "Prop_NamedIconPathDeviceStandby_String": "{lighthouse}/icons/base2_status_standby.png",
-        "Prop_NamedIconPathDeviceAlertLow_String": "{lighthouse}/icons/base_status_ready_low.png",
-        "Prop_ControllerType_String": "",
-        "Prop_ControllerHandSelectionPriority_Int32": 0
-      }
-    },
-    "geometry": {
-      "rec_rts": [
-        2468,
-        2740
-      ],
-      "raw_eye": {
-        "Left": {
-          "tan_left": -1.5392378568649292,
-          "tan_right": 1.0501070022583008,
-          "tan_bottom": -1.4046337604522705,
-          "tan_top": 1.4123759269714355,
-          "aspect": 0.9191821217536926
-        },
-        "Right": {
-          "tan_left": -1.054413914680481,
-          "tan_right": 1.5359985828399658,
-          "tan_bottom": -1.4085981845855713,
-          "tan_top": 1.4115869998931885,
-          "aspect": 0.9185256958007813
-        }
-      },
-      "eye2head": {
-        "Left": [
-          [
-            1.0,
-            0.0,
-            0.0,
-            -0.03314383327960968
-          ],
-          [
-            0.0,
-            1.0,
-            0.0,
-            0.0
-          ],
-          [
-            0.0,
-            0.0,
-            1.0,
-            0.0
-          ]
-        ],
-        "Right": [
-          [
-            1.0,
-            0.0,
-            0.0,
-            0.03314383327960968
-          ],
-          [
-            0.0,
-            1.0,
-            0.0,
-            0.0
-          ],
-          [
-            0.0,
-            0.0,
-            1.0,
-            0.0
-          ]
-        ]
-      },
-      "view_geom": {
-        "left_rot": 0.0,
-        "right_rot": 0.0,
-        "ipd": 0.06628766655921936
-      },
-      "fov_eye": null,
-      "fov_head": {
-        "Left": {
-          "fov_pts": [
-            [
-              -1.136112068935769,
-              -1.0367607323112342,
-              -1.0
-            ],
-            [
-              0.0,
-              -1.3775481367915725,
-              -1.0
-            ],
-            [
-              0.6400302879237895,
-              -0.8561109945904424,
-              -1.0
-            ],
-            [
-              0.8982991433788976,
-              0.0,
-              -1.0
-            ],
-            [
-              0.7156606756165501,
-              0.9625513475742933,
-              -1.0
-            ],
-            [
-              0.0,
-              1.3924923315939448,
-              -1.0
-            ],
-            [
-              -1.1415539362774596,
-              1.0474685843691867,
-              -1.0
-            ],
-            [
-              -1.4078475253043805,
-              0.0,
-              -1.0
-            ]
-          ],
-          "deg_left": -54.613662185008884,
-          "deg_right": 41.93332610635089,
-          "deg_bottom": -54.023072694455536,
-          "deg_top": 54.31648109924274,
-          "deg_hor": 96.54698829135978,
-          "deg_ver": 108.33955379369829
-        },
-        "Right": {
-          "fov_pts": [
-            [
-              -0.6438046776461702,
-              -0.8600627206583298,
-              -1.0
-            ],
-            [
-              0.0,
-              -1.3827316741210056,
-              -1.0
-            ],
-            [
-              1.1334268213140775,
-              -1.0394169504451596,
-              -1.0
-            ],
-            [
-              1.4044254307462023,
-              0.0,
-              -1.0
-            ],
-            [
-              1.1383136191080916,
-              1.046113404325818,
-              -1.0
-            ],
-            [
-              0.0,
-              1.3925709331904006,
-              -1.0
-            ],
-            [
-              -0.7189316178357636,
-              0.9624631384503941,
-              -1.0
-            ],
-            [
-              -0.9025183242712524,
-              0.0,
-              -1.0
-            ]
-          ],
-          "deg_left": -42.066830620393816,
-          "deg_right": 54.54780487676476,
-          "deg_bottom": -54.12531608424515,
-          "deg_top": 54.31801336142832,
-          "deg_hor": 96.61463549715857,
-          "deg_ver": 108.44332944567347
-        }
-      },
-      "fov_tot": {
-        "fov_hor": 109.16146706177364,
-        "fov_ver": 108.39144161968588,
-        "fov_diag": 114.09935279099065,
-        "overlap": 84.0001567267447
-      },
-      "ham_mesh": {
-        "Left": {
-          "ham_area": 0.24878651098108281,
-          "verts_raw": [
-            [
-              1.0,
-              0.5
-            ],
-            [
-              1.0,
-              0.35600000619888306
-            ],
-            [
-              0.9470000267028809,
-              0.35600000619888306
-            ],
-            [
-              1.0,
-              0.5
-            ],
-            [
-              0.9470000267028809,
-              0.35600000619888306
-            ],
-            [
-              0.9419999718666077,
-              0.4440000057220459
-            ],
-            [
-              1.0,
-              0.5
-            ],
-            [
-              0.9419999718666077,
-              0.4440000057220459
-            ],
-            [
-              0.9409999847412109,
-              0.531000018119812
-            ],
-            [
-              1.0,
-              0.5
-            ],
-            [
-              0.9409999847412109,
-              0.531000018119812
-            ],
-            [
-              0.9459999799728394,
-              0.6130000352859497
-            ],
-            [
-              1.0,
-              0.5
-            ],
-            [
-              0.9459999799728394,
-              0.6130000352859497
-            ],
-            [
-              0.953000009059906,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              0.5
-            ],
-            [
-              0.953000009059906,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              1.0,
-              0.6980000138282776
-            ],
-            [
-              0.9549999833106995,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.9549999833106995,
-              0.6980000138282776
-            ],
-            [
-              0.9139999747276306,
-              0.7870000004768372
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.9139999747276306,
-              0.7870000004768372
-            ],
-            [
-              0.8460000157356262,
-              0.8709999918937683
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.8460000157356262,
-              0.8709999918937683
-            ],
-            [
-              0.7710000276565552,
-              0.9300000071525574
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.7710000276565552,
-              0.9300000071525574
-            ],
-            [
-              0.6700000166893005,
-              0.9769999980926514
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.6700000166893005,
-              0.9769999980926514
-            ],
-            [
-              0.5609999895095825,
-              1.0
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.4169999957084656,
-              1.0
-            ],
-            [
-              0.2939999997615814,
-              0.9649999737739563
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.2939999997615814,
-              0.9649999737739563
-            ],
-            [
-              0.19200000166893005,
-              0.9039999842643738
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.19200000166893005,
-              0.9039999842643738
-            ],
-            [
-              0.1289999932050705,
-              0.8489999771118164
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.1289999932050705,
-              0.8489999771118164
-            ],
-            [
-              0.07100000232458115,
-              0.7689999938011169
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.07100000232458115,
-              0.7689999938011169
-            ],
-            [
-              0.041999999433755875,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.041999999433755875,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.0,
-              0.6929999589920044
-            ],
-            [
-              0.041999999433755875,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.041999999433755875,
-              0.6929999589920044
-            ],
-            [
-              0.04899999871850014,
-              0.5740000009536743
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.04899999871850014,
-              0.5740000009536743
-            ],
-            [
-              0.050999999046325684,
-              0.503000020980835
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.050999999046325684,
-              0.503000020980835
-            ],
-            [
-              0.04800000041723251,
-              0.4520000219345093
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.04800000041723251,
-              0.4520000219345093
-            ],
-            [
-              0.0430000014603138,
-              0.38099998235702515
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.0430000014603138,
-              0.38099998235702515
-            ],
-            [
-              0.039000000804662704,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.039000000804662704,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.0,
-              0.3100000023841858
-            ],
-            [
-              0.039000000804662704,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.039000000804662704,
-              0.3100000023841858
-            ],
-            [
-              0.0860000029206276,
-              0.20999997854232788
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.0860000029206276,
-              0.20999997854232788
-            ],
-            [
-              0.1720000058412552,
-              0.1119999885559082
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.1720000058412552,
-              0.1119999885559082
-            ],
-            [
-              0.28200000524520874,
-              0.04400002956390381
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.28200000524520874,
-              0.04400002956390381
-            ],
-            [
-              0.43700000643730164,
-              0.0
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.5619999766349792,
-              0.0
-            ],
-            [
-              0.7509999871253967,
-              0.0559999942779541
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.7509999871253967,
-              0.0559999942779541
-            ],
-            [
-              0.9470000267028809,
-              0.35600000619888306
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.9470000267028809,
-              0.35600000619888306
-            ],
-            [
-              1.0,
-              0.35600000619888306
-            ]
-          ],
-          "verts_opt": [
-            [
-              1.0,
-              0.5
-            ],
-            [
-              1.0,
-              0.35600000619888306
-            ],
-            [
-              0.9470000267028809,
-              0.35600000619888306
-            ],
-            [
-              0.9419999718666077,
-              0.4440000057220459
-            ],
-            [
-              0.9409999847412109,
-              0.531000018119812
-            ],
-            [
-              0.9459999799728394,
-              0.6130000352859497
-            ],
-            [
-              0.953000009059906,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              0.6980000138282776
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.9549999833106995,
-              0.6980000138282776
-            ],
-            [
-              0.9139999747276306,
-              0.7870000004768372
-            ],
-            [
-              0.8460000157356262,
-              0.8709999918937683
-            ],
-            [
-              0.7710000276565552,
-              0.9300000071525574
-            ],
-            [
-              0.6700000166893005,
-              0.9769999980926514
-            ],
-            [
-              0.5609999895095825,
-              1.0
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.4169999957084656,
-              1.0
-            ],
-            [
-              0.2939999997615814,
-              0.9649999737739563
-            ],
-            [
-              0.19200000166893005,
-              0.9039999842643738
-            ],
-            [
-              0.1289999932050705,
-              0.8489999771118164
-            ],
-            [
-              0.07100000232458115,
-              0.7689999938011169
-            ],
-            [
-              0.041999999433755875,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              0.6929999589920044
-            ],
-            [
-              0.0,
-              0.48900002241134644
-            ],
-            [
-              0.04899999871850014,
-              0.5740000009536743
-            ],
-            [
-              0.050999999046325684,
-              0.503000020980835
-            ],
-            [
-              0.04800000041723251,
-              0.4520000219345093
-            ],
-            [
-              0.0430000014603138,
-              0.38099998235702515
-            ],
-            [
-              0.039000000804662704,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.3100000023841858
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.0860000029206276,
-              0.20999997854232788
-            ],
-            [
-              0.1720000058412552,
-              0.1119999885559082
-            ],
-            [
-              0.28200000524520874,
-              0.04400002956390381
-            ],
-            [
-              0.43700000643730164,
-              0.0
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.5619999766349792,
-              0.0
-            ],
-            [
-              0.7509999871253967,
-              0.0559999942779541
-            ]
-          ],
-          "faces_opt": [
-            [
-              37,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              0,
-              1,
-              35,
-              36
-            ],
-            [
-              8,
-              7,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14
-            ],
-            [
-              30,
-              29,
-              23,
-              22,
-              15,
-              16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              24,
-              25,
-              26,
-              27,
-              28,
-              31,
-              32,
-              33,
-              34
-            ]
-          ]
-        },
-        "Right": {
-          "ham_area": 0.24878651223277976,
-          "verts_raw": [
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.0,
-              0.35600000619888306
-            ],
-            [
-              0.05299997329711914,
-              0.35600000619888306
-            ],
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.05299997329711914,
-              0.35600000619888306
-            ],
-            [
-              0.058000028133392334,
-              0.4440000057220459
-            ],
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.058000028133392334,
-              0.4440000057220459
-            ],
-            [
-              0.05900001525878906,
-              0.531000018119812
-            ],
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.05900001525878906,
-              0.531000018119812
-            ],
-            [
-              0.054000020027160645,
-              0.6130000352859497
-            ],
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.054000020027160645,
-              0.6130000352859497
-            ],
-            [
-              0.046999990940093994,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.046999990940093994,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.0,
-              0.6980000138282776
-            ],
-            [
-              0.04500001668930054,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.04500001668930054,
-              0.6980000138282776
-            ],
-            [
-              0.08600002527236938,
-              0.7870000004768372
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.08600002527236938,
-              0.7870000004768372
-            ],
-            [
-              0.15399998426437378,
-              0.8709999918937683
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.15399998426437378,
-              0.8709999918937683
-            ],
-            [
-              0.22899997234344482,
-              0.9300000071525574
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.22899997234344482,
-              0.9300000071525574
-            ],
-            [
-              0.32999998331069946,
-              0.9769999980926514
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.32999998331069946,
-              0.9769999980926514
-            ],
-            [
-              0.4390000104904175,
-              1.0
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.5830000042915344,
-              1.0
-            ],
-            [
-              0.7059999704360962,
-              0.9649999737739563
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.7059999704360962,
-              0.9649999737739563
-            ],
-            [
-              0.8079999685287476,
-              0.9039999842643738
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.8079999685287476,
-              0.9039999842643738
-            ],
-            [
-              0.8709999918937683,
-              0.8489999771118164
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.8709999918937683,
-              0.8489999771118164
-            ],
-            [
-              0.9290000200271606,
-              0.7689999938011169
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.9290000200271606,
-              0.7689999938011169
-            ],
-            [
-              0.9580000042915344,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.9580000042915344,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              1.0,
-              0.6929999589920044
-            ],
-            [
-              0.9580000042915344,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9580000042915344,
-              0.6929999589920044
-            ],
-            [
-              0.9509999752044678,
-              0.5740000009536743
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9509999752044678,
-              0.5740000009536743
-            ],
-            [
-              0.9490000009536743,
-              0.503000020980835
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9490000009536743,
-              0.503000020980835
-            ],
-            [
-              0.9520000219345093,
-              0.4520000219345093
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9520000219345093,
-              0.4520000219345093
-            ],
-            [
-              0.9570000171661377,
-              0.38099998235702515
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9570000171661377,
-              0.38099998235702515
-            ],
-            [
-              0.9610000252723694,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9610000252723694,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              1.0,
-              0.3100000023841858
-            ],
-            [
-              0.9610000252723694,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.9610000252723694,
-              0.3100000023841858
-            ],
-            [
-              0.9139999747276306,
-              0.20999997854232788
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.9139999747276306,
-              0.20999997854232788
-            ],
-            [
-              0.828000009059906,
-              0.1119999885559082
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.828000009059906,
-              0.1119999885559082
-            ],
-            [
-              0.7179999947547913,
-              0.04400002956390381
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.7179999947547913,
-              0.04400002956390381
-            ],
-            [
-              0.562999963760376,
-              0.0
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.43800002336502075,
-              0.0
-            ],
-            [
-              0.24900001287460327,
-              0.0559999942779541
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.24900001287460327,
-              0.0559999942779541
-            ],
-            [
-              0.05299997329711914,
-              0.35600000619888306
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.05299997329711914,
-              0.35600000619888306
-            ],
-            [
-              0.0,
-              0.35600000619888306
-            ]
-          ],
-          "verts_opt": [
-            [
-              0.0,
-              0.5
-            ],
-            [
-              0.0,
-              0.35600000619888306
-            ],
-            [
-              0.05299997329711914,
-              0.35600000619888306
-            ],
-            [
-              0.058000028133392334,
-              0.4440000057220459
-            ],
-            [
-              0.05900001525878906,
-              0.531000018119812
-            ],
-            [
-              0.054000020027160645,
-              0.6130000352859497
-            ],
-            [
-              0.046999990940093994,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              0.6980000138282776
-            ],
-            [
-              0.0,
-              1.0
-            ],
-            [
-              0.04500001668930054,
-              0.6980000138282776
-            ],
-            [
-              0.08600002527236938,
-              0.7870000004768372
-            ],
-            [
-              0.15399998426437378,
-              0.8709999918937683
-            ],
-            [
-              0.22899997234344482,
-              0.9300000071525574
-            ],
-            [
-              0.32999998331069946,
-              0.9769999980926514
-            ],
-            [
-              0.4390000104904175,
-              1.0
-            ],
-            [
-              1.0,
-              1.0
-            ],
-            [
-              0.5830000042915344,
-              1.0
-            ],
-            [
-              0.7059999704360962,
-              0.9649999737739563
-            ],
-            [
-              0.8079999685287476,
-              0.9039999842643738
-            ],
-            [
-              0.8709999918937683,
-              0.8489999771118164
-            ],
-            [
-              0.9290000200271606,
-              0.7689999938011169
-            ],
-            [
-              0.9580000042915344,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              0.6929999589920044
-            ],
-            [
-              1.0,
-              0.48900002241134644
-            ],
-            [
-              0.9509999752044678,
-              0.5740000009536743
-            ],
-            [
-              0.9490000009536743,
-              0.503000020980835
-            ],
-            [
-              0.9520000219345093,
-              0.4520000219345093
-            ],
-            [
-              0.9570000171661377,
-              0.38099998235702515
-            ],
-            [
-              0.9610000252723694,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.3100000023841858
-            ],
-            [
-              1.0,
-              0.0
-            ],
-            [
-              0.9139999747276306,
-              0.20999997854232788
-            ],
-            [
-              0.828000009059906,
-              0.1119999885559082
-            ],
-            [
-              0.7179999947547913,
-              0.04400002956390381
-            ],
-            [
-              0.562999963760376,
-              0.0
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.43800002336502075,
-              0.0
-            ],
-            [
-              0.24900001287460327,
-              0.0559999942779541
-            ]
-          ],
-          "faces_opt": [
-            [
-              37,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              0,
-              1,
-              35,
-              36
-            ],
-            [
-              8,
-              7,
-              9,
-              10,
-              11,
-              12,
-              13,
-              14
-            ],
-            [
-              30,
-              29,
-              23,
-              22,
-              15,
-              16,
-              17,
-              18,
-              19,
-              20,
-              21,
-              24,
-              25,
-              26,
-              27,
-              28,
-              31,
-              32,
-              33,
-              34
-            ]
-          ]
-        }
-      }
-    }
-  },
-  "oculus": {
-    "error@": "ovr_Create: No HMD attached."
-  },
-  "checksum": "EE61FAFCACF866571877CABA8C5DE25D"
+	"misc": {
+		"time": "2023-12-23 20:37:46",
+		"hmdq_ver": "2.1.7",
+		"log_ver": 5,
+		"os_ver": "10.0.19041.3803"
+	},
+	"openvr": {
+		"rt_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamVR",
+		"rt_ver": "2.2.3",
+		"devices": [
+			[
+				0,
+				1
+			],
+			[
+				1,
+				4
+			],
+			[
+				2,
+				4
+			]
+		],
+		"properties": {
+			"0": {
+				"Prop_TrackingSystemName_String": "lighthouse",
+				"Prop_ModelNumber_String": "Index",
+				"Prop_SerialNumber_String": "anon@B1940405A87B06314BB89832",
+				"Prop_RenderModelName_String": "generic_hmd",
+				"Prop_WillDriftInYaw_Bool": false,
+				"Prop_ManufacturerName_String": "Valve",
+				"Prop_TrackingFirmwareVersion_String": "1623823641 WMBUILD-W64$@wmbuild-w64 2021-06-16 FPGA 538(2.26/9/2) BL 1555018550",
+				"Prop_HardwareRevision_String": "product 34 rev 21.65.9 lot 2000/0/0 0",
+				"Prop_AllWirelessDongleDescriptions_String": "anon@3B5CC1831C716605FE9F9677",
+				"Prop_Firmware_UpdateAvailable_Bool": false,
+				"Prop_Firmware_ManualUpdate_Bool": false,
+				"Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
+				"Prop_HardwareRevision_Uint64": 571818249,
+				"Prop_FirmwareVersion_Uint64": 1623823641,
+				"Prop_FPGAVersion_Uint64": 538,
+				"Prop_VRCVersion_Uint64": 1623823641,
+				"Prop_BlockServerShutdown_Bool": false,
+				"Prop_ContainsProximitySensor_Bool": true,
+				"Prop_Firmware_ProgrammingTarget_String": "anon@B1940405A87B06314BB89832",
+				"Prop_DeviceClass_Int32": 1,
+				"Prop_HasCamera_Bool": true,
+				"Prop_Firmware_ForceUpdateRequired_Bool": false,
+				"Prop_ParentDriver_Uint64": 8589934597,
+				"Prop_ResourceRoot_String": "indexhmd",
+				"Prop_InputProfilePath_String": "{indexhmd}/input/indexhmd_profile.json",
+				"Prop_NumCameras_Int32": 2,
+				"Prop_CameraFrameLayout_Int32": 34,
+				"Prop_AdditionalDeviceSettingsPath_String": "{indexhmd}/additional.vrsettings",
+				"Prop_Identifiable_Bool": false,
+				"Prop_Firmware_RemindUpdate_Bool": false,
+				"Prop_ManufacturerSerialNumber_String": "AUAB9474000F",
+				"Prop_ComputedSerialNumber_String": "eb6df639be11bf42585cb2c215a1f50c",
+				"Prop_EstimatedDeviceFirstUseTime_Int32": 1627288314,
+				"Prop_ReportsTimeSinceVSync_Bool": true,
+				"Prop_SecondsFromVsyncToPhotons_Float": 0.012116000056266785,
+				"Prop_DisplayFrequency_Float": 79.9988784790039,
+				"Prop_UserIpdMeters_Float": 0.06628766655921936,
+				"Prop_CurrentUniverseId_Uint64": 1627288313,
+				"Prop_PreviousUniverseId_Uint64": 0,
+				"Prop_DisplayMCType_Int32": 0,
+				"Prop_DisplayMCOffset_Float": 0.0,
+				"Prop_DisplayMCScale_Float": 0.0,
+				"Prop_EdidVendorID_Int32": 38489,
+				"Prop_DisplayMCImageLeft_String": "",
+				"Prop_DisplayMCImageRight_String": "",
+				"Prop_DisplayGCBlackClamp_Float": 0.0,
+				"Prop_EdidProductID_Int32": 37288,
+				"Prop_CameraToHeadTransform_Matrix34": [
+					[
+						0.9966246485710144,
+						-0.007532943040132523,
+						0.0817471444606781,
+						-0.06748999655246735
+					],
+					[
+						0.006749730557203293,
+						0.9999286532402039,
+						0.009853040799498558,
+						-0.03294000029563904
+					],
+					[
+						-0.08181554079055786,
+						-0.009268011897802353,
+						0.9966043829917908,
+						-0.09473000466823578
+					]
+				],
+				"Prop_DisplayGCType_Int32": 0,
+				"Prop_DisplayGCOffset_Float": 0.0,
+				"Prop_DisplayGCScale_Float": 0.0,
+				"Prop_DisplayGCPrescale_Float": 1.0,
+				"Prop_DisplayGCImage_String": "",
+				"Prop_LensCenterLeftU_Float": 0.5084571242332458,
+				"Prop_LensCenterLeftV_Float": 0.5021986961364746,
+				"Prop_LensCenterRightU_Float": 0.49401378631591797,
+				"Prop_LensCenterRightV_Float": 0.5008478164672852,
+				"Prop_UserHeadToEyeDepthMeters_Float": 0.0,
+				"Prop_CameraFirmwareVersion_Uint64": 1099511627785,
+				"Prop_CameraFirmwareDescription_String": "Etron_776_20200407_v009_Bulk",
+				"Prop_CameraCompatibilityMode_Int32": 0,
+				"Prop_ScreenshotHorizontalFieldOfViewDegrees_Float": 70.0,
+				"Prop_ScreenshotVerticalFieldOfViewDegrees_Float": 70.0,
+				"Prop_ExpectedTrackingReferenceCount_Int32": 2,
+				"Prop_ExpectedControllerCount_Int32": 2,
+				"Prop_NamedIconPathControllerLeftDeviceOff_String": "{indexcontroller}/icons/left_controller_status_off.png",
+				"Prop_NamedIconPathControllerRightDeviceOff_String": "{indexcontroller}/icons/right_controller_status_off.png",
+				"Prop_NamedIconPathTrackingReferenceDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
+				"Prop_CameraToHeadTransforms_Matrix34_Array": [
+					[
+						[
+							0.9966246485710144,
+							-0.007532943040132523,
+							0.0817471444606781,
+							-0.06748999655246735
+						],
+						[
+							0.006749730557203293,
+							0.9999286532402039,
+							0.009853040799498558,
+							-0.03294000029563904
+						],
+						[
+							-0.08181554079055786,
+							-0.009268011897802353,
+							0.9966043829917908,
+							-0.09473000466823578
+						]
+					],
+					[
+						[
+							0.9975187182426453,
+							-0.00863541942089796,
+							-0.06987015157938004,
+							0.06748999655246735
+						],
+						[
+							0.010128365829586983,
+							0.9997273087501526,
+							0.02104145474731922,
+							-0.03294000029563904
+						],
+						[
+							0.06966939568519592,
+							-0.021696915850043297,
+							0.9973341822624207,
+							-0.09473000466823578
+						]
+					]
+				],
+				"Prop_MinimumIpdStepMeters_Float": 0.0020000000949949026,
+				"Prop_ImuToHeadTransform_Matrix34": [
+					[
+						3.422854177870249e-08,
+						-0.9999999403953552,
+						0.0,
+						0.05333999916911125
+					],
+					[
+						-0.9999999403953552,
+						3.422854177870249e-08,
+						0.0,
+						0.0370200015604496
+					],
+					[
+						0.0,
+						-0.0,
+						-0.9999999403953552,
+						-0.08298999816179276
+					]
+				],
+				"Prop_ImuFactoryGyroBias_Vector3": [
+					0.03307650238275528,
+					0.00984142441302538,
+					0.011898566037416458
+				],
+				"Prop_ImuFactoryGyroScale_Vector3": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"Prop_ImuFactoryAccelerometerBias_Vector3": [
+					-0.07898508757352829,
+					-0.04373602196574211,
+					0.1427011787891388
+				],
+				"Prop_ImuFactoryAccelerometerScale_Vector3": [
+					1.0011683702468872,
+					1.0000909566879272,
+					0.9990932941436768
+				],
+				"Prop_ConfigurationIncludesLighthouse20Features_Bool": true,
+				"Prop_AdditionalRadioFeatures_Uint64": 2,
+				"Prop_CameraDistortionFunction_Int32_Array": [
+					2,
+					2
+				],
+				"Prop_CameraDistortionCoefficients_Float_Array": [
+					-3.6770126805180895e-34,
+					1.5653470754623413,
+					-5.596141230828533e+28,
+					1.2700759172439575,
+					-3.696885824203491,
+					-1.5885989665985107,
+					7090370772992.0,
+					1.4211336374282837,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					1.6810495607326205e-34,
+					1.5660117864608765,
+					2.0390760260835528e-11,
+					1.2054829597473145,
+					-6.800444274390993e-38,
+					-1.5755211114883423,
+					0.603952944278717,
+					1.4109338521957397,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0,
+					0.0
+				],
+				"Prop_ExpectedControllerType_String": "knuckles",
+				"Prop_HmdTrackingStyle_Int32": 1,
+				"Prop_HmdColumnCorrectionSettingPrefix_String": "indexHmdColumnOffset_0455F2C",
+				"Prop_CameraSupportsCompatibilityModes_Bool": false,
+				"Prop_SupportsRoomViewDepthProjection_Bool": true,
+				"Prop_DisplayAvailableFrameRates_Float_Array": [
+					79.9988784790039,
+					90.00262451171875,
+					120.01903533935547,
+					144.00022888183594
+				],
+				"Prop_DisplaySupportsMultipleFramerates_Bool": true,
+				"Prop_DisplayColorMultLeft_Vector3": [
+					1.0,
+					1.0,
+					0.8500000238418579
+				],
+				"Prop_DisplayColorMultRight_Vector3": [
+					1.0,
+					1.0,
+					0.8500000238418579
+				],
+				"Prop_DisplaySupportsRuntimeFramerateChange_Bool": true,
+				"Prop_DisplaySupportsAnalogGain_Bool": true,
+				"Prop_DisplayMinAnalogGain_Float": 0.004999999888241291,
+				"Prop_DisplayMaxAnalogGain_Float": 1.600000023841858,
+				"Prop_DashboardScale_Float": 1.0,
+				"Prop_Hmd_EnableParallelRenderCameras_Bool": true,
+				"Prop_IpdUIRangeMinMeters_Float": 0.057999998331069946,
+				"Prop_IpdUIRangeMaxMeters_Float": 0.07000000029802322,
+				"Prop_Hmd_SupportsHDCP14LegacyCompat_Bool": true,
+				"Prop_Hmd_SupportsMicMonitoring_Bool": true,
+				"Prop_Hmd_SupportsDisplayPortTrainingMode_Bool": true,
+				"Prop_Hmd_SupportsAppThrottling_Bool": true,
+				"Prop_DSCVersion_Int32": 0,
+				"Prop_DSCSliceCount_Int32": 0,
+				"Prop_DSCBPPx16_Int32": 0,
+				"Prop_Audio_DefaultPlaybackDeviceId_String": "{0.0.0.00000000}.{acd0505a-9ef1-46d4-a222-5cd78272c923}",
+				"Prop_Audio_DefaultRecordingDeviceId_String": "{0.0.1.00000000}.{a60587e4-9b32-4715-8878-3a12da5d3967}",
+				"Prop_Audio_DefaultPlaybackDeviceVolume_Float": 0.699999988079071,
+				"Prop_Audio_SupportsDualSpeakerAndJackOutput_Bool": true,
+				"Prop_NamedIconPathDeviceOff_String": "{indexhmd}/icons/headset_status_off.png",
+				"Prop_NamedIconPathDeviceSearching_String": "{indexhmd}/icons/headset_status_searching.gif",
+				"Prop_NamedIconPathDeviceSearchingAlert_String": "{indexhmd}/icons/headset_status_searching_alert.gif",
+				"Prop_NamedIconPathDeviceReady_String": "{indexhmd}/icons/headset_status_ready.png",
+				"Prop_NamedIconPathDeviceReadyAlert_String": "{indexhmd}/icons/headset_status_ready_alert.png",
+				"Prop_NamedIconPathDeviceNotReady_String": "{indexhmd}/icons/headset_status_error.png",
+				"Prop_NamedIconPathDeviceStandby_String": "{indexhmd}/icons/headset_status_standby.png",
+				"Prop_NamedIconPathDeviceStandbyAlert_String": "{indexhmd}/icons/headset_status_standby_alert.png",
+				"Prop_HasDisplayComponent_Bool": true,
+				"Prop_HasCameraComponent_Bool": true,
+				"Prop_HasDriverDirectModeComponent_Bool": false,
+				"Prop_HasVirtualDisplayComponent_Bool": false,
+				"Prop_ControllerType_String": "indexhmd",
+				"Prop_ControllerHandSelectionPriority_Int32": 0
+			},
+			"1": {
+				"Prop_TrackingSystemName_String": "lighthouse",
+				"Prop_ModelNumber_String": "Valve SR Imp",
+				"Prop_SerialNumber_String": "anon@DDC32DC4561CBA806C0ABB4E",
+				"Prop_RenderModelName_String": "lh_basestation_valve_gen2",
+				"Prop_ManufacturerName_String": "Valve Corporation",
+				"Prop_TrackingFirmwareVersion_String": "3008",
+				"Prop_HardwareRevision_String": "Valve Corp., 1004, 0.0, FB94211890 V001017-20.A ",
+				"Prop_Firmware_UpdateAvailable_Bool": false,
+				"Prop_Firmware_ManualUpdate_Bool": false,
+				"Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
+				"Prop_HardwareRevision_Uint64": 150994959,
+				"Prop_FirmwareVersion_Uint64": 3008,
+				"Prop_RadioVersion_Uint64": 521,
+				"Prop_DeviceClass_Int32": 4,
+				"Prop_ParentDriver_Uint64": 8589934597,
+				"Prop_ResourceRoot_String": "lighthouse",
+				"Prop_BootloaderVersion_Uint64": 772,
+				"Prop_CompositeFirmwareVersion_String": "R: 2.9.2004771     M: 1.8.2004742     B: 3.4.3782793    ",
+				"Prop_FieldOfViewLeftDegrees_Float": 75.0,
+				"Prop_FieldOfViewRightDegrees_Float": 75.0,
+				"Prop_FieldOfViewTopDegrees_Float": 55.0,
+				"Prop_FieldOfViewBottomDegrees_Float": 55.0,
+				"Prop_TrackingRangeMinimumMeters_Float": 0.5,
+				"Prop_TrackingRangeMaximumMeters_Float": 6.0,
+				"Prop_ModeLabel_String": "1",
+				"Prop_CanWirelessIdentify_Bool": true,
+				"Prop_Nonce_Int32": 26599,
+				"Prop_NamedIconPathDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
+				"Prop_NamedIconPathDeviceSearching_String": "{lighthouse}/icons/base2_status_searching.gif",
+				"Prop_NamedIconPathDeviceSearchingAlert_String": "{lighthouse}/icons/base2_status_searching_alert.gif",
+				"Prop_NamedIconPathDeviceReady_String": "{lighthouse}/icons/base2_status_ready.png",
+				"Prop_NamedIconPathDeviceReadyAlert_String": "{lighthouse}/icons/base2_status_ready_alert.png",
+				"Prop_NamedIconPathDeviceNotReady_String": "{lighthouse}/icons/base2_status_error.png",
+				"Prop_NamedIconPathDeviceStandby_String": "{lighthouse}/icons/base2_status_standby.png",
+				"Prop_NamedIconPathDeviceAlertLow_String": "{lighthouse}/icons/base_status_ready_low.png",
+				"Prop_ControllerType_String": "",
+				"Prop_ControllerHandSelectionPriority_Int32": 0
+			},
+			"2": {
+				"Prop_TrackingSystemName_String": "lighthouse",
+				"Prop_ModelNumber_String": "Valve SR Imp",
+				"Prop_SerialNumber_String": "anon@CE87EA51C984122AF57643F6",
+				"Prop_RenderModelName_String": "lh_basestation_valve_gen2",
+				"Prop_ManufacturerName_String": "Valve Corporation",
+				"Prop_TrackingFirmwareVersion_String": "3008",
+				"Prop_HardwareRevision_String": "0x0900000f",
+				"Prop_Firmware_UpdateAvailable_Bool": false,
+				"Prop_Firmware_ManualUpdate_Bool": false,
+				"Prop_Firmware_ManualUpdateURL_String": "https://developer.valvesoftware.com/wiki/SteamVR/HowTo_Update_Firmware",
+				"Prop_HardwareRevision_Uint64": 150994959,
+				"Prop_FirmwareVersion_Uint64": 3008,
+				"Prop_DeviceClass_Int32": 4,
+				"Prop_ParentDriver_Uint64": 8589934597,
+				"Prop_ResourceRoot_String": "lighthouse",
+				"Prop_FieldOfViewLeftDegrees_Float": 75.0,
+				"Prop_FieldOfViewRightDegrees_Float": 75.0,
+				"Prop_FieldOfViewTopDegrees_Float": 55.0,
+				"Prop_FieldOfViewBottomDegrees_Float": 55.0,
+				"Prop_TrackingRangeMinimumMeters_Float": 0.5,
+				"Prop_TrackingRangeMaximumMeters_Float": 6.0,
+				"Prop_ModeLabel_String": "2",
+				"Prop_CanWirelessIdentify_Bool": true,
+				"Prop_Nonce_Int32": 58910,
+				"Prop_NamedIconPathDeviceOff_String": "{lighthouse}/icons/base2_status_off.png",
+				"Prop_NamedIconPathDeviceSearching_String": "{lighthouse}/icons/base2_status_searching.gif",
+				"Prop_NamedIconPathDeviceSearchingAlert_String": "{lighthouse}/icons/base2_status_searching_alert.gif",
+				"Prop_NamedIconPathDeviceReady_String": "{lighthouse}/icons/base2_status_ready.png",
+				"Prop_NamedIconPathDeviceReadyAlert_String": "{lighthouse}/icons/base2_status_ready_alert.png",
+				"Prop_NamedIconPathDeviceNotReady_String": "{lighthouse}/icons/base2_status_error.png",
+				"Prop_NamedIconPathDeviceStandby_String": "{lighthouse}/icons/base2_status_standby.png",
+				"Prop_NamedIconPathDeviceAlertLow_String": "{lighthouse}/icons/base_status_ready_low.png",
+				"Prop_ControllerType_String": "",
+				"Prop_ControllerHandSelectionPriority_Int32": 0
+			}
+		},
+		"geometry": {
+			"rec_rts": [
+				2468,
+				2740
+			],
+			"raw_eye": {
+				"Left": {
+					"tan_left": -1.5392378568649292,
+					"tan_right": 1.0501070022583008,
+					"tan_bottom": -1.4046337604522705,
+					"tan_top": 1.4123759269714355,
+					"aspect": 0.9191821217536926
+				},
+				"Right": {
+					"tan_left": -1.054413914680481,
+					"tan_right": 1.5359985828399658,
+					"tan_bottom": -1.4085981845855713,
+					"tan_top": 1.4115869998931885,
+					"aspect": 0.9185256958007813
+				}
+			},
+			"eye2head": {
+				"Left": [
+					[
+						1.0,
+						0.0,
+						0.0,
+						-0.03314383327960968
+					],
+					[
+						0.0,
+						1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					]
+				],
+				"Right": [
+					[
+						1.0,
+						0.0,
+						0.0,
+						0.03314383327960968
+					],
+					[
+						0.0,
+						1.0,
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					]
+				]
+			},
+			"view_geom": {
+				"left_rot": 0.0,
+				"right_rot": 0.0,
+				"ipd": 0.06628766655921936
+			},
+			"fov_eye": null,
+			"fov_head": {
+				"Left": {
+					"fov_pts": [
+						[
+							-1.136112068935769,
+							-1.0367607323112342,
+							-1.0
+						],
+						[
+							0.0,
+							-1.3775481367915725,
+							-1.0
+						],
+						[
+							0.6400302879237895,
+							-0.8561109945904424,
+							-1.0
+						],
+						[
+							0.8982991433788976,
+							0.0,
+							-1.0
+						],
+						[
+							0.7156606756165501,
+							0.9625513475742933,
+							-1.0
+						],
+						[
+							0.0,
+							1.3924923315939448,
+							-1.0
+						],
+						[
+							-1.1415539362774596,
+							1.0474685843691867,
+							-1.0
+						],
+						[
+							-1.4078475253043805,
+							0.0,
+							-1.0
+						]
+					],
+					"deg_left": -54.613662185008884,
+					"deg_right": 41.93332610635089,
+					"deg_bottom": -54.023072694455536,
+					"deg_top": 54.31648109924274,
+					"deg_hor": 96.54698829135978,
+					"deg_ver": 108.33955379369829
+				},
+				"Right": {
+					"fov_pts": [
+						[
+							-0.6438046776461702,
+							-0.8600627206583298,
+							-1.0
+						],
+						[
+							0.0,
+							-1.3827316741210056,
+							-1.0
+						],
+						[
+							1.1334268213140775,
+							-1.0394169504451596,
+							-1.0
+						],
+						[
+							1.4044254307462023,
+							0.0,
+							-1.0
+						],
+						[
+							1.1383136191080916,
+							1.046113404325818,
+							-1.0
+						],
+						[
+							0.0,
+							1.3925709331904006,
+							-1.0
+						],
+						[
+							-0.7189316178357636,
+							0.9624631384503941,
+							-1.0
+						],
+						[
+							-0.9025183242712524,
+							0.0,
+							-1.0
+						]
+					],
+					"deg_left": -42.066830620393816,
+					"deg_right": 54.54780487676476,
+					"deg_bottom": -54.12531608424515,
+					"deg_top": 54.31801336142832,
+					"deg_hor": 96.61463549715857,
+					"deg_ver": 108.44332944567347
+				}
+			},
+			"fov_tot": {
+				"fov_hor": 109.16146706177364,
+				"fov_ver": 108.39144161968588,
+				"fov_diag": 114.09935279099065,
+				"overlap": 84.0001567267447
+			},
+			"ham_mesh": {
+				"Left": {
+					"ham_area": 0.24878651098108281,
+					"verts_raw": [
+						[
+							1.0,
+							0.5
+						],
+						[
+							1.0,
+							0.35600000619888306
+						],
+						[
+							0.9470000267028809,
+							0.35600000619888306
+						],
+						[
+							1.0,
+							0.5
+						],
+						[
+							0.9470000267028809,
+							0.35600000619888306
+						],
+						[
+							0.9419999718666077,
+							0.4440000057220459
+						],
+						[
+							1.0,
+							0.5
+						],
+						[
+							0.9419999718666077,
+							0.4440000057220459
+						],
+						[
+							0.9409999847412109,
+							0.531000018119812
+						],
+						[
+							1.0,
+							0.5
+						],
+						[
+							0.9409999847412109,
+							0.531000018119812
+						],
+						[
+							0.9459999799728394,
+							0.6130000352859497
+						],
+						[
+							1.0,
+							0.5
+						],
+						[
+							0.9459999799728394,
+							0.6130000352859497
+						],
+						[
+							0.953000009059906,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							0.5
+						],
+						[
+							0.953000009059906,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							1.0,
+							0.6980000138282776
+						],
+						[
+							0.9549999833106995,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.9549999833106995,
+							0.6980000138282776
+						],
+						[
+							0.9139999747276306,
+							0.7870000004768372
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.9139999747276306,
+							0.7870000004768372
+						],
+						[
+							0.8460000157356262,
+							0.8709999918937683
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.8460000157356262,
+							0.8709999918937683
+						],
+						[
+							0.7710000276565552,
+							0.9300000071525574
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.7710000276565552,
+							0.9300000071525574
+						],
+						[
+							0.6700000166893005,
+							0.9769999980926514
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.6700000166893005,
+							0.9769999980926514
+						],
+						[
+							0.5609999895095825,
+							1.0
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.4169999957084656,
+							1.0
+						],
+						[
+							0.2939999997615814,
+							0.9649999737739563
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.2939999997615814,
+							0.9649999737739563
+						],
+						[
+							0.19200000166893005,
+							0.9039999842643738
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.19200000166893005,
+							0.9039999842643738
+						],
+						[
+							0.1289999932050705,
+							0.8489999771118164
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.1289999932050705,
+							0.8489999771118164
+						],
+						[
+							0.07100000232458115,
+							0.7689999938011169
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.07100000232458115,
+							0.7689999938011169
+						],
+						[
+							0.041999999433755875,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.041999999433755875,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.0,
+							0.6929999589920044
+						],
+						[
+							0.041999999433755875,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.041999999433755875,
+							0.6929999589920044
+						],
+						[
+							0.04899999871850014,
+							0.5740000009536743
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.04899999871850014,
+							0.5740000009536743
+						],
+						[
+							0.050999999046325684,
+							0.503000020980835
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.050999999046325684,
+							0.503000020980835
+						],
+						[
+							0.04800000041723251,
+							0.4520000219345093
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.04800000041723251,
+							0.4520000219345093
+						],
+						[
+							0.0430000014603138,
+							0.38099998235702515
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.0430000014603138,
+							0.38099998235702515
+						],
+						[
+							0.039000000804662704,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.039000000804662704,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.0,
+							0.3100000023841858
+						],
+						[
+							0.039000000804662704,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.039000000804662704,
+							0.3100000023841858
+						],
+						[
+							0.0860000029206276,
+							0.20999997854232788
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.0860000029206276,
+							0.20999997854232788
+						],
+						[
+							0.1720000058412552,
+							0.1119999885559082
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.1720000058412552,
+							0.1119999885559082
+						],
+						[
+							0.28200000524520874,
+							0.04400002956390381
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.28200000524520874,
+							0.04400002956390381
+						],
+						[
+							0.43700000643730164,
+							0.0
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.5619999766349792,
+							0.0
+						],
+						[
+							0.7509999871253967,
+							0.0559999942779541
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.7509999871253967,
+							0.0559999942779541
+						],
+						[
+							0.9470000267028809,
+							0.35600000619888306
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.9470000267028809,
+							0.35600000619888306
+						],
+						[
+							1.0,
+							0.35600000619888306
+						]
+					],
+					"verts_opt": [
+						[
+							1.0,
+							0.5
+						],
+						[
+							1.0,
+							0.35600000619888306
+						],
+						[
+							0.9470000267028809,
+							0.35600000619888306
+						],
+						[
+							0.9419999718666077,
+							0.4440000057220459
+						],
+						[
+							0.9409999847412109,
+							0.531000018119812
+						],
+						[
+							0.9459999799728394,
+							0.6130000352859497
+						],
+						[
+							0.953000009059906,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							0.6980000138282776
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.9549999833106995,
+							0.6980000138282776
+						],
+						[
+							0.9139999747276306,
+							0.7870000004768372
+						],
+						[
+							0.8460000157356262,
+							0.8709999918937683
+						],
+						[
+							0.7710000276565552,
+							0.9300000071525574
+						],
+						[
+							0.6700000166893005,
+							0.9769999980926514
+						],
+						[
+							0.5609999895095825,
+							1.0
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.4169999957084656,
+							1.0
+						],
+						[
+							0.2939999997615814,
+							0.9649999737739563
+						],
+						[
+							0.19200000166893005,
+							0.9039999842643738
+						],
+						[
+							0.1289999932050705,
+							0.8489999771118164
+						],
+						[
+							0.07100000232458115,
+							0.7689999938011169
+						],
+						[
+							0.041999999433755875,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							0.6929999589920044
+						],
+						[
+							0.0,
+							0.48900002241134644
+						],
+						[
+							0.04899999871850014,
+							0.5740000009536743
+						],
+						[
+							0.050999999046325684,
+							0.503000020980835
+						],
+						[
+							0.04800000041723251,
+							0.4520000219345093
+						],
+						[
+							0.0430000014603138,
+							0.38099998235702515
+						],
+						[
+							0.039000000804662704,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.3100000023841858
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.0860000029206276,
+							0.20999997854232788
+						],
+						[
+							0.1720000058412552,
+							0.1119999885559082
+						],
+						[
+							0.28200000524520874,
+							0.04400002956390381
+						],
+						[
+							0.43700000643730164,
+							0.0
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.5619999766349792,
+							0.0
+						],
+						[
+							0.7509999871253967,
+							0.0559999942779541
+						]
+					],
+					"faces_opt": [
+						[
+							37,
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							0,
+							1,
+							35,
+							36
+						],
+						[
+							8,
+							7,
+							9,
+							10,
+							11,
+							12,
+							13,
+							14
+						],
+						[
+							30,
+							29,
+							23,
+							22,
+							15,
+							16,
+							17,
+							18,
+							19,
+							20,
+							21,
+							24,
+							25,
+							26,
+							27,
+							28,
+							31,
+							32,
+							33,
+							34
+						]
+					]
+				},
+				"Right": {
+					"ham_area": 0.24878651223277976,
+					"verts_raw": [
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.0,
+							0.35600000619888306
+						],
+						[
+							0.05299997329711914,
+							0.35600000619888306
+						],
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.05299997329711914,
+							0.35600000619888306
+						],
+						[
+							0.058000028133392334,
+							0.4440000057220459
+						],
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.058000028133392334,
+							0.4440000057220459
+						],
+						[
+							0.05900001525878906,
+							0.531000018119812
+						],
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.05900001525878906,
+							0.531000018119812
+						],
+						[
+							0.054000020027160645,
+							0.6130000352859497
+						],
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.054000020027160645,
+							0.6130000352859497
+						],
+						[
+							0.046999990940093994,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.046999990940093994,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.0,
+							0.6980000138282776
+						],
+						[
+							0.04500001668930054,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.04500001668930054,
+							0.6980000138282776
+						],
+						[
+							0.08600002527236938,
+							0.7870000004768372
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.08600002527236938,
+							0.7870000004768372
+						],
+						[
+							0.15399998426437378,
+							0.8709999918937683
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.15399998426437378,
+							0.8709999918937683
+						],
+						[
+							0.22899997234344482,
+							0.9300000071525574
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.22899997234344482,
+							0.9300000071525574
+						],
+						[
+							0.32999998331069946,
+							0.9769999980926514
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.32999998331069946,
+							0.9769999980926514
+						],
+						[
+							0.4390000104904175,
+							1.0
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.5830000042915344,
+							1.0
+						],
+						[
+							0.7059999704360962,
+							0.9649999737739563
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.7059999704360962,
+							0.9649999737739563
+						],
+						[
+							0.8079999685287476,
+							0.9039999842643738
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.8079999685287476,
+							0.9039999842643738
+						],
+						[
+							0.8709999918937683,
+							0.8489999771118164
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.8709999918937683,
+							0.8489999771118164
+						],
+						[
+							0.9290000200271606,
+							0.7689999938011169
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.9290000200271606,
+							0.7689999938011169
+						],
+						[
+							0.9580000042915344,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.9580000042915344,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							1.0,
+							0.6929999589920044
+						],
+						[
+							0.9580000042915344,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9580000042915344,
+							0.6929999589920044
+						],
+						[
+							0.9509999752044678,
+							0.5740000009536743
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9509999752044678,
+							0.5740000009536743
+						],
+						[
+							0.9490000009536743,
+							0.503000020980835
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9490000009536743,
+							0.503000020980835
+						],
+						[
+							0.9520000219345093,
+							0.4520000219345093
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9520000219345093,
+							0.4520000219345093
+						],
+						[
+							0.9570000171661377,
+							0.38099998235702515
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9570000171661377,
+							0.38099998235702515
+						],
+						[
+							0.9610000252723694,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9610000252723694,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							1.0,
+							0.3100000023841858
+						],
+						[
+							0.9610000252723694,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.9610000252723694,
+							0.3100000023841858
+						],
+						[
+							0.9139999747276306,
+							0.20999997854232788
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.9139999747276306,
+							0.20999997854232788
+						],
+						[
+							0.828000009059906,
+							0.1119999885559082
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.828000009059906,
+							0.1119999885559082
+						],
+						[
+							0.7179999947547913,
+							0.04400002956390381
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.7179999947547913,
+							0.04400002956390381
+						],
+						[
+							0.562999963760376,
+							0.0
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.43800002336502075,
+							0.0
+						],
+						[
+							0.24900001287460327,
+							0.0559999942779541
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.24900001287460327,
+							0.0559999942779541
+						],
+						[
+							0.05299997329711914,
+							0.35600000619888306
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.05299997329711914,
+							0.35600000619888306
+						],
+						[
+							0.0,
+							0.35600000619888306
+						]
+					],
+					"verts_opt": [
+						[
+							0.0,
+							0.5
+						],
+						[
+							0.0,
+							0.35600000619888306
+						],
+						[
+							0.05299997329711914,
+							0.35600000619888306
+						],
+						[
+							0.058000028133392334,
+							0.4440000057220459
+						],
+						[
+							0.05900001525878906,
+							0.531000018119812
+						],
+						[
+							0.054000020027160645,
+							0.6130000352859497
+						],
+						[
+							0.046999990940093994,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							0.6980000138282776
+						],
+						[
+							0.0,
+							1.0
+						],
+						[
+							0.04500001668930054,
+							0.6980000138282776
+						],
+						[
+							0.08600002527236938,
+							0.7870000004768372
+						],
+						[
+							0.15399998426437378,
+							0.8709999918937683
+						],
+						[
+							0.22899997234344482,
+							0.9300000071525574
+						],
+						[
+							0.32999998331069946,
+							0.9769999980926514
+						],
+						[
+							0.4390000104904175,
+							1.0
+						],
+						[
+							1.0,
+							1.0
+						],
+						[
+							0.5830000042915344,
+							1.0
+						],
+						[
+							0.7059999704360962,
+							0.9649999737739563
+						],
+						[
+							0.8079999685287476,
+							0.9039999842643738
+						],
+						[
+							0.8709999918937683,
+							0.8489999771118164
+						],
+						[
+							0.9290000200271606,
+							0.7689999938011169
+						],
+						[
+							0.9580000042915344,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							0.6929999589920044
+						],
+						[
+							1.0,
+							0.48900002241134644
+						],
+						[
+							0.9509999752044678,
+							0.5740000009536743
+						],
+						[
+							0.9490000009536743,
+							0.503000020980835
+						],
+						[
+							0.9520000219345093,
+							0.4520000219345093
+						],
+						[
+							0.9570000171661377,
+							0.38099998235702515
+						],
+						[
+							0.9610000252723694,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.3100000023841858
+						],
+						[
+							1.0,
+							0.0
+						],
+						[
+							0.9139999747276306,
+							0.20999997854232788
+						],
+						[
+							0.828000009059906,
+							0.1119999885559082
+						],
+						[
+							0.7179999947547913,
+							0.04400002956390381
+						],
+						[
+							0.562999963760376,
+							0.0
+						],
+						[
+							0.0,
+							0.0
+						],
+						[
+							0.43800002336502075,
+							0.0
+						],
+						[
+							0.24900001287460327,
+							0.0559999942779541
+						]
+					],
+					"faces_opt": [
+						[
+							37,
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							0,
+							1,
+							35,
+							36
+						],
+						[
+							8,
+							7,
+							9,
+							10,
+							11,
+							12,
+							13,
+							14
+						],
+						[
+							30,
+							29,
+							23,
+							22,
+							15,
+							16,
+							17,
+							18,
+							19,
+							20,
+							21,
+							24,
+							25,
+							26,
+							27,
+							28,
+							31,
+							32,
+							33,
+							34
+						]
+					]
+				}
+			}
+		}
+	},
+	"oculus": {
+		"error@": "ovr_Create: No HMD attached."
+	},
+	"checksum": "EE61FAFCACF866571877CABA8C5DE25D"
 }

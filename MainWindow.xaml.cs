@@ -1,6 +1,7 @@
 ﻿using AutoUpdaterDotNET;
 using NLog;
 using NLog.Config;
+
 // using SCVRPatcher.Classes;
 using System.Diagnostics;
 using System.IO;
@@ -20,6 +21,7 @@ namespace SCVRPatcher {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
         // test
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -77,7 +79,6 @@ namespace SCVRPatcher {
             }
             AutoUpdater.RunUpdateAsAdmin = false;
         }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             var oldHeight = this.Height; this.Height = 0; var oldWidth = this.Width; this.Width = 0; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
@@ -373,7 +374,6 @@ namespace SCVRPatcher {
             vorpx.UnPatch();
             game.Unpatch();
             MessageBox.Show("VR Disabled", "Success, rolled back Attriubtes.", MessageBoxButton.OK, MessageBoxImage.Information);
-
         }
 
         private HmdConfig? GetSelectedConfig() {

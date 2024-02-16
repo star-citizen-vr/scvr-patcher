@@ -11,8 +11,10 @@ public class Hmdq {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private const string JsonName = "hmdq_data.json";
     private static readonly List<string> GithubRepo = new() { "risa2000", "hmdq" };
+
     private static readonly List<string> Arguments = new() { "-n", "--out_json", JsonName
     };
+
     private FileInfo Path { get; set; }
     public HmdqOutput Data { get; private set; }
     public virtual bool IsEmpty => Data.Openvr.Error is not null && Data.Oculus.Error is not null;
@@ -88,7 +90,6 @@ public class Hmdq {
         }
     }
 
-
     public void ReadHmdqData(string? fileName = null) {
         fileName ??= JsonName;
         Logger.Debug($"Reading HMDQ data from {fileName}");
@@ -96,5 +97,4 @@ public class Hmdq {
         Data = HmdqOutput.FromJson(json);
         Logger.Debug($"Read HMDQ data from {fileName}");
     }
-
 }

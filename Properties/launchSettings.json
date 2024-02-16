@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "scvr-patcher": {
-      "commandName": "Project",
-      "commandLineArgs": "--console --no-admin"
-    }
-  }
+	"profiles": {
+		"scvr-patcher": {
+			"commandName": "Project",
+			"commandLineArgs": "--console --no-admin"
+		}
+	}
 }

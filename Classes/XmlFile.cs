@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace SCVRPatcher {
+
     public abstract class XmlFile {
         public static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public static readonly XmlWriterSettings Settings = new XmlWriterSettings() { Indent = true, OmitXmlDeclaration = true };
@@ -38,8 +39,5 @@ namespace SCVRPatcher {
         //        return Serializer.Deserialize(reader) as Attributes;
         //    }
         //}
-
-        #region definitions
-        #endregion definitions
     }
 }

@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace SCVRPatcher {
+
     internal static class Extensions {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -196,6 +197,7 @@ namespace SCVRPatcher {
         #endregion Object
 
         #region String
+
         public static string WithSuffix(this string str, string suffix) => $"{str}{suffix}";
 
         public static string WithPrefix(this string str, string prefix) => $"{prefix}{str}";
@@ -422,20 +424,25 @@ namespace SCVRPatcher {
             WriteIndented = true,
             Converters = { new IPAddressConverter() }
         };
+
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() {
             WriteIndented = false,
             Converters = { new IPAddressConverter() }
         };
+
         public class IPAddressConverter : JsonConverter<IPAddress> {
+
             public override IPAddress Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
                 return IPAddress.Parse(reader.GetString() ?? string.Empty);
             }
+
             public override void Write(Utf8JsonWriter writer, IPAddress value, JsonSerializerOptions options) {
                 writer.WriteStringValue(value.ToString());
             }
         }
 
         internal static class Converter {
+
             public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.General) {
                 Converters =
                 {
@@ -447,6 +454,7 @@ namespace SCVRPatcher {
         }
 
         internal class ParseStringConverter : JsonConverter<long> {
+
             public override bool CanConvert(Type t) => t == typeof(long);
 
             public override long Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
@@ -468,7 +476,9 @@ namespace SCVRPatcher {
 
         public class DateOnlyConverter : JsonConverter<DateOnly> {
             private readonly string serializationFormat;
-            public DateOnlyConverter() : this(null) { }
+
+            public DateOnlyConverter() : this(null) {
+            }
 
             public DateOnlyConverter(string? serializationFormat) {
                 this.serializationFormat = serializationFormat ?? "yyyy-MM-dd";
@@ -486,7 +496,8 @@ namespace SCVRPatcher {
         public class TimeOnlyConverter : JsonConverter<TimeOnly> {
             private readonly string serializationFormat;
 
-            public TimeOnlyConverter() : this(null) { }
+            public TimeOnlyConverter() : this(null) {
+            }
 
             public TimeOnlyConverter(string? serializationFormat) {
                 this.serializationFormat = serializationFormat ?? "HH:mm:ss.fff";
@@ -502,6 +513,7 @@ namespace SCVRPatcher {
         }
 
         internal class IsoDateTimeOffsetConverter : JsonConverter<DateTimeOffset> {
+
             public override bool CanConvert(Type t) => t == typeof(DateTimeOffset);
 
             private const string DefaultDateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
@@ -528,7 +540,6 @@ namespace SCVRPatcher {
             public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options) {
                 string text;
 
-
                 if ((_dateTimeStyles & DateTimeStyles.AdjustToUniversal) == DateTimeStyles.AdjustToUniversal
                     || (_dateTimeStyles & DateTimeStyles.AssumeUniversal) == DateTimeStyles.AssumeUniversal) {
                     value = value.ToUniversalTime();
@@ -553,10 +564,10 @@ namespace SCVRPatcher {
                 }
             }
 
-
             public static readonly IsoDateTimeOffsetConverter Singleton = new IsoDateTimeOffsetConverter();
         }
-        #endregion
+
+        #endregion json
 
         #region Others
 

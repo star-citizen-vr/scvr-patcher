@@ -7,36 +7,36 @@
         mc:Ignorable="d"
         Title="Star Citizen VR Patcher" Height="500" Width="1150" Loaded="Window_Loaded">
     <StackPanel Orientation="Vertical">
-        <ToolBar >
+        <ToolBar>
             <Menu>
                 <MenuItem Header="File">
-                    <MenuItem Header="Exit" Click="onExitButtonClicked"/>
+                    <MenuItem Header="Exit" Click="onExitButtonClicked" />
                 </MenuItem>
-                <MenuItem Header="Settings" Click="onSettingsButtonClicked"/>
+                <MenuItem Header="Settings" Click="onSettingsButtonClicked" />
                 <MenuItem Header="Debug">
-                    <MenuItem Header="Open Config Database" Click="onOpenFileButtonClicked"/>
-                    <MenuItem Header="Open Star Citizen Root Directory" Click="onOpenDirectoryButtonClicked"/>
+                    <MenuItem Header="Open Config Database" Click="onOpenFileButtonClicked" />
+                    <MenuItem Header="Open Star Citizen Root Directory" Click="onOpenDirectoryButtonClicked" />
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="About this software" Click="onAboutButtonClicked" />
-                    <MenuItem Header="Check for updates" Click="onCheckForUpdatesClicked"/>
-                    <MenuItem Header="SCVR Discord" Click="onDiscordButtonClicked"/>
+                    <MenuItem Header="Check for updates" Click="onCheckForUpdatesClicked" />
+                    <MenuItem Header="SCVR Discord" Click="onDiscordButtonClicked" />
                 </MenuItem>
             </Menu>
         </ToolBar>
         <StackPanel Orientation="Horizontal">
-            <TreeView x:Name="tree_hmds" SelectedItemChanged="tree_hmds_SelectedItemChanged" MinWidth="200"/>
-            <GridSplitter/>
-            <ListView x:Name="list_configs" MinWidth="250" SelectionChanged="list_configs_SelectionChanged" SelectionMode="Single"/>
-            <GridSplitter/>
+            <TreeView x:Name="tree_hmds" SelectedItemChanged="tree_hmds_SelectedItemChanged" MinWidth="200" />
+            <GridSplitter />
+            <ListView x:Name="list_configs" MinWidth="250" SelectionChanged="list_configs_SelectionChanged" SelectionMode="Single" />
+            <GridSplitter />
             <StackPanel Orientation="Vertical">
                 <Image Source="pack://application:,,,/banner.png" Width="400" />
-                <CheckBox x:Name="ChangeResolutionCheckbox" Content="Change my game resolution to match my HMD" IsChecked="False" Width="274" HorizontalAlignment="Center"/>
+                <CheckBox x:Name="ChangeResolutionCheckbox" Content="Change my game resolution to match my HMD" IsChecked="False" Width="274" HorizontalAlignment="Center" />
                 <TextBlock x:Name="ChangeResolutionText" Text="Uncheck to keep using your current game resolution." Width="280" />
                 <Button x:Name="VREnableButton" Content="Enable VR" IsEnabled="False" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
                 <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="False" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" Click="VRDisableButton_Click" />
             </StackPanel>
-            <GridSplitter/>
+            <GridSplitter />
             <StackPanel x:Name="stackpanel_config">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Label: " />

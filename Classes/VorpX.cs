@@ -1,6 +1,7 @@
 ﻿using System.IO;
 
 namespace SCVRPatcher {
+
     public partial class VorpX {
         internal static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal static readonly DirectoryInfo VorpXConfigDir = new DirectoryInfo(@"C:\ProgramData\Animation Labs\vorpX");
