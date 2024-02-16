@@ -19,7 +19,6 @@ namespace SCVRPatcher
     using System.Text.Json.Serialization;
     using System.Globalization;
     using System.Runtime.InteropServices;
-    using NLog;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Net.Http;

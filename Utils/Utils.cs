@@ -315,7 +315,10 @@ namespace SCVRPatcher {
             return new IPEndPoint(ip, port);
         }
 
-
-
+        // TODO: Implement this method
+        internal static object GetRsiLauncherPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -335,7 +335,32 @@ namespace SCVRPatcher {
             // }
             game.Patch(selectedConfig, selectedResolution);
             Logger.Info("Patched VR");
-            MessageBox.Show("Success, patched Attriubtes for VR. \nPlease launch RSI Launcher", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Success, patched Attriubtes for VR. Open the RSI Launcher and Launch the game!", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
+            /*Logger.Info("Opening RSI Launcher");
+            MessageBox.Show("Opening RSI Launcher", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);*/
+            this.WindowState = WindowState.Minimized;
+
+            // TODO: See if we can launch the RSI Launcher and then check if starcitizen.exe is running, and if it is, then minimize this window
+            /*var rsiLauncherPath = Utils.GetRsiLauncherPath();
+            if (rsiLauncherPath is null)
+            {
+                Logger.Error("Failed to get RSI Launcher path!");
+                MessageBox.Show("Failed to get RSI Launcher path!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else Process.Start("C:\\Program Files\\Roberts Space Industries\\RSI Launcher\\RSI Launcher.exe");*/
+            //the RSI launcher will open, users will launnch the game, and the 'starcitizen.exe' application will start running. I want to check if the 'starcitizen.exe' is running, and if it is, then I want to loop to check if starcitizen.exe stops running. If it stops running, then I want to unminimize this window
+            // TODO: If a user closes the RSI Launcher before launching star citizen, we won't bring up the window, currently... Perhaps look at this later.
+            if (Process.GetProcessesByName("starcitizen").Length > 0) {
+                Logger.Info("Star Citizen is running");
+                while (Process.GetProcessesByName("starcitizen").Length > 0) {
+                    System.Threading.Thread.Sleep(1000);
+                }
+                Logger.Info("Star Citizen stopped running");
+                this.WindowState = WindowState.Normal;
+                this.Activated += (s, e) => this.Topmost = true;
+                // TODO: Can't get this to come back as active window.. maybe we can do something else...
+            }
         }
 
         private void VRDisableButton_Click(object sender, RoutedEventArgs e) {
@@ -350,6 +375,7 @@ namespace SCVRPatcher {
 
         private HmdConfig? GetSelectedConfig() {
             var selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
+            // TODO: If a user hits Enable VR before selecting a config, we crash here...
             var hasParent = selectedItem.Parent is not null;
             var hasChildren = selectedItem.Items.Count > 0;
             if (!hasParent || hasChildren) return null;
