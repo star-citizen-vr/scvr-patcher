@@ -11,9 +11,7 @@
 namespace SCVRPatcher {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGenerated
-        
-        ()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class AppSettings : global::System.Configuration.ApplicationSettingsBase {
         
@@ -28,7 +26,7 @@ namespace SCVRPatcher {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/Bluscream/scvr-patcher/main/configs.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/Bluscream/scvr-patcher/csharp/configs.json")]
         public string availableConfigsUrl {
             get {
                 return ((string)(this["availableConfigsUrl"]));
