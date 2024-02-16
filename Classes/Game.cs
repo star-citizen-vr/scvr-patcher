@@ -31,7 +31,7 @@ namespace SCVRPatcher {
             }
         }
 
-        public bool Patch(HmdConfig config, Resolution resolution) {
+        public bool Patch(HmdConfig config, Resolution resolution, bool changeresolution) {
             foreach (var buildDir in BuildDirectories) {
                 Logger.Info($"Got build directory: {buildDir.Key} ({buildDir.Value.ToFullString()})");
                 var profileDir = buildDir.Value.Combine("user", "Client", "0", "Profiles", "default");

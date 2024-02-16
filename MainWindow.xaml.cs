@@ -130,7 +130,7 @@ namespace SCVRPatcher {
                             System.Threading.Thread.Sleep(1000);
                             oculusProcess = Process.GetProcessesByName("OVRServer_x64");
                         }
-                        // ToDo: initialize HMDQ again
+                        hmdq.RunHmdq();
                     } else {
                         result = MessageBox.Show("SteamVR not running! Start SteamVR?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Error);
                         if (result == MessageBoxResult.Yes) {
@@ -144,13 +144,14 @@ namespace SCVRPatcher {
                                 System.Threading.Thread.Sleep(1000);
                                 steamProcess = Process.GetProcessesByName("vrmonitor");
                             }
-                            // ToDo: initialize HMDQ again
+                            hmdq.RunHmdq();
                         }
                     }
                 } else {
                     Logger.Info("SteamVR or Oculus running!");
                 }
-            } else {
+            }
+            if (!hmdq.IsEmpty) {
                 Logger.Info($"Manufacturer: {hmdq.Manufacturer} Model: {hmdq.Model} {hmdq.Width}x{hmdq.Height} (fov: {hmdq.VerticalFov})");
                 HmdConfig detectedHmdConfig = new() {
                     Fov = hmdq.VerticalFov,
@@ -163,8 +164,8 @@ namespace SCVRPatcher {
                         }
                     ]
                 };
-                Dictionary<string, HmdConfig> detectedHmd = new() { { "Current", detectedHmdConfig } };
-                Dictionary<string, Dictionary<string, HmdConfig>> detectedBrand = new() { { "Brand", detectedHmd } };
+                Dictionary<string, HmdConfig> detectedHmd = new() { { hmdq.Model, detectedHmdConfig } };
+                Dictionary<string, Dictionary<string, HmdConfig>> detectedBrand = new() { { hmdq.Manufacturer, detectedHmd } };
                 configDatabase.Brands.Add("Detected", detectedBrand);
 
                 Logger.Info($"Added HMDQ info to configDatabase");
@@ -353,22 +354,30 @@ namespace SCVRPatcher {
             // foreach (var excludedItem in vorpx.vorpControlConfig.Data.Exclude) {
             //     Logger.Info($"Excluding {excludedItem.Quote()} from VorpX");
             // }
-            _ = game.Patch(selectedConfig, selectedResolution);
+            _ = game.Patch(selectedConfig, selectedResolution, ChangeResolutionCheckbox.IsChecked ?? false);
             Logger.Info("Patched VR");
-            _ = MessageBox.Show("Success, patched Attriubtes for VR. Open the RSI Launcher and Launch the game!", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show("Success, patched Attriubtes for VR. \n Open the RSI Launcher and Launch the game!", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show("Any further changes made to your attributes.xml file will be lost when disabling VR. \n\nIf you would like to keep settings for future use, after making all changes to your settings, close the game and copy the attributes.xml before hitting the 'Disable VR' button.", "WARNING");
             /*Logger.Info("Opening RSI Launcher");
             MessageBox.Show("Opening RSI Launcher", "VR Enabled", MessageBoxButton.OK, MessageBoxImage.Information);*/
-            WindowState = WindowState.Minimized;
+            //WindowState = WindowState.Minimized;
 
             // TODO: See if we can launch the RSI Launcher and then check if starcitizen.exe is running, and if it is, then minimize this window
-            /*var rsiLauncherPath = Utils.GetRsiLauncherPath();
-            if (rsiLauncherPath is null)
-            {
-                Logger.Error("Failed to get RSI Launcher path!");
-                MessageBox.Show("Failed to get RSI Launcher path!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else Process.Start("C:\\Program Files\\Roberts Space Industries\\RSI Launcher\\RSI Launcher.exe");*/
+            //var rsiLauncherPath = Utils.GetRsiLauncherPath();
+            //if (rsiLauncherPath is null)
+            //{
+            //    Logger.Error("Failed to get RSI Launcher path!");
+            //    MessageBox.Show("Failed to get RSI Launcher path!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //else Process.Start("C:\\Program Files\\Roberts Space Industries\\RSI Launcher\\RSI Launcher.exe");
+
+
+            //openRSI.Initialized += (s, e) =>
+            //{
+            //    Logger.Info("RSI Launcher initialized");
+            //    openRSI.Start();
+            //};
 
             // TODO: See if we can start vorpx after RSI Launcher is started...
 
@@ -390,14 +399,21 @@ namespace SCVRPatcher {
             //VRDisableButton.IsEnabled = false;
             //VREnableButton.IsEnabled = true;
             eac.UnPatch();
+            Logger.Info("UnPatched EAC");
             vorpx.UnPatch();
+            Logger.Info("UnPatched VorpX");
             _ = game.Unpatch();
-            _ = MessageBox.Show("VR Disabled", "Success, rolled back Attriubtes.", MessageBoxButton.OK, MessageBoxImage.Information);
+            Logger.Info("UnPatched Game");
+            _ = MessageBox.Show("Success, rolled back Attriubtes. \nAny changes made to the attributes.xml file during VR gameplay was lost.", "VR Disabled", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private HmdConfig? GetSelectedConfig() {
             TreeViewItem selectedItem = (TreeViewItem)tree_hmds.SelectedItem;
-            // TODO: If a user hits Enable VR before selecting a config, we crash here...
+            if (selectedItem is null)
+            {
+                MessageBox.Show("No HMD selected!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
             bool hasParent = selectedItem.Parent is not null;
             bool hasChildren = selectedItem.Items.Count > 0;
             if (!hasParent || hasChildren) {
@@ -463,6 +479,11 @@ namespace SCVRPatcher {
 
         private void onExitButtonClicked(object sender, RoutedEventArgs e) {
             Application.Current.Shutdown();
+        }
+
+        private void ChangeResolutionCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            ChangeResolutionCheckbox.IsChecked = true;
         }
     }
 }

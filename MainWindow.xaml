@@ -31,7 +31,7 @@
             <GridSplitter />
             <StackPanel Orientation="Vertical">
                 <Image Source="pack://application:,,,/banner.png" Width="400" />
-                <CheckBox x:Name="ChangeResolutionCheckbox" Content="Change my game resolution to match my HMD" IsChecked="False" Width="274" HorizontalAlignment="Center" />
+                <CheckBox x:Name="ChangeResolutionCheckbox" Content="Change my game resolution to match my HMD" IsChecked="False" Width="274" HorizontalAlignment="Center" Checked="ChangeResolutionCheckbox_Checked" />
                 <TextBlock x:Name="ChangeResolutionText" Text="Uncheck to keep using your current game resolution." Width="280" />
                 <Button x:Name="VREnableButton" Content="Enable VR" IsEnabled="True" Click="VREnableButton_Click" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" />
                 <Button x:Name="VRDisableButton" Content="Disable VR" IsEnabled="True" Margin="60, 20" Padding="15" VerticalAlignment="Bottom" Click="VRDisableButton_Click" />
