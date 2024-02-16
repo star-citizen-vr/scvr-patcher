@@ -17,6 +17,7 @@ using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 using Brand = System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, SCVRPatcher.HmdConfig>>>;
 using System.Windows.Controls.Primitives;
+using AutoUpdaterDotNET;
 
 namespace SCVRPatcher {
 

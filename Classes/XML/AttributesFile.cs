@@ -32,7 +32,7 @@ namespace SCVRPatcher {
 
         public AttributesFile(FileInfo file) : base(file) {
             Initizalize();
-            Logger.Info($"Found attributes file with version {Content.Version} containing {Content.Attr.Count} attributes");
+            Logger.Info($"Found attributes file with version {Content?.Version} containing {Content?.Attr.Count} attributes");
         }
 
         public override void Initizalize() {
@@ -54,22 +54,22 @@ namespace SCVRPatcher {
             return Content.Attr.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
-        public bool AddOrUpdate(string name, object value) {
+        public bool AddOrUpdate(string name, object? value) {
             if (value is null) throw new ArgumentNullException(nameof(value));
             var attr = Get(name).FirstOrDefault();
             var changed = false;
             if (attr is null) {
-                attr = new Attr() { Name = name, Value = value.ToString() };
+                attr = new Attr() { Name = name, Value = value?.ToString() };
                 Content.Attr.Add(attr);
                 changed = true;
             } else {
-                if (attr.Value != value.ToString()) {
-                    attr.Value = value.ToString();
+                if (attr.Value != value?.ToString()) {
+                    attr.Value = value?.ToString();
                     changed = true;
                 }
             }
-            if (changed) Logger.Info($"Set attribute: {attr.Name.Quote()} to {attr.Value.Quote()}");
-            else Logger.Info($"Attribute {attr.Name.Quote()} already set to {attr.Value.Quote()}");
+            if (changed) Logger.Info($"Set attribute: {attr.Name.Quote()} to {attr.Value?.Quote()}");
+            else Logger.Info($"Attribute {attr.Name.Quote()} already set to {attr.Value?.Quote()}");
             return changed;
         }
 
@@ -123,7 +123,7 @@ namespace SCVRPatcher {
             Logger.Info($"Unpatching {File.FullName}");
             File.Restore(); // TODO: Inform the user, that changing attributes settings while VR enabled, will not save when attributes are reverted. Add a way for new attributes to get saved to the old file... or something
             MessageBox.Show("Any changes you made to your attribute file during VR gameplay, was just removed as we are back on your old settings.", "Unpatched", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //Save();
+            //Save();
             Logger.Info($"Unpatched {File.FullName}");
             return true;
         }

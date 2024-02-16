@@ -11,15 +11,18 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <Description>Tool used to patch Star Citzen for VR</Description>
-    <PackageProjectUrl>https://github.com/Kaglaaz/scvr-update</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/star-citizen-vr/scvr-patcher</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/Kaglaaz/scvr-update</RepositoryUrl>
+    <RepositoryUrl>https://github.com/star-citizen-vr/scvr-patcher</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>vr,vorpx,star citizen,eac,patcher</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <FileVersion>3.0.0.0</FileVersion>
+    <PackageReleaseNotes>https://github.com/star-citizen-vr/scvr-patcher/releases</PackageReleaseNotes>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -57,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.4" />
     <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="ini-parser" Version="2.5.2" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
@@ -122,6 +126,10 @@
     <None Update="main.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>main.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>
