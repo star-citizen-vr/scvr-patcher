@@ -26,6 +26,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="configs\**" />
+    <EmbeddedResource Remove="configs\**" />
+    <None Remove="configs\**" />
+    <Page Remove="configs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Program.cs" />
   </ItemGroup>
 

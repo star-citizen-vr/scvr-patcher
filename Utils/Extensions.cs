@@ -198,6 +198,17 @@ namespace SCVRPatcher {
 
         #region String
 
+        public static string GetMd5Hash(this string input) {
+            using (var md5 = System.Security.Cryptography.MD5.Create()) {
+                byte[] data = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+                var sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++) {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+                return sBuilder.ToString();
+            }
+        }
+
         public static string WithSuffix(this string str, string suffix) => $"{str}{suffix}";
 
         public static string WithPrefix(this string str, string prefix) => $"{prefix}{str}";

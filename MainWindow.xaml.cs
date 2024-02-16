@@ -203,11 +203,11 @@ namespace SCVRPatcher {
             Logger.Debug($"offlineConfigs: null={offlineConfigs == null} IsEmptyOrMissing={offlineConfigs?.IsEmptyOrMissing} ({availableConfigsFile})");
             if (onlineConfigs != null) {
                 Logger.Debug($"onlineConfigs available");
-                if (onlineConfigs != offlineConfigs) {
+                if (onlineConfigs != offlineConfigs && onlineConfigs?.Md5 != offlineConfigs?.Md5) {
                     Logger.Info("onlineConfigs and offlineConfigs differ!");
                     MessageBoxResult result = MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
-                        onlineConfigs.ToFile(availableConfigsFile);
+                        onlineConfigs?.ToFile(availableConfigsFile);
                         Logger.Info($"Saved config from {availableConfigsUrl} to {availableConfigsFile.Quote()}");
                     } else { Logger.Info("User chose not to overwrite offline configs."); }
                 }
