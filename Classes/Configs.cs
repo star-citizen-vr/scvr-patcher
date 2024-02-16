@@ -14,12 +14,14 @@ namespace SCVRPatcher {
     using System.Net.Http;
     using System.Text;
     using Brand = Dictionary<string, Dictionary<string, Dictionary<string, HmdConfig>>>;
+    using System.Net.Http.Json;
 
     public partial class ConfigDataBase {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         [JsonIgnore]
         public string? Raw { get; private set; }
+        [JsonIgnore]
         public string? Md5 { get; private set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -59,7 +61,7 @@ namespace SCVRPatcher {
         }
 
         public void ToFile(FileInfo file) {
-            File.WriteAllText(file.FullName, this.ToJson());
+            File.WriteAllText(file.FullName, this.ToJson(true));//.Replace("\r\n", "\n"););
         }
 
         public static ConfigDataBase? FromUrl(Uri uri) {

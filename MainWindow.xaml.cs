@@ -51,7 +51,7 @@ namespace SCVRPatcher {
             System.Reflection.AssemblyMetadataAttribute? repositoryUrl = attributes.OfType<System.Reflection.AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl");
 
             SetupLogging();
-            Logger.Info($"Started {Application.Current.MainWindow.Title}");     // TODO: If a user doesn't have EAC (because they removed it for some reason), make sure to not hang here...
+            Logger.Info($"Started {Application.Current.MainWindow.Title}");
             string[] args = Environment.GetCommandLineArgs();
             Logger.Info($"Command line arguments: {string.Join(" ", args)}");
             string processName = Process.GetCurrentProcess().ProcessName;
@@ -95,6 +95,8 @@ namespace SCVRPatcher {
                     _ = MessageBox.Show("Admin permissions refused, you will have to patch your hosts file manually later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
+            Application.Current.MainWindow.Title += " v"+AssemblyAttributes.Version;
 
             List<Utils.PageFile> pageFiles = Utils.GetPageFileSizes();
             foreach (Utils.PageFile pageFile in pageFiles) {
@@ -206,6 +208,10 @@ namespace SCVRPatcher {
                 Logger.Debug($"onlineConfigs available");
                 if (onlineConfigs != offlineConfigs && onlineConfigs?.Md5 != offlineConfigs?.Md5) {
                     Logger.Info("onlineConfigs and offlineConfigs differ!");
+                    Logger.Info($"onlineConfigs.Md5: {onlineConfigs.Md5}");
+                    Logger.Info($"offlineConfigs.Md5: {offlineConfigs?.Md5}");
+                    Logger.Info($"onlineConfigs.Brands.Count: {onlineConfigs.Brands.Count}");
+                    Logger.Info($"offlineConfigs.Brands.Count: {offlineConfigs?.Brands.Count}");
                     MessageBoxResult result = MessageBox.Show("Online and offline configs differ, overwrite?", "New configs available", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
                         onlineConfigs?.ToFile(availableConfigsFile);

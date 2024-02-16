@@ -90,8 +90,8 @@ namespace SCVRPatcher {
             Logger.Info($"Removed {found} / {keys.Count()} attributes.");
             return found > 0;
         }
-
-        public override bool Patch(HmdConfig config, Resolution resolution) {
+        public override bool Patch(HmdConfig config, Resolution resolution) => Patch(config, resolution, false);
+        public bool Patch(HmdConfig config, Resolution resolution, bool changeresolution) {
             Logger.Info($"Patching {File.FullName}");
             var changed = Remove(attributesToRemove);
             Logger.Info($"Removed {attributesToRemove.Count} attributes.");
@@ -110,12 +110,12 @@ namespace SCVRPatcher {
             // TODO: Add a way to change resolution based on if user checks a checkbox, see below
             // I'm not able to figure out how to get the 'isChecked' to work here....
 
-            //if {
-            //Logger.Info("Changing resolution to match HMD");
-            //    if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
-            //    if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
-            //    Logger.Info($"Changed resolution to {resolution.Width}x{resolution.Height}");
-            //}
+            if (changeresolution) {
+            Logger.Info("Changing resolution to match HMD");
+                if (resolution.Height is not null) changed |= AddOrUpdate("Height", resolution.Height);
+                if (resolution.Width is not null) changed |= AddOrUpdate("Width", resolution.Width);
+                Logger.Info($"Changed resolution to {resolution.Width}x{resolution.Height}");
+            }
             if (changed) {
                 Save();
                 Logger.Info($"Patched {File.FullName}");
@@ -125,8 +125,7 @@ namespace SCVRPatcher {
 
         public override bool Unpatch() {
             Logger.Info($"Unpatching {File.FullName}");
-            File.Restore(); // TODO: Inform the user, that changing attributes settings while VR enabled, will not save when attributes are reverted. Add a way for new attributes to get saved to the old file... or something
-            MessageBox.Show("Any changes you made to your attribute file during VR gameplay, was just removed as we are back on your old settings.", "Unpatched", MessageBoxButton.OK, MessageBoxImage.Information);
+            File.Restore();
             //Save();
             Logger.Info($"Unpatched {File.FullName}");
             return true;
