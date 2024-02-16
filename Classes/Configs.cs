@@ -61,7 +61,7 @@ namespace SCVRPatcher {
         }
 
         public void ToFile(FileInfo file) {
-            File.WriteAllText(file.FullName, this.ToJson(true));//.Replace("\r\n", "\n"););
+            File.WriteAllText(file.FullName, this.ToJson());//.Replace("\r\n", "\n"););
         }
 
         public static ConfigDataBase? FromUrl(Uri uri) {
