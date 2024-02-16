@@ -320,6 +320,14 @@ namespace SCVRPatcher {
 
         #region Uri
 
+        public static Uri CombinePath(this Uri uri, params string[] paths) { // potentially broken
+            var final = uri.AbsoluteUri;
+            foreach (var path in paths) {
+                final = Path.Combine(final, path);
+            }
+            return new Uri(final);
+        }
+
         public static void OpenInDefaultBrowser(this Uri url) {
             try {
                 System.Diagnostics.Process.Start(url.AbsoluteUri);

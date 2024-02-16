@@ -18,7 +18,6 @@ namespace SCVRPatcher {
             public string Title { get; set; }
             public string Version { get; set; }
             public Uri RepositoryUrl { get; set; }
-            public Uri PackageReleaseNotes { get; set; }
 
             public AssemblyAttributes(Assembly? assembly = null) {
                 assembly = assembly ?? typeof(MainWindow).Assembly;
@@ -26,7 +25,6 @@ namespace SCVRPatcher {
                 Title = attributes.OfType<AssemblyTitleAttribute>().FirstOrDefault().Title;
                 Version = attributes.OfType<AssemblyFileVersionAttribute>().FirstOrDefault().Version;
                 RepositoryUrl = new Uri(attributes.OfType<AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl").Value);
-                PackageReleaseNotes = new Uri(attributes.OfType<AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "PackageReleaseNotes").Value);
             }
         }
 

@@ -412,7 +412,7 @@ namespace SCVRPatcher {
         }
 
         private void onCheckForUpdatesClicked(object sender, RoutedEventArgs e) {
-            AssemblyAttributes.PackageReleaseNotes.OpenInDefaultBrowser();
+            AssemblyAttributes.RepositoryUrl.CombinePath("releases").OpenInDefaultBrowser();
         }
 
         private void onDiscordButtonClicked(object sender, RoutedEventArgs e) {
