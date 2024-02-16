@@ -16,6 +16,7 @@ namespace SCVRPatcher {
             public string Title { get; set; }
             public string Version { get; set; }
             public Uri RepositoryUrl { get; set; }
+            public Uri PackageReleaseNotes { get; set; }
 
             public AssemblyAttributes(Assembly? assembly = null) {
                 assembly = assembly ?? typeof(MainWindow).Assembly;
@@ -23,6 +24,7 @@ namespace SCVRPatcher {
                 Title = attributes.OfType<AssemblyTitleAttribute>().FirstOrDefault().Title;
                 Version = attributes.OfType<AssemblyFileVersionAttribute>().FirstOrDefault().Version;
                 RepositoryUrl = new Uri(attributes.OfType<AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "RepositoryUrl").Value);
+                PackageReleaseNotes = new Uri(attributes.OfType<AssemblyMetadataAttribute>().FirstOrDefault(x => x.Key == "PackageReleaseNotes").Value);
             }
         }
         internal class Screen {
@@ -316,14 +318,12 @@ namespace SCVRPatcher {
         }
 
         // TODO: Implement this method
-        internal static object GetRsiLauncherPath()
-        {
+        internal static object GetRsiLauncherPath() {
             throw new NotImplementedException();
         }
 
         // TODO: Implement this method
-        internal static object GetVorpxPath()
-        {
+        internal static object GetVorpxPath() {
             throw new NotImplementedException();
         }
     }

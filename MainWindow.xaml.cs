@@ -80,11 +80,15 @@ namespace SCVRPatcher {
                 AllocConsole();
                 Logger.Info("Console ready!");
             }
+            AutoUpdater.RunUpdateAsAdmin = false;
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             var oldHeight = this.Height; this.Height = 0; var oldWidth = this.Width; this.Width = 0; // This is a dumb way to work around the fact that MessageBoxes close on their own in the constructor!
+            if (!CommandLineParser.GetSwitchArgument("no-update")) {
+                AutoUpdater.Start("https://raw.githubusercontent.com/star-citizen-vr/scvr-patcher/csharp/release.xml");
+            }
             if (!CommandLineParser.GetSwitchArgument("no-admin") && !Utils.IsAdmin()) {
                 Logger.Info("Missing elevation and --no-admin not set, restarting as admin!");
                 var result = MessageBox.Show("SCVR-Patcher needs to run as admin to be able to patch the hosts file for the EAC bypass", "Restart as admin?", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -413,31 +417,7 @@ namespace SCVRPatcher {
         }
 
         private void onCheckForUpdatesClicked(object sender, RoutedEventArgs e) {
-            var githubUrl = AssemblyAttributes.RepositoryUrl;
-            var githubUser = githubUrl.Segments[1].TrimEnd('/');
-            var githubRepo = githubUrl.Segments[2].TrimEnd('/');
-            Logger.Debug($"Getting self from Github release: {githubUser}/{githubRepo}");
-            var client = new GitHubClient(new ProductHeaderValue("SCVRPatcher"));
-            var release = client.Repository.Release.GetLatest(githubUser, githubRepo).Result;
-            Logger.Debug($"Installed version: {AssemblyAttributes.Version}");
-            Logger.Debug($"Found latest release {release.Name} ({release.TagName})");
-            if (release.TagName == AssemblyAttributes.Version) {
-                var msg = $"Version {release.TagName} is already latest, nothing to update!";
-                Logger.Info(msg);
-                MessageBox.Show(msg, "No update available", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-            var asset = release.Assets.First(a => a.Name.EndsWith(".zip"));
-            var downloadUrl = asset.BrowserDownloadUrl;
-            Logger.Debug($"Downloading {downloadUrl}");
-            var tempPath = Utils.GetTempFile().WithExtension("zip");
-            using (var client2 = new WebClient()) {
-                client2.DownloadFile(downloadUrl, tempPath.FullName);
-            }
-            Logger.Debug($"Downloaded to {tempPath}");
-            var currentPath = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            currentPath.Directory.OpenInExplorer();
-            tempPath.OpenInExplorer();
+            AssemblyAttributes.PackageReleaseNotes.OpenInDefaultBrowser();
         }
 
         private void onDiscordButtonClicked(object sender, RoutedEventArgs e) {
