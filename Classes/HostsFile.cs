@@ -83,6 +83,10 @@ namespace SCVRPatcher {
 
         public void Save(FileInfo file = null, bool backup = true) {
             file ??= HostFile;
+            if (file.Name.EndsWith(".bak")) { // file = new FileInfo(file.FullName.Replace(".bak", string.Empty));
+                Logger.Warn($"File name ends with .bak? {file.Quote()}");
+                return;
+            }
             var original_file = new FileInfo(file.FullName); // This is a workaround for a bug in the File.MoveTo method idk valve pls fix
             Logger.Info($"Saving hosts file to {file.Quote()}");
             if (file.Exists && backup) {
