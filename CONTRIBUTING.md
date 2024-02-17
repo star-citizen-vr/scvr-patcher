@@ -38,7 +38,7 @@ Contributions can take many forms, from submitting bug reports and feature reque
 
 ## Community Guidelines
 
-We strive to create a welcoming and inclusive community. Please follow our Code of Conduct in all your interactions with the project.
+We strive to create a welcoming and inclusive community. Please follow our [Code of Conduct](CodeOfConduct.md) in all your interactions with the project.
 
 Thank you for contributing to SCVR-Patcher! Your efforts help make the Star Citizen VR experience better for everyone.
 
