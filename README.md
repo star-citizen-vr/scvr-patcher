@@ -15,8 +15,11 @@ SCVR Patcher is a tool designed to help players get Star Citizen up and running 
 <details>
 <summary>Screenshot(s)</summary>
 
-![](https://camo.githubusercontent.com/fe57e1dd48781568c680e67e8ff0a20a3e08219ab97dfe11a46296dd84a620ac/68747470733a2f2f692e696d6775722e636f6d2f6957614c3635392e706e67)
-)
+![scvr-patcher_evkOLRFJlQ](https://github.com/star-citizen-vr/scvr-patcher/assets/3318223/ea984694-d31a-4355-8304-403f11dab38e)
+
+![scvr-patcher_XtEKPMQvbn](https://github.com/star-citizen-vr/scvr-patcher/assets/3318223/add218e7-8717-4fcf-9c4a-1cbd02c6cf87)
+
+
 </details>
 
 ## Setup Instructions
