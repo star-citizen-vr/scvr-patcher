@@ -1,8 +1,4 @@
-# Star Citizen VR Patcher v3
-
-[![Stars](https://img.shields.io/github/stars/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/stargazers)
-[![Forks](https://img.shields.io/github/forks/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/network)
-[![Latest Release](https://img.shields.io/github/v/release/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/releases)
+# Star Citizen VR Patcher v3 [![Stars](https://img.shields.io/github/stars/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/stargazers) [![Forks](https://img.shields.io/github/forks/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/network) [![Latest Release](https://img.shields.io/github/v/release/star-citizen-vr/scvr-patcher?style=flat-square)](https://github.com/star-citizen-vr/scvr-patcher/releases) ![Total Downloads)](https://img.shields.io/github/downloads/star-citizen-vr/scvr-patcher/total)
 
 ## Description
 
