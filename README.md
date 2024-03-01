@@ -27,7 +27,7 @@ SCVR Patcher is a tool designed to help players get Star Citizen up and running 
 ### Prerequisites
 - [Star Citizen](https://robertsspaceindustries.com/star-citizen/)
 - [VorpX](https://www.vorpx.com/) (Paid)
-- [.NET 8 Desktop Runtime x86](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-8.0.2-windows-x86-installer)
+- [.NET 8.0.0 Desktop Runtime x86](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-8.0.0-windows-x86-installer)
 
 1. Download the latest release from the [releases page](https://github.com/star-citizen-vr/scvr-patcher/releases).
 2. Extract the contents of the ZIP file to a directory of your choice.
